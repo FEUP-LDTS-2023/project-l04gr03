@@ -8,7 +8,7 @@ public abstract class Menu {
 
     public void nextOption() {
         selected++;
-        if(selected > options.size()){
+        if(selected >= options.size()){
             selected = 0;
         }
     }
@@ -31,5 +31,6 @@ public abstract class Menu {
     public int getNumberOptions(){
         return options.size();
     }
+
 
 }
