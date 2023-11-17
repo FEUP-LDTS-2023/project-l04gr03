@@ -30,5 +30,5 @@ pitest {
 }
 
 application{
-    mainClass.set("org.source_code.App")
+    mainClass.set("SpaceInvaders.source_code.Game")
 }
