@@ -26,66 +26,112 @@ This project was developed by:
 ### PLANNED FEATURES
 
 - **Playable Character** - The playable character is a spaceship. The player controls its movements by pressing the right and left arrow keys.
+
 - **Enemy Characters** - The enemy characters are aliens that want to invade the planet. They can shoot lasers and kill the player. They can also move from left to right and when they hit the wall they move from right to left and vice-versa.
+
 - **Enemy Spaceship** - Sometimes, the aliens spaceship appears and moves from left to right or from right to left. If the player hits this spaceship, he will receive a bonus punctuation.
+
 - **Cover Walls** - Walls that protect the player from the enemy lasers.
+
 - **Lasers** - Both aliens and the player can shoot lasers.
+
 - **Arena** - The place were the player and the aliens fight.
+
 - **Collision Detection** - The game detects if a laser collided with an alien or a player. It may also detect if a laser collided with a cover wall and if an aliens or the player collided with the arena walls. Other important thing the game needs to detect is the collision of the aliens with the cover walls because in that case the game ends.
+
 - **Collectable Lives** - The player can extend his lives by collecting this collectable.
+
 - **Collectable Projectiles** - This collectables can help the player by given him the option to shoot special projectiles.
-- **Main Menu** -
-- **Pause Menu** -
-- **Game Over Screen** -
-- **Leaderboard** -
+
+- **Main Menu** - The game Main Menu is accessed at the beginning of the game. It can also be accessed through the Pause menu and Game Over menu.
+ It as the following options:
+  - **Play** - Starts the game;
+  - **Leaderboard** - Shows the best scores;
+  - **Instructions** - Displays the game instructions;
+  - **Exit** - Exists the game.
+
+- **Pause Menu** - Can be accessed pressing the escape key. It as the following options:
+  - **Continue** - Resumes the game;
+  - **Instructions** - Displays the instructions;
+  - **Restart** - Restarts the game;
+  - **Exit** - Returns to the main menu.
+
+- **Game Over Screen** - Is accessed when the player dies. It as the following options:
+  - The player can type is name and insert is score into the leaderboard;
+  - **Restart** - Restarts the game;
+  - **Leaderboard** - Displays the top 5 best scores;
+  - **Exit** - Exits the game.
+  
 - **Background Music** - Music that plays when the game starts.
+
 - **Sound Effects** - Sound of the lasers and collisions.
 
 ### DESIGN
 
-> This section should be organized in different subsections, each describing a different design problem that you had to solve during the project. Each subsection should be organized in four different parts:
+### Structure
 
-- **Problem in Context.** The description of the design context and the concrete problem that motivated the instantiation of the pattern. Someone else other than the original developer should be able to read and understand all the motivations for the decisions made. When refering to the implementation before the pattern was applied, don’t forget to [link to the relevant lines of code](https://help.github.com/en/articles/creating-a-permanent-link-to-a-code-snippet) in the appropriate version.
-- **The Pattern.** Identify the design pattern to be applied, why it was selected and how it is a good fit considering the existing design context and the problem at hand.
-- **Implementation.** Show how the pattern roles, operations and associations were mapped to the concrete design classes. Illustrate it with a UML class diagram, and refer to the corresponding source code with links to the relevant lines (these should be [relative links](https://help.github.com/en/articles/about-readmes#relative-links-and-image-paths-in-readme-files). When doing this, always point to the latest version of the code.
-- **Consequences.** Benefits and liabilities of the design after the pattern instantiation, eventually comparing these consequences with those of alternative solutions.
+- **Problem in Context.** The game is complex, and so we need to organize the code the best way possible. The structure needs to be simple and easy to read in order to facilitate the maintenance and the ability to improve and add features to the game.
 
-**Example of one of such subsections**:
 
-------
+- **The Pattern.** The MVC pattern is the best choice for this. It divides the code in three parts: 
+  - **Model** - Contains the data and logic of the game;
+  - **View** - Displays the model data and receives the users inputs;
+  - **Controller** - Provides the model data to the view and interprets the actions.
+  
 
-#### THE JUMP ACTION OF THE KANGAROOBOY SHOULD BEHAVE DIFFERENTLY DEPENDING ON ITS STATE
+- **Implementation.** The pattern allowed us to divide the code in at least this four parts:
+  - **Model** - Basic logic and data of every element of the game (Spaceship, Aliens, etc...); 
+  - **Viewer** - Displays tha data of each model ("draws" the character);
+  - **GUI** - Controls the graphics and receives the inputs. It´s basically an extension of the Viewer but more specialized into using the Lanterna framework.
+  - **Controller** - Controls the logic of the program. Decides the next step by interpreting the inputs and gives to the Viewer the Model data.
 
-**Problem in Context**
+Illustrate it with a UML class diagram, and refer to the corresponding source code with links to the relevant lines (these should be [relative links](https://help.github.com/en/articles/about-readmes#relative-links-and-image-paths-in-readme-files). When doing this, always point to the latest version of the code.
 
-There was a lot of scattered conditional logic when deciding how the KangarooBoy should behave when jumping, as the jumps should be different depending on the items that came to his possession during the game (an helix will alow him to fly, driking a potion will allow him to jump double the height, etc.). This is a violation of the **Single Responsability Principle**. We could concentrate all the conditional logic in the same method to circumscribe the issue to that one method but the **Single Responsability Principle** would still be violated.
 
-**The Pattern**
+- **Consequences.** This type of implementation forces us to specify from very early in the game development the different classes and structures that we are going to use.
+This can be a challenge specially if we are not sure about what features we want to add to the game. The code needs to be very organized since the beginning. 
 
-We have applied the **State** pattern. This pattern allows you to represent different states with different subclasses. We can switch to a different state of the application by switching to another implementation (i.e., another subclass). This pattern allowed to address the identified problems because […].
+### States
 
-**Implementation**
+- **Problem in context.** The game needs to have several states, such as the main menu, the pause menu, the game itself, etc.
+This leads us to the necessity of having a simple and organized way to handle the different states.
 
-The following figure shows how the pattern’s roles were mapped to the application classes.
 
-![img](https://www.fe.up.pt/~arestivo/page/img/examples/lpoo/state.svg)
+- **The Pattern.** The state pattern is the best choice to help us. It allows an object to alter its behavior when its internal state changes. The object will appear to change its class.
 
-These classes can be found in the following files:
 
-- [Character](https://web.fe.up.pt/~arestivo/page/courses/2021/lpoo/template/src/main/java/Character.java)
-- [JumpAbilityState](https://web.fe.up.pt/~arestivo/page/courses/2021/lpoo/template/src/main/java/JumpAbilityState.java)
-- [DoubleJumpState](https://web.fe.up.pt/~arestivo/page/courses/2021/lpoo/template/src/main/java/DoubleJumpState.java)
-- [HelicopterState](https://web.fe.up.pt/~arestivo/page/courses/2021/lpoo/template/src/main/java/HelicopterState.java)
-- [IncreasedGravityState](https://web.fe.up.pt/~arestivo/page/courses/2021/lpoo/template/src/main/java/IncreasedGravityState.java)
+- **Implementation.** The code includes a state part that handle the different states.
 
-**Consequences**
 
-The use of the State Pattern in the current design allows the following benefits:
+- **Consequences.** The functionality of the game is influenced by the state that it is currently in. Because of that, many features and functionalities are trapped inside a single state.
 
-- The several states that represent the character’s hability to jump become explicit in the code, instead of relying on a series of flags.
-- We don’t need to have a long set of conditional if or switch statements associated with the various states; instead, polimorphism is used to activate the right behavior.
-- There are now more classes and instances to manage, but still in a reasonable number.
+### Part-Whole Hierarchies
 
+- **Problem in Context.** Some parts/classes of the game are very similar. They share the same code and have similar behaviour in some cases.
+Because of that we might end up writing the same code repeatedly.
+
+
+- **The Pattern.** The composite pattern can help us with that. It can compose objects into tree structures to represent part-whole hierarchies. Composite lets clients treat individual objects and compositions uniformly.
+
+
+- **Implementation.** Some classes are divides in a part-whole hierarchies, for example the Elements Class.
+
+
+- **Consequences.** The code becomes more simple and organized. It's easier to add new types of components. 
+However, the subclasses will always depend on their superclasses, reducing their flexibility. 
+
+### Singleton
+
+- **Problem in Context.** Some classes cannot be initialized more than one time. This could cause serious problems to the program.
+
+
+- **The Pattern.** The Singleton is the best choice to solve this problem. It ensures that a class only has one instance and provide a global point to access it.
+
+
+- **Implementation.** Mostly used to ensure that only one Game object is instantiated.
+
+
+- **Consequences.** It makes the code harder to test. It is also a very specific and limiting pattern and should only be used in certain cases.
 #### KNOWN CODE SMELLS
 
 > This section should describe 3 to 5 different code smells that you have identified in your current implementation.
