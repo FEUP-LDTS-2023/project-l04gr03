@@ -6,7 +6,7 @@ import java.util.List;
 import java.util.Scanner;
 
 public abstract class OnlyTextMenu {
-    List<String> text;
+    protected List<String> text;
 
     public OnlyTextMenu(String filename){
         this.text = readFile(filename);
