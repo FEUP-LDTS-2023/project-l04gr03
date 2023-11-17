@@ -1,4 +1,4 @@
 package SpaceInvaders.source_code.Model.Game.Collectables;
 
-public class HealthCollectableFactory {
+public class SplashProjectileCollectable {
 }
