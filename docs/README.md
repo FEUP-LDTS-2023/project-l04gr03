@@ -14,18 +14,32 @@ This project was developed by:
 - **Lucas Faria** (up202207540)
 - **Francisco Magalhães** (up202007945)
 - **Rodrigo Sousa** (up202207292)
+
+
+  LDTS 2023⁄24 <br>
+  Software Design and Testing Laboratory
+
 ### IMPLEMENTED FEATURES
 
 > This section should contain a list of implemented features and their descriptions. In the end of the section, include two or three screenshots that illustrate the most important features.
 
-**Examples**:
-
-- **Jumping** - The game character will jump when the space bar key is pressed.
-- **Getting hidden coins** - When the game character hits a platform from below (by jumping beneath it) it will smash that segment of the platform and will get any coins that may exist hidden there.
-
 ### PLANNED FEATURES
 
-> This section is similar to the previous one but should list the features that are not yet implemented. Instead of screenshots you should include GUI mock-ups for the planned features.
+- **Playable Character** - The playable character is a spaceship. The player controls its movements by pressing the right and left arrow keys.
+- **Enemy Characters** - The enemy characters are aliens that want to invade the planet. They can shoot lasers and kill the player. They can also move from left to right and when they hit the wall they move from right to left and vice-versa.
+- **Enemy Spaceship** - Sometimes, the aliens spaceship appears and moves from left to right or from right to left. If the player hits this spaceship, he will receive a bonus punctuation.
+- **Cover Walls** - Walls that protect the player from the enemy lasers.
+- **Lasers** - Both aliens and the player can shoot lasers.
+- **Arena** - The place were the player and the aliens fight.
+- **Collision Detection** - The game detects if a laser collided with an alien or a player. It may also detect if a laser collided with a cover wall and if an aliens or the player collided with the arena walls. Other important thing the game needs to detect is the collision of the aliens with the cover walls because in that case the game ends.
+- **Collectable Lives** - The player can extend his lives by collecting this collectable.
+- **Collectable Projectiles** - This collectables can help the player by given him the option to shoot special projectiles.
+- **Main Menu** -
+- **Pause Menu** -
+- **Game Over Screen** -
+- **Leaderboard** -
+- **Background Music** - Music that plays when the game starts.
+- **Sound Effects** - Sound of the lasers and collisions.
 
 ### DESIGN
 
