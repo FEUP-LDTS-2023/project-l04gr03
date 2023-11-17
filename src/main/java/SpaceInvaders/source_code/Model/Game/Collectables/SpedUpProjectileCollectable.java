@@ -1,4 +1,4 @@
 package SpaceInvaders.source_code.Model.Game.Collectables;
 
-public class SpedUpProjectileCollectableFactory {
+public class SpedUpProjectileCollectable {
 }
