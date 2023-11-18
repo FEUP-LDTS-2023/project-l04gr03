@@ -1,4 +1,4 @@
-package Collectables
+package Model.Collectables
 
 import SpaceInvaders.source_code.Model.Game.Collectables.DamageCollectable
 import SpaceInvaders.source_code.Model.Game.Collectables.HealthCollectable
