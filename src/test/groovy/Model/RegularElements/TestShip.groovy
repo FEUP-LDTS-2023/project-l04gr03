@@ -1,4 +1,4 @@
-package SpaceInvaders.source_code.Model
+package Model.RegularElements
 
 import SpaceInvaders.source_code.Model.Game.RegularGameElements.Ship
 import SpaceInvaders.source_code.Model.Position
