@@ -1,7 +1,6 @@
-package Model
+package Model.RegularElements
 
 import SpaceInvaders.source_code.Model.Game.RegularGameElements.DestroyableElement
-import SpaceInvaders.source_code.Model.Game.RegularGameElements.Ship
 import SpaceInvaders.source_code.Model.Position
 import spock.lang.Specification
 
