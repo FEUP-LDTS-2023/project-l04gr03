@@ -46,6 +46,84 @@ class MenuTest extends Specification {
             m.isSelected(0)
     }
 
+    def "Get Option StartMenu"(){
+        given:
+            def m = new StartMenu()
+        expect:
+            expected == m.getOption(i)
+        where:
+            i | expected
+            0 | "Play"
+            1 | "Leaderboard"
+            2 | "Instructions"
+            3 | "Exit"
+    }
+
+    def "Get Option PauseMenu"(){
+        given:
+            def m = new PauseMenu()
+        expect:
+            expected == m.getOption(i)
+        where:
+        i | expected
+        0 | "Continue"
+        1 | "Instructions"
+        2 | "Restart"
+        3 | "Exit"
+    }
+
+    def "Number of options"(){
+        given:
+            def m = new PauseMenu()
+        when:
+            int i = m.getNumberOptions()
+        then:
+            i == 4
+    }
+
+    def "Add char username GameOver"(){
+        given:
+            def m = new GameOverMenu(0)
+            Character c = 'A'
+        when:
+            m.addLetter(c)
+        then:
+            m.username == "A"
+    }
+
+    def "Add char username GameOver when username isn´t empty"(){
+        given:
+            def m = new GameOverMenu(0)
+            Character c = 'C'
+            StringBuilder s = new StringBuilder()
+            s.append("AB")
+            m.setUsername(s)
+        when:
+            m.addLetter(c)
+        then:
+            m.username == "ABC"
+    }
+
+    def "Remove char username GameOver"(){
+        given:
+            def m = new GameOverMenu(0)
+            StringBuilder s = new StringBuilder()
+            s.append("ABC")
+            m.setUsername(s)
+        when:
+            m.removeLetter()
+        then:
+            m.username == "AB"
+    }
+
+    def "remove Char username GameOver when username is empty" (){
+        given:
+            def m = new GameOverMenu(0)
+        when:
+            m.removeLetter()
+        then:
+            m.username == ""
+    }
 
 }
 
