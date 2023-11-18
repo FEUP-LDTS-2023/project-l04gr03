@@ -20,6 +20,7 @@ public class GameOverMenu extends Menu {
         return username.toString();
     }
 
+
     public void addLetter(Character Letter){
         username.append(Letter);
     }
@@ -40,5 +41,9 @@ public class GameOverMenu extends Menu {
 
     public boolean isSelectedExit(){
         return isSelected(2);
+    }
+
+    public void setUsername(StringBuilder username) {
+        this.username = username;
     }
 }
