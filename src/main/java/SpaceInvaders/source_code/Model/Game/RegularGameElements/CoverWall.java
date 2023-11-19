@@ -1,4 +1,6 @@
 package SpaceInvaders.source_code.Model.Game.RegularGameElements;
 
-public class CoverWall {
+import SpaceInvaders.source_code.Model.Game.Element;
+
+public class CoverWall extends Element {
 }

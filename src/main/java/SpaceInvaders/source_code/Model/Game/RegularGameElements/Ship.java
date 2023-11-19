@@ -1,4 +1,6 @@
 package SpaceInvaders.source_code.Model.Game.RegularGameElements;
 
-public class Ship {
+import SpaceInvaders.source_code.Model.Game.Element;
+
+public class Ship extends Element {
 }
