@@ -9,6 +9,7 @@ import com.googlecode.lanterna.screen.TerminalScreen;
 import com.googlecode.lanterna.terminal.DefaultTerminalFactory;
 import com.googlecode.lanterna.terminal.Terminal;
 import com.googlecode.lanterna.terminal.swing.AWTTerminalFontConfiguration;
+import com.googlecode.lanterna.input.KeyStroke;
 
 import java.awt.*;
 import java.io.File;
@@ -62,11 +63,53 @@ public class GUILanterna implements GUI {
         return fontConfig;
     }
 
-    public void drawText(int x,int y, String text, String color) {
+    @Override
+    public void drawAlien(Position position) {
+
+    }
+
+    @Override
+    public void drawShip(Position position){
+
+    }
+
+    @Override
+    public void drawWall(Position position){
+
+    }
+
+    @Override
+    public void drawAlienShip(Position position){
+
+    }
+
+    @Override
+    public void drawProjectile(Position position){
+
+    }
+    @Override
+    public void drawCoverWall(Position position){
+
+    }
+
+    @Override
+    public void drawCollectable(Position position, String type){
+
+    }
+
+    @Override
+    public void drawText(Position position, String text, String color){
         TextGraphics tg = screen.newTextGraphics();
         tg.setForegroundColor(TextColor.Factory.fromString(color));
-        tg.putString(x, y, text);
+        tg.putString(position.getX(), position.getY(), text);
     }
+
+    @Override
+    public KeyStroke getNextAction() throws IOException {
+        KeyStroke k = screen.pollInput();
+        return k;
+    }
+
 
     private void drawCharacter(int x, int y, char c, String color) {
         TextGraphics tg = screen.newTextGraphics();
@@ -74,7 +117,13 @@ public class GUILanterna implements GUI {
         tg.putString(x, y + 1, "" + c);
     }
 
+    @Override
     public void refresh() throws IOException {
         screen.refresh();
+    }
+
+    @Override
+    public void close() throws IOException{
+        screen.close();
     }
 }
