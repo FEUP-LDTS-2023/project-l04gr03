@@ -12,6 +12,10 @@ public abstract class OnlyTextMenu {
         this.text = readFile(filename);
     }
 
+    public List<String> getText(){
+        return text;
+    }
+
     private List<String> readFile(String filename) {
         File file = new File(filename);
         List<String> newText = new ArrayList<>();

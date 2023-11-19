@@ -1,4 +1,4 @@
 package SpaceInvaders.source_code.Model.Game.Collectables;
 
-public class HealthCollectable {
+public class HealthCollectable implements Collectable {
 }

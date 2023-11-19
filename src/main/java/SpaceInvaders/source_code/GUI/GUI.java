@@ -17,6 +17,7 @@ public interface GUI {
     public void drawText(Position position, String text, String color);
 
     public KeyStroke getNextAction() throws IOException;
+    public void clear();
     public void refresh() throws IOException;
     public void close() throws IOException;
 
