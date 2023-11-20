@@ -7,12 +7,12 @@ import SpaceInvaders.source_code.Model.Position;
 
 public class InstructionsViewer extends OnlyTextMenuViewer<Instructions> {
     public InstructionsViewer(Instructions menu){
-        super(menu, new Position());
+        super(menu, new Position(5,3));
     }
 
     @Override
     protected void drawElements(GUI gui) {
         super.drawElements(gui);
-        super.drawMenuTitle(gui, colorTitle, new Position());
+        super.drawMenuTitle(gui,"INSTRUCTIONS", colorTitle, new Position(5,2));
     }
 }
