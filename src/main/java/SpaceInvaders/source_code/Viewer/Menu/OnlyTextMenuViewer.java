@@ -32,4 +32,12 @@ public abstract class OnlyTextMenuViewer<T extends OnlyTextMenu> extends Viewer<
     protected void drawMenuTitle(GUI gui, String title, String color, Position position){
         gui.drawText(position,title, colorTitle);
     }
+
+    protected int getReference_x(){
+        return reference_x;
+    }
+
+    protected int getReference_y(){
+        return reference_y;
+    }
 }
