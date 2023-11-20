@@ -6,13 +6,13 @@ import SpaceInvaders.source_code.Model.Position;
 
 public class LeaderboardViewer extends OnlyTextMenuViewer<Leaderboard> {
     public LeaderboardViewer(Leaderboard menu){
-        super(menu, new Position());
+        super(menu, new Position(5, 3));
     }
 
     @Override
     protected void drawElements(GUI gui) {
         super.drawElements(gui);
-        super.drawMenuTitle(gui, "LEADERBOARD", colorTitle, new Position());
+        super.drawMenuTitle(gui, "LEADERBOARD", colorTitle, new Position(5, 2));
     }
 
 

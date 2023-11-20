@@ -21,7 +21,7 @@ public abstract class MenuViewer<T extends Menu> extends Viewer<Menu> {
 
     @Override
     protected void drawElements(GUI gui) {
-        drawOptions(gui);
+        this.drawOptions(gui);
     }
 
     protected void drawOptions(GUI gui){

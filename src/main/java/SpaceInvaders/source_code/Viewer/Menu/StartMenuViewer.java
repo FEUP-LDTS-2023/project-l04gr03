@@ -6,13 +6,13 @@ import SpaceInvaders.source_code.Model.Position;
 
 public class StartMenuViewer extends MenuViewer<StartMenu> {
     public StartMenuViewer(StartMenu menu){
-        super(menu, new Position());
+        super(menu, new Position(5, 2));
     }
 
     @Override
     protected void drawElements(GUI gui) {
         super.drawElements(gui);
-        super.drawMenuTitle(gui, "START MENU", colorTitle, new Position());
+        super.drawMenuTitle(gui, "START MENU", colorTitle, new Position(5,3));
     }
 
 }
