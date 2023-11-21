@@ -63,37 +63,8 @@ public class GUILanterna implements GUI {
     }
 
     @Override
-    public void drawAlien(Position position) {
-
-    }
-
-    @Override
-    public void drawShip(Position position){
-
-    }
-
-    @Override
-    public void drawWall(Position position){
-
-    }
-
-    @Override
-    public void drawAlienShip(Position position){
-
-    }
-
-    @Override
-    public void drawProjectile(Position position){
-
-    }
-    @Override
-    public void drawCoverWall(Position position){
-
-    }
-
-    @Override
-    public void drawCollectable(Position position, String type){
-
+    public void drawElement(Position position, char character, String color){
+        drawCharacter(position.getX(), position.getY(), character, color);
     }
 
     @Override
