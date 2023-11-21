@@ -18,10 +18,6 @@ public abstract class OnlyTextMenuViewer<T extends OnlyTextMenu> extends Viewer<
     static final String colorTitle = "#006400" ; // this color is a dark green
     static final String  color = "#fffafa"; //this color is a type of white
 
-    @Override
-    protected void drawElements(GUI gui) {
-        drawFileText(gui);
-    }
 
     protected void drawFileText(GUI gui){
         for(int i = 0; i < getModel().getText().size(); i++){

@@ -12,7 +12,7 @@ public class PauseMenuViewer extends MenuViewer<PauseMenu> {
 
     @Override
     protected void drawElements(GUI gui) {
-        super.drawElements(gui);
+        drawOptions(gui);
         super.drawMenuTitle(gui, "PAUSE MENU", colorTitle, new Position(5, 2));
     }
 
