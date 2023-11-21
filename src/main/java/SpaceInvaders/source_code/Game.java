@@ -14,7 +14,7 @@ public class Game {
     private final int height = 20;
     private final int width = 20;
     public static void main(String[] args) throws IOException, URISyntaxException, FontFormatException {
-     
+
 
     }
 }

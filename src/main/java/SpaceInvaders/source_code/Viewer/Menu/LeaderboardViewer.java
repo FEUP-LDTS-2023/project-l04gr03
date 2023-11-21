@@ -11,8 +11,8 @@ public class LeaderboardViewer extends OnlyTextMenuViewer<Leaderboard> {
 
     @Override
     protected void drawElements(GUI gui) {
-        super.drawElements(gui);
-        super.drawMenuTitle(gui, "LEADERBOARD", colorTitle, new Position(5, 2));
+        drawFileText(gui);
+        drawMenuTitle(gui, "LEADERBOARD", colorTitle, new Position(5, 2));
     }
 
 

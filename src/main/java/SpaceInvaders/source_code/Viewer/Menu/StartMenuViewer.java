@@ -11,8 +11,8 @@ public class StartMenuViewer extends MenuViewer<StartMenu> {
 
     @Override
     protected void drawElements(GUI gui) {
-        super.drawElements(gui);
-        super.drawMenuTitle(gui, "START MENU", colorTitle, new Position(5,3));
+        drawOptions(gui);
+        drawMenuTitle(gui, "START MENU", colorTitle, new Position(5,3));
     }
 
 }

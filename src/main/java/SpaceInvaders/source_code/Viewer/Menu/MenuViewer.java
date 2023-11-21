@@ -19,10 +19,6 @@ public abstract class MenuViewer<T extends Menu> extends Viewer<Menu> {
     static final String colorTitle = "#006400" ; // this color is a dark green
     static final String  color = "#fffafa"; //this color is a type of white
 
-    @Override
-    protected void drawElements(GUI gui) {
-        this.drawOptions(gui);
-    }
 
     protected void drawOptions(GUI gui){
         for(int i = 0; i < getModel().getNumberOptions(); i++){
