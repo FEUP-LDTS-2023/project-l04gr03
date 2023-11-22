@@ -14,9 +14,9 @@ class OnlyTextMenuViewerTests extends Specification{
         def OnlyTextMenuViewer = new LeaderboardViewer(Menu)
         def gui = Mock(GUI)
         when:
-            OnlyTextMenuViewer.drawElements(gui)
+        OnlyTextMenuViewer.drawElements(gui)
         then:
-            (Menu.text.size() + 1) * gui.drawText(_,_,_)
+        (Menu.text.size() + 1) * gui.drawText(_,_,_)
     }
 
     def "Draw elements Instructions"(){
@@ -35,9 +35,9 @@ class OnlyTextMenuViewerTests extends Specification{
         def OnlyTextMenuViewer = Mock(OnlyTextMenuViewer)
         def gui = Mock(GUI)
         when:
-            OnlyTextMenuViewer.drawFileText(gui)
+        OnlyTextMenuViewer.drawFileText(gui)
         then:
-            1 * OnlyTextMenuViewer.drawFileText(gui)
+        1 * OnlyTextMenuViewer.drawFileText(gui)
     }
 
     def "Draw Menu Title"(){
@@ -46,8 +46,8 @@ class OnlyTextMenuViewerTests extends Specification{
         def gui = Mock(GUI)
         def position = Mock(Position)
         when:
-            OnlyTextMenuViewer.drawMenuTitle(gui,"123","123",position)
+        OnlyTextMenuViewer.drawMenuTitle(gui,"123","123",position)
         then:
-            1 * OnlyTextMenuViewer.drawMenuTitle(_,_,_,_)
+        1 * OnlyTextMenuViewer.drawMenuTitle(_,_,_,_)
     }
 }

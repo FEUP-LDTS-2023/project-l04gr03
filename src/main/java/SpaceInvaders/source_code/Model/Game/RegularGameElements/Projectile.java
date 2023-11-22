@@ -18,4 +18,9 @@ public class Projectile extends Element {
     public void increaseSpeed(int increaseRatio){
         speed*=increaseRatio;
     }
+
+    @Override
+    public Position getPosition() {
+        return super.getPosition();
+    }
 }
