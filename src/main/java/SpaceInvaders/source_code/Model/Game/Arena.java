@@ -1,10 +1,7 @@
 package SpaceInvaders.source_code.Model.Game;
 
 import SpaceInvaders.source_code.Model.Game.Collectables.Collectable;
-import SpaceInvaders.source_code.Model.Game.RegularGameElements.Alien;
-import SpaceInvaders.source_code.Model.Game.RegularGameElements.CoverWall;
-import SpaceInvaders.source_code.Model.Game.RegularGameElements.Ship;
-import SpaceInvaders.source_code.Model.Game.RegularGameElements.Wall;
+import SpaceInvaders.source_code.Model.Game.RegularGameElements.*;
 
 import java.util.List;
 
@@ -21,6 +18,8 @@ public class Arena {
     private List<Wall> walls;
 
     private List<CoverWall> coverWalls;
+
+    private AlienShip alienShip;
 
     private Collectable collectable;
 
@@ -54,6 +53,8 @@ public class Arena {
         return coverWalls;
     }
 
+    public AlienShip getAlienShip() {return alienShip;}
+
     public Collectable getCollectable() {
         return collectable;
     }
@@ -74,7 +75,10 @@ public class Arena {
         this.coverWalls = coverWalls;
     }
 
+    public void setAlienShip(AlienShip alienShip) {this.alienShip = alienShip;}
+
     public void setCollectable(Collectable collectable) {
         this.collectable = collectable;
     }
+
 }

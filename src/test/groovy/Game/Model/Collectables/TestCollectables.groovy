@@ -1,4 +1,4 @@
-package Model.Collectables
+package Game.Model.Collectables
 
 import SpaceInvaders.source_code.Model.Game.Collectables.DamageCollectable
 import SpaceInvaders.source_code.Model.Game.Collectables.HealthCollectable
@@ -12,7 +12,7 @@ import spock.lang.Specification
 
 class TestCollectables extends Specification {
 
-    def "health collectable"(){
+    def "HealthCollectable"(){
         given:
         Position position = Mock(Position)
         Ship ship = Mock(Ship)
@@ -23,7 +23,7 @@ class TestCollectables extends Specification {
         1 * ship.restoreHealth()
     }
 
-    def "damage collectable"(){
+    def "DamageCollectable"(){
         given:
         Position position = Mock(Position)
         Ship ship = Mock(Ship)
@@ -35,7 +35,7 @@ class TestCollectables extends Specification {
         1 * ship.increaseDamage(multiplier)
     }
 
-    def "score collectable"(){
+    def "ScoreCollectable"(){
         given:
         Position position = Mock(Position)
         Alien alien = Mock(Alien)
@@ -47,7 +47,7 @@ class TestCollectables extends Specification {
         1 * alien.increaseScore(multiplier)
     }
 
-    def "sped up projectile collectable"(){
+    def "SpedUpProjectileCollectable"(){
         given:
         Position position = Mock(Position)
         Projectile projectile = Mock(Projectile)

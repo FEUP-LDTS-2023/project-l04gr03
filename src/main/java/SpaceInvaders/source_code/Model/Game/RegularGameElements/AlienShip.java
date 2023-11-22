@@ -5,10 +5,14 @@ import SpaceInvaders.source_code.Model.Position;
 
 public class AlienShip extends DestroyableElement {
 
-    final int score = 500;
+    private int score;
 
-    public AlienShip(Position position,int health) {
+    public AlienShip(Position position,int health,int score) {
         super(position,health);
+        this.score = score;
     }
 
+    public int getScore() {
+        return score;
+    }
 }

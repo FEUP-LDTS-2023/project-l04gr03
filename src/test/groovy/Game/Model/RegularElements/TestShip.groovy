@@ -1,11 +1,11 @@
-package Model.RegularElements
+package Game.Model.RegularElements
 
 import SpaceInvaders.source_code.Model.Game.RegularGameElements.Ship
 import SpaceInvaders.source_code.Model.Position
 import spock.lang.Specification;
 
 public class TestShip extends Specification {
-    def "restore health"(){
+    def "RestoreHealth"(){
         given:
         def position= Mock(Position)
         Ship ship = new Ship(position,70,50)
@@ -15,7 +15,7 @@ public class TestShip extends Specification {
         ship.getHealth() == 100
     }
 
-    def "increase damage"(){
+    def "IncreaseDamage"(){
         given:
         def position = Mock(Position)
         Ship ship = new Ship(position,100,50)

@@ -1,11 +1,11 @@
-package Model.RegularElements
+package Game.Model.RegularElements
 
 import SpaceInvaders.source_code.Model.Game.RegularGameElements.Alien
 import SpaceInvaders.source_code.Model.Position
 import spock.lang.Specification
 
 class TestAlien extends Specification {
-    def "increase score"(){
+    def "IncreaseScore"(){
         given:
         Position position = Mock(Position)
         Alien alien = new Alien(position,100,50,initialScore)

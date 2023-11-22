@@ -1,5 +1,6 @@
-package SpaceInvaders.source_code.Model
+package Game.Model
 
+import SpaceInvaders.source_code.Model.Position
 import spock.lang.Specification
 
 class TestPosition extends Specification {
