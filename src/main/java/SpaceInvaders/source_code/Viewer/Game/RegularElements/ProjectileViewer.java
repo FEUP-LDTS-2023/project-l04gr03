@@ -9,6 +9,6 @@ public class ProjectileViewer implements ElementViewer<Projectile> {
     public void draw(GUI gui, Projectile element) {
         char projectileViewerChar = '*';
         String projectileColor = "#5353F1";
-        gui.drawElement(element.getPosition, projectileViewerChar,projectileColor);
+    //    gui.drawElement(element.getPosition, projectileViewerChar,projectileColor);
     }
 }

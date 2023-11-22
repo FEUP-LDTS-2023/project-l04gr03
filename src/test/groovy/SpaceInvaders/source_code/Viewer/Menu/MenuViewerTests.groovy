@@ -11,6 +11,7 @@ import spock.lang.Specification
 
 class MenuViewerTests extends Specification{
 
+
     def "Draw elements Start Menu"(){
         given:
             def menu = new StartMenu()
