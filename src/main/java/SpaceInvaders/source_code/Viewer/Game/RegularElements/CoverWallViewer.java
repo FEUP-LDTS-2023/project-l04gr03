@@ -7,8 +7,8 @@ public class CoverWallViewer implements ElementViewer<CoverWall> {
 
     @Override
     public void draw(GUI gui, CoverWall element) {
-        char coverWallChar = 'Ó';
+        String coverWallChar = "Ó";
         String coverWallColor = "#F83B3A";
-        gui.drawElement(element.getPosition, coverWallChar, coverWallColor);
+ //       gui.drawElement(element.getPosition, coverWallChar, coverWallColor);
     }
 }

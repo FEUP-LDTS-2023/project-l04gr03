@@ -28,7 +28,6 @@ test {
 }
 
 
-
 pitest {
     junit5PluginVersion = '0.12'
 }
@@ -36,3 +35,4 @@ pitest {
 application{
     mainClass.set("SpaceInvaders.source_code.Game")
 }
+
