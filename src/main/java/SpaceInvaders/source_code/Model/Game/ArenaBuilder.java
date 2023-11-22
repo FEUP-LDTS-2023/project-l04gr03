@@ -1,10 +1,7 @@
 package SpaceInvaders.source_code.Model.Game;
 
 import SpaceInvaders.source_code.Model.Game.Collectables.Collectable;
-import SpaceInvaders.source_code.Model.Game.RegularGameElements.Alien;
-import SpaceInvaders.source_code.Model.Game.RegularGameElements.CoverWall;
-import SpaceInvaders.source_code.Model.Game.RegularGameElements.Ship;
-import SpaceInvaders.source_code.Model.Game.RegularGameElements.Wall;
+import SpaceInvaders.source_code.Model.Game.RegularGameElements.*;
 import SpaceInvaders.source_code.Model.Position;
 
 import java.util.List;
@@ -23,6 +20,11 @@ public abstract class ArenaBuilder{
 
     private int baseCoverWallHealth;
 
+    private int baseAlienShipHealth;
+
+    private int baseAlienShipScore;
+
+
     public Arena buildArena(){
         Arena newArena = new Arena(getWidth(),getHeight());
         baseShipHealth = 100;
@@ -31,16 +33,17 @@ public abstract class ArenaBuilder{
         baseAlienDamage = 20;
         baseAlienScore = 20;
         baseCoverWallHealth = 100;
+        baseAlienShipHealth = 200;
+        baseAlienShipScore = 500;
         newArena.setShip(createShip());
         newArena.setAliens(createAliens());
         newArena.setWalls(createWalls());
         newArena.setCoverWalls(createCoverWalls());
+        newArena.setAlienShip(createAlienShip());
         return newArena;
     }
 
-    public int getBaseShipHealth() {
-        return baseShipHealth;
-    }
+    public int getBaseShipHealth() {return baseShipHealth;}
 
     public int getBaseShipDamage() {
         return baseShipDamage;
@@ -62,6 +65,10 @@ public abstract class ArenaBuilder{
         return baseCoverWallHealth;
     }
 
+    public int getBaseAlienShipHealth(){ return baseAlienShipHealth; }
+
+    public int getBaseAlienShipScore() { return baseAlienShipScore; }
+
     public abstract int getWidth();
 
     public abstract int getHeight();
@@ -74,5 +81,5 @@ public abstract class ArenaBuilder{
 
     public abstract List<CoverWall> createCoverWalls();
 
-    public abstract Collectable createCollectable(Position position, String type, int multiplier);
+    public abstract AlienShip createAlienShip();
 }

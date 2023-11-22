@@ -1,11 +1,11 @@
-package Model.RegularElements
+package Game.Model.RegularElements
 
 import SpaceInvaders.source_code.Model.Game.RegularGameElements.Projectile
 import SpaceInvaders.source_code.Model.Position
 import spock.lang.Specification
 
 class TestProjectile extends Specification{
-    def "increase speed"(){
+    def "IncreaseSpeed"(){
         given:
         Position position = Mock(Position)
         Projectile projectile = new Projectile(position,initialSpeed)

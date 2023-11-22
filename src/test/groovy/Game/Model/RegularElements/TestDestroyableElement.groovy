@@ -1,11 +1,11 @@
-package Model.RegularElements
+package Game.Model.RegularElements
 
 import SpaceInvaders.source_code.Model.Game.RegularGameElements.DestroyableElement
 import SpaceInvaders.source_code.Model.Position
 import spock.lang.Specification
 
 class TestDestroyableElement extends Specification {
-    def "decrease health"(){
+    def "DecreaseHealth"(){
         given:
         def position = Mock(Position)
         DestroyableElement destroyableElement = new DestroyableElement(position,initialHealth)
