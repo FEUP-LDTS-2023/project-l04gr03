@@ -14,10 +14,10 @@ class TestDestroyableElement extends Specification {
         finalHealth == destroyableElement.getHealth()
         where:
         initialHealth | finalHealth | damageTaken
-              100     |    100      |   0
-              200     |    60       |   140
-              250     |    80       |   170
-              100     |    0        |   100
+        100     |    100      |   0
+        200     |    60       |   140
+        250     |    80       |   170
+        100     |    0        |   100
     }
 
     def "isDestroyed"(){
@@ -28,8 +28,8 @@ class TestDestroyableElement extends Specification {
         isDestroyed == destroyableElement.isDestroyed()
         where:
         health | isDestroyed
-          0    |   true
-          -10  |   true
-          100  |   false
+        0    |   true
+        -10  |   true
+        100  |   false
     }
 }
