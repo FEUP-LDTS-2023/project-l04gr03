@@ -1,10 +1,5 @@
 package SpaceInvaders.source_code.Model.Game.RegularGameElements;
 
-<<<<<<< HEAD
-import SpaceInvaders.source_code.Model.Game.Element;
-
-public class Alien extends Element {
-=======
 import SpaceInvaders.source_code.Model.Position;
 
 public class Alien extends DestroyableElement {
@@ -31,5 +26,4 @@ public class Alien extends DestroyableElement {
     public void increaseScore(int increaseRatio){
         score*=increaseRatio;
     }
->>>>>>> 660561113c5e83e47358b78ba6339ddb5bfbdce8
 }
