@@ -1,4 +1,4 @@
-package Game.Model
+package SpaceInvaders.source_code.Model.Game
 
 
 import SpaceInvaders.source_code.Model.Game.ArenaBuilderByRound

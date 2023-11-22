@@ -1,4 +1,4 @@
-package Game.Model.RegularElements
+package SpaceInvaders.source_code.Model.Game.RegularElements
 
 import SpaceInvaders.source_code.Model.Game.RegularGameElements.DestroyableElement
 import SpaceInvaders.source_code.Model.Position
