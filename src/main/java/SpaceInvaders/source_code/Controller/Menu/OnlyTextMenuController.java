@@ -2,14 +2,15 @@ package SpaceInvaders.source_code.Controller.Menu;
 
 import SpaceInvaders.source_code.Controller.Controller;
 import SpaceInvaders.source_code.Game;
-import SpaceInvaders.source_code.Model.Menu.PauseMenu;
+import SpaceInvaders.source_code.Model.Menu.OnlyTextMenu;
 import com.googlecode.lanterna.input.KeyStroke;
 
 import java.io.IOException;
 
-public class PauseMenuController extends Controller<PauseMenu> {
-    PauseMenu menu;
-    public PauseMenuController(PauseMenu menu){
+public class OnlyTextMenuController extends Controller<OnlyTextMenu> {
+
+    OnlyTextMenu menu;
+    public OnlyTextMenuController(OnlyTextMenu menu){
         super(menu);
     }
 
