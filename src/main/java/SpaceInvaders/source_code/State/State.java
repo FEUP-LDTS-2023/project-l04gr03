@@ -6,23 +6,28 @@ import SpaceInvaders.source_code.Controller.Menu.GameOverController;
 import SpaceInvaders.source_code.Controller.Menu.OnlyTextMenuController;
 import SpaceInvaders.source_code.Controller.Menu.PauseMenuController;
 import SpaceInvaders.source_code.Controller.Menu.StartMenuController;
+import SpaceInvaders.source_code.GUI.GUI;
+import SpaceInvaders.source_code.Game;
 import SpaceInvaders.source_code.Model.Game.Arena;
 import SpaceInvaders.source_code.Model.Menu.*;
 import SpaceInvaders.source_code.Viewer.Game.GameViewer;
 import SpaceInvaders.source_code.Viewer.Menu.*;
 import SpaceInvaders.source_code.Viewer.Viewer;
+import com.googlecode.lanterna.input.KeyStroke;
+
+import java.io.IOException;
 
 public class State {
 
-    GameStates currentState;
-    GameStates previousState;
+    private GameStates currentState;
+    private GameStates previousState;
 
-    Controller controller;
+    private Controller controller;
 
 
-    Viewer viewer;
+    private Viewer viewer;
 
-    Arena arena;
+   private Arena arena;
 
     public State(){
         currentState = GameStates.START_MENU;
@@ -30,6 +35,26 @@ public class State {
         StartMenu menu = new StartMenu();
         viewer = new StartMenuViewer(menu);
         controller = new StartMenuController(menu);
+    }
+
+    public Arena getArena() {
+        return arena;
+    }
+
+    public Controller getController() {
+        return controller;
+    }
+
+    public Viewer getViewer() {
+        return viewer;
+    }
+
+    public GameStates getCurrentState() {
+        return currentState;
+    }
+
+    public GameStates getPreviousState() {
+        return previousState;
     }
 
     public void UpdateState(GameStates newState){
@@ -46,6 +71,13 @@ public class State {
         GameStates aux = currentState;
         currentState = previousState;
         previousState = aux;
+    }
+
+    public void step(GUI gui, Game game, long time) throws IOException {
+        KeyStroke key = gui.getNextAction();
+        controller.step(game,key,time);
+        viewer.draw(gui);
+
     }
 
     public void StateActions (){
