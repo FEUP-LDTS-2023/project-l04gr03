@@ -36,10 +36,13 @@ public class GameOverController extends Controller<GameOverMenu> {
                 else if(getModel().isSelectedLeaderboard()) {
                     game.setState(GameStates.INSTRUCTIONS);
                 }
+                break;
             case Character:
                 getModel().addLetter(key.getCharacter());
+                break;
             case Backspace:
                 getModel().removeLetter();
+                break;
         }
     }
 }
