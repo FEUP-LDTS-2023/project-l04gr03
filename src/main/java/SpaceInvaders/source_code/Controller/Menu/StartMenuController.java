@@ -19,8 +19,10 @@ public class StartMenuController extends Controller<StartMenu> {
         switch(key.getKeyType()){
             case ArrowUp:
                 getModel().previousOption();
+                break;
             case ArrowDown:
                 getModel().nextOption();
+                break;
             case Enter:
                 if(getModel().isSelectedPlay()){
                     game.setState(GameStates.GAME);
@@ -34,6 +36,7 @@ public class StartMenuController extends Controller<StartMenu> {
                 else if(getModel().isSelectedExit()){
                     game.setState(GameStates.QUIT_GAME);
                 }
+                break;
         }
     }
 }

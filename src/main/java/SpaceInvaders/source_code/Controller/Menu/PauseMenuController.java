@@ -19,8 +19,10 @@ public class PauseMenuController extends Controller<PauseMenu> {
         switch(key.getKeyType()){
             case ArrowUp:
                 getModel().previousOption();
+                break;
             case ArrowDown:
                 getModel().nextOption();
+                break;
             case Enter:
                 if(getModel().isSelectedContinue()){
                     game.setState(GameStates.RESUME_GAME);
@@ -34,6 +36,7 @@ public class PauseMenuController extends Controller<PauseMenu> {
                 else if(getModel().isSelectedExit()){
                     game.setState(GameStates.START_MENU);
                 }
+                break;
         }
     }
 }
