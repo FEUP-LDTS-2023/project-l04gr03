@@ -4,6 +4,7 @@ import SpaceInvaders.source_code.Controller.Controller;
 import SpaceInvaders.source_code.Game;
 import SpaceInvaders.source_code.Model.Menu.OnlyTextMenu;
 import com.googlecode.lanterna.input.KeyStroke;
+import com.googlecode.lanterna.input.KeyType;
 
 import java.io.IOException;
 
@@ -16,6 +17,8 @@ public class OnlyTextMenuController extends Controller<OnlyTextMenu> {
 
     @Override
     public void step(Game game, KeyStroke key, long time) throws IOException {
-
+       if(key.getKeyType() == KeyType.Escape){
+           game.setPrevState();
+       }
     }
 }
