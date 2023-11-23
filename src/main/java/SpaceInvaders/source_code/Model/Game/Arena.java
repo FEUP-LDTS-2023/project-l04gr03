@@ -23,10 +23,13 @@ public class Arena {
 
     private Collectable collectable;
 
+    private int score;
+
 
     public Arena(int width, int height) {
         this.width = width;
         this.height = height;
+        this.score = 0;
     }
 
     public int getWidth() {
@@ -35,6 +38,9 @@ public class Arena {
 
     public int getHeight(){
         return height;
+    }
+    public int getScore(){
+        return score;
     }
 
     public Ship getShip() {
