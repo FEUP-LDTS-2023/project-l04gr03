@@ -7,5 +7,6 @@ public enum GameStates {
     LEADERBOARD,
     INSTRUCTIONS,
     GAME,
-    RESUME_GAME
+    RESUME_GAME,
+    QUIT_GAME
 }

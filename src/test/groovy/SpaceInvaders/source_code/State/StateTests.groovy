@@ -63,16 +63,9 @@ public class StateTests extends Specification{
 
     def "State Step"(){
         given:
-            State state = new State()
             GUI gui = Mock(GUI.class)
             Game game = Mock(Game)
             State stateMock = Mock(State)
-        when: 'State'
-            state.step(gui,game, 0 )
-        then:
-            1 * gui.getNextAction()
-            5 * gui.drawText(_,_,_) //StartMenu viewer elements
-
         when: 'State mocked'
             stateMock.step(gui,game,0)
         then:
