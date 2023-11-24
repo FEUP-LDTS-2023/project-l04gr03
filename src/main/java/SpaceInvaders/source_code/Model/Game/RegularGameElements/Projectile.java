@@ -3,17 +3,17 @@ package SpaceInvaders.source_code.Model.Game.RegularGameElements;
 import SpaceInvaders.source_code.Model.Game.Element;
 import SpaceInvaders.source_code.Model.Position;
 
-public class Projectile<T> extends Element {
+public class Projectile extends Element {
 
     private int speed;
 
-    private final T element;
+    private final AttackingElement attackingElement;
 
     private int damage;
 
-    public Projectile(Position position, T element, int speed) {
+    public Projectile(Position position, AttackingElement attackingElement, int speed) {
         super(position);
-        this.element = element;
+        this.attackingElement = attackingElement;
         this.speed = speed;
     }
 
@@ -21,7 +21,7 @@ public class Projectile<T> extends Element {
         return speed;
     }
 
-    public T getElement(){ return element; }
+    public AttackingElement getElement(){ return attackingElement; }
 
     public void increaseSpeed(int increaseRatio){
         speed*=increaseRatio;

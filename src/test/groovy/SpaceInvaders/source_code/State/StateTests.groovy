@@ -19,7 +19,7 @@ import spock.lang.Specification
 public class StateTests extends Specification{
     def "State Constructor"(){
         given:
-            State state = new State();
+            State state = State.getInstance();
         expect:
             state.viewer.getClass() == StartMenuViewer.class
             state.controller.getClass() == StartMenuController.class
@@ -29,7 +29,7 @@ public class StateTests extends Specification{
 
     def "Update State"(){
         given:
-            State state = new State();
+            State state = State.getInstance();
         when:
             state.UpdateState(GameStates.GAME)
         then:
@@ -39,7 +39,7 @@ public class StateTests extends Specification{
 
     def "Update State When New State is Start Menu"(){
         given:
-            State state = new State()
+            State state = State.getInstance()
         when:
             state.UpdateState(GameStates.GAME)
             state.UpdateState(GameStates.GAME_OVER)
@@ -51,7 +51,7 @@ public class StateTests extends Specification{
 
     def "Update to Previous"(){
         given:
-            State state = new State()
+            State state = State.getInstance();
         when:
             state.UpdateState(GameStates.GAME)
             state.UpdateToPrevious()
@@ -63,7 +63,7 @@ public class StateTests extends Specification{
 
     def "State Step"(){
         given:
-            State state = new State()
+            State state = State.getInstance();
             GUI gui = Mock(GUI.class)
             Game game = Mock(Game)
             State stateMock = Mock(State)
@@ -81,7 +81,7 @@ public class StateTests extends Specification{
 
     def "StateActions" (){
         given:
-            State state = new State()
+            State state = State.getInstance();
 
         when: 'Start Menu State'
             state.StateActions()
