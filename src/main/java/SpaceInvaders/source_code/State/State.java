@@ -23,18 +23,26 @@ public class State {
     private GameStates previousState;
 
     private Controller controller;
-
-
     private Viewer viewer;
 
    private Arena arena;
 
-    public State(){
+   private static  State instance;
+
+
+    private State(){
         currentState = GameStates.START_MENU;
         previousState = GameStates.START_MENU;
         StartMenu menu = new StartMenu();
         viewer = new StartMenuViewer(menu);
         controller = new StartMenuController(menu);
+    }
+
+    public static State getInstance(){
+        if(instance == null){
+            instance = new State();
+        }
+        return instance;
     }
 
     public Arena getArena() {
