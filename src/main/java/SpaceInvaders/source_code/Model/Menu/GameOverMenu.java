@@ -22,7 +22,9 @@ public class GameOverMenu extends Menu {
 
 
     public void addLetter(Character Letter){
-        username.append(Letter);
+        if(username.length() < 6) {
+            username.append(Letter);
+        }
     }
 
     public void removeLetter(){
