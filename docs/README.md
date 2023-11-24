@@ -148,6 +148,33 @@ are updated in each loop.
 - **Consequences** The game runs more smoothly. However, we need to make sure that the code in the Game Loop
 is efficient because that peace of code will run a lot of times during the Game execution. Bad code will result in bad game performance.
 
+### Command
+
+- **Problem in Context.** Some classes are only differentiated by the actions they execute. Therefore, is necessary to find a way to organize them in a correct way.
+
+
+- **The Pattern.** The Command Pattern is the solution to this problem. With this pattern, objects are parameterized by an action they perform.
+
+
+- **Implementation.** Is used in the collectables to execute their specific actions.
+
+
+- **Consequences.** It decouples the object that invokes the operation from the one that knows how to perform it and 
+facilitates the addition of new commands.
+
+
+### Collectable Factory
+
+- **Problem in Context.** The game has several collectables, and they need to be created in an organized manner. Each collectable has a type, and we need to create the collectable object accordingly to the type.
+
+
+- **The Pattern.** The Factory Pattern is the best choice to solve this problem. It allows to have a "factory" class that creates the collectables accordingly to their type without specifying specifically the class we want to instantiate.
+
+
+- **Implementation.** Used with the collectables.
+
+
+- **Consequences.**  The code becomes easier to reuse and maintain. It also becomes more modular and enables the creation of objects without knowing the implementation details. 
 #### KNOWN CODE SMELLS
 
 > This section should describe 3 to 5 different code smells that you have identified in your current implementation.
