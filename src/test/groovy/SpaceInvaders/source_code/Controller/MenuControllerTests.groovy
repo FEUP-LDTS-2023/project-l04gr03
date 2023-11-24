@@ -35,11 +35,11 @@ class MenuControllerTests extends Specification{
 
         when: 'Enter key'
             key = new KeyStroke(KeyType.Enter)
-            def gameOverMenu2 = new GameOverMenu(0)
-            def gameOverController2 = new GameOverController(gameOverMenu2)
-            gameOverController2.step(game,key,0)
+            gameOverController.step(game,key,0)
         then:
-            1 * game.setState(_)
+            1 * gameOverController.getModel().isSelectedRestart()
+            1 * gameOverController.getModel().isSelectedLeaderboard()
+            1 * gameOverController.getModel().isSelectedExit()
 
         when: 'Character key'
             key = new KeyStroke('A' as Character, false, false)

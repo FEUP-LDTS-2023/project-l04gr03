@@ -1,6 +1,11 @@
 package SpaceInvaders.source_code.Model.Menu;
 
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.List;
+import java.util.Scanner;
 
 public class Leaderboard extends OnlyTextMenu {
 
@@ -15,4 +20,5 @@ public class Leaderboard extends OnlyTextMenu {
             return Integer.parseInt(splitS2[1]) - Integer.parseInt(splitS1[1]);
                 });
     }
+
 }
