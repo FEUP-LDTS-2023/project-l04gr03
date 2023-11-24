@@ -39,21 +39,7 @@ public class GameViewer extends Viewer<Arena> {
     }
 
     private void drawCollectable(GUI gui, Collectable collectable){
-        if(collectable.getClass() == HealthCollectable.class){
-            new HealthCollectableViewer().draw(gui, (HealthCollectable) collectable);
-        }
-        else if(collectable.getClass() == DamageCollectable.class){
-            new DamageCollectableViewer().draw(gui, (DamageCollectable) collectable);
-        }
-        else if(collectable.getClass() == ScoreCollectable.class){
-            new ScoreCollectableViewer().draw(gui, (ScoreCollectable) collectable);
-        }
-        else if(collectable.getClass() == SpedUpProjectileCollectable.class){
-            new SpedUpProjectileCollectableViewer().draw(gui, (SpedUpProjectileCollectable) collectable);
-        }
-        else if(collectable.getClass() == SplashProjectileCollectable.class){
-            new SplashDamageProjectileCollectableViewer().draw(gui, (SplashProjectileCollectable) collectable);
-        }
+
     }
 
 }
