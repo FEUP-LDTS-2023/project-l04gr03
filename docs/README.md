@@ -21,51 +21,70 @@ This project was developed by:
 
 ### IMPLEMENTED FEATURES
 
-> This section should contain a list of implemented features and their descriptions. In the end of the section, include two or three screenshots that illustrate the most important features.
-
-### PLANNED FEATURES
-
 - **Playable Character** - The playable character is a spaceship. The player controls its movements by pressing the right and left arrow keys.
+
 
 - **Enemy Characters** - The enemy characters are aliens that want to invade the planet. They can shoot lasers and kill the player. They can also move from left to right and when they hit the wall they move from right to left and vice-versa.
 
-- **Enemy Spaceship** - Sometimes, the aliens spaceship appears and moves from left to right or from right to left. If the player hits this spaceship, he will receive a bonus punctuation.
 
 - **Cover Walls** - Walls that protect the player from the enemy lasers.
 
+
 - **Lasers** - Both aliens and the player can shoot lasers.
+
 
 - **Arena** - The place were the player and the aliens fight.
 
+
 - **Collision Detection** - The game detects if a laser collided with an alien or a player. It may also detect if a laser collided with a cover wall and if an aliens or the player collided with the arena walls. Other important thing the game needs to detect is the collision of the aliens with the cover walls because in that case the game ends.
+
+
+- **Main Menu** - The game Main Menu is accessed at the beginning of the game. It can also be accessed through the Pause menu and Game Over menu.
+  It as the following options:
+    - **Play** - Starts the game;
+    - **Leaderboard** - Shows the best scores;
+    - **Instructions** - Displays the game instructions;
+    - **Exit** - Exists the game.
+
+
+- **Pause Menu** - Can be accessed pressing the escape key. It as the following options:
+    - **Continue** - Resumes the game;
+    - **Instructions** - Displays the instructions;
+    - **Restart** - Restarts the game;
+    - **Exit** - Returns to the main menu.
+
+
+- **Game Over Screen** - Is accessed when the player dies. It as the following options:
+    - The player can type is name and insert is score into the leaderboard;
+    - **Restart** - Restarts the game;
+    - **Leaderboard** - Displays the top 5 best scores;
+    - **Exit** - Exits the game.
+  
+
+### PLANNED FEATURES
+
+- **Enemy Spaceship** - Sometimes, the aliens spaceship appears and moves from left to right or from right to left. If the player hits this spaceship, he will receive a bonus punctuation.
+
 
 - **Collectable Lives** - The player can extend his lives by collecting this collectable.
 
+
 - **Collectable Projectiles** - This collectables can help the player by given him the option to shoot special projectiles.
+ 
 
-- **Main Menu** - The game Main Menu is accessed at the beginning of the game. It can also be accessed through the Pause menu and Game Over menu.
- It as the following options:
-  - **Play** - Starts the game;
-  - **Leaderboard** - Shows the best scores;
-  - **Instructions** - Displays the game instructions;
-  - **Exit** - Exists the game.
-
-- **Pause Menu** - Can be accessed pressing the escape key. It as the following options:
-  - **Continue** - Resumes the game;
-  - **Instructions** - Displays the instructions;
-  - **Restart** - Restarts the game;
-  - **Exit** - Returns to the main menu.
-
-- **Game Over Screen** - Is accessed when the player dies. It as the following options:
-  - The player can type is name and insert is score into the leaderboard;
-  - **Restart** - Restarts the game;
-  - **Leaderboard** - Displays the top 5 best scores;
-  - **Exit** - Exits the game.
-  
 - **Background Music** - Music that plays when the game starts.
+
 
 - **Sound Effects** - Sound of the lasers and collisions.
 
+
+- **Better Aliens Animation** - Aliens have an animation when moving
+
+![Mocks](Mocks/Aliens.png)
+
+- **Cover Walls Destruction**- Cover walls can be destructed and have different looks depending on the damage
+
+![Mocks](Mocks/cover_walls.png)
 ### DESIGN
 
 ### Structure
@@ -85,7 +104,8 @@ This project was developed by:
   - **GUI** - Controls the graphics and receives the inputs. It´s basically an extension of the Viewer but more specialized into using the Lanterna framework.
   - **Controller** - Controls the logic of the program. Decides the next step by interpreting the inputs and gives to the Viewer the Model data.
 
-Illustrate it with a UML class diagram, and refer to the corresponding source code with links to the relevant lines (these should be [relative links](https://help.github.com/en/articles/about-readmes#relative-links-and-image-paths-in-readme-files). When doing this, always point to the latest version of the code.
+
+![pattern](Images_UML/MVC_Pattern.png)
 
 
 - **Consequences.** This type of implementation forces us to specify from very early in the game development the different classes and structures that we are going to use.
@@ -102,6 +122,7 @@ This leads us to the necessity of having a simple and organized way to handle th
 
 - **Implementation.** The code includes a state part that handle the different states.
 
+![pattern](Images_UML/State_Pattern.png)
 
 - **Consequences.** The functionality of the game is influenced by the state that it is currently in. Because of that, many features and functionalities are trapped inside a single state.
 
@@ -116,6 +137,7 @@ Because of that we might end up writing the same code repeatedly.
 
 - **Implementation.** Some classes are divides in a part-whole hierarchies, for example the Elements Class.
 
+![pattern](Images_UML/Composite_Pattern.png)
 
 - **Consequences.** The code becomes more simple and organized. It's easier to add new types of components. 
 However, the subclasses will always depend on their superclasses, reducing their flexibility. 
@@ -130,6 +152,7 @@ However, the subclasses will always depend on their superclasses, reducing their
 
 - **Implementation.** Mostly used to ensure that only one Game and State object are instantiated.
 
+![pattern](Images_UML/Singleton_Pattern.png)
 
 - **Consequences.** It makes the code harder to test. It is also a very specific and limiting pattern and should only be used in certain cases.
 
@@ -145,6 +168,8 @@ are updated in each loop.
 
 - **Implementation** Used in the Game class
 
+![pattern](Images_UML/Game_Loop_Pattern.png)
+
 - **Consequences** The game runs more smoothly. However, we need to make sure that the code in the Game Loop
 is efficient because that peace of code will run a lot of times during the Game execution. Bad code will result in bad game performance.
 
@@ -158,6 +183,7 @@ is efficient because that peace of code will run a lot of times during the Game 
 
 - **Implementation.** Is used in the collectables to execute their specific actions.
 
+![pattern](Images_UML/Command_Pattern.png)
 
 - **Consequences.** It decouples the object that invokes the operation from the one that knows how to perform it and 
 facilitates the addition of new commands.
@@ -173,6 +199,7 @@ facilitates the addition of new commands.
 
 - **Implementation.** Used with the collectables.
 
+![pattern](Images_UML/Factory_Pattern.png)
 
 - **Consequences.**  The code becomes easier to reuse and maintain. It also becomes more modular and enables the creation of objects without knowing the implementation details. 
 #### KNOWN CODE SMELLS
