@@ -5,6 +5,7 @@ import SpaceInvaders.source_code.Model.Game.Collectables.CollectableFactory;
 import SpaceInvaders.source_code.Model.Game.RegularGameElements.*;
 import SpaceInvaders.source_code.Model.Position;
 
+import java.util.Iterator;
 import java.util.List;
 
 public class ArenaModifier {
@@ -21,7 +22,16 @@ public class ArenaModifier {
     }
 
     public void removeAlien(Alien alien) {
-        arena.getAliens().remove(alien);
+        List<Alien> aliens = arena.getAliens();
+        for(int i = 0; i < aliens.size(); i++){
+            if(aliens.get(i).equals(alien)){
+                if(i > 0){
+                    aliens.get(i - 1).setAlienState(AlienState.ATTACKING);
+                }
+                aliens.remove(aliens.get(i));
+                break;
+            }
+        }
     }
 
     public void removeCoverWall(CoverWall coverWall){
@@ -38,6 +48,6 @@ public class ArenaModifier {
 
     public void addProjectile(Projectile projectile) {arena.getProjectiles().add(projectile);}
 
-    public void removeProjectile(Projectile projectile) {}
+    public void removeProjectile(Projectile projectile) {arena.getProjectiles().remove(projectile);}
 
 }

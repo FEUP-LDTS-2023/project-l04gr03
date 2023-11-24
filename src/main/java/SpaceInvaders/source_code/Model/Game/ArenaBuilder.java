@@ -4,6 +4,7 @@ import SpaceInvaders.source_code.Model.Game.Collectables.Collectable;
 import SpaceInvaders.source_code.Model.Game.RegularGameElements.*;
 import SpaceInvaders.source_code.Model.Position;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public abstract class ArenaBuilder{
@@ -40,6 +41,7 @@ public abstract class ArenaBuilder{
         newArena.setWalls(createWalls());
         newArena.setCoverWalls(createCoverWalls());
         newArena.setAlienShip(createAlienShip());
+        newArena.setProjectiles(new ArrayList<>());
         return newArena;
     }
 
