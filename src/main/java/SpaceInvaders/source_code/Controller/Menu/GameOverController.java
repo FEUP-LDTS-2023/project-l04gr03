@@ -2,23 +2,25 @@ package SpaceInvaders.source_code.Controller.Menu;
 
 import SpaceInvaders.source_code.Controller.Controller;
 import SpaceInvaders.source_code.Game;
+import SpaceInvaders.source_code.Model.Game.ArenaBuilderByRound;
 import SpaceInvaders.source_code.Model.Menu.GameOverMenu;
 import SpaceInvaders.source_code.Model.Menu.Menu;
 import SpaceInvaders.source_code.State.GameStates;
 import com.googlecode.lanterna.input.KeyStroke;
 
-import java.io.IOException;
+import java.io.*;
+import java.net.URL;
 
 
 public class GameOverController extends Controller<GameOverMenu> {
 
-    public GameOverController(GameOverMenu menu){
+    public GameOverController(GameOverMenu menu) {
         super(menu);
     }
 
     @Override
     public void step(Game game, KeyStroke key, long time) throws IOException {
-        switch (key.getKeyType()){
+        switch (key.getKeyType()) {
 
             case ArrowUp:
                 getModel().previousOption();
@@ -27,13 +29,13 @@ public class GameOverController extends Controller<GameOverMenu> {
                 getModel().nextOption();
                 break;
             case Enter:
-                if(getModel().isSelectedRestart()){
+                if (getModel().isSelectedRestart()) {
+                    UpdateLeaderboard(getModel().getScore(), getModel().getUsername());
                     game.setState(GameStates.GAME);
-                }
-                else if(getModel().isSelectedExit()){
+                } else if (getModel().isSelectedExit()) {
+                    UpdateLeaderboard(getModel().getScore(), getModel().getUsername());
                     game.setState(GameStates.START_MENU);
-                }
-                else if(getModel().isSelectedLeaderboard()) {
+                } else if (getModel().isSelectedLeaderboard()) {
                     game.setState(GameStates.INSTRUCTIONS);
                 }
                 break;
@@ -44,6 +46,13 @@ public class GameOverController extends Controller<GameOverMenu> {
                 getModel().removeLetter();
                 break;
         }
+    }
+
+    private void UpdateLeaderboard(Integer score, String username) throws IOException {
+        File file = new File("src/main/resources/text/Leaderboard.txt");
+        BufferedWriter bw = new BufferedWriter(new FileWriter(file.getAbsolutePath()));
+        bw.write(score + " - " + username + '\n');
+        bw.close();
     }
 }
 

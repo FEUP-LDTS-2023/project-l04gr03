@@ -18,6 +18,7 @@ public abstract class OnlyTextMenu {
 
     private List<String> readFile(String filename) {
         File file = new File(filename);
+        filename = file.getAbsolutePath();
         List<String> newText = new ArrayList<>();
         Scanner scanner = new Scanner(filename);
 
@@ -26,4 +27,6 @@ public abstract class OnlyTextMenu {
         }
         return newText;
     }
+
+
 }
