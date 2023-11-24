@@ -12,4 +12,17 @@ public class AttackingElement extends DestroyableElement {
     }
 
     public int getDamagePerShot() {return damagePerShot;}
+
+    public void setDamagePerShot(int damagePerShot){this.damagePerShot = damagePerShot;}
+
+    @Override
+    public boolean equals(Object o){
+        if(this == o){
+            return true;
+        }
+        if(this.getClass() != o.getClass() || this == null){
+            return false;
+        }
+        return this.getPosition().equals(((AttackingElement) o).getPosition()) && this.getHealth() == ((AttackingElement) o).getHealth() && this.getDamagePerShot() == ((AttackingElement) o).getDamagePerShot();
+    }
 }

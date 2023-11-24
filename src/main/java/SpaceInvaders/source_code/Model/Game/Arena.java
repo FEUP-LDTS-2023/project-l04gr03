@@ -89,6 +89,8 @@ public class Arena {
         this.coverWalls = coverWalls;
     }
 
+    public void setProjectiles(List<Projectile> projectiles) {this.projectiles = projectiles;}
+
     public void setAlienShip(AlienShip alienShip) {this.alienShip = alienShip;}
 
     public void setCollectable(Collectable collectable) {

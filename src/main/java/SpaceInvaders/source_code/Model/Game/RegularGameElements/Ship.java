@@ -12,7 +12,7 @@ public class Ship extends AttackingElement {
     }
 
     public void increaseDamage(int increaseRatio){
-        damagePerShot*=increaseRatio;
+        this.setDamagePerShot(getDamagePerShot() * increaseRatio);
     }
 
     public void restoreHealth(){

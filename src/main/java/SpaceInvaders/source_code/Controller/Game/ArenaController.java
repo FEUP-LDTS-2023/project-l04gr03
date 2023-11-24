@@ -2,6 +2,7 @@ package SpaceInvaders.source_code.Controller.Game;
 
 import SpaceInvaders.source_code.Game;
 import SpaceInvaders.source_code.Model.Game.Arena;
+import SpaceInvaders.source_code.Model.Game.ArenaModifier;
 import SpaceInvaders.source_code.Model.Game.Element;
 import SpaceInvaders.source_code.Model.Game.RegularGameElements.Alien;
 import SpaceInvaders.source_code.Model.Game.RegularGameElements.CoverWall;
@@ -24,12 +25,15 @@ public class ArenaController extends GameController {
 
     private CollisionController collisionController;
 
+    private ArenaModifier arenaModifier;
+
     public ArenaController(Arena arena) {
         super(arena);
         this.shipController = new ShipController(arena);
         this.alienController = new AlienController(arena);
         this.projectileController = new ProjectileController(arena);
         this.collisionController = new CollisionController(arena);
+        this.arenaModifier = new ArenaModifier(arena);
     }
 
     public ShipController getShipController() {return shipController;}
@@ -39,6 +43,8 @@ public class ArenaController extends GameController {
     public ProjectileController getProjectileController() {return projectileController;}
 
     public CollisionController getCollisionController() {return collisionController;}
+
+    public ArenaModifier getArenaModifier() {return arenaModifier;}
 
     public boolean collisionBetween(Element element1, Element element2){
         return element1.getPosition().equals(element2.getPosition());
@@ -68,6 +74,24 @@ public class ArenaController extends GameController {
         return false;
     }
 
+    public void coverWallHitByProjectile(CoverWall coverWall, Projectile projectile){
+        coverWall.decreaseHealth(projectile.getElement().getDamagePerShot());
+    }
+
+    public void removeDestroyedCoverWalls(){
+        List<CoverWall> coverWalls = getModel().getCoverWalls();
+        for (CoverWall coverWall : coverWalls){
+            if(coverWall.isDestroyed()){
+               arenaModifier.removeCoverWall(coverWall);
+            }
+        }
+    }
+
+    public void removeDestroyedElements(){
+        alienController.removeDestroyedAliens();
+        removeDestroyedCoverWalls();
+    }
+
     @Override
     public void step(Game game, KeyStroke key, long time) throws IOException {
         if(getModel().getShip().getHealth() == 0 || shipCollidesWithAlien() || alienCollidesWithCoverWall()){
@@ -77,6 +101,7 @@ public class ArenaController extends GameController {
             game.setState(GameStates.PAUSE);
         }
         else{
+            removeDestroyedElements();
             collisionController.step(game,key,time);
             shipController.step(game,key,time);
             alienController.step(game,key,time);

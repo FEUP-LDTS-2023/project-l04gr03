@@ -65,16 +65,24 @@ public class AlienController extends ArenaController {
 
     public void shootProjectile(){
         List<Alien> attackingAliens = getModel().getAttackingAliens();
-        ArenaModifier arenaModifier = new ArenaModifier(getModel());
         Random random = new Random();
         int randomIndex = random.nextInt(attackingAliens.size());
         Alien randomAlien = attackingAliens.get(randomIndex);
-        arenaModifier.addProjectile(new Projectile(randomAlien.getPosition(),randomAlien,5));
+        getArenaModifier().addProjectile(new Projectile(randomAlien.getPosition(),randomAlien,5));
     }
 
     public void hitByProjectile(Alien alien, Projectile projectile){
         alien.decreaseHealth(projectile.getElement().getDamagePerShot());
         getModel().increaseScore(alien.getScore());
+    }
+
+    public void removeDestroyedAliens(){
+        List<Alien> aliens = getModel().getAliens();
+        for(Alien alien : aliens){
+            if(alien.isDestroyed()){
+               getArenaModifier().removeAlien(alien);
+            }
+        }
     }
 
     public void updateMovementDirection(){

@@ -22,8 +22,9 @@ public class Alien extends AttackingElement {
 
     public AlienState getAlienState() {return alienState;}
 
+    public void setAlienState(AlienState alienState) {this.alienState = alienState;}
+
     public void increaseScore(int increaseRatio){
         score*=increaseRatio;
     }
-
 }
