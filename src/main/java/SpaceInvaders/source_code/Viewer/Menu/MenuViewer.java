@@ -5,7 +5,7 @@ import SpaceInvaders.source_code.Model.Menu.Menu;
 import SpaceInvaders.source_code.Model.Position;
 import SpaceInvaders.source_code.Viewer.Viewer;
 
-public abstract class MenuViewer<T extends Menu> extends Viewer<Menu> {
+public abstract class MenuViewer<T extends Menu> extends Viewer<T> {
 
     private final int reference_x;
     private final int reference_y;

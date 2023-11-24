@@ -89,6 +89,18 @@ class MenuTest extends Specification {
             m.addLetter(c)
         then:
             m.username == "A"
+
+        when: 'username length == 6'
+            Character c1 = 'a', c2 = 'b', c3 = 'c', c4 = 'd', c5 = 'e', c6 = 'l'
+            m.addLetter(c1);
+            m.addLetter(c2)
+            m.addLetter(c3)
+            m.addLetter(c4)
+            m.addLetter(c5)
+            m.addLetter(c6)
+        then:
+            m.username.length() == 6
+            m.username == "Aabcde"
     }
 
     def "Add char username GameOver when username isn´t empty"(){
