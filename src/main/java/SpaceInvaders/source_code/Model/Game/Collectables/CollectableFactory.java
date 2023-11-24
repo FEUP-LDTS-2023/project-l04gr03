@@ -23,7 +23,6 @@ public class CollectableFactory {
             case "damage" -> new DamageCollectable(position, multiplier);
             case "score" -> new ScoreCollectable(position, multiplier);
             case "sped up projectile" -> new SpedUpProjectileCollectable(position, multiplier);
-            case "splash projectile" -> new SplashProjectileCollectable(position, multiplier);
             default -> null;
         };
     }
