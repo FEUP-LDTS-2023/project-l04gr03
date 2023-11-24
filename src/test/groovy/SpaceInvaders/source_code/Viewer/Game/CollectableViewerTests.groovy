@@ -1,20 +1,23 @@
 package SpaceInvaders.source_code.Viewer.Game
 
 import SpaceInvaders.source_code.GUI.GUI
+import SpaceInvaders.source_code.Model.Game.Collectables.Collectable
 import SpaceInvaders.source_code.Model.Game.Collectables.HealthCollectable
-import SpaceInvaders.source_code.Viewer.Game.Collectables.HealthCollectableViewer
+import SpaceInvaders.source_code.Viewer.Game.Collectables.CollectableViewer
+import SpaceInvaders.source_code.Viewer.Game.Collectables.CollectableViewerInterface
 import spock.lang.Specification
 
 class CollectableViewerTests extends Specification{
-    def "Health Collectable Draw"(){
+    def "Collectable draw"(){
         given:
-            def viewer = new HealthCollectableViewer()
-            def HealthCollectable = Mock(HealthCollectable)
+            def CollectableViewer = new CollectableViewer()
             def gui = Mock(GUI)
+            def collectable = Mock(Collectable)
         when:
-            viewer.draw(gui,HealthCollectable)
+            CollectableViewer.draw(gui,collectable)
         then:
             1 * gui.drawElement(_,_,_)
+
     }
 }
 
