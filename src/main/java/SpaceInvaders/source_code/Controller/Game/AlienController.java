@@ -2,21 +2,19 @@ package SpaceInvaders.source_code.Controller.Game;
 
 import SpaceInvaders.source_code.Game;
 import SpaceInvaders.source_code.Model.Game.Arena;
-import SpaceInvaders.source_code.Model.Game.RegularGameElements.Alien;
-import SpaceInvaders.source_code.Model.Game.RegularGameElements.CoverWall;
-import SpaceInvaders.source_code.Model.Game.RegularGameElements.Ship;
+import SpaceInvaders.source_code.Model.Game.ArenaModifier;
+import SpaceInvaders.source_code.Model.Game.RegularGameElements.*;
 import SpaceInvaders.source_code.Model.Position;
 import com.googlecode.lanterna.input.KeyStroke;
 
 import java.util.List;
+import java.util.Random;
 
 public class AlienController extends ArenaController {
 
     private MovementDirection movementDirection;
 
     private long lastMovementTime;
-
-    private long time;
 
     public AlienController(Arena arena) {
         super(arena);
@@ -65,6 +63,20 @@ public class AlienController extends ArenaController {
         }
     }
 
+    public void shootProjectile(){
+        List<Alien> attackingAliens = getModel().getAttackingAliens();
+        ArenaModifier arenaModifier = new ArenaModifier(getModel());
+        Random random = new Random();
+        int randomIndex = random.nextInt(attackingAliens.size());
+        Alien randomAlien = attackingAliens.get(randomIndex);
+        arenaModifier.addProjectile(new Projectile(randomAlien.getPosition(),randomAlien,5));
+    }
+
+    public void hitByProjectile(Alien alien, Projectile projectile){
+        alien.decreaseHealth(projectile.getElement().getDamagePerShot());
+        getModel().increaseScore(alien.getScore());
+    }
+
     public void updateMovementDirection(){
         switch (movementDirection){
             case LEFT:
@@ -85,6 +97,9 @@ public class AlienController extends ArenaController {
 
     public void step(Game game, KeyStroke key, long time) {
         updateMovementDirection();
+        if(lastMovementTime - time > 100){
+            shootProjectile();
+        }
         if(lastMovementTime - time > 200){
             moveAliens();
         }

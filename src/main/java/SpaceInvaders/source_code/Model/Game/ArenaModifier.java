@@ -36,7 +36,8 @@ public class ArenaModifier {
         arena.setCollectable(null);
     }
 
-    public void addShipProjectile(Projectile<Ship> projectile) {arena.getShipProjectiles().add(projectile);}
+    public void addProjectile(Projectile projectile) {arena.getProjectiles().add(projectile);}
 
-    public void addAlienProjectile(Projectile<Alien> projectile) {arena.getAlienProjectiles().add(projectile);}
+    public void removeProjectile(Projectile projectile) {}
+
 }

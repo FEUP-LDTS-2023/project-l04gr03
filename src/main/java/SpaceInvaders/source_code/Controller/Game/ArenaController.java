@@ -5,6 +5,7 @@ import SpaceInvaders.source_code.Model.Game.Arena;
 import SpaceInvaders.source_code.Model.Game.Element;
 import SpaceInvaders.source_code.Model.Game.RegularGameElements.Alien;
 import SpaceInvaders.source_code.Model.Game.RegularGameElements.CoverWall;
+import SpaceInvaders.source_code.Model.Game.RegularGameElements.Projectile;
 import SpaceInvaders.source_code.Model.Game.RegularGameElements.Ship;
 import SpaceInvaders.source_code.State.GameStates;
 import com.googlecode.lanterna.input.KeyStroke;
@@ -21,13 +22,23 @@ public class ArenaController extends GameController {
 
     private ProjectileController projectileController;
 
+    private CollisionController collisionController;
+
     public ArenaController(Arena arena) {
         super(arena);
         this.shipController = new ShipController(arena);
         this.alienController = new AlienController(arena);
         this.projectileController = new ProjectileController(arena);
+        this.collisionController = new CollisionController(arena);
     }
 
+    public ShipController getShipController() {return shipController;}
+
+    public AlienController getAlienController() {return alienController;}
+
+    public ProjectileController getProjectileController() {return projectileController;}
+
+    public CollisionController getCollisionController() {return collisionController;}
 
     public boolean collisionBetween(Element element1, Element element2){
         return element1.getPosition().equals(element2.getPosition());
@@ -60,12 +71,13 @@ public class ArenaController extends GameController {
     @Override
     public void step(Game game, KeyStroke key, long time) throws IOException {
         if(getModel().getShip().getHealth() == 0 || shipCollidesWithAlien() || alienCollidesWithCoverWall()){
-            game.getState().UpdateState(GameStates.GAME_OVER);
+            game.setState(GameStates.GAME_OVER);
         }
         else if(key.getKeyType() == KeyType.Escape){
-            game.getState().UpdateState(GameStates.PAUSE);
+            game.setState(GameStates.PAUSE);
         }
         else{
+            collisionController.step(game,key,time);
             shipController.step(game,key,time);
             alienController.step(game,key,time);
             projectileController.step(game,key,time);
