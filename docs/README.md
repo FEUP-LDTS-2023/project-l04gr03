@@ -128,10 +128,26 @@ However, the subclasses will always depend on their superclasses, reducing their
 - **The Pattern.** The Singleton is the best choice to solve this problem. It ensures that a class only has one instance and provide a global point to access it.
 
 
-- **Implementation.** Mostly used to ensure that only one Game object is instantiated.
+- **Implementation.** Mostly used to ensure that only one Game and State object are instantiated.
 
 
 - **Consequences.** It makes the code harder to test. It is also a very specific and limiting pattern and should only be used in certain cases.
+
+### Game Loop
+
+- **Problem in Context.** The game needs to process the inputs without crashing, update the state
+and render the graphics. It also needs to track the passage of time to control the rate of gameplay.
+
+
+- **The Pattern.** The Game Loop Pattern is the best solution to solve this problem. It ensures that the state and the controllers
+are updated in each loop.
+
+
+- **Implementation** Used in the Game class
+
+- **Consequences** The game runs more smoothly. However, we need to make sure that the code in the Game Loop
+is efficient because that peace of code will run a lot of times during the Game execution. Bad code will result in bad game performance.
+
 #### KNOWN CODE SMELLS
 
 > This section should describe 3 to 5 different code smells that you have identified in your current implementation.
