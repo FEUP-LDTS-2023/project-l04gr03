@@ -50,7 +50,7 @@ public class GUILanterna implements GUI {
     }
 
     private AWTTerminalFontConfiguration loadFont() throws URISyntaxException, FontFormatException, IOException {
-        URL resource = getClass().getClassLoader().getResource("fonts/Space_invaders_font.ttf");
+        URL resource = getClass().getClassLoader().getResource("fonts/CosmicAlien.ttf");
         File fontFile = new File(resource.toURI());
         Font font = Font.createFont(Font.TRUETYPE_FONT, fontFile);
 
