@@ -4,7 +4,7 @@ import SpaceInvaders.source_code.GUI.GUI;
 import SpaceInvaders.source_code.Model.Game.RegularGameElements.Alien;
 
 public class AlienViewer implements ElementViewer<Alien> {
-    final private  char[] AlienChars = {'\u00ca','\u00cc','\u0302'}; // Ê, Ì, Î
+    final private  char[] AlienChars = {'\u00ca','\u00cc','\u00ce'}; // Ê, Ì, Î
 
     final private String [] AlienColors = {"#DB55DD", "#EBDF64", "#62DE6D"};
     int AlienType;

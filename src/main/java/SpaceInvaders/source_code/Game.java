@@ -1,7 +1,9 @@
 package SpaceInvaders.source_code;
 
 
+import SpaceInvaders.source_code.GUI.GUI;
 import SpaceInvaders.source_code.GUI.GUILanterna;
+import SpaceInvaders.source_code.Model.Position;
 import SpaceInvaders.source_code.State.GameStates;
 import SpaceInvaders.source_code.State.State;
 
@@ -10,7 +12,7 @@ import java.io.IOException;
 import java.net.URISyntaxException;
 
 public class Game {
-    private final GUILanterna gui;
+    private final GUI gui;
     private final State state;
 
     public Game() throws FontFormatException, IOException, URISyntaxException {
