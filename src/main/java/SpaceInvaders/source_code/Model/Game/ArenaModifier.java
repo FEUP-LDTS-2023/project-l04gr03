@@ -2,9 +2,7 @@ package SpaceInvaders.source_code.Model.Game;
 
 import SpaceInvaders.source_code.Model.Game.Collectables.Collectable;
 import SpaceInvaders.source_code.Model.Game.Collectables.CollectableFactory;
-import SpaceInvaders.source_code.Model.Game.RegularGameElements.Alien;
-import SpaceInvaders.source_code.Model.Game.RegularGameElements.AlienShip;
-import SpaceInvaders.source_code.Model.Game.RegularGameElements.CoverWall;
+import SpaceInvaders.source_code.Model.Game.RegularGameElements.*;
 import SpaceInvaders.source_code.Model.Position;
 
 import java.util.List;
@@ -37,4 +35,8 @@ public class ArenaModifier {
     public void removeCollectable(){
         arena.setCollectable(null);
     }
+
+    public void addShipProjectile(Projectile<Ship> projectile) {arena.getShipProjectiles().add(projectile);}
+
+    public void addAlienProjectile(Projectile<Alien> projectile) {arena.getAlienProjectiles().add(projectile);}
 }

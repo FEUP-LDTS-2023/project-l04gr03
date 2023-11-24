@@ -19,6 +19,10 @@ public class Arena {
 
     private List<CoverWall> coverWalls;
 
+    private List<Projectile<Ship>> shipProjectiles;
+
+    private List<Projectile<Alien>> alienProjectiles;
+
     private AlienShip alienShip;
 
     private Collectable collectable;
@@ -58,6 +62,10 @@ public class Arena {
     public List<CoverWall> getCoverWalls() {
         return coverWalls;
     }
+
+    public List<Projectile<Ship>> getShipProjectiles() {return shipProjectiles;}
+
+    public List<Projectile<Alien>> getAlienProjectiles() {return alienProjectiles;}
 
     public AlienShip getAlienShip() {return alienShip;}
 
