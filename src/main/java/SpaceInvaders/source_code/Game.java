@@ -20,7 +20,9 @@ public class Game {
         this.state = State.getInstance();
     }
     public static void main(String[] args) throws IOException, URISyntaxException, FontFormatException {
-
+        GUI gui = new GUILanterna(20,20);
+        gui.drawText(new Position(5,5),"\u00c1", "#FF5400");
+        gui.refresh();
     }
 
     public void setState(GameStates gameStates) {
