@@ -17,6 +17,9 @@ public class OnlyTextMenuController extends Controller<OnlyTextMenu> {
 
     @Override
     public void step(Game game, KeyStroke key, long time) throws IOException {
+        if(key == null){
+            return;
+        }
        if(key.getKeyType() == KeyType.Escape){
            game.setPrevState();
        }

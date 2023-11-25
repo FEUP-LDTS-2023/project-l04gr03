@@ -41,7 +41,7 @@ class TestArenaBuilderByRound extends Specification{
         when:
         Ship ship = arenaBuilderByRound.createShip()
         then:
-        ship.getPosition().equals(new Position(35,26))
+        ship.getPosition().equals(new Position(35,27))
         ship.getHealth() == 1 * arenaBuilderByRound.getBaseShipHealth()
         ship.getDamagePerShot() == 1 * arenaBuilderByRound.getBaseShipDamage()
     }
@@ -83,9 +83,9 @@ class TestArenaBuilderByRound extends Specification{
         when:
         List<CoverWall> coverWalls = arenaBuilderByRound.createCoverWalls()
         then:
-        coverWalls.size() == 2;
+        coverWalls.size() == 8;
         coverWalls.get(0).getPosition().equals(new Position(14,24))
-        coverWalls.get(1).getPosition().equals(new Position(57,24))
+        coverWalls.get(1).getPosition().equals(new Position(14,25))
         coverWalls.get(0).getHealth() == arenaBuilderByRound.getBaseCoverWallHealth() * round * round
     }
 
