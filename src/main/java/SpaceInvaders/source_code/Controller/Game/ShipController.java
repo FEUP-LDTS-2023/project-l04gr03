@@ -13,7 +13,7 @@ import com.googlecode.lanterna.input.KeyType;
 
 import java.io.IOException;
 
-public class ShipController extends ArenaController {
+public class ShipController extends GameController {
 
     public ShipController(Arena arena) {
         super(arena);
@@ -53,13 +53,16 @@ public class ShipController extends ArenaController {
 
     @Override
     public void step(Game game, KeyStroke key, long time) throws IOException {
-        if(key.getKeyType() == KeyType.ArrowLeft || key.getCharacter() == 'A'){
+        if(key == null){
+            return;
+        }
+        if(key.getKeyType() == KeyType.ArrowLeft){
             moveLeft();
         }
-        if(key.getKeyType() == KeyType.ArrowRight || key.getCharacter() == 'D'){
+        if(key.getKeyType() == KeyType.ArrowRight){
             moveRight();
         }
-        if(key.getKeyType() == KeyType.ArrowUp || key.getCharacter() == 'W'){
+        if(key.getKeyType() == KeyType.ArrowUp){
             shootProjectile();
         }
     }

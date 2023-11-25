@@ -23,8 +23,6 @@ public class ArenaController extends GameController {
 
     private ProjectileController projectileController;
 
-    private CollisionController collisionController;
-
     private ArenaModifier arenaModifier;
 
     public ArenaController(Arena arena) {
@@ -32,7 +30,6 @@ public class ArenaController extends GameController {
         this.shipController = new ShipController(arena);
         this.alienController = new AlienController(arena);
         this.projectileController = new ProjectileController(arena);
-        this.collisionController = new CollisionController(arena);
         this.arenaModifier = new ArenaModifier(arena);
     }
 
@@ -42,7 +39,6 @@ public class ArenaController extends GameController {
 
     public ProjectileController getProjectileController() {return projectileController;}
 
-    public CollisionController getCollisionController() {return collisionController;}
 
     public ArenaModifier getArenaModifier() {return arenaModifier;}
 
@@ -74,6 +70,44 @@ public class ArenaController extends GameController {
         return false;
     }
 
+    public void projectileCollisionsWithShip(){
+        List<Projectile> projectiles = getModel().getProjectiles();
+        Ship ship = getModel().getShip();
+        for(Projectile projectile : projectiles){
+            if(collisionBetween(ship,projectile)){
+                getShipController().hitByProjectile(projectile);
+                getArenaModifier().removeProjectile(projectile);
+            }
+        }
+    }
+
+
+    public void projectileCollisionsWithAliens(){
+        List<Projectile> projectiles = getModel().getProjectiles();
+        List<Alien> aliens = getModel().getAliens();
+        for(Alien alien : aliens){
+            for (Projectile projectile : projectiles){
+                if(collisionBetween(alien,projectile)){
+                    getAlienController().hitByProjectile(alien,projectile);
+                    getArenaModifier().removeProjectile(projectile);
+                }
+            }
+        }
+    }
+
+    public void projectileCollisionsWithCoverWalls(){
+        List<Projectile> projectiles = getModel().getProjectiles();
+        List<CoverWall> coverWalls = getModel().getCoverWalls();
+        for(CoverWall coverWall : coverWalls){
+            for (Projectile projectile : projectiles){
+                if(collisionBetween(coverWall,projectile)){
+                    coverWallHitByProjectile(coverWall,projectile);
+                    getArenaModifier().removeProjectile(projectile);
+                }
+            }
+        }
+    }
+
     public void coverWallHitByProjectile(CoverWall coverWall, Projectile projectile){
         coverWall.decreaseHealth(projectile.getElement().getDamagePerShot());
     }
@@ -92,21 +126,26 @@ public class ArenaController extends GameController {
         removeDestroyedCoverWalls();
     }
 
+    public void checkCollisions(){
+        projectileCollisionsWithShip();
+        projectileCollisionsWithAliens();
+        projectileCollisionsWithCoverWalls();
+    }
+
     @Override
     public void step(Game game, KeyStroke key, long time) throws IOException {
+        if(key != null){
+            if(key.getKeyType() == KeyType.Escape){
+                game.setState(GameStates.PAUSE);
+            }
+        }
         if(getModel().getShip().getHealth() == 0 || shipCollidesWithAlien() || alienCollidesWithCoverWall()){
             game.setState(GameStates.GAME_OVER);
         }
-        else if(key.getKeyType() == KeyType.Escape){
-            game.setState(GameStates.PAUSE);
-        }
-        else{
-            removeDestroyedElements();
-            collisionController.step(game,key,time);
-            shipController.step(game,key,time);
-            alienController.step(game,key,time);
-            projectileController.step(game,key,time);
-        }
-
+        removeDestroyedElements();
+        checkCollisions();
+        shipController.step(game,key,time);
+        alienController.step(game,key,time);
+        projectileController.step(game,key,time);
     }
 }

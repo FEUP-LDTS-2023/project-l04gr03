@@ -20,8 +20,10 @@ public class GameOverController extends Controller<GameOverMenu> {
 
     @Override
     public void step(Game game, KeyStroke key, long time) throws IOException {
+        if(key == null){
+            return;
+        }
         switch (key.getKeyType()) {
-
             case ArrowUp:
                 getModel().previousOption();
                 break;
