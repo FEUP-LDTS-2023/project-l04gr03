@@ -73,10 +73,10 @@ public class ArenaController extends GameController {
     public void projectileCollisionsWithShip(){
         List<Projectile> projectiles = getModel().getProjectiles();
         Ship ship = getModel().getShip();
-        for(Projectile projectile : projectiles){
-            if(collisionBetween(ship,projectile)){
-                getShipController().hitByProjectile(projectile);
-                getArenaModifier().removeProjectile(projectile);
+        for(int i = 0; i < projectiles.size(); i++){
+            if(collisionBetween(ship,projectiles.get(i))){
+                getShipController().hitByProjectile(projectiles.get(i));
+                arenaModifier.removeProjectile(projectiles.get(i));
             }
         }
     }
@@ -85,11 +85,11 @@ public class ArenaController extends GameController {
     public void projectileCollisionsWithAliens(){
         List<Projectile> projectiles = getModel().getProjectiles();
         List<Alien> aliens = getModel().getAliens();
-        for(Alien alien : aliens){
-            for (Projectile projectile : projectiles){
-                if(collisionBetween(alien,projectile)){
-                    getAlienController().hitByProjectile(alien,projectile);
-                    getArenaModifier().removeProjectile(projectile);
+        for(int i = 0; i < aliens.size(); i++){
+            for (int j = 0; j < projectiles.size(); j++){
+                if(collisionBetween(aliens.get(i), projectiles.get(j))){
+                    getAlienController().hitByProjectile(aliens.get(i),projectiles.get(j));
+                    arenaModifier.removeProjectile(projectiles.get(j));
                 }
             }
         }
@@ -98,11 +98,11 @@ public class ArenaController extends GameController {
     public void projectileCollisionsWithCoverWalls(){
         List<Projectile> projectiles = getModel().getProjectiles();
         List<CoverWall> coverWalls = getModel().getCoverWalls();
-        for(CoverWall coverWall : coverWalls){
-            for (Projectile projectile : projectiles){
-                if(collisionBetween(coverWall,projectile)){
-                    coverWallHitByProjectile(coverWall,projectile);
-                    getArenaModifier().removeProjectile(projectile);
+        for(int i = 0; i < coverWalls.size(); i++){
+            for (int j = 0; j < projectiles.size(); j++){
+                if(collisionBetween(coverWalls.get(i),projectiles.get(j))){
+                    coverWallHitByProjectile(coverWalls.get(i),projectiles.get(j));
+                    arenaModifier.removeProjectile(projectiles.get(j));
                 }
             }
         }
@@ -114,9 +114,9 @@ public class ArenaController extends GameController {
 
     public void removeDestroyedCoverWalls(){
         List<CoverWall> coverWalls = getModel().getCoverWalls();
-        for (CoverWall coverWall : coverWalls){
-            if(coverWall.isDestroyed()){
-               arenaModifier.removeCoverWall(coverWall);
+        for (int i = 0; i < coverWalls.size(); i++){
+            if(coverWalls.get(i).isDestroyed()){
+               arenaModifier.removeCoverWall(coverWalls.get(i));
             }
         }
     }
@@ -139,7 +139,7 @@ public class ArenaController extends GameController {
                 game.setState(GameStates.PAUSE);
             }
         }
-        if(getModel().getShip().getHealth() == 0 || shipCollidesWithAlien() || alienCollidesWithCoverWall()){
+        if(getModel().getShip().getHealth() == 0 || shipCollidesWithAlien() || alienCollidesWithCoverWall() || getModel().getAliens().isEmpty()){
             game.setState(GameStates.GAME_OVER);
         }
         removeDestroyedElements();

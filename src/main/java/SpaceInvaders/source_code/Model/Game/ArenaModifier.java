@@ -34,9 +34,7 @@ public class ArenaModifier {
         }
     }
 
-    public void removeCoverWall(CoverWall coverWall){
-        arena.getCoverWalls().remove(coverWall);
-    }
+    public void removeCoverWall(CoverWall coverWall){arena.getCoverWalls().remove(coverWall);}
 
     public void removeAlienShip(AlienShip alienShip){
         arena.setAlienShip(null);
@@ -48,6 +46,5 @@ public class ArenaModifier {
 
     public void addProjectile(Projectile projectile) {arena.getProjectiles().add(projectile);}
 
-    public void removeProjectile(Projectile projectile) {
-        arena.getProjectiles().remove(projectile);}
+    public void removeProjectile(Projectile projectile) {arena.getProjectiles().remove(projectile);}
 }
