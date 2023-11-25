@@ -25,16 +25,21 @@ public class Game {
 
     private int score;
 
+    private final long launchTime;
+
     private Game() throws IOException, URISyntaxException, FontFormatException {
         Screen screen = null;
         this.gui = new GUILanterna(75,30);
         this.state = State.getInstance();
         this.score = 0;
+        this.launchTime = System.currentTimeMillis();
     }
 
     public State getState() {return state;}
 
-    public void setState(GameStates gameStates){state.UpdateState(gameStates);}
+    public long getLaunchTime() {return launchTime;}
+
+    public void setState(GameStates gameStates) throws IOException {state.UpdateState(gameStates);}
 
     private void startGame() throws IOException {
         int FPS = 20;

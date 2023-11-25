@@ -12,7 +12,7 @@ import com.googlecode.lanterna.input.KeyStroke;
 
 import java.util.List;
 
-public class ProjectileController extends ArenaController {
+public class ProjectileController extends GameController {
 
 
     public ProjectileController(Arena arena) {

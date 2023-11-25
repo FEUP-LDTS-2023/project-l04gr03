@@ -9,6 +9,8 @@ import SpaceInvaders.source_code.Controller.Menu.StartMenuController;
 import SpaceInvaders.source_code.GUI.GUI;
 import SpaceInvaders.source_code.Game;
 import SpaceInvaders.source_code.Model.Game.Arena;
+import SpaceInvaders.source_code.Model.Game.ArenaBuilder;
+import SpaceInvaders.source_code.Model.Game.ArenaBuilderByRound;
 import SpaceInvaders.source_code.Model.Menu.*;
 import SpaceInvaders.source_code.Viewer.Game.GameViewer;
 import SpaceInvaders.source_code.Viewer.Menu.*;
@@ -64,7 +66,7 @@ public class State {
         return previousState;
     }
 
-    public void UpdateState(GameStates newState){
+    public void UpdateState(GameStates newState) throws IOException {
         if(newState == GameStates.START_MENU){
             previousState = GameStates.START_MENU;
         }
@@ -72,6 +74,7 @@ public class State {
             previousState = currentState;
         }
         currentState = newState;
+        StateActions();
     }
 
     public void UpdateToPrevious(){
@@ -84,10 +87,9 @@ public class State {
         KeyStroke key = gui.getNextAction();
         controller.step(game,key,time);
         viewer.draw(gui);
-
     }
 
-    public void StateActions (){
+    public void StateActions () throws IOException {
 
         switch (currentState){
             case START_MENU:
@@ -103,7 +105,8 @@ public class State {
                 break;
 
             case GAME:
-                this.arena = new Arena(20,20);
+                ArenaBuilderByRound arenaBuilder = new ArenaBuilderByRound(1);
+                this.arena = arenaBuilder.buildArena();
                 controller = new ArenaController(arena);
                 viewer = new GameViewer(arena);
                 break;

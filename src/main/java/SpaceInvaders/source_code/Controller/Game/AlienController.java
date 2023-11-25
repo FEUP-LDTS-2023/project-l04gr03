@@ -10,16 +10,16 @@ import com.googlecode.lanterna.input.KeyStroke;
 import java.util.List;
 import java.util.Random;
 
-public class AlienController extends ArenaController {
+public class AlienController extends GameController {
 
     private MovementDirection movementDirection;
 
-    private long lastMovementTime;
+    private long lastMovimentTime;
 
     public AlienController(Arena arena) {
         super(arena);
         this.movementDirection = MovementDirection.RIGHT;
-        this.lastMovementTime = 0;
+        this.lastMovimentTime = 0;
     }
 
     public boolean canMoveAlien(Alien alien) {
@@ -48,11 +48,14 @@ public class AlienController extends ArenaController {
         Position alienPosition = new Position(alien.getPosition().getX(),alien.getPosition().getY());
         switch(movementDirection){
             case LEFT:
-                alien.setPosition(new Position(alienPosition.getX() - 3,alienPosition.getY()));
+                alien.setPosition(new Position(alienPosition.getX() - 1,alienPosition.getY()));
+                break;
             case RIGHT:
-                alien.setPosition(new Position(alienPosition.getX() + 3,alienPosition.getY()));
+                alien.setPosition(new Position(alienPosition.getX() + 1,alienPosition.getY()));
+                break;
             case DOWN:
-                alien.setPosition(new Position(alienPosition.getX(),alienPosition.getY() + 3));
+                alien.setPosition(new Position(alienPosition.getX(),alienPosition.getY() + 1));
+                break;
         }
     }
 
@@ -104,13 +107,13 @@ public class AlienController extends ArenaController {
     }
 
     public void step(Game game, KeyStroke key, long time) {
-        updateMovementDirection();
-        if(lastMovementTime - time > 100){
+        if(time - game.getLaunchTime() > 500){
             shootProjectile();
         }
-        if(lastMovementTime - time > 200){
+        if(time - lastMovimentTime > 300){
+            updateMovementDirection();
             moveAliens();
+            lastMovimentTime = time;
         }
-        this.lastMovementTime = time;
     }
 }
