@@ -29,7 +29,6 @@ public class State {
 
    private static  State instance;
 
-
     private State(){
         currentState = GameStates.START_MENU;
         previousState = GameStates.START_MENU;
