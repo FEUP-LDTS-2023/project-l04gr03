@@ -3,6 +3,7 @@ package SpaceInvaders.source_code.Model.Game;
 import SpaceInvaders.source_code.Model.Game.Collectables.Collectable;
 import SpaceInvaders.source_code.Model.Game.RegularGameElements.*;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class Arena {
@@ -18,6 +19,9 @@ public class Arena {
     private List<Wall> walls;
 
     private List<CoverWall> coverWalls;
+
+    private List<Projectile> projectiles;
+
 
     private AlienShip alienShip;
 
@@ -43,6 +47,8 @@ public class Arena {
         return score;
     }
 
+    public void increaseScore(int score){this.score+=score;}
+
     public Ship getShip() {
         return ship;
     }
@@ -58,6 +64,8 @@ public class Arena {
     public List<CoverWall> getCoverWalls() {
         return coverWalls;
     }
+
+    public List<Projectile> getProjectiles() {return projectiles;}
 
     public AlienShip getAlienShip() {return alienShip;}
 
@@ -81,10 +89,22 @@ public class Arena {
         this.coverWalls = coverWalls;
     }
 
+    public void setProjectiles(List<Projectile> projectiles) {this.projectiles = projectiles;}
+
     public void setAlienShip(AlienShip alienShip) {this.alienShip = alienShip;}
 
     public void setCollectable(Collectable collectable) {
         this.collectable = collectable;
+    }
+
+    public List<Alien> getAttackingAliens(){
+        List<Alien> attackingAliens = new ArrayList<>();
+        for(Alien alien : aliens){
+            if(alien.getAlienState() == AlienState.ATTACKING){
+                attackingAliens.add(alien);
+            }
+        }
+        return attackingAliens;
     }
 
 }

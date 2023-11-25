@@ -3,21 +3,16 @@ package SpaceInvaders.source_code.Model.Game.RegularGameElements;
 import SpaceInvaders.source_code.Model.Game.Element;
 import SpaceInvaders.source_code.Model.Position;
 
-public class Ship extends DestroyableElement {
+public class Ship extends AttackingElement {
 
     private int damagePerShot;
 
     public Ship(Position position, int health, int damagePerShot){
-        super(position,health);
-        this.damagePerShot = damagePerShot;
-    }
-
-    public int getDamagePerShot() {
-        return damagePerShot;
+        super(position,health,damagePerShot);
     }
 
     public void increaseDamage(int increaseRatio){
-        damagePerShot*=increaseRatio;
+        this.setDamagePerShot(getDamagePerShot() * increaseRatio);
     }
 
     public void restoreHealth(){

@@ -1,6 +1,7 @@
 package SpaceInvaders.source_code.Model.Game.RegularElements
 
 import SpaceInvaders.source_code.Model.Game.RegularGameElements.Alien
+import SpaceInvaders.source_code.Model.Game.RegularGameElements.AlienState
 import SpaceInvaders.source_code.Model.Position
 import spock.lang.Specification
 
@@ -8,7 +9,8 @@ class TestAlien extends Specification {
     def "IncreaseScore"(){
         given:
         Position position = Mock(Position)
-        Alien alien = new Alien(position,100,50,initialScore)
+        AlienState alienState = AlienState.ATTACKING
+        Alien alien = new Alien(position,100,50,initialScore,alienState)
         expect:
         alien.increaseScore(multiplier)
         finalScore == alien.getScore()

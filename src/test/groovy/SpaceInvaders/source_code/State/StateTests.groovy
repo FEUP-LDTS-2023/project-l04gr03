@@ -51,7 +51,7 @@ public class StateTests extends Specification{
 
     def "Update to Previous"(){
         given:
-            State state = State.getInstance()
+            State state = State.getInstance();
         when:
             state.UpdateState(GameStates.GAME)
             state.UpdateToPrevious()
@@ -63,6 +63,7 @@ public class StateTests extends Specification{
 
     def "State Step"(){
         given:
+            State state = State.getInstance();
             GUI gui = Mock(GUI.class)
             Game game = Mock(Game)
             State stateMock = Mock(State)
@@ -75,7 +76,6 @@ public class StateTests extends Specification{
     def "StateActions" (){
         given:
             State state = State.getInstance()
-
         when: 'Start Menu State'
             state.StateActions()
         then:
