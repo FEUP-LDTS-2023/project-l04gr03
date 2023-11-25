@@ -55,7 +55,7 @@ This project was developed by:
 
 
 - **Game Over Screen** - Is accessed when the player dies. It as the following options:
-    - The player can type is name and insert is score into the leaderboard;
+    - The player can type his name and insert his score into the leaderboard;
     - **Restart** - Restarts the game;
     - **Leaderboard** - Displays the top 5 best scores;
     - **Exit** - Exits the game.
@@ -65,12 +65,17 @@ This project was developed by:
 
 - **Enemy Spaceship** - Sometimes, the aliens spaceship appears and moves from left to right or from right to left. If the player hits this spaceship, he will receive a bonus punctuation.
 
+![Mocks](Mocks/Alien_ship.png)
 
 - **Collectable Lives** - The player can extend his lives by collecting this collectable.
 
 
 - **Collectable Projectiles** - This collectables can help the player by given him the option to shoot special projectiles.
- 
+
+
+  **Collectable lives** and **Projectile** appearance:
+
+![Mocks](Mocks/Collectabel.png)
 
 - **Background Music** - Music that plays when the game starts.
 
