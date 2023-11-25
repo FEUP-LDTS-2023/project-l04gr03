@@ -42,7 +42,7 @@ public class ShipController extends GameController {
     public void shootProjectile(){
         Ship ship = getModel().getShip();
         ArenaModifier arenaModifier = new ArenaModifier(getModel());
-        Position projectilePosition = new Position(ship.getPosition().getX(),ship.getPosition().getY() + 1);
+        Position projectilePosition = new Position(ship.getPosition().getX(),ship.getPosition().getY());
         Projectile projectile = new Projectile(projectilePosition, ship, 5);
         arenaModifier.addProjectile(projectile);
     }

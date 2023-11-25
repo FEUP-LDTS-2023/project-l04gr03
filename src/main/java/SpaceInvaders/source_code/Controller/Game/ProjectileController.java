@@ -23,7 +23,12 @@ public class ProjectileController extends GameController {
         List<Projectile> projectiles = getModel().getProjectiles();
         for(Projectile projectile : projectiles){
             Position projectilePosition = projectile.getPosition();
-            projectile.setPosition(new Position(projectilePosition.getX(),projectilePosition.getY() + projectile.getSpeed()));
+            if(projectile.getElement() instanceof Ship){
+                projectile.setPosition(new Position(projectilePosition.getX(),projectilePosition.getY() - 1));
+            }
+            if(projectile.getElement() instanceof Alien){
+                projectile.setPosition(new Position(projectilePosition.getX(),projectilePosition.getY() + 1));
+            }
         }
     }
 
