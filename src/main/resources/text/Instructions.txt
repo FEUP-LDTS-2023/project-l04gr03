@@ -1,1 +1,12 @@
-Demo
+The goal of the game is to kill
+all the aliens and stop the invasion.
+
+Use the left and right arrow keys to
+control the ship. Use the up Arrow key
+to shoot.
+
+Punctuations:
+- Aliens shot: 20 * round number
+
+AliensShip(future feature)
+Collectables(future feature)
