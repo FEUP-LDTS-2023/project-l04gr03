@@ -9,8 +9,8 @@ import java.util.Scanner;
 
 public class Leaderboard extends OnlyTextMenu {
 
-    public Leaderboard(){
-        super("src/main/java/resources/text/Leaderboard.txt");
+    public Leaderboard() throws IOException {
+        super("/text/Leaderboard.txt");
         sortByScore();
     }
     public void sortByScore(){
