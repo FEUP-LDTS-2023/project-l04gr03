@@ -23,6 +23,7 @@ public class GameViewer extends Viewer<Arena> {
         drawElements(gui,getModel().getCoverWalls(), new CoverWallViewer());
         drawElements(gui, getModel().getWalls(), new WallViewer());
         drawElement(gui, getModel().getShip(), new ShipViewer());
+        drawElements(gui, getModel().getProjectiles(), new ProjectileViewer());
         drawCollectable(gui, getModel().getCollectable());
         gui.drawText(new Position(0,19), "SCORE= ", "#F8F8FF");
         gui.drawText(new Position(8,19), String.valueOf(getModel().getScore()),"#F8F8FF" );

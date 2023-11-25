@@ -16,10 +16,13 @@ public class AlienController extends GameController {
 
     private long lastMovimentTime;
 
+    private long lastShotTime;
+
     public AlienController(Arena arena) {
         super(arena);
         this.movementDirection = MovementDirection.RIGHT;
         this.lastMovimentTime = 0;
+        this.lastShotTime = 0;
     }
 
     public boolean canMoveAlien(Alien alien) {
@@ -107,8 +110,9 @@ public class AlienController extends GameController {
     }
 
     public void step(Game game, KeyStroke key, long time) {
-        if(time - game.getLaunchTime() > 500){
+        if(time - lastShotTime > 800){
             shootProjectile();
+            lastShotTime = time;
         }
         if(time - lastMovimentTime > 300){
             updateMovementDirection();
