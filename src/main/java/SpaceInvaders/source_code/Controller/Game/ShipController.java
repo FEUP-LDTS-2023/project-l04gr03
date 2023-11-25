@@ -15,8 +15,11 @@ import java.io.IOException;
 
 public class ShipController extends GameController {
 
+    private long inputTime;
+
     public ShipController(Arena arena) {
         super(arena);
+        this.inputTime = 0;
     }
 
     public boolean canMoveShip(Position position){
@@ -56,14 +59,17 @@ public class ShipController extends GameController {
         if(key == null){
             return;
         }
-        if(key.getKeyType() == KeyType.ArrowLeft){
+        if(key.getKeyType() == KeyType.ArrowLeft && time - inputTime > 100){
             moveLeft();
+            inputTime = time;
         }
-        if(key.getKeyType() == KeyType.ArrowRight){
+        if(key.getKeyType() == KeyType.ArrowRight && time - inputTime > 100){
             moveRight();
+            inputTime = time;
         }
-        if(key.getKeyType() == KeyType.ArrowUp){
+        if(key.getKeyType() == KeyType.ArrowUp && time - inputTime > 300){
             shootProjectile();
+            inputTime = time;
         }
     }
 }

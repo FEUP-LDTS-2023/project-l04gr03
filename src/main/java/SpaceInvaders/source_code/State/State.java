@@ -77,10 +77,11 @@ public class State {
         StateActions();
     }
 
-    public void UpdateToPrevious(){
+    public void UpdateToPrevious() throws IOException {
         GameStates aux = currentState;
         currentState = previousState;
         previousState = aux;
+        StateActions();
     }
 
     public void step(GUI gui, Game game, long time) throws IOException {
