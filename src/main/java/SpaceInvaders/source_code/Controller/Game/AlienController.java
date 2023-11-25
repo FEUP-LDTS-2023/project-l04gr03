@@ -84,9 +84,9 @@ public class AlienController extends GameController {
 
     public void removeDestroyedAliens(){
         List<Alien> aliens = getModel().getAliens();
-        for(Alien alien : aliens){
-            if(alien.isDestroyed()){
-               getArenaModifier().removeAlien(alien);
+        for(int i = 0; i < aliens.size(); i++){
+            if(aliens.get(i).isDestroyed()){
+               getArenaModifier().removeAlien(aliens.get(i));
             }
         }
     }
