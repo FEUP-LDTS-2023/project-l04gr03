@@ -53,6 +53,16 @@ public class ArenaBuilderByRound extends ArenaBuilder {
         return arenaLines;
     }
 
+    private int getAliensAttackLine(){
+        int i = 0;
+        for(i = arenaLines.size() - 1; i >= 0; i--){
+            if(arenaLines.get(i).indexOf('A') != -1){
+                return i;
+            }
+        }
+        return i;
+    }
+
     @Override
     public Ship createShip() {
         for(int x = 0; x < arenaLines.get(0).length(); x++){
@@ -68,10 +78,16 @@ public class ArenaBuilderByRound extends ArenaBuilder {
     @Override
     public List<Alien> createAliens() {
         List<Alien> aliens = new ArrayList<>();
+        AlienState alienState;
         for(int x = 0; x < arenaLines.get(0).length(); x++){
             for (int y = 0; y < arenaLines.size(); y++){
                 if(arenaLines.get(y).charAt(x) == 'A'){
-                    aliens.add(new Alien(new Position(x,y),getBaseAlienHealth() * (int) Math.pow(2,round - 1),getBaseAlienHealth() * (int) Math.pow(2, round - 1),getBaseAlienScore() * round));
+                    if(y == getAliensAttackLine()){
+                        aliens.add(new Alien(new Position(x,y),getBaseAlienHealth() * (int) Math.pow(2,round - 1),getBaseAlienDamage() * (int) Math.pow(2, round - 1),getBaseAlienScore() * round,AlienState.ATTACKING));
+                    }
+                    else{
+                        aliens.add(new Alien(new Position(x,y),getBaseAlienHealth() * (int) Math.pow(2,round - 1),getBaseAlienDamage() * (int) Math.pow(2, round - 1),getBaseAlienScore() * round,AlienState.PASSIVE));
+                    }
                 }
             }
         }

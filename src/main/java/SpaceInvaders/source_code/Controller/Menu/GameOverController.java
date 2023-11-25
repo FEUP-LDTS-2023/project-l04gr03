@@ -20,8 +20,10 @@ public class GameOverController extends Controller<GameOverMenu> {
 
     @Override
     public void step(Game game, KeyStroke key, long time) throws IOException {
+        if(key == null){
+            return;
+        }
         switch (key.getKeyType()) {
-
             case ArrowUp:
                 getModel().previousOption();
                 break;
@@ -50,7 +52,7 @@ public class GameOverController extends Controller<GameOverMenu> {
 
     private void UpdateLeaderboard(Integer score, String username) throws IOException {
         File file = new File("src/main/resources/text/Leaderboard.txt");
-        BufferedWriter bw = new BufferedWriter(new FileWriter(file.getAbsolutePath()));
+        BufferedWriter bw = new BufferedWriter(new FileWriter(file.getAbsolutePath(),true));
         bw.write(score + " " + username + '\n');
         bw.close();
     }

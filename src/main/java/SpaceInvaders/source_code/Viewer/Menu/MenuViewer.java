@@ -23,10 +23,10 @@ public abstract class MenuViewer<T extends Menu> extends Viewer<T> {
     protected void drawOptions(GUI gui){
         for(int i = 0; i < getModel().getNumberOptions(); i++){
             if(getModel().isSelected(i)) {
-                gui.drawText(new Position(reference_x, reference_y + i), "->" + getModel().getOption(i), colorSelected);
+                gui.drawText(new Position(reference_x, reference_y  + 3 * i), "->" + getModel().getOption(i), colorSelected);
             }
             else{
-                gui.drawText(new Position(reference_x, reference_y + i), getModel().getOption(i), color);
+                gui.drawText(new Position(reference_x, reference_y + 3 * i), getModel().getOption(i), color);
             }
         }
     }

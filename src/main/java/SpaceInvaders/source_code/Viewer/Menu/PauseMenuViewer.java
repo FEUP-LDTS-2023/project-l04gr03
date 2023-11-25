@@ -7,13 +7,13 @@ import SpaceInvaders.source_code.Model.Position;
 public class PauseMenuViewer extends MenuViewer<PauseMenu> {
 
     public PauseMenuViewer(PauseMenu menu){
-        super(menu, new Position(5, 3));
+        super(menu, new Position(35, 13));
     }
 
     @Override
     protected void drawElements(GUI gui) {
         drawOptions(gui);
-        super.drawMenuTitle(gui, "PAUSE MENU", colorTitle, new Position(5, 2));
+        super.drawMenuTitle(gui, "PAUSE MENU", colorTitle, new Position(35, 10));
     }
 
 
