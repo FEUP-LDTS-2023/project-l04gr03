@@ -53,7 +53,10 @@ public class GameOverController extends Controller<GameOverMenu> {
     private void UpdateLeaderboard(Integer score, String username) throws IOException {
         File file = new File("src/main/resources/text/Leaderboard.txt");
         BufferedWriter bw = new BufferedWriter(new FileWriter(file.getAbsolutePath(),true));
-        bw.write(score + " " + username + '\n');
+        if(username.isEmpty()){
+            username = "Unknown";
+        }
+        bw.write(username + " " + score + '\n');
         bw.close();
     }
 }

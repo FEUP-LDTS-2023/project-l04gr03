@@ -1,4 +1,3 @@
 Lucas 1200
 Joao 1000
-Maria 3000
-1280 
+Maria 1020
