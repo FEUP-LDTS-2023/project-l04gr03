@@ -10,13 +10,18 @@ import spock.lang.Specification
 class OnlyTextMenuViewerTests extends Specification{
     def "Draw elements Leaderboard"(){
         given:
-        def Menu = new Leaderboard()
-        def OnlyTextMenuViewer = new LeaderboardViewer(Menu)
-        def gui = Mock(GUI)
+            def Menu = new Leaderboard()
+            def OnlyTextMenuViewer = new LeaderboardViewer(Menu)
+            def gui = Mock(GUI)
         when:
-        OnlyTextMenuViewer.drawElements(gui)
+            OnlyTextMenuViewer.drawElements(gui)
         then:
-        (Menu.text.size() + 1) * gui.drawText(_,_,_)
+            if(Menu.text.size() <= 5) {
+                (Menu.text.size() + 1) * gui.drawText(_, _, _)
+                }
+            else{
+                    6 * gui.drawText(_,_,_)
+                }
     }
 
     def "Draw elements Instructions"(){

@@ -235,9 +235,6 @@ facilitates the addition of new commands.
 ![pattern](Images_UML/Factory_Pattern.png)
 
 - **Consequences.**  The code becomes easier to reuse and maintain. It also becomes more modular and enables the creation of objects without knowing the implementation details. 
-#### KNOWN CODE SMELLS
-
-> This section should describe 3 to 5 different code smells that you have identified in your current implementation.
 
 ### TESTING
 
@@ -246,9 +243,6 @@ facilitates the addition of new commands.
 
 ### SELF-EVALUATION
 
-> In this section describe how the work regarding the project was divided between the students. In the event that members of the group do not agree on a work distribution, the group should send an email to the teacher explaining the disagreement.
-
-**Example**:
-
-- John Doe: 40%
-- Jane Doe: 60%
+- **Lucas Faria**: 45%
+- **Francisco Magalhães**: 45%
+- **Rodrigo Sousa**: 10%
