@@ -25,9 +25,9 @@ public class GameViewer extends Viewer<Arena> {
         drawElement(gui, getModel().getShip(), new ShipViewer());
         drawElements(gui, getModel().getProjectiles(), new ProjectileViewer());
         drawCollectable(gui, getModel().getCollectable());
-        gui.drawText(new Position(5,5), "SCORE= ", "#F8F8FF");
+        gui.drawText(new Position(5,5), "SCORE = ", "#F8F8FF");
         gui.drawText(new Position(15,5), String.valueOf(getModel().getScore()),"#F8F8FF" );
-        gui.drawText(new Position(55,5), "HEALTH= ", "#F8F8FF");
+        gui.drawText(new Position(55,5), "HEALTH = ", "#F8F8FF");
         gui.drawText(new Position(65,5), String.valueOf(getModel().getShip().getHealth()),"#F8F8FF" );
     }
 

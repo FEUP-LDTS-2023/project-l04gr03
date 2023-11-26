@@ -19,8 +19,9 @@ public class LeaderboardViewer extends OnlyTextMenuViewer<Leaderboard> {
     @Override
     protected void drawFileText(GUI gui) {
         for(int i = 0; i < 5; i++){
+            Integer position = i + 1;
             if(i < getModel().getText().size()) {
-                gui.drawText(new Position(getReference_x(), getReference_y() + 1), getModel().getText().get(i), color);
+                gui.drawText(new Position(getReference_x(), getReference_y() + 1+  i), position.toString() + " - " + getModel().getText().get(i), color);
             }
         }
     }
