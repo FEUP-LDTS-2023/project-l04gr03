@@ -21,7 +21,7 @@ public abstract class OnlyTextMenuViewer<T extends OnlyTextMenu> extends Viewer<
 
     protected void drawFileText(GUI gui){
         for(int i = 0; i < getModel().getText().size(); i++){
-            gui.drawText(new Position(reference_x, reference_y + 1),getModel().getText().get(i),color);
+            gui.drawText(new Position(reference_x, reference_y + i + 1),getModel().getText().get(i),color);
         }
     }
 

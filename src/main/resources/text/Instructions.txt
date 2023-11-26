@@ -1,12 +1,19 @@
-The goal of the game is to kill
-all the aliens and stop the invasion.
+The goal of the game is to kill all the aliens and
+ stop the invasion.
 
-Use the left and right arrow keys to
-control the ship. Use the up Arrow key
-to shoot.
+Use the LEFT and RIGHT ARROW KEYS to control
+the ship. Use the UP ARROW KEY to shoot. Use
+the UP and DOWN ARROW KEYS to change the
+different menu options and press the ENTER KEY
+to select the option. Use the ESCAPE KEY when
+you want to pause the game or exit the LEADERBOARD
+and INSTRUCTIONS menus.
 
 Punctuations:
+
 - Aliens shot: 20 * round number
 
-AliensShip(future feature)
-Collectables(future feature)
+AliensShip ( Feature not implemented )
+
+Collectables( Feature not implemented )
+
