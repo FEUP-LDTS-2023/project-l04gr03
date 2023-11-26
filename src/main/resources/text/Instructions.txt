@@ -15,5 +15,5 @@ Punctuations:
 
 AliensShip ( Feature not implemented )
 
-Collectables( Feature not implemented )
+Collectables ( Feature not implemented )
 

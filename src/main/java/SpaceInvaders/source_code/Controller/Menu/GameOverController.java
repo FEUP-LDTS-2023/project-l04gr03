@@ -38,7 +38,7 @@ public class GameOverController extends Controller<GameOverMenu> {
                     UpdateLeaderboard(getModel().getScore(), getModel().getUsername());
                     game.setState(GameStates.START_MENU);
                 } else if (getModel().isSelectedLeaderboard()) {
-                    game.setState(GameStates.INSTRUCTIONS);
+                    game.setState(GameStates.LEADERBOARD);
                 }
                 break;
             case Character:
