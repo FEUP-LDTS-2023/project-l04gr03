@@ -6,12 +6,12 @@ public class CollectableFactory {
 
     private Position position;
 
-    private String type;
+    private CollectableType type;
 
     private int multiplier;
 
 
-    public CollectableFactory(Position position,String type,int multiplier){
+    public CollectableFactory(Position position,CollectableType type,int multiplier){
         this.position = position;
         this.type = type;
         this.multiplier = multiplier;
@@ -19,10 +19,9 @@ public class CollectableFactory {
 
     public Collectable createCollectable(){
         return switch (type) {
-            case "health" -> new HealthCollectable(position);
-            case "damage" -> new DamageCollectable(position, multiplier);
-            case "score" -> new ScoreCollectable(position, multiplier);
-            case "sped up projectile" -> new SpedUpProjectileCollectable(position, multiplier);
+            case HEALTH -> new HealthCollectable(position);
+            case DAMAGE -> new DamageCollectable(position, multiplier);
+            case SCORE -> new ScoreCollectable(position, multiplier);
             default -> null;
         };
     }

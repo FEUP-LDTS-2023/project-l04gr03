@@ -74,7 +74,7 @@ public class AlienController extends GameController {
         Random random = new Random();
         int randomIndex = random.nextInt(attackingAliens.size());
         Alien randomAlien = attackingAliens.get(randomIndex);
-        getArenaModifier().addProjectile(new Projectile(randomAlien.getPosition(),randomAlien,5));
+        getArenaModifier().addProjectile(new Projectile(randomAlien.getPosition(),randomAlien));
     }
 
     public void hitByProjectile(Alien alien, Projectile projectile){

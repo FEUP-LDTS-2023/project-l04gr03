@@ -1,11 +1,7 @@
 package SpaceInvaders.source_code.Model.Game.Collectables
 
-import SpaceInvaders.source_code.Model.Game.Collectables.DamageCollectable
-import SpaceInvaders.source_code.Model.Game.Collectables.HealthCollectable
-import SpaceInvaders.source_code.Model.Game.Collectables.ScoreCollectable
-import SpaceInvaders.source_code.Model.Game.Collectables.SpedUpProjectileCollectable
+
 import SpaceInvaders.source_code.Model.Game.RegularGameElements.Alien
-import SpaceInvaders.source_code.Model.Game.RegularGameElements.Projectile
 import SpaceInvaders.source_code.Model.Game.RegularGameElements.Ship
 import SpaceInvaders.source_code.Model.Position
 import spock.lang.Specification
@@ -45,17 +41,5 @@ class TestCollectables extends Specification {
         scoreCollectable.execute(alien)
         then:
         1 * alien.increaseScore(multiplier)
-    }
-
-    def "SpedUpProjectileCollectable"(){
-        given:
-        Position position = Mock(Position)
-        Projectile projectile = Mock(Projectile)
-        int multiplier = 4
-        SpedUpProjectileCollectable spedUpProjectileCollectable = new SpedUpProjectileCollectable(position,multiplier)
-        when:
-        spedUpProjectileCollectable.execute(projectile)
-        then:
-        1 * projectile.increaseSpeed(multiplier)
     }
 }

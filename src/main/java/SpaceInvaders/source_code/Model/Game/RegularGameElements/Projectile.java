@@ -5,27 +5,18 @@ import SpaceInvaders.source_code.Model.Position;
 
 public class Projectile extends Element {
 
-    private int speed;
 
     private final AttackingElement attackingElement;
 
-    private int damage;
 
-    public Projectile(Position position, AttackingElement attackingElement, int speed) {
+    public Projectile(Position position, AttackingElement attackingElement) {
         super(position);
         this.attackingElement = attackingElement;
-        this.speed = speed;
     }
 
-    public int getSpeed() {
-        return speed;
-    }
 
-    public AttackingElement getElement(){ return attackingElement; }
+    public AttackingElement getElement(){ return attackingElement;}
 
-    public void increaseSpeed(int increaseRatio){
-        speed*=increaseRatio;
-    }
 
     @Override
     public Position getPosition() {
