@@ -2,6 +2,7 @@ package SpaceInvaders.source_code.Model.Game;
 
 import SpaceInvaders.source_code.Model.Game.Collectables.Collectable;
 import SpaceInvaders.source_code.Model.Game.Collectables.CollectableFactory;
+import SpaceInvaders.source_code.Model.Game.Collectables.CollectableType;
 import SpaceInvaders.source_code.Model.Game.RegularGameElements.*;
 import SpaceInvaders.source_code.Model.Position;
 
@@ -16,7 +17,7 @@ public class ArenaModifier {
         this.arena = arena;
     }
 
-    public void createCollectable(Position position,String type, int multiplier) {
+    public void createCollectable(Position position, CollectableType type, int multiplier) {
         CollectableFactory collectableFactory = new CollectableFactory(position,type,multiplier);
         arena.setCollectable(collectableFactory.createCollectable());
     }

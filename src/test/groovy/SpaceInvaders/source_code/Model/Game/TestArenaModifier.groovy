@@ -54,8 +54,8 @@ class TestArenaModifier extends Specification{
         List<Projectile> projectiles = new ArrayList<>()
         arena.setProjectiles(projectiles)
         Alien alien = Mock(Alien)
-        Projectile projectile1 = new Projectile(new Position(13,15),alien,5)
-        Projectile projectile2 = new Projectile(new Position(19,15),alien,5)
+        Projectile projectile1 = new Projectile(new Position(13,15),alien)
+        Projectile projectile2 = new Projectile(new Position(19,15),alien)
         ArenaModifier arenaModifier = new ArenaModifier(arena)
         when:
         arenaModifier.addProjectile(projectile1)
@@ -70,9 +70,9 @@ class TestArenaModifier extends Specification{
         List<Projectile> projectiles = new ArrayList<>()
         Alien alien = Mock(Alien)
         Ship ship = Mock(Ship)
-        projectiles.add(new Projectile(new Position(13,15),alien,5))
-        projectiles.add(new Projectile(new Position(35,26),ship,5))
-        projectiles.add(new Projectile(new Position(10,10),ship,5))
+        projectiles.add(new Projectile(new Position(13,15),alien))
+        projectiles.add(new Projectile(new Position(35,26),ship))
+        projectiles.add(new Projectile(new Position(10,10),ship))
         arena.setProjectiles(projectiles)
         ArenaModifier arenaModifier = new ArenaModifier((arena))
         when:
@@ -81,6 +81,5 @@ class TestArenaModifier extends Specification{
         then:
         arena.getProjectiles().size() == 1
         arena.getProjectiles().get(0).getPosition().equals(new Position(35,26))
-        arena.getProjectiles().get(0).getSpeed() == 5
     }
 }
