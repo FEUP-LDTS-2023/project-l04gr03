@@ -3,7 +3,7 @@
 
 
 This project is a re-adaption of the classical game Space Invaders, released in 1978 for the arcade video game machines and later to other platforms.
-The objective is to defeat a wave of descending aliens with a horizontally moving laser and earn as may points as possible by killing them and stop the invasion.
+The objective is to defeat a wave of descending aliens with a horizontally moving laser and earn as many points as possible by killing them and stop the invasion.
 
 The player controls a spaceship that can shoot lasers. The game ends when the player is shot and has no lives left. The player can also collect some power ups that can help him.
 
@@ -59,6 +59,34 @@ This project was developed by:
     - **Restart** - Restarts the game;
     - **Leaderboard** - Displays the top 5 best scores;
     - **Exit** - Exits the game.
+  
+
+### Screen Shots
+
+  - ### **Game**:
+
+  ![ScreenShots](ScreenShots/Game.png)
+
+  - ### **Start Menu**:
+
+  ![ScreenShots](ScreenShots/Start_menu.png)
+
+  - ### **Pause Menu**:
+
+  ![ScreenShots](ScreenShots/Pause_Menu.png)
+
+  - ### **GameOver Menu**:
+
+  ![ScreenShots](ScreenShots/Game_Over.png)
+
+  - ### **Instructions Menu**:
+
+  ![ScreenShots](ScreenShots/Instructions.png)
+
+  - ### **Leaderboard**:
+
+  ![ScreenShots](ScreenShots/Leaderboard.png)
+
   
 
 ### PLANNED FEATURES
