@@ -138,6 +138,18 @@ This project was developed by:
   - **Controller** - Controls the logic of the program. Decides the next step by interpreting the inputs and gives to the Viewer the Model data.
 
 
+**The packages can be found on these folders:**
+
+[Controller](../src/main/java/SpaceInvaders/source_code/Controller)
+[State](../src/main/java/SpaceInvaders/source_code/State)
+[GUI](../src/main/java/SpaceInvaders/source_code/GUI)
+[Model](../src/main/java/SpaceInvaders/source_code/Model)
+[Viewer](../src/main/java/SpaceInvaders/source_code/Viewer)
+
+
+
+**UML:**
+
 ![pattern](Images_UML/MVC_Pattern.png)
 
 
@@ -155,6 +167,14 @@ This leads us to the necessity of having a simple and organized way to handle th
 
 - **Implementation.** The code includes a state part that handle the different states.
 
+
+**These implementation can be found on these folders:**
+
+[State](../src/main/java/SpaceInvaders/source_code/State)
+
+
+**UML:**
+
 ![pattern](Images_UML/State_Pattern.png)
 
 - **Consequences.** The functionality of the game is influenced by the state that it is currently in. Because of that, many features and functionalities are trapped inside a single state.
@@ -170,6 +190,13 @@ Because of that we might end up writing the same code repeatedly.
 
 - **Implementation.** Some classes are divides in a part-whole hierarchies, for example the Elements Class.
 
+**This implementation can be found on these folders:**
+
+[Element](../src/main/java/SpaceInvaders/source_code/Model/Game/RegularGameElements)
+
+
+**UML:**
+
 ![pattern](Images_UML/Composite_Pattern.png)
 
 - **Consequences.** The code becomes more simple and organized. It's easier to add new types of components. 
@@ -184,6 +211,12 @@ However, the subclasses will always depend on their superclasses, reducing their
 
 
 - **Implementation.** Mostly used to ensure that only one Game and State object are instantiated.
+
+**These implementation can be found on these folders:**
+
+[State](../src/main/java/SpaceInvaders/source_code/State)
+
+**UML:**
 
 ![pattern](Images_UML/Singleton_Pattern.png)
 
@@ -201,6 +234,12 @@ are updated in each loop.
 
 - **Implementation** Used in the Game class
 
+**These implementation can be found in:**
+
+[Game](../src/main/java/SpaceInvaders/source_code/Game.java)
+
+**UML:**
+
 ![pattern](Images_UML/Game_Loop_Pattern.png)
 
 - **Consequences** The game runs more smoothly. However, we need to make sure that the code in the Game Loop
@@ -215,6 +254,12 @@ is efficient because that peace of code will run a lot of times during the Game 
 
 
 - **Implementation.** Is used in the collectables to execute their specific actions.
+
+**These implementation can be found on these folder:**
+
+[Collectables](../src/main/java/SpaceInvaders/source_code/Model/Game/Collectables)
+
+**UML:**
 
 ![pattern](Images_UML/Command_Pattern.png)
 
@@ -232,14 +277,21 @@ facilitates the addition of new commands.
 
 - **Implementation.** Used with the collectables.
 
+**These implementation can be found on these folder:**
+
+[Collectables](../src/main/java/SpaceInvaders/source_code/Model/Game/Collectables)
+
+**UML:**
+
 ![pattern](Images_UML/Factory_Pattern.png)
 
 - **Consequences.**  The code becomes easier to reuse and maintain. It also becomes more modular and enables the creation of objects without knowing the implementation details. 
 
 ### TESTING
 
-- Screenshot of coverage report.
-- Link to mutation testing report.
+- **Coverage Testing** (Intermediate delivery):
+
+![Test](Testing/Test_coverage.png)
 
 ### SELF-EVALUATION
 
