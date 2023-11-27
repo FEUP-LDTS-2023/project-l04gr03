@@ -1,11 +1,11 @@
-package SpaceInvaders.source_code.Controller.Game;
+package SpaceInvaders.Controller.Game;
 
-import SpaceInvaders.source_code.Game;
-import SpaceInvaders.source_code.Model.Game.Arena;
-import SpaceInvaders.source_code.Model.Game.ArenaModifier;
-import SpaceInvaders.source_code.Model.Game.Element;
-import SpaceInvaders.source_code.Model.Game.RegularGameElements.*;
-import SpaceInvaders.source_code.State.GameStates;
+import SpaceInvaders.Game;
+import SpaceInvaders.Model.Game.Arena;
+import SpaceInvaders.Model.Game.ArenaModifier;
+import SpaceInvaders.Model.Game.Element;
+import SpaceInvaders.Model.Game.RegularGameElements.*;
+import SpaceInvaders.State.GameStates;
 import com.googlecode.lanterna.input.KeyStroke;
 import com.googlecode.lanterna.input.KeyType;
 
