@@ -87,7 +87,12 @@ This project was developed by:
 
   ![ScreenShots](ScreenShots/Leaderboard.png)
 
-  
+
+### UML With All The Implemented Features
+
+
+![General_UML](Images_UML/General_UML.drawio.png)
+
 
 ### PLANNED FEATURES
 
