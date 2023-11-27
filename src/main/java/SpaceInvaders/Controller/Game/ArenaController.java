@@ -1,14 +1,11 @@
-package SpaceInvaders.Controller.Game;
+package SpaceInvaders.source_code.Controller.Game;
 
-import SpaceInvaders.Game;
-import SpaceInvaders.Model.Game.ArenaModifier;
-import SpaceInvaders.Model.Game.Element;
-import SpaceInvaders.Model.Game.RegularGameElements.Alien;
-import SpaceInvaders.Model.Game.RegularGameElements.CoverWall;
-import SpaceInvaders.Model.Game.RegularGameElements.Projectile;
-import SpaceInvaders.Model.Game.RegularGameElements.Ship;
-import SpaceInvaders.State.GameStates;
-import SpaceInvaders.Model.Game.Arena;
+import SpaceInvaders.source_code.Game;
+import SpaceInvaders.source_code.Model.Game.Arena;
+import SpaceInvaders.source_code.Model.Game.ArenaModifier;
+import SpaceInvaders.source_code.Model.Game.Element;
+import SpaceInvaders.source_code.Model.Game.RegularGameElements.*;
+import SpaceInvaders.source_code.State.GameStates;
 import com.googlecode.lanterna.input.KeyStroke;
 import com.googlecode.lanterna.input.KeyType;
 
@@ -22,6 +19,8 @@ public class ArenaController extends GameController {
     private AlienController alienController;
 
     private ProjectileController projectileController;
+
+    private CollectableController collectableController;
 
     private ArenaModifier arenaModifier;
 
@@ -68,6 +67,18 @@ public class ArenaController extends GameController {
             }
         }
         return false;
+    }
+
+    public void projectileCollisionsWithWalls(){
+        List<Projectile> projectiles = getModel().getProjectiles();
+        List<Wall> walls = getModel().getWalls();
+        for(int i = 0; i < walls.size(); i++){
+            for(int j = 0; j < projectiles.size(); j++){
+                if(collisionBetween(walls.get(i),projectiles.get(j))){
+                    arenaModifier.removeProjectile(projectiles.get(j));
+                }
+            }
+        }
     }
 
     public void projectileCollisionsWithShip(){
@@ -127,6 +138,7 @@ public class ArenaController extends GameController {
     }
 
     public void checkCollisions(){
+        projectileCollisionsWithWalls();
         projectileCollisionsWithShip();
         projectileCollisionsWithAliens();
         projectileCollisionsWithCoverWalls();
