@@ -145,11 +145,11 @@ This project was developed by:
 
 **The packages can be found on these folders:**
 
-[Controller](../src/main/java/SpaceInvaders/source_code/Controller)
-[State](../src/main/java/SpaceInvaders/source_code/State)
-[GUI](../src/main/java/SpaceInvaders/source_code/GUI)
-[Model](../src/main/java/SpaceInvaders/source_code/Model)
-[Viewer](../src/main/java/SpaceInvaders/source_code/Viewer)
+[Controller](../src/main/java/SpaceInvaders/sourceCode/Controller)
+[State](../src/main/java/SpaceInvaders/sourceCode/State)
+[GUI](../src/main/java/SpaceInvaders/sourceCode/GUI)
+[Model](../src/main/java/SpaceInvaders/sourceCode/Model)
+[Viewer](../src/main/java/SpaceInvaders/sourceCode/Viewer)
 
 
 
@@ -175,7 +175,7 @@ This leads us to the necessity of having a simple and organized way to handle th
 
 **These implementation can be found on these folders:**
 
-[State](../src/main/java/SpaceInvaders/source_code/State)
+[State](../src/main/java/SpaceInvaders/sourceCode/State)
 
 
 **UML:**
@@ -197,7 +197,7 @@ Because of that we might end up writing the same code repeatedly.
 
 **This implementation can be found on these folders:**
 
-[Element](../src/main/java/SpaceInvaders/source_code/Model/Game/RegularGameElements)
+[Element](../src/main/java/SpaceInvaders/sourceCode/Model/Game/RegularGameElements)
 
 
 **UML:**
@@ -219,7 +219,7 @@ However, the subclasses will always depend on their superclasses, reducing their
 
 **These implementation can be found on these folders:**
 
-[State](../src/main/java/SpaceInvaders/source_code/State)
+[State](../src/main/java/SpaceInvaders/sourceCode/State)
 
 **UML:**
 
@@ -241,7 +241,7 @@ are updated in each loop.
 
 **These implementation can be found in:**
 
-[Game](../src/main/java/SpaceInvaders/source_code/Game.java)
+[Game](../src/main/java/SpaceInvaders/sourceCode/Game.java)
 
 **UML:**
 
@@ -262,7 +262,7 @@ is efficient because that peace of code will run a lot of times during the Game 
 
 **These implementation can be found on these folder:**
 
-[Collectables](../src/main/java/SpaceInvaders/source_code/Model/Game/Collectables)
+[Collectables](../src/main/java/SpaceInvaders/sourceCode/Model/Game/Collectables)
 
 **UML:**
 
@@ -284,7 +284,7 @@ facilitates the addition of new commands.
 
 **These implementation can be found on these folder:**
 
-[Collectables](../src/main/java/SpaceInvaders/source_code/Model/Game/Collectables)
+[Collectables](../src/main/java/SpaceInvaders/sourceCode/Model/Game/Collectables)
 
 **UML:**
 
