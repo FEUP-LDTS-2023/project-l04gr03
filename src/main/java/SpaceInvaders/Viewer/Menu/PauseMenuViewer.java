@@ -11,7 +11,7 @@ public class PauseMenuViewer extends MenuViewer<PauseMenu> {
     }
 
     @Override
-    protected void drawElements(GUI gui) {
+    protected void drawElements(GUI gui, long time) {
         drawOptions(gui);
         super.drawMenuTitle(gui, "PAUSE MENU", colorTitle, new Position(35, 10));
     }

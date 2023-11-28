@@ -10,7 +10,7 @@ class TestAlien extends Specification {
         given:
         Position position = Mock(Position)
         AlienState alienState = AlienState.ATTACKING
-        Alien alien = new Alien(position,100,50,initialScore,alienState)
+        Alien alien = new Alien(position,100,50,initialScore,alienState,0)
         expect:
         alien.increaseScore(multiplier)
         finalScore == alien.getScore()
@@ -21,5 +21,16 @@ class TestAlien extends Specification {
              100     |      3     |    300
 
 
+    }
+
+    def "Test Alien type bigger or equal to 3" (){
+        given:
+            Position position = Mock(Position)
+            AlienState alienState = AlienState.ATTACKING
+            Alien alien = new Alien(position,100,50,0,alienState,3)
+            Alien alien2 = new Alien(position,100,50,0,alienState,4)
+        expect:
+            alien.getType() == 0
+            alien2.getType() == 0
     }
 }

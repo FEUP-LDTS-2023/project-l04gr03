@@ -10,7 +10,7 @@ public class LeaderboardViewer extends OnlyTextMenuViewer<Leaderboard> {
     }
 
     @Override
-    protected void drawElements(GUI gui) {
+    protected void drawElements(GUI gui, long time) {
         drawFileText(gui);
         drawMenuTitle(gui, "LEADERBOARD", colorTitle, new Position(5, 2));
     }

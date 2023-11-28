@@ -76,14 +76,21 @@ public class ArenaBuilderByRound extends ArenaBuilder {
         List<Alien> aliens = new ArrayList<>();
         AlienState alienState;
         for(int x = 0; x < arenaLines.get(0).length(); x++){
+            int type = 0;
             for (int y = 0; y < arenaLines.size(); y++){
                 if(arenaLines.get(y).charAt(x) == 'A'){
                     if(y == getAliensAttackLine()){
-                        aliens.add(new Alien(new Position(x,y),getBaseAlienHealth() * (int) Math.pow(2,round - 1),getBaseAlienDamage() * (int) Math.pow(2, round - 1),getBaseAlienScore() * round,AlienState.ATTACKING));
+                        aliens.add(new Alien(new Position(x,y),getBaseAlienHealth() * (int) Math.pow(2,round - 1),getBaseAlienDamage() * (int) Math.pow(2, round - 1),getBaseAlienScore() * round,AlienState.ATTACKING, type));
+                        type++;
                     }
                     else{
-                        aliens.add(new Alien(new Position(x,y),getBaseAlienHealth() * (int) Math.pow(2,round - 1),getBaseAlienDamage() * (int) Math.pow(2, round - 1),getBaseAlienScore() * round,AlienState.PASSIVE));
+                        aliens.add(new Alien(new Position(x,y),getBaseAlienHealth() * (int) Math.pow(2,round - 1),getBaseAlienDamage() * (int) Math.pow(2, round - 1),getBaseAlienScore() * round,AlienState.PASSIVE,type));
+                        type++;
                     }
+                }
+
+                if(type >= 3 ){
+                    type = 0;
                 }
             }
         }

@@ -13,7 +13,7 @@ class OnlyTextMenuViewerTests extends Specification{
             def OnlyTextMenuViewer = new LeaderboardViewer(Menu)
             def gui = Mock(GUI)
         when:
-            OnlyTextMenuViewer.drawElements(gui)
+            OnlyTextMenuViewer.drawElements(gui,0)
         then:
             if(Menu.text.size() <= 5) {
                 (Menu.text.size() + 1) * gui.drawText(_, _, _)
@@ -29,7 +29,7 @@ class OnlyTextMenuViewerTests extends Specification{
         def OnlyTextMenuViewer = new InstructionsViewer(Menu)
         def gui = Mock(GUI)
         when:
-        OnlyTextMenuViewer.drawElements(gui)
+        OnlyTextMenuViewer.drawElements(gui,0)
         then:
         (Menu.text.size() + 1) * gui.drawText(_,_,_)
     }

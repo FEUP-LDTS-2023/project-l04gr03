@@ -90,7 +90,7 @@ public class State {
     public void step(GUI gui, Game game, long time) throws IOException {
         KeyStroke key = gui.getNextAction();
         controller.step(game,key,time);
-        viewer.draw(gui);
+        viewer.draw(gui, time);
     }
 
     public void StateActions () throws IOException {

@@ -14,13 +14,16 @@ import java.util.List;
 
 public class GameViewer extends Viewer<Arena> {
 
+    private int alienCharChoice = 0;
     public GameViewer(Arena arena){
         super(arena);
     }
 
     @Override
-    public void drawElements(GUI gui) {
-        drawElements(gui, getModel().getAliens(), new AlienViewer(0));
+    public void drawElements(GUI gui, long time) {
+        drawElements(gui, getModel().getAliens(), new AlienViewer(alienCharChoice));
+        alienCharChoice++;
+        alienCharChoice = alienCharChoice % 2;
         drawElements(gui,getModel().getCoverWalls(), new CoverWallViewer());
         drawElements(gui, getModel().getWalls(), new WallViewer());
         drawElement(gui, getModel().getShip(), new ShipViewer());
@@ -31,6 +34,7 @@ public class GameViewer extends Viewer<Arena> {
         gui.drawText(new Position(55,5), "HEALTH = ", "#F8F8FF");
         gui.drawText(new Position(65,5), String.valueOf(getModel().getShip().getHealth()),"#F8F8FF" );
     }
+
 
     private <T extends Element> void drawElements(GUI gui, List<T> elements, ElementViewer<T> viewer) {
         for (T element : elements)

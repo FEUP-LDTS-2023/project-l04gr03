@@ -54,9 +54,13 @@ class TestArenaBuilderByRound extends Specification{
         then:
         aliens.size() == 64
         aliens.get(0).getPosition().equals(new Position(13,10))
+        aliens.get(0).getType() == 0
         aliens.get(3).getPosition().equals(new Position(13,16))
+        aliens.get(3).getType() == 0
         aliens.get(29).getPosition().equals(new Position(34,12))
+        aliens.get(29).getType() == 1
         aliens.get(60).getPosition().equals(new Position(58,10))
+        aliens.get(60).getType() == 0
         aliens.get(aliens.size() - 1).getPosition().equals(new Position(58,16))
         aliens.get(0).getHealth() == arenaBuilderByRound.getBaseAlienHealth() * (int) Math.pow(2,round - 1)
         aliens.get(0).getDamagePerShot() == arenaBuilderByRound.getBaseAlienDamage() * (int) Math.pow(2,round - 1)

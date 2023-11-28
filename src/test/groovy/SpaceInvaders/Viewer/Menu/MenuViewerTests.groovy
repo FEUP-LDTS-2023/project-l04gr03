@@ -16,7 +16,7 @@ class MenuViewerTests extends Specification{
             def MViewer = new StartMenuViewer(menu)
             def gui = Mock(GUI.class)
         when:
-            MViewer.drawElements(gui)
+            MViewer.drawElements(gui,0)
         then:
             5 * gui.drawText(_,_,_)
 
@@ -28,7 +28,7 @@ class MenuViewerTests extends Specification{
             def MViewer = new GameOverMenuViewer(menu)
             def gui = Mock(GUI.class)
         when:
-            MViewer.drawElements(gui)
+            MViewer.drawElements(gui,0)
         then:
             6 * gui.drawText(_,_,_)
 
@@ -40,7 +40,7 @@ class MenuViewerTests extends Specification{
         def MViewer = new PauseMenuViewer(menu)
         def gui = Mock(GUI.class)
         when:
-        MViewer.drawElements(gui)
+        MViewer.drawElements(gui,0)
         then:
             5 * gui.drawText(_,_,_)
 
