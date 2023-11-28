@@ -5,7 +5,7 @@
 This project is a re-adaption of the classical game Space Invaders, released in 1978 for the arcade video game machines and later to other platforms.
 The objective is to defeat a wave of descending aliens with a horizontally moving laser and earn as many points as possible by killing them and stop the invasion.
 
-The player controls a spaceship that can shoot lasers. The game ends when the player is shot and has no lives left. The player can also collect some power ups that can help him.
+The player controls a spaceship that can shoot lasers. The game ends when the player is shot and has no health left. The player can also collect some power ups that can help him.
 
 **Stop the invasion and have fun!!!**
 
@@ -21,7 +21,7 @@ This project was developed by:
 
 ### IMPLEMENTED FEATURES
 
-- **Playable Character** - The playable character is a spaceship. The player controls its movements by pressing the right and left arrow keys.
+- **Playable Character** - The playable character is a spaceship. The player controls its movements by pressing the right and left arrow keys. It can shoot by pressing the up arrow key.
 
 
 - **Enemy Characters** - The enemy characters are aliens that want to invade the planet. They can shoot lasers and kill the player. They can also move from left to right and when they hit the wall they move from right to left and vice-versa.
@@ -106,7 +106,7 @@ This project was developed by:
 - **Collectable Projectiles** - This collectables can help the player by given him the option to shoot special projectiles.
 
 
-  **Collectable lives** and **Projectile** appearance:
+  **Collectable lives/Health** and **Projectile** appearance:
 
 ![Mocks](Mocks/Collectabel.png)
 
