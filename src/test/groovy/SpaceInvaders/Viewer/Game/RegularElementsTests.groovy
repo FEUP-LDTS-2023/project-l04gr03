@@ -6,6 +6,7 @@ import SpaceInvaders.Model.Game.RegularGameElements.CoverWall
 import SpaceInvaders.Model.Game.RegularGameElements.Projectile
 import SpaceInvaders.Model.Game.RegularGameElements.Ship
 import SpaceInvaders.Model.Game.RegularGameElements.Wall
+import SpaceInvaders.Model.Position
 import SpaceInvaders.Viewer.Game.RegularElements.AlienViewer
 import SpaceInvaders.Viewer.Game.RegularElements.CoverWallViewer
 import SpaceInvaders.Viewer.Game.RegularElements.ProjectileViewer
@@ -53,6 +54,28 @@ class RegularElementsTests extends Specification{
             viewer.draw(gui,coverWall)
         then:
             1 * gui.drawElement(_,_,_)
+    }
+
+    def "Cover Wall Test Char choices" () {
+        given:
+            def viewer = new CoverWallViewer()
+            def gui = Mock(GUI)
+            def coverWall = new CoverWall(Mock(Position), health)
+        when:
+            viewer.draw(gui, coverWall)
+        then:
+            1 * gui.drawElement(_,Char,_)
+        where:
+            Char | health
+        '\u00d2' | 100
+        '\u00d2' | 76
+        '\u00d3' | 75
+        '\u00d3' | 51
+        '\u00d5' | 50
+        '\u00d5' | 26
+        '\u00d4' | 25
+        '\u00d4' | 1
+        '\u00d2' | 0
     }
 
     def "Projectile Viewer"(){
