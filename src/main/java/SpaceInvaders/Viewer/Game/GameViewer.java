@@ -15,6 +15,7 @@ import java.util.List;
 public class GameViewer extends Viewer<Arena> {
 
     private int alienCharChoice = 0;
+    private long lastCharChange = 0;
     public GameViewer(Arena arena){
         super(arena);
     }
@@ -22,8 +23,10 @@ public class GameViewer extends Viewer<Arena> {
     @Override
     public void drawElements(GUI gui, long time) {
         drawElements(gui, getModel().getAliens(), new AlienViewer(alienCharChoice));
-        alienCharChoice++;
-        alienCharChoice = alienCharChoice % 2;
+
+        //Changes char for the next frame (only if needed)
+        ChangeChar(time);
+
         drawElements(gui,getModel().getCoverWalls(), new CoverWallViewer());
         drawElements(gui, getModel().getWalls(), new WallViewer());
         drawElement(gui, getModel().getShip(), new ShipViewer());
@@ -34,6 +37,24 @@ public class GameViewer extends Viewer<Arena> {
         gui.drawText(new Position(55,5), "HEALTH = ", "#F8F8FF");
         gui.drawText(new Position(65,5), String.valueOf(getModel().getShip().getHealth()),"#F8F8FF" );
     }
+
+    private void ChangeChar(long time){
+        if(time - lastCharChange > 300) {
+            alienCharChoice++;
+            alienCharChoice = alienCharChoice % 2;
+            lastCharChange = time;
+        }
+    }
+
+    public int getAlienCharChoice(){
+        return alienCharChoice;
+    }
+
+    public long getLastCharChange(){
+        return lastCharChange;
+    }
+
+
 
 
     private <T extends Element> void drawElements(GUI gui, List<T> elements, ElementViewer<T> viewer) {
