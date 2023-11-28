@@ -10,7 +10,7 @@ public class InstructionsViewer extends OnlyTextMenuViewer<Instructions> {
     }
 
     @Override
-    protected void drawElements(GUI gui) {
+    protected void drawElements(GUI gui, long time) {
         drawFileText(gui);
         super.drawMenuTitle(gui,"INSTRUCTIONS", colorTitle, new Position(5,2));
     }

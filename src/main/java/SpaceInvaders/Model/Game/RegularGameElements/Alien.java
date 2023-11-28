@@ -8,12 +8,20 @@ public class Alien extends AttackingElement {
 
     private int score;
 
+    private int Type;
+
     private AlienState alienState;
 
-    public Alien(Position position,int health, int damagePerShot, int score, AlienState alienState) {
+    public Alien(Position position,int health, int damagePerShot, int score, AlienState alienState, int Type) {
         super(position,health,damagePerShot);
         this.score = score;
         this.alienState = alienState;
+        if(Type >= 3){
+            this.Type = 0;
+        }
+        else {
+            this.Type = Type;
+        }
     }
 
     public int getScore() {
@@ -26,5 +34,8 @@ public class Alien extends AttackingElement {
 
     public void increaseScore(int increaseRatio){
         score*=increaseRatio;
+    }
+    public int getType(){
+        return Type;
     }
 }

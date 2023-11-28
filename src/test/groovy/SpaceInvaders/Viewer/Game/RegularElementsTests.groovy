@@ -26,6 +26,24 @@ class RegularElementsTests extends Specification{
             1 * gui.drawElement(_,_,_)
     }
 
+    def "Alien Draw Test character choice"(){
+        given:
+            def viewer = new AlienViewer(0)
+            def gui = Mock(GUI)
+            def alien = Mock(Alien)
+            alien.getType() >> 0;
+        when:
+            viewer.draw(gui,alien)
+        then:
+            1 * gui.drawElement(_,'\u00ca',"#DB55DD")
+        when:
+            viewer = new AlienViewer(1)
+            viewer.draw(gui,alien)
+        then:
+            1 * gui.drawElement(_, '\u00cb', "#DB55DD")
+    }
+
+
     def "Cover Wall Draw"(){
         given:
             def viewer = new CoverWallViewer()

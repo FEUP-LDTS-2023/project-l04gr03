@@ -11,7 +11,7 @@ public class GameOverMenuViewer extends MenuViewer<GameOverMenu> {
     }
 
     @Override
-    protected void drawElements(GUI gui) {
+    protected void drawElements(GUI gui, long time) {
         drawOptions(gui);
         drawMenuTitle(gui, "GAME OVER", colorTitle, new Position(35,10));
         gui.drawText(new Position(5,4),"SCORE: " + getModel().getScore(), color );

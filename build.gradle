@@ -33,7 +33,7 @@ pitest {
     junit5PluginVersion = '0.12'
     verbose = true
     excludedClasses = ["SpaceInvaders.GUI.GUILanterna"]
-    excludedTestClasses = ["SpaceInvaders.State.StateTests"]
+    excludedTestClasses = ["SpaceInvaders.State.StateTestsNotMutable"]
 }
 
 application{

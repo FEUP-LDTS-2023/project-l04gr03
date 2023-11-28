@@ -10,7 +10,7 @@ public class StartMenuViewer extends MenuViewer<StartMenu> {
     }
 
     @Override
-    protected void drawElements(GUI gui) {
+    protected void drawElements(GUI gui, long time) {
         drawOptions(gui);
         drawMenuTitle(gui, "START MENU", colorTitle, new Position(35,10));
     }

@@ -14,10 +14,10 @@ class TestArenaModifier extends Specification{
         given:
         Arena arena = new Arena(75,30)
         List<Alien> aliens = new ArrayList<>();
-        aliens.add(new Alien(new Position(13,11),30,20,20,AlienState.PASSIVE))
-        aliens.add(new Alien(new Position(13,13),30,20,20,AlienState.PASSIVE))
-        aliens.add(new Alien(new Position(13,15),30,20,20,AlienState.ATTACKING))
-        aliens.add(new Alien(new Position(16,11),30,20,20,AlienState.ATTACKING))
+        aliens.add(new Alien(new Position(13,11),30,20,20,AlienState.PASSIVE,0))
+        aliens.add(new Alien(new Position(13,13),30,20,20,AlienState.PASSIVE,1))
+        aliens.add(new Alien(new Position(13,15),30,20,20,AlienState.ATTACKING,2))
+        aliens.add(new Alien(new Position(16,11),30,20,20,AlienState.ATTACKING,0))
         arena.setAliens(aliens);
         ArenaModifier arenaModifier = new ArenaModifier(arena)
         when:
