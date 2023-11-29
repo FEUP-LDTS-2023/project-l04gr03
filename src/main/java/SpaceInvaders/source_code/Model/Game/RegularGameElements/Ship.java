@@ -11,7 +11,16 @@ public class Ship extends AttackingElement {
 
     public Ship(Position position, int health, int damagePerShot){
         super(position,health,damagePerShot);
-        this.shipMode = shipMode;
+        this.shipMode = ShipMode.NORMAL_MODE;
+    }
+
+    public ShipMode getShipMode() {return shipMode;}
+
+    @Override
+    public void decreaseHealth(int damage){
+        if(shipMode != ShipMode.GOD_MODE){
+            this.setHealth(getHealth() - damage);
+        }
     }
 
     public void increaseDamage(int increaseRatio){
