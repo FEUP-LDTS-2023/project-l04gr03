@@ -20,6 +20,8 @@ public class Alien extends AttackingElement {
         return score;
     }
 
+    public void setScore(int score) {this.score = score;}
+
     public AlienState getAlienState() {return alienState;}
 
     public void setAlienState(AlienState alienState) {this.alienState = alienState;}

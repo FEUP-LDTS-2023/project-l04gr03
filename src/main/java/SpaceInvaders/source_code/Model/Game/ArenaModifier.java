@@ -16,6 +16,15 @@ public class ArenaModifier {
         this.arena = arena;
     }
 
+    public void restoreShipDamage() {
+        arena.getShip().setDamagePerShot(arena.getRound() * 50);
+    }
+
+    public void restoreAlienScore() {
+        for(Alien alien : arena.getAliens()){
+            alien.setScore(arena.getRound() * 20);
+        }
+    }
     public void createCollectable() {
         List<Integer> columns = arena.getFreeArenaColumns();
         Random random = new Random();

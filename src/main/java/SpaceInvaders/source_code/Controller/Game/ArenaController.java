@@ -3,7 +3,7 @@ package SpaceInvaders.source_code.Controller.Game;
 import SpaceInvaders.source_code.Game;
 import SpaceInvaders.source_code.Model.Game.Arena;
 import SpaceInvaders.source_code.Model.Game.ArenaModifier;
-import SpaceInvaders.source_code.Model.Game.Collectables.Collectable;
+import SpaceInvaders.source_code.Model.Game.Collectables.*;
 import SpaceInvaders.source_code.Model.Game.Element;
 import SpaceInvaders.source_code.Model.Game.RegularGameElements.*;
 import SpaceInvaders.source_code.State.GameStates;
@@ -42,6 +42,7 @@ public class ArenaController extends GameController {
 
 
     public ArenaModifier getArenaModifier() {return arenaModifier;}
+
 
     public boolean collisionBetween(Element element1, Element element2){
         return element1.getPosition().equals(element2.getPosition());
@@ -127,6 +128,7 @@ public class ArenaController extends GameController {
         if(collectable != null){
             if(collisionBetween(ship, collectable)){
                 getModel().getActiveCollectable().execute();
+                collectableController.defineCollectableEffect(getModel().getActiveCollectable().getClass());
                 getArenaModifier().removeActiveCollectable();
             }
         }
