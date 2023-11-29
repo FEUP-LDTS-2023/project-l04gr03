@@ -2,10 +2,15 @@ package SpaceInvaders.Viewer.Game.Collectables;
 
 import SpaceInvaders.GUI.GUI;
 import SpaceInvaders.Model.Game.Collectables.Collectable;
+import SpaceInvaders.Model.Game.Collectables.HealthCollectable;
 
-public class CollectableViewer implements CollectableViewerInterface<Collectable> {
-    @Override
+public class CollectableViewer {
     public void draw(GUI gui, Collectable collectable) {
-        gui.drawElement(collectable.getPosition(), '\u00c1', "#ff0000");
+        if(collectable.getClass() == HealthCollectable.class){
+            gui.drawElement(collectable.getPosition(), '\u00c1', "#ff0000");
+        }
+        else {
+            gui.drawElement(collectable.getPosition(), '\u0024', "#009000");
+        }
     }
 }
