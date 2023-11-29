@@ -43,7 +43,7 @@ public class Game {
 
 
     private void startGame() throws IOException {
-        int FPS = 20;
+        int FPS = 30;
         int frameTime = 1000 / FPS;
         while(this.state.getCurrentState() != GameStates.QUIT_GAME){
             long startTime = System.currentTimeMillis();
