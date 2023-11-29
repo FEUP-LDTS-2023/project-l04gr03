@@ -3,6 +3,7 @@ package SpaceInvaders.source_code.Controller.Game;
 import SpaceInvaders.source_code.Game;
 import SpaceInvaders.source_code.Model.Game.Arena;
 import SpaceInvaders.source_code.Model.Game.ArenaModifier;
+import SpaceInvaders.source_code.Model.Game.Collectables.Collectable;
 import SpaceInvaders.source_code.Model.Game.Element;
 import SpaceInvaders.source_code.Model.Game.RegularGameElements.*;
 import SpaceInvaders.source_code.State.GameStates;
@@ -29,6 +30,7 @@ public class ArenaController extends GameController {
         this.shipController = new ShipController(arena);
         this.alienController = new AlienController(arena);
         this.projectileController = new ProjectileController(arena);
+        this.collectableController = new CollectableController(arena);
         this.arenaModifier = new ArenaModifier(arena);
     }
 
@@ -119,6 +121,17 @@ public class ArenaController extends GameController {
         }
     }
 
+    public void shipCollisionsWithCollectables(){
+        Ship ship = getModel().getShip();
+        Collectable collectable = getModel().getActiveCollectable();
+        if(collectable != null){
+            if(collisionBetween(ship, collectable)){
+                getModel().getActiveCollectable().execute();
+                getArenaModifier().removeActiveCollectable();
+            }
+        }
+    }
+
     public void coverWallHitByProjectile(CoverWall coverWall, Projectile projectile){
         coverWall.decreaseHealth(projectile.getElement().getDamagePerShot());
     }
@@ -142,6 +155,7 @@ public class ArenaController extends GameController {
         projectileCollisionsWithShip();
         projectileCollisionsWithAliens();
         projectileCollisionsWithCoverWalls();
+        shipCollisionsWithCollectables();
     }
 
     @Override
@@ -159,5 +173,6 @@ public class ArenaController extends GameController {
         shipController.step(game,key,time);
         alienController.step(game,key,time);
         projectileController.step(game,key,time);
+        collectableController.step(game,key,time);
     }
 }

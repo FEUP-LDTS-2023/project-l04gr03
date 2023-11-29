@@ -5,12 +5,12 @@ import SpaceInvaders.source_code.Model.Position;
 
 public class DamageCollectable extends CollectableWithMultiplier<Ship> {
 
-    public DamageCollectable(Position position, int multiplier){
-        super(position,multiplier);
+    public DamageCollectable(Position position, Ship ship, int multiplier){
+        super(position,ship,multiplier);
     }
 
     @Override
-    public void execute(Ship ship) {
-        ship.increaseDamage(this.getMultiplier());
+    public void execute() {
+        getAttackingElement().increaseDamage(this.getMultiplier());
     }
 }

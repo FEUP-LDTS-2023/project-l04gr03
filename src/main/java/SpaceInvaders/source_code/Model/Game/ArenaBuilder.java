@@ -1,6 +1,9 @@
 package SpaceInvaders.source_code.Model.Game;
 
 import SpaceInvaders.source_code.Model.Game.Collectables.Collectable;
+import SpaceInvaders.source_code.Model.Game.Collectables.CollectableFactory;
+import SpaceInvaders.source_code.Model.Game.Collectables.CollectableType;
+import SpaceInvaders.source_code.Model.Game.Collectables.HealthCollectable;
 import SpaceInvaders.source_code.Model.Game.RegularGameElements.*;
 import SpaceInvaders.source_code.Model.Position;
 
@@ -42,6 +45,7 @@ public abstract class ArenaBuilder{
         newArena.setCoverWalls(createCoverWalls());
         newArena.setAlienShip(createAlienShip());
         newArena.setProjectiles(new ArrayList<>());
+        newArena.setActiveCollectable(null);
         return newArena;
     }
 
@@ -84,4 +88,5 @@ public abstract class ArenaBuilder{
     public abstract List<CoverWall> createCoverWalls();
 
     public abstract AlienShip createAlienShip();
+
 }
