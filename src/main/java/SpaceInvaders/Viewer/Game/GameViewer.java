@@ -4,10 +4,9 @@ import SpaceInvaders.GUI.GUI;
 import SpaceInvaders.Model.Game.Collectables.Collectable;
 import SpaceInvaders.Model.Game.Element;
 import SpaceInvaders.Model.Game.Arena;
+import SpaceInvaders.Viewer.Game.Collectables.CollectableViewer;
 import SpaceInvaders.Viewer.Game.RegularElements.*;
-import SpaceInvaders.Model.Game.Collectables.*;
 import SpaceInvaders.Model.Position;
-import SpaceInvaders.Viewer.Game.RegularElements.*;
 import SpaceInvaders.Viewer.Viewer;
 
 import java.util.List;
@@ -31,7 +30,7 @@ public class GameViewer extends Viewer<Arena> {
         drawElements(gui, getModel().getWalls(), new WallViewer());
         drawElement(gui, getModel().getShip(), new ShipViewer());
         drawElements(gui, getModel().getProjectiles(), new ProjectileViewer());
-        drawCollectable(gui, getModel().getCollectable());
+        drawCollectable(gui, getModel().getCollectable(), new CollectableViewer());
         gui.drawText(new Position(5,5), "SCORE = ", "#F8F8FF");
         gui.drawText(new Position(15,5), String.valueOf(getModel().getScore()),"#F8F8FF" );
         gui.drawText(new Position(55,5), "HEALTH = ", "#F8F8FF");
@@ -66,8 +65,8 @@ public class GameViewer extends Viewer<Arena> {
         viewer.draw(gui, element);
     }
 
-    private void drawCollectable(GUI gui, Collectable collectable){
-
+    private void drawCollectable(GUI gui, Collectable collectable, CollectableViewer viewer ){
+            viewer.draw(gui,collectable);
     }
 
 }
