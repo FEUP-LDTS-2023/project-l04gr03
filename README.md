@@ -8,8 +8,8 @@ The player controls a spaceship that can shoot lasers. The game ends when the pl
 
 ### Project Main Goals
 
-The project uses some of the Design Patterns learned during the classes and emphasizes in the code organization and testing rater than making the most sophisticated game possible.
-Therefore, the main goals are the testing and desidn of the code
+The project uses some of the Design Patterns learned during the classes and emphasizes in the code organization and testing, rater than making the most sophisticated game possible.
+Therefore, the main goals of this game are the testing and desing of the code.
 
 ### Game Screenshot
 > Insert a screenchot here for the final version
