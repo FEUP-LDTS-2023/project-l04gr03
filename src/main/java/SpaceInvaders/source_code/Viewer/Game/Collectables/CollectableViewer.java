@@ -2,6 +2,7 @@ package SpaceInvaders.source_code.Viewer.Game.Collectables;
 
 import SpaceInvaders.source_code.GUI.GUI;
 import SpaceInvaders.source_code.Model.Game.Collectables.Collectable;
+import SpaceInvaders.source_code.Model.Position;
 
 public class CollectableViewer implements CollectableViewerInterface<Collectable> {
     @Override

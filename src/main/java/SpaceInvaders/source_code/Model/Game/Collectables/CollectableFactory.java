@@ -31,6 +31,7 @@ public class CollectableFactory<T> {
             case HEALTH -> new HealthCollectable(position, (Ship) attackingElement);
             case DAMAGE -> new DamageCollectable(position, (Ship) attackingElement, multiplier);
             case SCORE -> new ScoreCollectable(position, (List<Alien>) attackingElement, multiplier);
+            case MACHINE_GUN_MODE -> new MachineGunModeCollectable(position, (Ship) attackingElement);
             case GOD_MODE -> new GodModeCollectable(position,(Ship) attackingElement);
             default -> null;
         };

@@ -28,8 +28,6 @@ public class Arena {
 
     private Collectable activeCollectable;
 
-    private int round;
-
     private int score;
 
 
@@ -47,13 +45,11 @@ public class Arena {
         return height;
     }
 
-    public int getRound() {return round;}
 
     public int getScore(){
         return score;
     }
 
-    public void setRound(int round) {this.round = round;}
 
     public void increaseScore(int score){this.score+=score;}
 

@@ -128,8 +128,19 @@ public class ArenaController extends GameController {
         if(collectable != null){
             if(collisionBetween(ship, collectable)){
                 getModel().getActiveCollectable().execute();
-                collectableController.defineCollectableEffect(getModel().getActiveCollectable().getClass());
                 getArenaModifier().removeActiveCollectable();
+            }
+        }
+    }
+
+    public void collectableCollisionsWithWalls(){
+        List<Wall> walls = getModel().getWalls();
+        Collectable collectable = getModel().getActiveCollectable();
+        if(collectable != null){
+            for(Wall wall : walls){
+                if(collisionBetween(wall,collectable)){
+                    getModel().setActiveCollectable(null);
+                }
             }
         }
     }
@@ -158,6 +169,7 @@ public class ArenaController extends GameController {
         projectileCollisionsWithAliens();
         projectileCollisionsWithCoverWalls();
         shipCollisionsWithCollectables();
+        collectableCollisionsWithWalls();
     }
 
     @Override

@@ -4,6 +4,8 @@ import SpaceInvaders.source_code.GUI.GUI;
 import SpaceInvaders.source_code.Model.Game.Arena;
 import SpaceInvaders.source_code.Model.Game.Collectables.*;
 import SpaceInvaders.source_code.Model.Game.Element;
+import SpaceInvaders.source_code.Model.Game.RegularGameElements.AlienMode;
+import SpaceInvaders.source_code.Model.Game.RegularGameElements.ShipMode;
 import SpaceInvaders.source_code.Model.Position;
 import SpaceInvaders.source_code.Viewer.Game.Collectables.*;
 import SpaceInvaders.source_code.Viewer.Game.RegularElements.*;
@@ -29,6 +31,14 @@ public class GameViewer extends Viewer<Arena> {
         gui.drawText(new Position(15,5), String.valueOf(getModel().getScore()),"#F8F8FF" );
         gui.drawText(new Position(55,5), "HEALTH = ", "#F8F8FF");
         gui.drawText(new Position(65,5), String.valueOf(getModel().getShip().getHealth()),"#F8F8FF" );
+        if(getModel().getShip().getShipMode() != ShipMode.NORMAL_MODE){
+            gui.drawText(new Position(55,8), String.valueOf(getModel().getShip().getShipMode()),"#F8F8FF");
+        }
+        if(!getModel().getAliens().isEmpty()){
+            if(getModel().getAliens().get(0).getAlienMode() != AlienMode.NORMAL_MODE){
+                gui.drawText(new Position(55,10), String.valueOf(getModel().getAliens().get(0).getAlienMode()),"#F8F8FF");
+            }
+        }
     }
 
     private <T extends Element> void drawElements(GUI gui, List<T> elements, ElementViewer<T> viewer) {
