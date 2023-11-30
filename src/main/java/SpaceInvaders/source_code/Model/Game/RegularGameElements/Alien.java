@@ -8,15 +8,37 @@ public class Alien extends AttackingElement {
 
     private int score;
 
+
+    private AlienMode alienMode;
+
     private AlienState alienState;
 
     public Alien(Position position,int health, int damagePerShot, int score, AlienState alienState) {
         super(position,health,damagePerShot);
         this.score = score;
         this.alienState = alienState;
+        this.alienMode = AlienMode.NORMAL_MODE;
     }
 
+    public AlienMode getAlienMode() {return alienMode;}
+
+    public void setAlienMode(AlienMode alienMode) {this.alienMode = alienMode;}
+
     public int getScore() {
+        switch (alienMode){
+            case NORMAL_MODE:
+                return score;
+            case SCORE_2X:
+                return score * 2;
+            case SCORE_3X:
+                return score * 3;
+            case SCORE_4X:
+                return score * 4;
+            case SCORE_5X:
+                return score * 5;
+            case SCORE_10X:
+                return score * 10;
+        }
         return score;
     }
 

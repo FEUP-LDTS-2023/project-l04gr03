@@ -17,6 +17,25 @@ public class Ship extends AttackingElement {
     public ShipMode getShipMode() {return shipMode;}
 
     @Override
+    public int getDamagePerShot(){
+        switch(shipMode){
+            case NORMAL_MODE :
+                return super.getDamagePerShot();
+            case DAMAGE_2X:
+                return super.getDamagePerShot() * 2;
+            case DAMAGE_3X:
+                return super.getDamagePerShot() * 3;
+            case DAMAGE_4X:
+                return super.getDamagePerShot() * 4;
+            case DAMAGE_5X:
+                return super.getDamagePerShot() * 5;
+            case DAMAGE_10X:
+                return super.getDamagePerShot() * 10;
+        }
+        return super.getDamagePerShot();
+    }
+
+    @Override
     public void decreaseHealth(int damage){
         if(shipMode != ShipMode.GOD_MODE){
             this.setHealth(getHealth() - damage);

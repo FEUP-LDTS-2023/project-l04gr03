@@ -39,3 +39,8 @@ Unknown 1280
 Unknown 12700
 Unknown 14140
 Unknown 900
+Unknown 940
+Unknown 2720
+Unknown 1200
+Unknown 1920
+Unknown 2640

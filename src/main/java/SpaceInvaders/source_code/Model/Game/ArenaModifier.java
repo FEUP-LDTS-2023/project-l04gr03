@@ -16,13 +16,15 @@ public class ArenaModifier {
         this.arena = arena;
     }
 
-    public void restoreShipDamage() {
-        arena.getShip().setDamagePerShot(arena.getRound() * 50);
+
+    public void resetShipMode(){
+        arena.getShip().setShipMode(ShipMode.NORMAL_MODE);
     }
 
-    public void restoreAlienScore() {
-        for(Alien alien : arena.getAliens()){
-            alien.setScore(arena.getRound() * 20);
+    public void resetAliensMode(){
+        List<Alien> aliens = arena.getAliens();
+        for(Alien alien : aliens){
+            alien.setAlienMode(AlienMode.NORMAL_MODE);
         }
     }
     public void createCollectable() {

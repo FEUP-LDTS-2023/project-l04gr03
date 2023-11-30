@@ -3,6 +3,7 @@ package SpaceInvaders.source_code.Controller.Game;
 import SpaceInvaders.source_code.Game;
 import SpaceInvaders.source_code.Model.Game.Arena;
 import SpaceInvaders.source_code.Model.Game.Collectables.*;
+import SpaceInvaders.source_code.Model.Game.RegularGameElements.AlienMode;
 import SpaceInvaders.source_code.Model.Game.RegularGameElements.AttackingElement;
 import SpaceInvaders.source_code.Model.Game.RegularGameElements.ShipMode;
 import SpaceInvaders.source_code.Model.Position;
@@ -20,13 +21,10 @@ public class CollectableController extends GameController {
 
     private long movementTime;
 
-    private CollectableEffect collectableEffect;
-
     public CollectableController(Arena arena) {
         super(arena);
         this.generateCollectorTime = 0;
         this.movementTime = 0;
-        this.collectableEffect = null;
     }
 
     public void generateCollectable(){
@@ -38,24 +36,10 @@ public class CollectableController extends GameController {
         collectable.setPosition(new Position(collectable.getPosition().getX(),collectable.getPosition().getY() + 1));
     }
 
-    public void defineCollectableEffect(Class class1){
-        if (class1.equals(DamageCollectable.class)) {
-            collectableEffect = CollectableEffect.DAMAGE;
-        } else if (class1.equals(ScoreCollectable.class)) {
-            collectableEffect = CollectableEffect.SCORE;
-        } else if (class1.equals(MachineGunModeCollectable.class)) {
-            collectableEffect = CollectableEffect.MACHINE_GUN_MODE;
-        } else if (class1.equals(GodModeCollectable.class)) {
-            collectableEffect = CollectableEffect.GOD_MODE;
-        }
-    }
 
     public void endCollectableEffect(){
-        switch (collectableEffect){
-            case MACHINE_GUN_MODE, GOD_MODE -> getModel().getShip().setShipMode(ShipMode.NORMAL_MODE);
-            case DAMAGE -> getArenaModifier().restoreShipDamage();
-            case SCORE -> getArenaModifier().restoreAlienScore();
-        }
+        getArenaModifier().resetShipMode();
+        getArenaModifier().resetAliensMode();
     }
 
 
@@ -69,8 +53,10 @@ public class CollectableController extends GameController {
             moveCollectable();
             movementTime = time;
         }
-        if(collectableEffect != null && time - generateCollectorTime > 15000){
-            endCollectableEffect();
+        if(!getModel().getAliens().isEmpty()){
+            if((getModel().getShip().getShipMode() != ShipMode.NORMAL_MODE || getModel().getAliens().get(0).getAlienMode() != AlienMode.NORMAL_MODE) && time - generateCollectorTime > 15000){
+                endCollectableEffect();
+            }
         }
     }
 }
