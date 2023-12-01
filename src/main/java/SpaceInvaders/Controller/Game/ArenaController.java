@@ -22,6 +22,8 @@ public class ArenaController extends GameController {
 
     private CollectableController collectableController;
 
+    private AlienShipController alienShipController;
+
     private ArenaModifier arenaModifier;
 
     public ArenaController(Arena arena) {
@@ -30,6 +32,7 @@ public class ArenaController extends GameController {
         this.alienController = new AlienController(arena);
         this.projectileController = new ProjectileController(arena);
         this.arenaModifier = new ArenaModifier(arena);
+        this.alienShipController = new AlienShipController(arena);
     }
 
     public ShipController getShipController() {return shipController;}
@@ -119,6 +122,18 @@ public class ArenaController extends GameController {
         }
     }
 
+    public void projectileCollisionWithAlienShip(){
+        List<Projectile> projectiles = getModel().getProjectiles();
+        AlienShip alienShip = getModel().getAlienShip();
+        if(alienShip != null) {
+            for (int i = 0; i < projectiles.size(); i++) {
+                if (collisionBetween(projectiles.get(i), alienShip)) {
+                    alienShipController.hitByProjectile(alienShip, projectiles.get(i));
+                }
+            }
+        }
+    }
+
     public void coverWallHitByProjectile(CoverWall coverWall, Projectile projectile){
         coverWall.decreaseHealth(projectile.getElement().getDamagePerShot());
     }
@@ -135,6 +150,7 @@ public class ArenaController extends GameController {
     public void removeDestroyedElements(){
         alienController.removeDestroyedAliens();
         removeDestroyedCoverWalls();
+        alienShipController.removeAlienShip();
     }
 
     public void checkCollisions(){
@@ -142,6 +158,7 @@ public class ArenaController extends GameController {
         projectileCollisionsWithShip();
         projectileCollisionsWithAliens();
         projectileCollisionsWithCoverWalls();
+        projectileCollisionWithAlienShip();
     }
 
     @Override
