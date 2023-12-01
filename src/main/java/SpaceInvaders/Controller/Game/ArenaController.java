@@ -129,6 +129,7 @@ public class ArenaController extends GameController {
             for (int i = 0; i < projectiles.size(); i++) {
                 if (collisionBetween(projectiles.get(i), alienShip)) {
                     alienShipController.hitByProjectile(alienShip, projectiles.get(i));
+                    arenaModifier.removeProjectile(projectiles.get(i));
                 }
             }
         }
@@ -176,5 +177,6 @@ public class ArenaController extends GameController {
         shipController.step(game,key,time);
         alienController.step(game,key,time);
         projectileController.step(game,key,time);
+        alienShipController.step(game, key, time);
     }
 }
