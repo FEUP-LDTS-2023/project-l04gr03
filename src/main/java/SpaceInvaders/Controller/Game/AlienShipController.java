@@ -12,9 +12,11 @@ import java.io.IOException;
 
 public class AlienShipController extends GameController{
     long lastAppearance;
+    long lastMovementTime;
     public AlienShipController(Arena arena){
         super(arena);
         this.lastAppearance = 0;
+        this.lastMovementTime = 0;
     }
 
     public void generateAlienShip(){
@@ -33,7 +35,7 @@ public class AlienShipController extends GameController{
 
     public boolean canMoveAlienShip(){
         AlienShip alienShip = getModel().getAlienShip();
-        return (alienShip.getPosition().getX() - 3 > 0) | (alienShip.getPosition().getX() + 3 < getModel().getWidth());
+        return (alienShip.getPosition().getX() - 1 > 0) && (alienShip.getPosition().getX() + 2 < getModel().getWidth());
     }
 
     public void removeAlienShip(){
@@ -46,16 +48,21 @@ public class AlienShipController extends GameController{
 
     public void hitByProjectile(AlienShip alienShip, Projectile projectile){
         alienShip.decreaseHealth(projectile.getElement().getDamagePerShot());
-        getModel().increaseScore(alienShip.getScore());
+        if(getModel().getAlienShip().isDestroyed()) {
+            getModel().increaseScore(alienShip.getScore());
+        }
     }
     @Override
     public void step(Game game, KeyStroke key, long time) throws IOException {
-        if(time - lastAppearance > 100000){
+        if(time - lastAppearance > 50000){
             generateAlienShip();
             lastAppearance = time;
         }
         else if(getModel().getAlienShip() != null){
-            moveAlienShip();
+            if(time - lastMovementTime > 100) {
+                moveAlienShip();
+                lastMovementTime = time;
+            }
         }
     }
 

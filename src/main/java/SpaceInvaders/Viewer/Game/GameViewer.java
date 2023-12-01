@@ -34,7 +34,7 @@ public class GameViewer extends Viewer<Arena> {
         drawElements(gui, getModel().getWalls(), new WallViewer());
         drawElement(gui, getModel().getShip(), new ShipViewer());
         drawElements(gui, getModel().getProjectiles(), new ProjectileViewer());
-        drawElement(gui,getModel().getAlienShip(),new AlienShipVi());
+        drawElement(gui,getModel().getAlienShip(),new AlienShipViewer());
         drawCollectable(gui, getModel().getCollectable());
         gui.drawText(new Position(5,5), "SCORE = ", "#F8F8FF");
         gui.drawText(new Position(15,5), String.valueOf(getModel().getScore()),"#F8F8FF" );
@@ -67,7 +67,9 @@ public class GameViewer extends Viewer<Arena> {
     }
 
     private <T extends Element> void drawElement(GUI gui, T element, ElementViewer<T> viewer) {
-        viewer.draw(gui, element);
+        if(element != null) {
+            viewer.draw(gui, element);
+        }
     }
 
     private<T extends Element> void drawCollectable(GUI gui, T collectable){
