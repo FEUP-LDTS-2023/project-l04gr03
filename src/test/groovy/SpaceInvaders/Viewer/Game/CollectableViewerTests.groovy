@@ -24,7 +24,7 @@ class CollectableViewerTests extends Specification{
         when:
             CollectableViewer.draw(gui,collectable)
         then:
-           1 * gui.drawElement(collectable.getPosition(), '\u0024', "#009000")
+           1 * gui.drawElement(collectable.getPosition(), '\u00e7', "#FFFF00");
 
     }
     def "Health collectable draw"(){
@@ -46,7 +46,7 @@ class CollectableViewerTests extends Specification{
         when:
             CollectableViewer.draw(gui, collectable)
         then:
-            1 * gui.drawElement(collectable.getPosition(), '\u0024', "#009000");
+            1 * gui.drawElement(collectable.getPosition(), '\u00c9', "#B0E0E6");
 
     }
 
@@ -69,7 +69,7 @@ class CollectableViewerTests extends Specification{
         when:
             CollectableViewer.draw(gui, collectable)
         then:
-            1 * gui.drawElement(collectable.getPosition(),'\u0024', "#009000")
+            1 * gui.drawElement(collectable.getPosition(), '\u00C8', "#FF4500");
     }
 
 }

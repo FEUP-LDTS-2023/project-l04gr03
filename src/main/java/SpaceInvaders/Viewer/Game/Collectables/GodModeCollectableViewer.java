@@ -7,6 +7,6 @@ import SpaceInvaders.Viewer.Game.RegularElements.ElementViewer;
 public class GodModeCollectableViewer implements ElementViewer<GodModeCollectable> {
     @Override
     public void draw(GUI gui, GodModeCollectable collectable) {
-        gui.drawElement(collectable.getPosition(), '\u0024', "#009000");
+        gui.drawElement(collectable.getPosition(), '\u00e7', "#FFFF00");
     }
 }
