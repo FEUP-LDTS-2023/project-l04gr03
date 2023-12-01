@@ -1,7 +1,8 @@
 package SpaceInvaders.Model.Game;
 
 import SpaceInvaders.Model.Game.RegularGameElements.*;
-import SpaceInvaders.Model.Game.RegularGameElements.*;
+
+
 
 import java.util.ArrayList;
 import java.util.List;
@@ -41,6 +42,7 @@ public abstract class ArenaBuilder{
         newArena.setCoverWalls(createCoverWalls());
         newArena.setAlienShip(createAlienShip());
         newArena.setProjectiles(new ArrayList<>());
+        newArena.setActiveCollectable(null);
         return newArena;
     }
 
@@ -74,6 +76,7 @@ public abstract class ArenaBuilder{
 
     public abstract int getHeight();
 
+
     public abstract Ship createShip();
 
     public abstract List<Alien> createAliens();
@@ -83,4 +86,5 @@ public abstract class ArenaBuilder{
     public abstract List<CoverWall> createCoverWalls();
 
     public abstract AlienShip createAlienShip();
+
 }

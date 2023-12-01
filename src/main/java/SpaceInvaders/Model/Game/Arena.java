@@ -3,6 +3,8 @@ package SpaceInvaders.Model.Game;
 import SpaceInvaders.Model.Game.Collectables.Collectable;
 import SpaceInvaders.Model.Game.RegularGameElements.*;
 import SpaceInvaders.Model.Game.RegularGameElements.*;
+import SpaceInvaders.Model.Position;
+
 
 import java.util.ArrayList;
 import java.util.List;
@@ -26,7 +28,7 @@ public class Arena {
 
     private AlienShip alienShip;
 
-    private Collectable collectable;
+    private Collectable activeCollectable;
 
     private int score;
 
@@ -44,9 +46,12 @@ public class Arena {
     public int getHeight(){
         return height;
     }
+
+
     public int getScore(){
         return score;
     }
+
 
     public void increaseScore(int score){this.score+=score;}
 
@@ -70,9 +75,7 @@ public class Arena {
 
     public AlienShip getAlienShip() {return alienShip;}
 
-    public Collectable getCollectable() {
-        return collectable;
-    }
+    public Collectable getActiveCollectable() {return activeCollectable;}
 
     public void setShip(Ship ship) {
         this.ship = ship;
@@ -94,9 +97,7 @@ public class Arena {
 
     public void setAlienShip(AlienShip alienShip) {this.alienShip = alienShip;}
 
-    public void setCollectable(Collectable collectable) {
-        this.collectable = collectable;
-    }
+    public void setActiveCollectable(Collectable activeCollectable){this.activeCollectable = activeCollectable;}
 
     public List<Alien> getAttackingAliens(){
         List<Alien> attackingAliens = new ArrayList<>();
@@ -108,4 +109,30 @@ public class Arena {
         return attackingAliens;
     }
 
+    public boolean freeArenaPosition(Position position){
+        for(Alien alien : aliens){
+            if(alien.getPosition().equals(position)){
+                return false;
+            }
+        }
+        for(CoverWall coverWall : coverWalls){
+            if(coverWall.getPosition().equals(position)){
+                return false;
+            }
+        }
+        return !alienShip.getPosition().equals(position);
+    }
+
+    public List<Integer> getFreeArenaColumns(){
+        List<Integer> columns = new ArrayList<>();
+        for(int x = 0; x < width; x++){
+            for(int y = 0; y < height; y++){
+                if(!freeArenaPosition(new Position(x,y))){
+                    break;
+                }
+            }
+            columns.add(x);
+        }
+        return columns;
+    }
 }

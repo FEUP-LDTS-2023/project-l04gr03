@@ -3,6 +3,7 @@ package SpaceInvaders.Controller.Game;
 import SpaceInvaders.Game;
 import SpaceInvaders.Model.Game.Arena;
 import SpaceInvaders.Model.Game.ArenaModifier;
+import SpaceInvaders.Model.Game.Collectables.Collectable;
 import SpaceInvaders.Model.Game.Element;
 import SpaceInvaders.Model.Game.RegularGameElements.*;
 import SpaceInvaders.State.GameStates;
@@ -29,6 +30,7 @@ public class ArenaController extends GameController {
         this.shipController = new ShipController(arena);
         this.alienController = new AlienController(arena);
         this.projectileController = new ProjectileController(arena);
+        this.collectableController = new CollectableController(arena);
         this.arenaModifier = new ArenaModifier(arena);
     }
 
@@ -40,6 +42,7 @@ public class ArenaController extends GameController {
 
 
     public ArenaModifier getArenaModifier() {return arenaModifier;}
+
 
     public boolean collisionBetween(Element element1, Element element2){
         return element1.getPosition().equals(element2.getPosition());
@@ -119,6 +122,29 @@ public class ArenaController extends GameController {
         }
     }
 
+    public void shipCollisionsWithCollectables(){
+        Ship ship = getModel().getShip();
+        Collectable collectable = getModel().getActiveCollectable();
+        if(collectable != null){
+            if(collisionBetween(ship, collectable)){
+                getModel().getActiveCollectable().execute();
+                getArenaModifier().removeActiveCollectable();
+            }
+        }
+    }
+
+    public void collectableCollisionsWithWalls(){
+        List<Wall> walls = getModel().getWalls();
+        Collectable collectable = getModel().getActiveCollectable();
+        if(collectable != null){
+            for(Wall wall : walls){
+                if(collisionBetween(wall,collectable)){
+                    getModel().setActiveCollectable(null);
+                }
+            }
+        }
+    }
+
     public void coverWallHitByProjectile(CoverWall coverWall, Projectile projectile){
         coverWall.decreaseHealth(projectile.getElement().getDamagePerShot());
     }
@@ -142,6 +168,8 @@ public class ArenaController extends GameController {
         projectileCollisionsWithShip();
         projectileCollisionsWithAliens();
         projectileCollisionsWithCoverWalls();
+        shipCollisionsWithCollectables();
+        collectableCollisionsWithWalls();
     }
 
     @Override
@@ -159,5 +187,6 @@ public class ArenaController extends GameController {
         shipController.step(game,key,time);
         alienController.step(game,key,time);
         projectileController.step(game,key,time);
+        collectableController.step(game,key,time);
     }
 }
