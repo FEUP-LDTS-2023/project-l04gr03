@@ -86,7 +86,7 @@ class TestArenaBuilderByRound extends Specification{
         when:
         List<CoverWall> coverWalls = arenaBuilderByRound.createCoverWalls()
         then:
-        coverWalls.size() == 8;
+        coverWalls.size() == 24;
         coverWalls.get(0).getPosition().equals(new Position(14,24))
         coverWalls.get(1).getPosition().equals(new Position(14,25))
         coverWalls.get(0).getHealth() == arenaBuilderByRound.getBaseCoverWallHealth() * round * round

@@ -2,6 +2,7 @@ package SpaceInvaders.Controller.Game;
 
 import SpaceInvaders.Game;
 import SpaceInvaders.Model.Game.Arena;
+import SpaceInvaders.Model.Game.ArenaModifier;
 import SpaceInvaders.Model.Game.RegularGameElements.AlienShip;
 import SpaceInvaders.Model.Game.RegularGameElements.Projectile;
 import SpaceInvaders.Model.Position;
@@ -29,7 +30,7 @@ public class AlienShipController extends GameController{
             alienShip.setPosition(new Position(alienShip.getPosition().getX() + alienShip.getMovementDirection(), alienShip.getPosition().getY()));
         }
         else{
-            getArenaModifier().removeAlienShip(getModel().getAlienShip());
+            getArenaModifier().removeAlienShip();
         }
     }
 
@@ -41,7 +42,7 @@ public class AlienShipController extends GameController{
     public void removeAlienShip(){
         if(getModel().getAlienShip() != null) {
             if (getModel().getAlienShip().isDestroyed()) {
-                getArenaModifier().removeAlienShip(getModel().getAlienShip());
+                getArenaModifier().removeAlienShip();
             }
         }
     }

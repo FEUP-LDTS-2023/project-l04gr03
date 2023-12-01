@@ -1,6 +1,7 @@
 package SpaceInvaders.Model.Game
 
 import SpaceInvaders.Model.Game.RegularGameElements.Alien
+import SpaceInvaders.Model.Game.RegularGameElements.AlienShip
 import SpaceInvaders.Model.Game.RegularGameElements.AlienState
 import SpaceInvaders.Model.Game.RegularGameElements.CoverWall
 import SpaceInvaders.Model.Game.RegularGameElements.Projectile
@@ -81,5 +82,26 @@ class TestArenaModifier extends Specification{
         then:
         arena.getProjectiles().size() == 1
         arena.getProjectiles().get(0).getPosition().equals(new Position(35,26))
+    }
+
+    def "Create Alien Ship"(){
+        given:
+            Arena arena = new Arena(75,30)
+            ArenaModifier arenaModifier = new ArenaModifier((arena))
+        when:
+            arenaModifier.createAlienShip()
+        then:
+            arena.getAlienShip() != null
+    }
+
+    def "Remove Alien Ship"(){
+        given:
+            def arena = Mock(Arena)
+            def arenaModifier = new ArenaModifier(arena)
+        when:
+            arenaModifier.removeAlienShip()
+        then:
+            1 * arena.setAlienShip(null)
+
     }
 }
