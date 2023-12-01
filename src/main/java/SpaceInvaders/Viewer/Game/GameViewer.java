@@ -72,10 +72,13 @@ public class GameViewer extends Viewer<Arena> {
         if(collectable != null) {
             if (collectable.getClass() == GodModeCollectable.class) {
                 new GodModeCollectableViewer().draw(gui, (GodModeCollectable) collectable);
+
             } else if (collectable.getClass() == MachineGunModeCollectable.class) {
                 new MachineGunCollectableViewer().draw(gui, (MachineGunModeCollectable) collectable);
+
             } else if (collectable.getClass() == HealthCollectable.class) {
                 new HealthCollectableViewer().draw(gui, (HealthCollectable) collectable);
+
             } else if (collectable.getClass() == ScoreCollectable.class) {
                 new ScoreCollectableViewer().draw(gui, (ScoreCollectable) collectable);
             }

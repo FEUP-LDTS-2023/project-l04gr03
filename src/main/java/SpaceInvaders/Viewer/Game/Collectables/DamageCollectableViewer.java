@@ -7,6 +7,6 @@ import SpaceInvaders.Viewer.Game.RegularElements.ElementViewer;
 public class DamageCollectableViewer implements ElementViewer<DamageCollectable> {
     @Override
     public void draw(GUI gui, DamageCollectable collectable) {
-        gui.drawElement(collectable.getPosition(), '\u0024', "#009000");
+        gui.drawElement(collectable.getPosition(), '\u00C8', "#FF4500");
     }
 }
