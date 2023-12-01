@@ -8,15 +8,21 @@ class TestArenaBuilder extends Specification {
         given:
             int round = 1
             ArenaBuilderByRound arenaBuilderByRound = new ArenaBuilderByRound(round)
+            def spyArenaBuilderByRound = Spy(arenaBuilderByRound)
         when:
-            arenaBuilderByRound.buildArena()
+            spyArenaBuilderByRound.buildArena()
         then:
-            arenaBuilderByRound.getBaseShipHealth() == 100
-            arenaBuilderByRound.getBaseShipDamage() == 50
-            arenaBuilderByRound.getBaseAlienHealth() == 20
-            arenaBuilderByRound.getBaseAlienDamage() == 20
-            arenaBuilderByRound.getBaseAlienScore() == 20
-            arenaBuilderByRound.getBaseAlienShipHealth() == 200
-            arenaBuilderByRound.getBaseAlienShipScore() == 500
+            spyArenaBuilderByRound.getBaseShipHealth() == 100
+            spyArenaBuilderByRound.getBaseShipDamage() == 50
+            spyArenaBuilderByRound.getBaseAlienHealth() == 20
+            spyArenaBuilderByRound.getBaseAlienDamage() == 20
+            spyArenaBuilderByRound.getBaseAlienScore() == 20
+            spyArenaBuilderByRound.getBaseAlienShipHealth() == 200
+            spyArenaBuilderByRound.getBaseAlienShipScore() == 500
+            1 * spyArenaBuilderByRound.createShip()
+            1 * spyArenaBuilderByRound.createAliens()
+            1 * spyArenaBuilderByRound.createAlienShip()
+            1 * spyArenaBuilderByRound.createWalls()
+            1 * spyArenaBuilderByRound.createCoverWalls()
     }
 }
