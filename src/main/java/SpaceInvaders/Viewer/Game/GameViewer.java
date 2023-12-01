@@ -1,10 +1,13 @@
 package SpaceInvaders.Viewer.Game;
 
 import SpaceInvaders.GUI.GUI;
-import SpaceInvaders.Model.Game.Collectables.Collectable;
+import SpaceInvaders.Model.Game.Collectables.*;
 import SpaceInvaders.Model.Game.Element;
 import SpaceInvaders.Model.Game.Arena;
-import SpaceInvaders.Viewer.Game.Collectables.CollectableViewer;
+import SpaceInvaders.Viewer.Game.Collectables.GodModeCollectableViewer;
+import SpaceInvaders.Viewer.Game.Collectables.HealthCollectableViewer;
+import SpaceInvaders.Viewer.Game.Collectables.MachineGunCollectableViewer;
+import SpaceInvaders.Viewer.Game.Collectables.ScoreCollectableViewer;
 import SpaceInvaders.Viewer.Game.RegularElements.*;
 import SpaceInvaders.Model.Position;
 import SpaceInvaders.Viewer.Viewer;
@@ -30,7 +33,7 @@ public class GameViewer extends Viewer<Arena> {
         drawElements(gui, getModel().getWalls(), new WallViewer());
         drawElement(gui, getModel().getShip(), new ShipViewer());
         drawElements(gui, getModel().getProjectiles(), new ProjectileViewer());
-        drawCollectable(gui, getModel().getCollectable(), new CollectableViewer());
+        drawCollectable(gui, getModel().getCollectable());
         gui.drawText(new Position(5,5), "SCORE = ", "#F8F8FF");
         gui.drawText(new Position(15,5), String.valueOf(getModel().getScore()),"#F8F8FF" );
         gui.drawText(new Position(55,5), "HEALTH = ", "#F8F8FF");
@@ -65,8 +68,21 @@ public class GameViewer extends Viewer<Arena> {
         viewer.draw(gui, element);
     }
 
-    private void drawCollectable(GUI gui, Collectable collectable, CollectableViewer viewer ){
-            viewer.draw(gui,collectable);
+    private<T extends Element> void drawCollectable(GUI gui, T collectable){
+        if(collectable != null) {
+            if (collectable.getClass() == GodModeCollectable.class) {
+                new GodModeCollectableViewer().draw(gui, (GodModeCollectable) collectable);
+
+            } else if (collectable.getClass() == MachineGunModeCollectable.class) {
+                new MachineGunCollectableViewer().draw(gui, (MachineGunModeCollectable) collectable);
+
+            } else if (collectable.getClass() == HealthCollectable.class) {
+                new HealthCollectableViewer().draw(gui, (HealthCollectable) collectable);
+
+            } else if (collectable.getClass() == ScoreCollectable.class) {
+                new ScoreCollectableViewer().draw(gui, (ScoreCollectable) collectable);
+            }
+        }
     }
 
 }
