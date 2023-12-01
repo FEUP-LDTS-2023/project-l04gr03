@@ -2,11 +2,13 @@ package SpaceInvaders.Viewer.Game
 
 import SpaceInvaders.GUI.GUI
 import SpaceInvaders.Model.Game.RegularGameElements.Alien
+import SpaceInvaders.Model.Game.RegularGameElements.AlienShip
 import SpaceInvaders.Model.Game.RegularGameElements.CoverWall
 import SpaceInvaders.Model.Game.RegularGameElements.Projectile
 import SpaceInvaders.Model.Game.RegularGameElements.Ship
 import SpaceInvaders.Model.Game.RegularGameElements.Wall
 import SpaceInvaders.Model.Position
+import SpaceInvaders.Viewer.Game.RegularElements.AlienShipViewer
 import SpaceInvaders.Viewer.Game.RegularElements.AlienViewer
 import SpaceInvaders.Viewer.Game.RegularElements.CoverWallViewer
 import SpaceInvaders.Viewer.Game.RegularElements.ProjectileViewer
@@ -111,6 +113,16 @@ class RegularElementsTests extends Specification{
             1 * gui.drawElement(_,_,_)
     }
 
+    def "AlienShip Viewer"(){
+        given:
+            def viewer = new AlienShipViewer();
+            def gui = Mock(GUI)
+            def alienShip = Mock(AlienShip)
+        when:
+            viewer.draw(gui,alienShip)
+        then:
+            1 * gui.drawElement(_,_,_)
+    }
 
 
 }
