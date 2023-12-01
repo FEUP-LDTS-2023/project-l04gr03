@@ -2,12 +2,13 @@ package SpaceInvaders.Model.Game.Collectables;
 
 import SpaceInvaders.Model.Position;
 
+
 public abstract class CollectableWithMultiplier<T> extends Collectable<T> {
 
     private int multiplier;
 
-    public CollectableWithMultiplier(Position position,int multiplier) {
-        super(position);
+    public CollectableWithMultiplier(Position position,T attackingElement,int multiplier) {
+        super(position,attackingElement);
         this.multiplier = multiplier;
     }
 
@@ -16,5 +17,5 @@ public abstract class CollectableWithMultiplier<T> extends Collectable<T> {
     }
 
     @Override
-    public abstract void execute(T element);
+    public abstract void execute();
 }
