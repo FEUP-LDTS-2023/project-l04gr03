@@ -6,6 +6,8 @@ import SpaceInvaders.Model.Game.Collectables.GodModeCollectable
 import SpaceInvaders.Model.Game.Collectables.HealthCollectable
 import SpaceInvaders.Model.Game.Collectables.MachineGunModeCollectable
 import SpaceInvaders.Model.Game.Collectables.ScoreCollectable
+import SpaceInvaders.Model.Game.RegularGameElements.Alien
+import SpaceInvaders.Model.Game.RegularGameElements.Ship
 import SpaceInvaders.Model.Position
 import SpaceInvaders.Viewer.Game.Collectables.DamageCollectableViewer
 import SpaceInvaders.Viewer.Game.Collectables.GodModeCollectableViewer
@@ -20,7 +22,7 @@ class CollectableViewerTests extends Specification{
         given:
             def CollectableViewer = new GodModeCollectableViewer()
             def gui = Mock(GUI)
-            def collectable = new GodModeCollectable(Mock(Position))
+            def collectable = new GodModeCollectable(Mock(Position),Mock(Ship))
         when:
             CollectableViewer.draw(gui,collectable)
         then:
@@ -31,7 +33,7 @@ class CollectableViewerTests extends Specification{
         given:
             def CollectableViewer = new HealthCollectableViewer()
             def gui = Mock(GUI)
-            def collectable = new HealthCollectable(Mock(Position))
+            def collectable = new HealthCollectable(Mock(Position),Mock(Ship))
         when:
             CollectableViewer.draw(gui, collectable)
         then:
@@ -42,7 +44,7 @@ class CollectableViewerTests extends Specification{
         given:
             def CollectableViewer = new MachineGunCollectableViewer()
             def gui = Mock(GUI)
-            def collectable = new MachineGunModeCollectable(Mock(Position))
+            def collectable = new MachineGunModeCollectable(Mock(Position), Mock(Ship))
         when:
             CollectableViewer.draw(gui, collectable)
         then:
@@ -54,7 +56,7 @@ class CollectableViewerTests extends Specification{
         given:
             def CollectableViewer = new ScoreCollectableViewer()
             def gui = Mock(GUI)
-            def collectable = new ScoreCollectable(Mock(Position),0)
+            def collectable = new ScoreCollectable(Mock(Position),Mock(List<Alien>),0)
         when:
             CollectableViewer.draw(gui,collectable)
         then:
@@ -65,7 +67,7 @@ class CollectableViewerTests extends Specification{
         given:
             def CollectableViewer = new DamageCollectableViewer()
             def gui = Mock(GUI)
-            def collectable = new DamageCollectable(Mock(Position),0)
+            def collectable = new DamageCollectable(Mock(Position),Mock(Ship),0)
         when:
             CollectableViewer.draw(gui, collectable)
         then:
