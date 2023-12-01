@@ -1,11 +1,14 @@
 package SpaceInvaders.Controller.Game;
 
+
 import SpaceInvaders.Game;
 import SpaceInvaders.Model.Game.ArenaModifier;
 import SpaceInvaders.Model.Game.RegularGameElements.Projectile;
 import SpaceInvaders.Model.Game.RegularGameElements.Ship;
+import SpaceInvaders.Model.Game.RegularGameElements.ShipMode;
 import SpaceInvaders.Model.Position;
 import SpaceInvaders.Model.Game.Arena;
+
 import com.googlecode.lanterna.input.KeyStroke;
 import com.googlecode.lanterna.input.KeyType;
 
@@ -64,6 +67,10 @@ public class ShipController extends GameController {
         if(key.getKeyType() == KeyType.ArrowRight && time - inputTime > 100){
             moveRight();
             inputTime = time;
+        }
+        if(key.getKeyType() == KeyType.ArrowUp && getModel().getShip().getShipMode() == ShipMode.MACHINE_GUN_MODE){
+            shootProjectile();
+            return;
         }
         if(key.getKeyType() == KeyType.ArrowUp && time - inputTime > 300){
             shootProjectile();
