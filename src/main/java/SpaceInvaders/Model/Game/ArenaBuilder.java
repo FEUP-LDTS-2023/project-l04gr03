@@ -20,9 +20,6 @@ public abstract class ArenaBuilder{
 
     private int baseCoverWallHealth;
 
-    private int baseAlienShipHealth;
-
-    private int baseAlienShipScore;
 
 
     public Arena buildArena(){
@@ -33,13 +30,10 @@ public abstract class ArenaBuilder{
         baseAlienDamage = 20;
         baseAlienScore = 20;
         baseCoverWallHealth = 100;
-        baseAlienShipHealth = 200;
-        baseAlienShipScore = 500;
         newArena.setShip(createShip());
         newArena.setAliens(createAliens());
         newArena.setWalls(createWalls());
         newArena.setCoverWalls(createCoverWalls());
-        newArena.setAlienShip(createAlienShip());
         newArena.setProjectiles(new ArrayList<>());
         return newArena;
     }
@@ -66,10 +60,6 @@ public abstract class ArenaBuilder{
         return baseCoverWallHealth;
     }
 
-    public int getBaseAlienShipHealth(){ return baseAlienShipHealth; }
-
-    public int getBaseAlienShipScore() { return baseAlienShipScore; }
-
     public abstract int getWidth();
 
     public abstract int getHeight();
@@ -82,5 +72,4 @@ public abstract class ArenaBuilder{
 
     public abstract List<CoverWall> createCoverWalls();
 
-    public abstract AlienShip createAlienShip();
 }

@@ -16,7 +16,5 @@ class TestArenaBuilder extends Specification {
             arenaBuilderByRound.getBaseAlienHealth() == 20
             arenaBuilderByRound.getBaseAlienDamage() == 20
             arenaBuilderByRound.getBaseAlienScore() == 20
-            arenaBuilderByRound.getBaseAlienShipHealth() == 200
-            arenaBuilderByRound.getBaseAlienShipScore() == 500
     }
 }

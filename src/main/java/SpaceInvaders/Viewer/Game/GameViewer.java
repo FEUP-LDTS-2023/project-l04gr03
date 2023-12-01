@@ -1,5 +1,6 @@
 package SpaceInvaders.Viewer.Game;
 
+import SpaceInvaders.Controller.Game.AlienShipController;
 import SpaceInvaders.GUI.GUI;
 import SpaceInvaders.Model.Game.Collectables.*;
 import SpaceInvaders.Model.Game.Element;
@@ -33,6 +34,7 @@ public class GameViewer extends Viewer<Arena> {
         drawElements(gui, getModel().getWalls(), new WallViewer());
         drawElement(gui, getModel().getShip(), new ShipViewer());
         drawElements(gui, getModel().getProjectiles(), new ProjectileViewer());
+        drawElement(gui,getModel().getAlienShip(),new AlienShipVi());
         drawCollectable(gui, getModel().getCollectable());
         gui.drawText(new Position(5,5), "SCORE = ", "#F8F8FF");
         gui.drawText(new Position(15,5), String.valueOf(getModel().getScore()),"#F8F8FF" );
