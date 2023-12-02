@@ -72,10 +72,12 @@ public class AlienController extends GameController {
 
     public void shootProjectile(){
         List<Alien> attackingAliens = getModel().getAttackingAliens();
-        Random random = new Random();
-        int randomIndex = random.nextInt(attackingAliens.size());
-        Alien randomAlien = attackingAliens.get(randomIndex);
-        getArenaModifier().addProjectile(new Projectile(randomAlien.getPosition(),randomAlien));
+        if(!getModel().getAttackingAliens().isEmpty()){
+            Random random = new Random();
+            int randomIndex = random.nextInt(attackingAliens.size());
+            Alien randomAlien = attackingAliens.get(randomIndex);
+            getArenaModifier().addProjectile(new Projectile(randomAlien.getPosition(),randomAlien));
+        }
     }
 
     public void hitByProjectile(Alien alien, Projectile projectile){

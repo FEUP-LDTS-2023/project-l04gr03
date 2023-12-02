@@ -67,12 +67,12 @@ public class ArenaModifier {
         arena.setActiveCollectable(collectableFactory.createCollectable());
     }
 
-    public boolean hasAlienInFront(Alien alien){
+    public boolean hasAlienInFront(Alien alien, Alien excludedAlien){
         List<Alien> aliens = arena.getAliens();
         int i = 0;
         while (i < aliens.size() && aliens.get(i).getPosition().getX() <= alien.getPosition().getX()){
             if(aliens.get(i).getPosition().getX() == alien.getPosition().getX()){
-                if(aliens.get(i).getPosition().getY() > alien.getPosition().getY() && aliens.get(i).getPosition().getY() != alien.getPosition().getY() + 2){
+                if(aliens.get(i).getPosition().getY() > alien.getPosition().getY() && !aliens.get(i).equals(excludedAlien)){
                     return true;
                 }
             }
@@ -86,7 +86,7 @@ public class ArenaModifier {
         for(int i = 0; i < aliens.size(); i++){
             if(aliens.get(i).equals(alien)){
                 if(i > 0){
-                    if(!hasAlienInFront(aliens.get(i - 1))){
+                    if(!hasAlienInFront(aliens.get(i - 1),aliens.get(i))){
                         aliens.get(i - 1).setAlienState(AlienState.ATTACKING);
                     }
                 }
