@@ -68,8 +68,9 @@ public class ShipController extends GameController {
             moveRight();
             inputTime = time;
         }
-        if(key.getKeyType() == KeyType.ArrowUp && getModel().getShip().getShipMode() == ShipMode.MACHINE_GUN_MODE){
+        if(key.getKeyType() == KeyType.ArrowUp && getModel().getShip().getShipMode() == ShipMode.MACHINE_GUN_MODE && time - inputTime > 100){
             shootProjectile();
+            inputTime = time;
             return;
         }
         if(key.getKeyType() == KeyType.ArrowUp && time - inputTime > 300){

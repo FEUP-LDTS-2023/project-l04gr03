@@ -120,7 +120,10 @@ public class Arena {
                 return false;
             }
         }
-        return !alienShip.getPosition().equals(position);
+        if(alienShip != null) {
+            return !alienShip.getPosition().equals(position);
+        }
+        return true;
     }
 
     public List<Integer> getFreeArenaColumns(){

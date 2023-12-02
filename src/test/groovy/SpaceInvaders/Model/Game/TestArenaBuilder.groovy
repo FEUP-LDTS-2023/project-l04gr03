@@ -4,17 +4,23 @@ import spock.lang.Specification
 
 class TestArenaBuilder extends Specification {
 
+
     def "ArenaBuilder"() {
         given:
-            int round = 1
-            ArenaBuilderByRound arenaBuilderByRound = new ArenaBuilderByRound(round)
+        int round = 1
+        ArenaBuilderByRound arenaBuilderByRound = new ArenaBuilderByRound(round)
+        def spyArenaBuilderByRound = Spy(arenaBuilderByRound)
         when:
-            arenaBuilderByRound.buildArena()
+        spyArenaBuilderByRound.buildArena()
         then:
-            arenaBuilderByRound.getBaseShipHealth() == 100
-            arenaBuilderByRound.getBaseShipDamage() == 50
-            arenaBuilderByRound.getBaseAlienHealth() == 20
-            arenaBuilderByRound.getBaseAlienDamage() == 20
-            arenaBuilderByRound.getBaseAlienScore() == 20
+        spyArenaBuilderByRound.getBaseShipHealth() == 100
+        spyArenaBuilderByRound.getBaseShipDamage() == 50
+        spyArenaBuilderByRound.getBaseAlienHealth() == 20
+        spyArenaBuilderByRound.getBaseAlienDamage() == 20
+        spyArenaBuilderByRound.getBaseAlienScore() == 20
+        1 * spyArenaBuilderByRound.createShip()
+        1 * spyArenaBuilderByRound.createAliens()
+        1 * spyArenaBuilderByRound.createWalls()
+        1 * spyArenaBuilderByRound.createCoverWalls()
     }
 }

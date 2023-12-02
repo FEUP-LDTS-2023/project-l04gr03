@@ -3,6 +3,7 @@ package SpaceInvaders;
 
 import SpaceInvaders.GUI.GUI;
 import SpaceInvaders.GUI.GUILanterna;
+import SpaceInvaders.Model.Position;
 import SpaceInvaders.State.GameStates;
 import SpaceInvaders.State.State;
 
