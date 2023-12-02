@@ -88,28 +88,14 @@ class TestArenaModifier extends Specification{
         arena.getProjectiles().get(0).getPosition().equals(new Position(35,26))
     }
 
-    def "RemoveAlienShip"(){
-        given:
-        Arena arena = new Arena(75,30)
-        ArenaModifier arenaModifier = new ArenaModifier(arena)
-        AlienShip alienShip = new AlienShip(Mock(Position),200,500)
-        arena.setAlienShip(alienShip)
-        when:
-        arenaModifier.removeAlienShip()
-        then:
-        arena.getAlienShip() == null
-    }
-
     def "RemoveActiveCollectable"(){
         given:
-        Arena arena = new Arena(75,30)
+        Arena arena = Mock(Arena)
         ArenaModifier arenaModifier = new ArenaModifier(arena)
-        Collectable collectable = new HealthCollectable(Mock(Position),Mock(Ship))
-        arena.setActiveCollectable(collectable)
         when:
         arenaModifier.removeActiveCollectable()
         then:
-        arena.getActiveCollectable() == null
+        1 * arena.setActiveCollectable(null)
     }
 
     def "ResetShipMode"(){
@@ -124,9 +110,9 @@ class TestArenaModifier extends Specification{
         1 * ship.setShipMode(ShipMode.NORMAL_MODE)
     }
 
-    def "ResetAliensMode"(){
+    def "ResetAliensMode"() {
         given:
-        Arena arena = new Arena(75,30)
+        Arena arena = new Arena(75, 30)
         ArenaModifier arenaModifier = new ArenaModifier(arena)
         Alien alien = Mock(Alien)
         List<Alien> aliens = new ArrayList<>()
@@ -140,5 +126,25 @@ class TestArenaModifier extends Specification{
         arenaModifier.resetAliensMode()
         then:
         5 * alien.setAlienMode(AlienMode.NORMAL_MODE)
+    }
+
+    def "CreateAlienShip"() {
+        given:
+        Arena arena = new Arena(75, 30)
+        ArenaModifier arenaModifier = new ArenaModifier((arena))
+        when:
+        arenaModifier.createAlienShip()
+        then:
+        arena.getAlienShip() != null
+    }
+
+    def "RemoveAlienShip"() {
+        given:
+        def arena = Mock(Arena)
+        def arenaModifier = new ArenaModifier(arena)
+        when:
+        arenaModifier.removeAlienShip()
+        then:
+        1 * arena.setAlienShip(null)
     }
 }

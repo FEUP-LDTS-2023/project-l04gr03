@@ -123,8 +123,4 @@ public class ArenaBuilderByRound extends ArenaBuilder {
         return coverWalls;
     }
 
-    @Override
-    public AlienShip createAlienShip() {
-        return new AlienShip(new Position(-73,5),getBaseAlienHealth() * round, getBaseAlienScore() * round);
-    }
 }
