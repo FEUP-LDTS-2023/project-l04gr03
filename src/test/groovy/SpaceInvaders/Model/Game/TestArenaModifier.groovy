@@ -1,10 +1,15 @@
 package SpaceInvaders.Model.Game
 
+import SpaceInvaders.Model.Game.Collectables.Collectable
+import SpaceInvaders.Model.Game.Collectables.HealthCollectable
 import SpaceInvaders.Model.Game.RegularGameElements.Alien
+import SpaceInvaders.Model.Game.RegularGameElements.AlienMode
+import SpaceInvaders.Model.Game.RegularGameElements.AlienShip
 import SpaceInvaders.Model.Game.RegularGameElements.AlienState
 import SpaceInvaders.Model.Game.RegularGameElements.CoverWall
 import SpaceInvaders.Model.Game.RegularGameElements.Projectile
 import SpaceInvaders.Model.Game.RegularGameElements.Ship
+import SpaceInvaders.Model.Game.RegularGameElements.ShipMode
 import SpaceInvaders.Model.Position
 import spock.lang.Specification
 
@@ -81,5 +86,59 @@ class TestArenaModifier extends Specification{
         then:
         arena.getProjectiles().size() == 1
         arena.getProjectiles().get(0).getPosition().equals(new Position(35,26))
+    }
+
+    def "RemoveAlienShip"(){
+        given:
+        Arena arena = new Arena(75,30)
+        ArenaModifier arenaModifier = new ArenaModifier(arena)
+        AlienShip alienShip = new AlienShip(Mock(Position),200,500)
+        arena.setAlienShip(alienShip)
+        when:
+        arenaModifier.removeAlienShip()
+        then:
+        arena.getAlienShip() == null
+    }
+
+    def "RemoveActiveCollectable"(){
+        given:
+        Arena arena = new Arena(75,30)
+        ArenaModifier arenaModifier = new ArenaModifier(arena)
+        Collectable collectable = new HealthCollectable(Mock(Position),Mock(Ship))
+        arena.setActiveCollectable(collectable)
+        when:
+        arenaModifier.removeActiveCollectable()
+        then:
+        arena.getActiveCollectable() == null
+    }
+
+    def "ResetShipMode"(){
+        given:
+        Arena arena = new Arena(75,30)
+        ArenaModifier arenaModifier = new ArenaModifier(arena)
+        Ship ship = Mock(Ship)
+        arena.setShip(ship)
+        when:
+        arenaModifier.resetShipMode()
+        then:
+        1 * ship.setShipMode(ShipMode.NORMAL_MODE)
+    }
+
+    def "ResetAliensMode"(){
+        given:
+        Arena arena = new Arena(75,30)
+        ArenaModifier arenaModifier = new ArenaModifier(arena)
+        Alien alien = Mock(Alien)
+        List<Alien> aliens = new ArrayList<>()
+        arena.setAliens(aliens)
+        when:
+        aliens.add(alien)
+        aliens.add(alien)
+        aliens.add(alien)
+        aliens.add(alien)
+        aliens.add(alien)
+        arenaModifier.resetAliensMode()
+        then:
+        5 * alien.setAlienMode(AlienMode.NORMAL_MODE)
     }
 }
