@@ -182,11 +182,11 @@ public class ArenaController extends GameController {
         if(getModel().getShip().getHealth() == 0 || shipCollidesWithAlien() || alienCollidesWithCoverWall() || getModel().getAliens().isEmpty()){
             game.setState(GameStates.GAME_OVER);
         }
-        removeDestroyedElements();
-        checkCollisions();
         shipController.step(game,key,time);
         alienController.step(game,key,time);
         projectileController.step(game,key,time);
         collectableController.step(game,key,time);
+        checkCollisions();
+        removeDestroyedElements();
     }
 }
