@@ -17,21 +17,15 @@ public class Ship extends AttackingElement {
 
     @Override
     public int getDamagePerShot(){
-        switch(shipMode){
-            case NORMAL_MODE :
-                return super.getDamagePerShot();
-            case DAMAGE_2X:
-                return super.getDamagePerShot() * 2;
-            case DAMAGE_3X:
-                return super.getDamagePerShot() * 3;
-            case DAMAGE_4X:
-                return super.getDamagePerShot() * 4;
-            case DAMAGE_5X:
-                return super.getDamagePerShot() * 5;
-            case DAMAGE_10X:
-                return super.getDamagePerShot() * 10;
-        }
-        return super.getDamagePerShot();
+        return switch (shipMode) {
+            case NORMAL_MODE -> super.getDamagePerShot();
+            case DAMAGE_2X -> super.getDamagePerShot() * 2;
+            case DAMAGE_3X -> super.getDamagePerShot() * 3;
+            case DAMAGE_4X -> super.getDamagePerShot() * 4;
+            case DAMAGE_5X -> super.getDamagePerShot() * 5;
+            case DAMAGE_10X -> super.getDamagePerShot() * 10;
+            default -> super.getDamagePerShot();
+        };
     }
 
     @Override

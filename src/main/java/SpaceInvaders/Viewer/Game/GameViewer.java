@@ -1,15 +1,13 @@
 package SpaceInvaders.Viewer.Game;
 
+import SpaceInvaders.Controller.Game.AlienShipController;
 import SpaceInvaders.GUI.GUI;
 import SpaceInvaders.Model.Game.Collectables.*;
 import SpaceInvaders.Model.Game.Element;
 import SpaceInvaders.Model.Game.Arena;
 import SpaceInvaders.Model.Game.RegularGameElements.AlienMode;
 import SpaceInvaders.Model.Game.RegularGameElements.ShipMode;
-import SpaceInvaders.Viewer.Game.Collectables.GodModeCollectableViewer;
-import SpaceInvaders.Viewer.Game.Collectables.HealthCollectableViewer;
-import SpaceInvaders.Viewer.Game.Collectables.MachineGunCollectableViewer;
-import SpaceInvaders.Viewer.Game.Collectables.ScoreCollectableViewer;
+import SpaceInvaders.Viewer.Game.Collectables.*;
 import SpaceInvaders.Viewer.Game.RegularElements.*;
 import SpaceInvaders.Model.Position;
 import SpaceInvaders.Viewer.Viewer;
@@ -35,6 +33,7 @@ public class GameViewer extends Viewer<Arena> {
         drawElements(gui, getModel().getWalls(), new WallViewer());
         drawElement(gui, getModel().getShip(), new ShipViewer());
         drawElements(gui, getModel().getProjectiles(), new ProjectileViewer());
+        drawElement(gui,getModel().getAlienShip(),new AlienShipViewer());
         drawCollectable(gui, getModel().getActiveCollectable());
         gui.drawText(new Position(5,5), "SCORE = ", "#F8F8FF");
         gui.drawText(new Position(15,5), String.valueOf(getModel().getScore()),"#F8F8FF" );
@@ -75,7 +74,9 @@ public class GameViewer extends Viewer<Arena> {
     }
 
     private <T extends Element> void drawElement(GUI gui, T element, ElementViewer<T> viewer) {
-        viewer.draw(gui, element);
+        if(element != null) {
+            viewer.draw(gui, element);
+        }
     }
 
     private<T extends Element> void drawCollectable(GUI gui, T collectable){
@@ -91,6 +92,9 @@ public class GameViewer extends Viewer<Arena> {
 
             } else if (collectable.getClass() == ScoreCollectable.class) {
                 new ScoreCollectableViewer().draw(gui, (ScoreCollectable) collectable);
+            }
+            else if(collectable.getClass() == DamageCollectable.class) {
+                new DamageCollectableViewer().draw(gui, (DamageCollectable)  collectable);
             }
         }
     }

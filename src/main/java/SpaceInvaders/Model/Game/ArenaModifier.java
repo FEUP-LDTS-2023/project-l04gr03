@@ -5,8 +5,11 @@ import SpaceInvaders.Model.Game.Collectables.CollectableType;
 import SpaceInvaders.Model.Game.RegularGameElements.*;
 import SpaceInvaders.Model.Game.RegularGameElements.*;
 import SpaceInvaders.Model.Position;
-import java.util.*;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+import java.util.Random;
 
 public class ArenaModifier {
 
@@ -79,9 +82,6 @@ public class ArenaModifier {
 
     public void removeCoverWall(CoverWall coverWall){arena.getCoverWalls().remove(coverWall);}
 
-    public void removeAlienShip(){
-        arena.setAlienShip(null);
-    }
 
 
     public void removeActiveCollectable(){
@@ -91,4 +91,25 @@ public class ArenaModifier {
     public void addProjectile(Projectile projectile) {arena.getProjectiles().add(projectile);}
 
     public void removeProjectile(Projectile projectile) {arena.getProjectiles().remove(projectile);}
+
+    public void removeAlienShip(){
+        arena.setAlienShip(null);
+    }
+
+
+    public void createAlienShip() {
+        Random random = new Random();
+        List<Integer> movementOptions = new ArrayList<>(Arrays.asList(-1,1));
+        int movementChoiceIndex = random.nextInt(movementOptions.size());
+        int movement = movementOptions.get(movementChoiceIndex);
+        if(movement == -1){
+            AlienShip alienShip = new AlienShip(new Position(arena.getWidth() - 4, 8),50 , 500, movement);
+            arena.setAlienShip(alienShip);
+        }
+        else {
+            AlienShip alienShip = new AlienShip(new Position(4, 8),50 , 500, movement);
+            arena.setAlienShip(alienShip);
+        }
+    }
+
 }

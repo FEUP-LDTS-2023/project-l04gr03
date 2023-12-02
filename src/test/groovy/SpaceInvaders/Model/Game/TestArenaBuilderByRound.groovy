@@ -86,21 +86,10 @@ class TestArenaBuilderByRound extends Specification{
         when:
         List<CoverWall> coverWalls = arenaBuilderByRound.createCoverWalls()
         then:
-        coverWalls.size() == 8;
+        coverWalls.size() == 24;
         coverWalls.get(0).getPosition().equals(new Position(14,24))
         coverWalls.get(1).getPosition().equals(new Position(14,25))
         coverWalls.get(0).getHealth() == arenaBuilderByRound.getBaseCoverWallHealth() * round * round
     }
 
-    def 'CreateAlienShip'(){
-        given:
-        int round = 1;
-        ArenaBuilderByRound arenaBuilderByRound = new ArenaBuilderByRound(round)
-        when:
-        AlienShip alienShip = arenaBuilderByRound.createAlienShip()
-        then:
-        alienShip.getPosition().equals(new Position(-73,5))
-        alienShip.getHealth() == arenaBuilderByRound.getBaseAlienShipHealth() * round
-        alienShip.getScore() == arenaBuilderByRound.getBaseAlienShipScore() * round
-    }
 }

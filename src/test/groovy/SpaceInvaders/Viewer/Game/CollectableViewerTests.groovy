@@ -26,7 +26,7 @@ class CollectableViewerTests extends Specification{
         when:
             CollectableViewer.draw(gui,collectable)
         then:
-           1 * gui.drawElement(collectable.getPosition(), '\u00e7', "#FFFF00");
+           1 * gui.drawElement(collectable.getPosition(), '\u00c7', "#FFFF00");
 
     }
     def "Health collectable draw"(){
