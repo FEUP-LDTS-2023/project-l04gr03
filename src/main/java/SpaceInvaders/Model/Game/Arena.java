@@ -128,13 +128,18 @@ public class Arena {
 
     public List<Integer> getFreeArenaColumns(){
         List<Integer> columns = new ArrayList<>();
+        boolean isFree = true;
         for(int x = 0; x < width; x++){
             for(int y = 0; y < height; y++){
                 if(!freeArenaPosition(new Position(x,y))){
+                    isFree = false;
                     break;
                 }
+                isFree = true;
             }
-            columns.add(x);
+            if(isFree){
+                columns.add(x);
+            }
         }
         return columns;
     }

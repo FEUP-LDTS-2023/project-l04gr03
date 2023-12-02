@@ -98,3 +98,9 @@ Unknown 2440
 Unknown 1240
 Unknown 2800
 Unknown 2440
+Unknown 3060
+Unknown 4100
+Unknown 3080
+Unknown 6380
+FRANC 3080
+Unknown 2720
