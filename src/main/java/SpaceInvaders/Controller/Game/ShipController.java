@@ -24,7 +24,7 @@ public class ShipController extends GameController {
     }
 
     public boolean canMoveShip(Position position){
-        return position.getX() >= 0 && position.getX() < getModel().getWidth() && position.getY() >= 0 && position.getY() < getModel().getHeight();
+        return position.getX() > 0 && position.getX() < getModel().getWidth() - 1 && position.getY() > 0 && position.getY() < getModel().getHeight() - 1;
     }
 
     public void moveLeft(){

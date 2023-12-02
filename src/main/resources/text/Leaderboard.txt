@@ -33,3 +33,5 @@ Unknown 3500
 Unknown 2000
 NOOB 1220
 Unknown 1280
+Unknown 1360
+Unknown 2160
