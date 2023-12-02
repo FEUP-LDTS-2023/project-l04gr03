@@ -3,6 +3,7 @@ package SpaceInvaders.Controller.Game;
 import SpaceInvaders.Game;
 import SpaceInvaders.Model.Game.Arena;
 import SpaceInvaders.Model.Game.ArenaModifier;
+import SpaceInvaders.Model.Game.Collectables.Collectable;
 import SpaceInvaders.Model.Game.Element;
 import SpaceInvaders.Model.Game.RegularGameElements.*;
 import SpaceInvaders.State.GameStates;
@@ -32,6 +33,7 @@ public class ArenaController extends GameController {
         this.alienController = new AlienController(arena);
         this.projectileController = new ProjectileController(arena);
         this.arenaModifier = new ArenaModifier(arena);
+        this.collectableController = new CollectableController(arena);
         this.alienShipController = new AlienShipController(arena);
     }
 
@@ -135,6 +137,29 @@ public class ArenaController extends GameController {
         }
     }
 
+    public void shipCollisionsWithCollectables(){
+        Ship ship = getModel().getShip();
+        Collectable collectable = getModel().getActiveCollectable();
+        if(collectable != null){
+            if(collisionBetween(ship, collectable)){
+                getModel().getActiveCollectable().execute();
+                getArenaModifier().removeActiveCollectable();
+            }
+        }
+    }
+
+    public void collectableCollisionsWithWalls(){
+        List<Wall> walls = getModel().getWalls();
+        Collectable collectable = getModel().getActiveCollectable();
+        if(collectable != null){
+            for(Wall wall : walls){
+                if(collisionBetween(wall,collectable)){
+                    getModel().setActiveCollectable(null);
+                }
+            }
+        }
+    }
+
     public void coverWallHitByProjectile(CoverWall coverWall, Projectile projectile){
         coverWall.decreaseHealth(projectile.getElement().getDamagePerShot());
     }
@@ -158,6 +183,8 @@ public class ArenaController extends GameController {
         projectileCollisionsWithWalls();
         projectileCollisionsWithShip();
         projectileCollisionsWithAliens();
+        shipCollisionsWithCollectables();
+        collectableCollisionsWithWalls();
         projectileCollisionsWithCoverWalls();
         projectileCollisionWithAlienShip();
     }
@@ -177,6 +204,7 @@ public class ArenaController extends GameController {
         shipController.step(game,key,time);
         alienController.step(game,key,time);
         projectileController.step(game,key,time);
+        collectableController.step(game,key,time);
         alienShipController.step(game, key, time);
     }
 }

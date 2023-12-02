@@ -5,10 +5,9 @@ import SpaceInvaders.GUI.GUI;
 import SpaceInvaders.Model.Game.Collectables.*;
 import SpaceInvaders.Model.Game.Element;
 import SpaceInvaders.Model.Game.Arena;
-import SpaceInvaders.Viewer.Game.Collectables.GodModeCollectableViewer;
-import SpaceInvaders.Viewer.Game.Collectables.HealthCollectableViewer;
-import SpaceInvaders.Viewer.Game.Collectables.MachineGunCollectableViewer;
-import SpaceInvaders.Viewer.Game.Collectables.ScoreCollectableViewer;
+import SpaceInvaders.Model.Game.RegularGameElements.AlienMode;
+import SpaceInvaders.Model.Game.RegularGameElements.ShipMode;
+import SpaceInvaders.Viewer.Game.Collectables.*;
 import SpaceInvaders.Viewer.Game.RegularElements.*;
 import SpaceInvaders.Model.Position;
 import SpaceInvaders.Viewer.Viewer;
@@ -35,11 +34,19 @@ public class GameViewer extends Viewer<Arena> {
         drawElement(gui, getModel().getShip(), new ShipViewer());
         drawElements(gui, getModel().getProjectiles(), new ProjectileViewer());
         drawElement(gui,getModel().getAlienShip(),new AlienShipViewer());
-        drawCollectable(gui, getModel().getCollectable());
+        drawCollectable(gui, getModel().getActiveCollectable());
         gui.drawText(new Position(5,5), "SCORE = ", "#F8F8FF");
         gui.drawText(new Position(15,5), String.valueOf(getModel().getScore()),"#F8F8FF" );
         gui.drawText(new Position(55,5), "HEALTH = ", "#F8F8FF");
         gui.drawText(new Position(65,5), String.valueOf(getModel().getShip().getHealth()),"#F8F8FF" );
+        if(getModel().getShip().getShipMode() != ShipMode.NORMAL_MODE){
+            gui.drawText(new Position(55,8), String.valueOf(getModel().getShip().getShipMode()),"#F8F8FF");
+        }
+        if(!getModel().getAliens().isEmpty()){
+            if(getModel().getAliens().get(0).getAlienMode() != AlienMode.NORMAL_MODE){
+                gui.drawText(new Position(55,10), String.valueOf(getModel().getAliens().get(0).getAlienMode()),"#F8F8FF");
+            }
+        }
     }
 
     private void ChangeChar(long time){
@@ -85,6 +92,9 @@ public class GameViewer extends Viewer<Arena> {
 
             } else if (collectable.getClass() == ScoreCollectable.class) {
                 new ScoreCollectableViewer().draw(gui, (ScoreCollectable) collectable);
+            }
+            else if(collectable.getClass() == DamageCollectable.class) {
+                new DamageCollectableViewer().draw(gui, (DamageCollectable)  collectable);
             }
         }
     }
