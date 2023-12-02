@@ -31,7 +31,7 @@ public class AlienController extends GameController {
             case LEFT:
                return alien.getPosition().getX() - 3 > 0;
             case RIGHT:
-                return alien.getPosition().getX() + 3 < getModel().getWidth();
+                return alien.getPosition().getX() + 3 < getModel().getWidth() - 1;
             case DOWN:
                 return true;
         }
