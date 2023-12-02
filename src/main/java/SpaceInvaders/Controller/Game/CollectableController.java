@@ -40,7 +40,7 @@ public class CollectableController extends GameController {
 
     @Override
     public void step(Game game, KeyStroke key, long time) throws IOException {
-        if(time - generateCollectorTime > 30000){
+        if(time - generateCollectorTime > 20000){
             generateCollectable();
             generateCollectorTime = time;
         }
@@ -49,7 +49,7 @@ public class CollectableController extends GameController {
             movementTime = time;
         }
         if(!getModel().getAliens().isEmpty()){
-            if((getModel().getShip().getShipMode() != ShipMode.NORMAL_MODE || getModel().getAliens().get(0).getAlienMode() != AlienMode.NORMAL_MODE) && time - generateCollectorTime > 15000){
+            if((getModel().getShip().getShipMode() != ShipMode.NORMAL_MODE || getModel().getAliens().get(0).getAlienMode() != AlienMode.NORMAL_MODE) && time - generateCollectorTime > 19900){
                 endCollectableEffect();
             }
         }
