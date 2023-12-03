@@ -1,7 +1,12 @@
 package SpaceInvaders.State
 
+import SpaceInvaders.Controller.Controller
+import SpaceInvaders.Controller.Menu.StartMenuController
 import SpaceInvaders.GUI.GUI
 import SpaceInvaders.Game
+import SpaceInvaders.Model.Game.Arena
+import SpaceInvaders.Model.Menu.StartMenu
+import SpaceInvaders.Viewer.Menu.StartMenuViewer
 import spock.lang.Specification
 
 class StateTests extends Specification{
@@ -28,7 +33,7 @@ class StateTests extends Specification{
 
     def "Update to Previous"(){
         given:
-            State state = State.getInstance();
+            def state = State.getInstance()
         when:
             state.UpdateState(GameStates.GAME)
             state.UpdateToPrevious()
@@ -39,15 +44,24 @@ class StateTests extends Specification{
     }
 
 
+
+
     def "State Step"(){
         given:
         GUI gui = Mock(GUI.class)
-        Game game = Mock(Game)
-        State stateMock = Mock(State)
+        Game game = Mock(Game.class)
+        State stateMock = Mock(State.class)
         when: 'State mocked'
         stateMock.step(gui,game,0)
         then:
         1 * stateMock.step(_,_,_)
+    }
+
+    def "Get arena"(){
+        given:
+            def state = State.getInstance()
+        expect:
+            state.getArena().getClass() == Arena.class
     }
 
 }
