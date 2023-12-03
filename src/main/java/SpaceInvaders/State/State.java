@@ -93,6 +93,7 @@ public class State {
         viewer.draw(gui, time);
     }
 
+    @DoNotMutate
     public void StateActions () throws IOException {
 
         switch (currentState){

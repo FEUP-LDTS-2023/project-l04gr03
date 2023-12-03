@@ -10,6 +10,7 @@ import java.util.List;
 public abstract class OnlyTextMenu {
     protected List<String> text;
 
+
     public OnlyTextMenu(String filename) throws IOException {
         this.text = readFile(filename);
     }
