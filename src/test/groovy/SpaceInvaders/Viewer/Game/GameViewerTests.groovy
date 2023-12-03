@@ -8,12 +8,14 @@ import spock.lang.Specification
 class GameViewerTests extends Specification{
     def "Draw Elements"(){
         given:
-            def gameViewerMocked = Mock(GameViewer)
+            def gameViewerSpy = Spy(GameViewer)
             def gui = Mock(GUI)
+            def arena = Mock(Arena)
+            gameViewerSpy.
         when:
-            gameViewerMocked.drawElements(gui,0)
+            gameViewerSpy.drawElements(gui,0)
         then:
-            1 * gameViewerMocked.drawElements(_,_)
+            1 * gameViewerSpy.drawElements(_,_)
     }
 
     def "Draw Elements test char choice when time equals zero"(){
@@ -50,6 +52,7 @@ class GameViewerTests extends Specification{
             gameViewer.getAlienCharChoice() == 0
             gameViewer.getLastCharChange() == 602
     }
+
 
 
 }
