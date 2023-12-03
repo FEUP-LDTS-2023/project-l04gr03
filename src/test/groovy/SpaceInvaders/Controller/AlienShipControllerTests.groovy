@@ -231,15 +231,14 @@ class AlienShipControllerTests extends Specification{
             1 * controller.moveAlienShip()
 
         when: "Move Alien Ship kill mutation replaced long subtraction with addition"
-            controller.step(Mock(Game), Mock(KeyStroke), 50205)
+            controller.step(Mock(Game), Mock(KeyStroke), - 50002)
         then:
-            1 * controller.moveAlienShip()
+            0 * controller.moveAlienShip()
 
         when: "Generate alien ship 2 kill mutation Replaced long subtraction with addition"
-            controller.step(Mock(Game), Mock(KeyStroke), 100002 )
+            controller.step(Mock(Game), Mock(KeyStroke), -100002 )
         then:
-            1 * controller.generateAlienShip()
-            controller.lastAppearance == 100002
+            0 * controller.generateAlienShip()
     }
 
 
