@@ -3,20 +3,47 @@ package SpaceInvaders.Viewer.Game
 import SpaceInvaders.GUI.GUI
 import SpaceInvaders.Model.Game.Arena
 import SpaceInvaders.Model.Game.ArenaBuilderByRound
+import SpaceInvaders.Model.Game.Collectables.Collectable
+import SpaceInvaders.Model.Game.Collectables.DamageCollectable
+import SpaceInvaders.Model.Game.Collectables.GodModeCollectable
+import SpaceInvaders.Model.Game.Collectables.HealthCollectable
+import SpaceInvaders.Model.Game.Collectables.MachineGunModeCollectable
+import SpaceInvaders.Model.Game.Collectables.ScoreCollectable
+import SpaceInvaders.Model.Game.RegularGameElements.Alien
+import SpaceInvaders.Model.Game.RegularGameElements.AlienMode
+import SpaceInvaders.Model.Game.RegularGameElements.AlienShip
+import SpaceInvaders.Model.Game.RegularGameElements.CoverWall
+import SpaceInvaders.Model.Game.RegularGameElements.Projectile
+import SpaceInvaders.Model.Game.RegularGameElements.Ship
+import SpaceInvaders.Model.Game.RegularGameElements.ShipMode
+import SpaceInvaders.Model.Game.RegularGameElements.Wall
+import SpaceInvaders.Viewer.Game.Collectables.GodModeCollectableViewer
 import spock.lang.Specification
 
 class GameViewerTests extends Specification{
     def "Draw Elements"(){
         given:
+
             def gameViewerSpy = Spy(GameViewer)
             def gui = Mock(GUI)
             def arena = Mock(Arena)
-            gameViewerSpy.
+            gameViewerSpy.getModel() >> arena
+            arena.getShip() >> Mock(Ship)
+            arena.getWalls() >> Arrays.asList(Mock(Wall))
+            arena.getProjectiles() >> Arrays.asList(Mock(Projectile))
+            arena.getCoverWalls() >> Arrays.asList(Mock( CoverWall))
+            arena.getAliens() >> Arrays.asList((Mock(Alien)))
+            arena.getActiveCollectable() >> Mock(Collectable)
+            arena.getAlienShip() >> Mock(AlienShip)
+
         when:
             gameViewerSpy.drawElements(gui,0)
+
         then:
-            1 * gameViewerSpy.drawElements(_,_)
+            6 * gui.drawElement(_,_,_)
+            6 * gui.drawText(_,_,_)
     }
+
 
     def "Draw Elements test char choice when time equals zero"(){
         given:
