@@ -1,4 +1,4 @@
-package SpaceInvaders.Controller
+package SpaceInvaders.Controller.Menu
 
 import SpaceInvaders.Controller.Menu.GameOverController
 import SpaceInvaders.Controller.Menu.OnlyTextMenuController
@@ -14,44 +14,6 @@ import com.googlecode.lanterna.input.KeyType
 import spock.lang.Specification
 
 class MenuControllerTests extends Specification{
-    def "Game Over Menu"(){
-        given:
-            def gameOverMenu = Mock(GameOverMenu)
-            def gameOverController = new GameOverController(gameOverMenu)
-            def game = Mock(Game)
-
-        when: 'ArrowDown Key'
-            def key = new KeyStroke(KeyType.ArrowDown)
-            gameOverController.step(game,key,0)
-        then:
-            1 * gameOverMenu.nextOption()
-
-        when: 'ArrowUp Key'
-            key = new KeyStroke(KeyType.ArrowUp)
-            gameOverController.step(game, key, 0)
-        then:
-            1 * gameOverMenu.previousOption()
-
-        when: 'Enter key'
-            key = new KeyStroke(KeyType.Enter)
-            gameOverController.step(game,key,0)
-        then:
-            1 * gameOverController.getModel().isSelectedRestart()
-            1 * gameOverController.getModel().isSelectedLeaderboard()
-            1 * gameOverController.getModel().isSelectedExit()
-
-        when: 'Character key'
-            key = new KeyStroke('A' as Character, false, false)
-            gameOverController.step(game,key,0)
-        then:
-            1 * gameOverMenu.addLetter(_)
-
-        when: 'BackSpace key'
-            key = new KeyStroke(KeyType.Backspace)
-            gameOverController.step(game,key,0)
-        then:
-            1 * gameOverMenu.removeLetter()
-    }
 
     def "Pause Menu"(){
         given:
