@@ -36,12 +36,14 @@ class OnlyTextMenuViewerTests extends Specification{
 
     def "Draw FileText"(){
         given:
-        def OnlyTextMenuViewer = Mock(OnlyTextMenuViewer)
-        def gui = Mock(GUI)
+            def OnlyTextMenuViewer = Spy(InstructionsViewer)
+            def gui = Mock(GUI)
+            OnlyTextMenuViewer.getModel() >> new Instructions()
         when:
-        OnlyTextMenuViewer.drawFileText(gui)
+            OnlyTextMenuViewer.drawFileText(gui)
         then:
-        1 * OnlyTextMenuViewer.drawFileText(gui)
+            1 * OnlyTextMenuViewer.drawFileText(gui)
+            19 * gui.drawText(_,_,_)
     }
 
     def "Draw Menu Title"(){
@@ -54,4 +56,13 @@ class OnlyTextMenuViewerTests extends Specification{
         then:
         1 * OnlyTextMenuViewer.drawMenuTitle(_,_,_,_)
     }
+
+    def "reference_x and reference_y"(){
+        given:
+            def menu = new LeaderboardViewer(Mock(Leaderboard))
+        expect:
+            menu.getReference_x() == 5
+            menu.getReference_y() == 3
+    }
+
 }
