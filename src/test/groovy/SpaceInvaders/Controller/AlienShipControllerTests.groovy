@@ -70,7 +70,7 @@ class AlienShipControllerTests extends Specification{
             controller.canMoveAlienShip() == true
     }
 
-    def "Can move alien ship wrong position x+2 > arena width "() {
+    def "Can move alien ship wrong position x-1 < 0  "() {
         given:
             def controller = Spy(AlienShipController.class)
             def arena = Mock(Arena.class)
@@ -83,7 +83,7 @@ class AlienShipControllerTests extends Specification{
             controller.canMoveAlienShip() == false
     }
 
-    def "Can move alien ship wrong position x-1 < 0 "(){
+    def "Can move alien ship wrong position x+2 > arena.width() "(){
         given:
             def controller = Spy(AlienShipController.class)
             def arena = Mock(Arena.class)
@@ -94,6 +94,32 @@ class AlienShipControllerTests extends Specification{
             arena.getAlienShip() >> alienShip
         then:
             controller.canMoveAlienShip() == false
+    }
+
+    def "Can move alien ship wrong position x-1 < 0 "(){
+        given:
+        def controller = Spy(AlienShipController.class)
+        def arena = Mock(Arena.class)
+        controller.getModel() >> arena
+        arena.getWidth() >> 74
+        when:
+        def alienShip = new AlienShip(new Position(0, 10), 100, 100, 1)
+        arena.getAlienShip() >> alienShip
+        then:
+        controller.canMoveAlienShip() == false
+    }
+
+    def "Can move alien ship wrong position x + 2 > arena.width() "(){
+        given:
+        def controller = Spy(AlienShipController.class)
+        def arena = Mock(Arena.class)
+        controller.getModel() >> arena
+        arena.getWidth() >> 74
+        when:
+        def alienShip = new AlienShip(new Position(74, 10), 100, 100, 1)
+        arena.getAlienShip() >> alienShip
+        then:
+        controller.canMoveAlienShip() == false
     }
 
     def "remove alien ship - ship not null and is destroyed"(){
@@ -203,6 +229,17 @@ class AlienShipControllerTests extends Specification{
             controller.step(Mock(Game), Mock(KeyStroke), 50002)
         then:
             1 * controller.moveAlienShip()
+
+        when: "Move Alien Ship kill mutation replaced long subtraction with addition"
+            controller.step(Mock(Game), Mock(KeyStroke), 50205)
+        then:
+            1 * controller.moveAlienShip()
+
+        when: "Generate alien ship 2 kill mutation Replaced long subtraction with addition"
+            controller.step(Mock(Game), Mock(KeyStroke), 100002 )
+        then:
+            1 * controller.generateAlienShip()
+            controller.lastAppearance == 100002
     }
 
 
