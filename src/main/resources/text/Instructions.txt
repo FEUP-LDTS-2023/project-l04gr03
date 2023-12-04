@@ -1,19 +1,28 @@
-The goal of the game is to kill all the aliens and
- stop the invasion.
+The goal is to kill the aliens and avoid they reach you or the cover
+walls.You control a ship that shoot lasers. Randomly, an alien ship
+may appear.
 
-Use the LEFT and RIGHT ARROW KEYS to control
-the ship. Use the UP ARROW KEY to shoot. Use
-the UP and DOWN ARROW KEYS to change the
-different menu options and press the ENTER KEY
-to select the option. Use the ESCAPE KEY when
-you want to pause the game or exit the LEADERBOARD
-and INSTRUCTIONS menus.
+How to Play:
+
+Game:
+Use the LEFT and RIGHT ARROW KEYS to control the ship.
+Use the UP ARROW KEY to shoot. Use the ESCAPE KEY when you want
+to pause the game
+
+Menus:
+Use the UP and DOWN ARROW KEYS to change the different menu options
+and press the ENTER KEY to select the option. Use the ESCAPE KEY when
+you want to pause the game or exit the LEADERBOARD and INSTRUCTIONS
+menus.
 
 Punctuations:
+- Aliens: 20 * round number
+- Alien Ship : 500 * round number
 
-- Aliens shot: 20 * round number
-
-AliensShip ( Feature not implemented )
-
-Collectables ( Feature not implemented )
+Collectables:
+- GodMode (star symbol): your ship doesn't lose health
+- Health (hearth symbol): refiles your ship's health
+- Machine Gun (lightning symbol): Bigger rate of shoots for you ship
+- Score (dollar symbol): gives a multiplier for the points you receive
+- Damage (flame symbol): multiplier for your ship's damage
 

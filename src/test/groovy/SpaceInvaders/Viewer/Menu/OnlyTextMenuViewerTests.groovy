@@ -43,7 +43,7 @@ class OnlyTextMenuViewerTests extends Specification{
             OnlyTextMenuViewer.drawFileText(gui)
         then:
             1 * OnlyTextMenuViewer.drawFileText(gui)
-            19 * gui.drawText(_,_,_)
+            28 * gui.drawText(_,_,_)
     }
 
     def "Draw Menu Title"(){
