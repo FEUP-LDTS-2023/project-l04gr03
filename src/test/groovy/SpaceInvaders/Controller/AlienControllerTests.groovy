@@ -1,6 +1,7 @@
 package SpaceInvaders.Controller
 
 import SpaceInvaders.Controller.Game.AlienController
+import SpaceInvaders.Controller.Game.MovementDirection
 import SpaceInvaders.Game
 import SpaceInvaders.Model.Game.Arena
 import SpaceInvaders.Model.Game.ArenaModifier
@@ -71,6 +72,49 @@ class AlienControllerTests extends Specification {
         then:
         !alienController.canMoveAliens()
     }
+
+    def "MoveAlien - Move Left"(){
+        given:
+        def alienController = Spy(AlienController.class)
+        def arena = Mock(Arena.class)
+        def alien = Mock(Alien.class)
+        alienController.getModel() >> arena
+        alienController.getMovementDirection() >> MovementDirection.LEFT
+        alien.getPosition() >> new Position(50,10)
+        when:
+        alienController.moveAlien(alien)
+        then:
+        1 * alien.setPosition(new Position(49,10))
+    }
+
+    def "MoveAlien - Move Right"(){
+        given:
+        def alienController = Spy(AlienController.class)
+        def arena = Mock(Arena.class)
+        def alien = Mock(Alien.class)
+        alienController.getModel() >> arena
+        alienController.getMovementDirection() >> MovementDirection.RIGHT
+        alien.getPosition() >> new Position(10,14)
+        when:
+        alienController.moveAlien(alien)
+        then:
+        1 * alien.setPosition(new Position(11,14))
+    }
+
+    def "MoveAlien - Move Down"(){
+        given:
+        def alienController = Spy(AlienController.class)
+        def arena = Mock(Arena.class)
+        def alien = Mock(Alien.class)
+        alienController.getModel() >> arena
+        alienController.getMovementDirection() >> MovementDirection.DOWN
+        alien.getPosition() >> new Position(45,16)
+        when:
+        alienController.moveAlien(alien)
+        then:
+        1 * alien.setPosition(new Position(45,17))
+    }
+
 
     def "MoveAliens"(){
         given:
