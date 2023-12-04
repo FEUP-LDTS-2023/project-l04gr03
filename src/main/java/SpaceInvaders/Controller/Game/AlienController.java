@@ -15,16 +15,18 @@ public class AlienController extends GameController {
 
     private MovementDirection movementDirection;
 
-    private long lastMovimentTime;
+    private long lastMovementTime;
 
     private long lastShotTime;
 
     public AlienController(Arena arena) {
         super(arena);
         this.movementDirection = MovementDirection.RIGHT;
-        this.lastMovimentTime = 0;
+        this.lastMovementTime = 0;
         this.lastShotTime = 0;
     }
+
+    public MovementDirection getMovementDirection() {return movementDirection;}
 
     public boolean canMoveAlien(Alien alien) {
         switch (movementDirection) {
@@ -117,10 +119,10 @@ public class AlienController extends GameController {
             shootProjectile();
             lastShotTime = time;
         }
-        if(time - lastMovimentTime > 300){
+        if(time - lastMovementTime > 300){
             updateMovementDirection();
             moveAliens();
-            lastMovimentTime = time;
+            lastMovementTime = time;
         }
     }
 }

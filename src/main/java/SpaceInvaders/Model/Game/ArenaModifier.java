@@ -19,7 +19,6 @@ public class ArenaModifier {
         this.arena = arena;
     }
 
-
     public void resetShipMode(){
         arena.getShip().setShipMode(ShipMode.NORMAL_MODE);
     }
@@ -54,7 +53,6 @@ public class ArenaModifier {
         int multiplier = collectableMultiplier.get(randomCollectableMultiplierIndex);
         CollectableFactory<Ship> collectableFactory = new CollectableFactory<>(position,collectableType,multiplier,arena.getShip());
         arena.setActiveCollectable(collectableFactory.createCollectable());
-
     }
 
 
