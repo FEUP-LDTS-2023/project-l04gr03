@@ -3,7 +3,6 @@ package SpaceInvaders;
 
 import SpaceInvaders.GUI.GUI;
 import SpaceInvaders.GUI.GUILanterna;
-import SpaceInvaders.Model.Position;
 import SpaceInvaders.State.GameStates;
 import SpaceInvaders.State.State;
 
@@ -19,21 +18,15 @@ public class Game {
 
     private GUI gui;
 
-    private int score;
 
-    private final long launchTime;
 
     private Game() throws IOException, URISyntaxException, FontFormatException {
-        Screen screen = null;
         this.gui = new GUILanterna(74,30);
         this.state = State.getInstance();
-        this.score = 0;
-        this.launchTime = System.currentTimeMillis();
     }
 
     public State getState() {return state;}
 
-    public long getLaunchTime() {return launchTime;}
 
     public void setState(GameStates gameStates) throws IOException {state.UpdateState(gameStates);}
 
