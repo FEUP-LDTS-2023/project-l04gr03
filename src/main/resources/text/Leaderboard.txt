@@ -103,3 +103,8 @@ Unknown 4100
 Unknown 3080
 Unknown 6380
 FRANC 3080
+Unknown 1660
+R 0
+Unknown 0
+R 0
+Unknown 0
