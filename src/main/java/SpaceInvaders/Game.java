@@ -10,7 +10,6 @@ import java.awt.*;
 import java.io.IOException;
 import java.net.URISyntaxException;
 
-import com.googlecode.lanterna.screen.Screen;
 
 public class Game {
 
