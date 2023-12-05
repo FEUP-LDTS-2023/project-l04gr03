@@ -103,3 +103,10 @@ Unknown 4100
 Unknown 3080
 Unknown 6380
 FRANC 3080
+Unknown 4920
+Unknown 2000
+Unknown 1280
+Unknown 4220
+Unknown 2200
+Unknown 3880
+Unknown 4120

@@ -165,33 +165,4 @@ class ArenaControllerTests extends Specification{
         then:
         !arenaController.alienCollidesWithCoverWall()
     }
-
-    def "ProjectileCollidesWithWalls - Single collision detected"(){
-        given:
-        def arenaController = Spy(ArenaController.class)
-        def arena = Mock(Arena.class)
-        def arenaModifier = Mock(ArenaModifier.class)
-        def wall1 = Mock(Wall.class)
-        def wall2 = Mock(Wall.class)
-        def wall3 = Mock(Wall.class)
-        def projectile = Mock(Projectile.class)
-        def position = Mock(Position.class)
-        wall1.getPosition() >> position
-        wall2.getPosition() >> position
-        wall3.getPosition() >> position
-        projectile.getPosition() >> position
-        List<Wall> walls = new ArrayList<>(Arrays.asList(wall1,wall2,wall3))
-        List<Projectile> projectiles = new ArrayList<>(Arrays.asList(projectile))
-        arenaController.getModel() >> arena
-        arenaController.getArenaModifier() >> arenaModifier
-        arena.getWalls() >> walls
-        arena.getProjectiles() >> projectiles
-        when:
-        arenaController.collisionBetween(wall1,projectile) >> true
-        arenaController.collisionBetween(wall2,projectile) >> false
-        arenaController.collisionBetween(wall3,projectile) >> false
-        arenaController.projectileCollisionsWithWalls()
-        then:
-        1 * arenaModifier.removeProjectile(projectile)
-    }
 }

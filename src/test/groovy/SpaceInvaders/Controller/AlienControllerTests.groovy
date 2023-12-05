@@ -14,6 +14,75 @@ import spock.lang.Specification
 
 class AlienControllerTests extends Specification {
 
+    def "CanMoveAlien - True Case Left"(){
+        given:
+        def alienController = Spy(AlienController.class)
+        def arena = Mock(Arena.class)
+        def alien = Mock(Alien.class)
+        alienController.getModel() >> arena
+        arena.getWidth() >> 74
+        when:
+        alienController.getMovementDirection() >> MovementDirection.LEFT
+        alien.getPosition() >> new Position(15,10)
+        then:
+        alienController.canMoveAlien(alien)
+    }
+
+    def "CanMoveAlien - False Case Left"(){
+        given:
+        def alienController = Spy(AlienController.class)
+        def arena = Mock(Arena.class)
+        def alien = Mock(Alien.class)
+        alienController.getModel() >> arena
+        arena.getWidth() >> 74
+        when:
+        alienController.getMovementDirection() >> MovementDirection.LEFT
+        alien.getPosition() >> new Position(3,14)
+        then:
+        !alienController.canMoveAlien(alien)
+    }
+
+    def "CanMoveAlien - True Case Right"(){
+        given:
+        def alienController = Spy(AlienController.class)
+        def arena = Mock(Arena.class)
+        def alien = Mock(Alien.class)
+        alienController.getModel() >> arena
+        arena.getWidth() >> 74
+        when:
+        alienController.getMovementDirection() >> MovementDirection.RIGHT
+        alien.getPosition() >> new Position(57,16)
+        then:
+        alienController.canMoveAlien(alien)
+    }
+
+    def "CanMoveAlien - False Case Right"(){
+        given:
+        def alienController = Spy(AlienController.class)
+        def arena = Mock(Arena.class)
+        def alien = Mock(Alien.class)
+        alienController.getModel() >> arena
+        arena.getWidth() >> 74
+        when:
+        alienController.getMovementDirection() >> MovementDirection.RIGHT
+        alien.getPosition() >> new Position(71,12)
+        then:
+        !alienController.canMoveAlien(alien)
+    }
+
+    def "CanMoveAlien - Case Down"(){
+        given:
+        def alienController = Spy(AlienController.class)
+        def arena = Mock(Arena.class)
+        def alien = Mock(Alien.class)
+        alienController.getModel() >> arena
+        when:
+        alienController.getMovementDirection() >> MovementDirection.DOWN
+        then:
+        alienController.canMoveAlien(alien)
+    }
+
+
     def "CanMoveAliens - True"(){
         def alienController = Spy(AlienController.class)
         def arena = Mock(Arena.class)
