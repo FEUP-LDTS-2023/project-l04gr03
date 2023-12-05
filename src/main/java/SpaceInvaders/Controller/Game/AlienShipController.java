@@ -10,6 +10,8 @@ import com.googlecode.lanterna.input.KeyStroke;
 
 import java.io.IOException;
 
+import static SpaceInvaders.Controller.Sound.SoundManager.playExplosionSound;
+
 
 public class AlienShipController extends GameController{
     long lastAppearance;
@@ -43,6 +45,7 @@ public class AlienShipController extends GameController{
         if(getModel().getAlienShip() != null) {
             if (getModel().getAlienShip().isDestroyed()) {
                 getArenaModifier().removeAlienShip();
+                playExplosionSound();
             }
         }
     }
