@@ -14,6 +14,8 @@ import com.googlecode.lanterna.input.KeyType;
 
 import java.io.IOException;
 
+import static SpaceInvaders.Controller.Sound.SoundManager.playShootingSound;
+
 public class ShipController extends GameController {
 
     private long inputTime;
@@ -49,6 +51,7 @@ public class ShipController extends GameController {
         Position projectilePosition = new Position(ship.getPosition().getX(),ship.getPosition().getY());
         Projectile projectile = new Projectile(projectilePosition, ship);
         arenaModifier.addProjectile(projectile);
+        playShootingSound();
     }
 
     public void hitByProjectile(Projectile projectile){
