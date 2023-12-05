@@ -12,16 +12,16 @@ public class SoundManager {
     private static Clip backgroundMusicClip;
     static {
         try {
-            AudioInputStream shootingInputStream = AudioSystem.getAudioInputStream(new File("shoot.wav"));
+            AudioInputStream shootingInputStream = AudioSystem.getAudioInputStream(new File("src/resources/sounds/shoot.wav"));
             shootClip = AudioSystem.getClip();
             shootClip.open(shootingInputStream);
-            AudioInputStream explosionInputStream = AudioSystem.getAudioInputStream(new File("invadedkiller.wav"));
+            AudioInputStream explosionInputStream = AudioSystem.getAudioInputStream(new File("src/resources/sounds/invaderkilled.wav"));
             dyingSoundClip = AudioSystem.getClip();
             dyingSoundClip.open(explosionInputStream);
-            AudioInputStream switchOptionInputStream = AudioSystem.getAudioInputStream(new File("light-switch-156813.mp3"));
+            AudioInputStream switchOptionInputStream = AudioSystem.getAudioInputStream(new File("src/resources/sounds/light-switch-156813.mp3"));
             switchOptionClip = AudioSystem.getClip();
             switchOptionClip.open(switchOptionInputStream);
-            AudioInputStream backgroundMusicInputStream = AudioSystem.getAudioInputStream(new File("spaceinvaders1.mpeg"));
+            AudioInputStream backgroundMusicInputStream = AudioSystem.getAudioInputStream(new File("src/resources/sounds/spaceinvaders1.mpeg"));
             backgroundMusicClip = AudioSystem.getClip();
             backgroundMusicClip.open(backgroundMusicInputStream);
             backgroundMusicClip.loop(Clip.LOOP_CONTINUOUSLY);
