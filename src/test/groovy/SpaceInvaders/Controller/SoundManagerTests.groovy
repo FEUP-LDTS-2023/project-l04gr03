@@ -1,32 +1,49 @@
 package SpaceInvaders.Controller
 
-import org.junit.jupiter.api.Test
+import org.junit.jupiter.api.Test;
 
 import javax.sound.sampled.Clip;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-class SoundManagerTest {
+class SoundManagerTests {
 
     @Test
-    void playShootingSound_shouldPlayShootClip() {
+    void shouldLoadClipSuccessfully() {
+        assertDoesNotThrow(() -> SoundManager.loadClip("src/resources/sounds/shoot.wav"));
+    }
+
+    @Test
+    void shouldLoadLoopClipSuccessfully() {
+        assertDoesNotThrow(() -> SoundManager.loadLoopClip("src/resources/sounds/spaceinvaders1.mpeg"));
+    }
+
+    @Test
+    void shouldPlayShootClip() {
         resetClipPosition(SoundManager.getShootClip());
         SoundManager.playShootingSound();
         assertTrue(SoundManager.getShootClip().isRunning());
     }
 
     @Test
-    void playExplosionSound_shouldPlayDyingSoundClip() {
+    void shouldPlayDyingSoundClip() {
         resetClipPosition(SoundManager.getDyingSoundClip());
         SoundManager.playExplosionSound();
         assertTrue(SoundManager.getDyingSoundClip().isRunning());
     }
 
     @Test
-    void playSwitchOptionSound_shouldPlaySwitchOptionClip() {
+    void shouldPlaySwitchOptionClip() {
         resetClipPosition(SoundManager.getSwitchOptionClip());
         SoundManager.playSwitchOptionSound();
         assertTrue(SoundManager.getSwitchOptionClip().isRunning());
+    }
+
+    @Test
+    void shouldPlayBackgroundMusic() {
+        resetClipPosition(SoundManager.backgroundMusicClip);
+        SoundManager.playBackgroundMusic();
+        assertTrue(SoundManager.backgroundMusicClip.isRunning());
     }
 
     private void resetClipPosition(Clip clip) {
