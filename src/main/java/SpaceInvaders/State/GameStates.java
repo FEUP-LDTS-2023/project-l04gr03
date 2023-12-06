@@ -8,5 +8,6 @@ public enum GameStates {
     INSTRUCTIONS,
     GAME,
     RESUME_GAME,
+    RESTART_GAME,
     QUIT_GAME
 }

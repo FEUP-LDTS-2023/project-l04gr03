@@ -19,9 +19,18 @@ public class ArenaBuilderByRound extends ArenaBuilder {
 
     public ArenaBuilderByRound(int round) throws IOException {
         this.round = round;
-        URL resource = ArenaBuilderByRound.class.getResource("/rounds/round" + round + ".txt");
-        BufferedReader br = new BufferedReader(new FileReader(resource.getFile()));
-        arenaLines = readArenaLines(br);
+        if(round <= 3){
+            URL resource = ArenaBuilderByRound.class.getResource("/rounds/round" + round + ".txt");
+            assert resource != null;
+            BufferedReader br = new BufferedReader(new FileReader(resource.getFile()));
+            arenaLines = readArenaLines(br);
+        }
+        else{
+            URL resource = ArenaBuilderByRound.class.getResource("/rounds/round3.txt");
+            assert resource != null;
+            BufferedReader br = new BufferedReader(new FileReader(resource.getFile()));
+            arenaLines = readArenaLines(br);
+        }
     }
 
     public List<String> readArenaLines(BufferedReader br) throws IOException {
@@ -41,6 +50,7 @@ public class ArenaBuilderByRound extends ArenaBuilder {
         return arenaLines.size();
     }
 
+    @Override
     public int getRound(){
         return round;
     }
@@ -64,7 +74,7 @@ public class ArenaBuilderByRound extends ArenaBuilder {
         for(int x = 0; x < arenaLines.get(0).length(); x++){
             for(int y = 0; y < arenaLines.size(); y++){
                 if(arenaLines.get(y).charAt(x) == 'S'){
-                    return new Ship(new Position(x,y),round * getBaseShipHealth(), round * getBaseShipDamage());
+                    return new Ship(new Position(x,y),round * getBaseShipHealth(), round * getBaseShipDamage(),round * getBaseShipHealth());
                 }
             }
         }

@@ -109,8 +109,17 @@ public class State {
                 break;
 
             case GAME:
-                ArenaBuilderByRound arenaBuilder = new ArenaBuilderByRound(1);
-                this.arena = arenaBuilder.buildArena();
+                ArenaBuilderByRound arenaBuilder;
+                if(arena == null){
+                    arenaBuilder = new ArenaBuilderByRound(1);
+                    this.arena = arenaBuilder.buildArena();
+                }
+                else{
+                    arenaBuilder = new ArenaBuilderByRound(arena.getRound() + 1);
+                    int score = this.arena.getScore();
+                    this.arena = arenaBuilder.buildArena();
+                    this.arena.increaseScore(score);
+                }
                 controller = new ArenaController(arena);
                 viewer = new GameViewer(arena);
                 break;
@@ -125,6 +134,13 @@ public class State {
                 GameOverMenu menuG = new GameOverMenu(arena.getScore());
                 controller = new GameOverController(menuG);
                 viewer = new GameOverMenuViewer(menuG);
+                break;
+
+            case RESTART_GAME:
+                ArenaBuilderByRound arenaBuilder1 = new ArenaBuilderByRound(1);
+                this.arena = arenaBuilder1.buildArena();
+                controller = new ArenaController(arena);
+                viewer = new GameViewer(arena);
                 break;
 
             case RESUME_GAME:

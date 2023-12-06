@@ -7,7 +7,6 @@ public class DestroyableElement extends Element {
 
     private int health;
 
-    private final int maxHealth = 100;
     public DestroyableElement(Position position, int health) {
         super(position);
         this.health = health;

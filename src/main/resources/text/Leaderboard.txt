@@ -103,4 +103,11 @@ Unknown 4100
 Unknown 3080
 Unknown 6380
 FRANC 3080
-Unknown 2720
+Unknown 2720Unknown 9240
+Unknown 33840
+Unknown 1180
+Unknown 10400
+Unknown 1200
+Unknown 12700
+Unknown 18920
+Unknown 15880
