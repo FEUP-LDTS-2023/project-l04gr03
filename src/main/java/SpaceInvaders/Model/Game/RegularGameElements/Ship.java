@@ -6,13 +6,13 @@ public class Ship extends AttackingElement {
 
     private int damagePerShot;
 
-    private int maxHealth;
+    private final int maxHealth;
 
     private ShipMode shipMode;
 
-    public Ship(Position position, int health, int damagePerShot, int maxHealth){
+    public Ship(Position position, int health, int damagePerShot){
         super(position,health,damagePerShot);
-        this.maxHealth = maxHealth;
+        this.maxHealth = 100;
         this.shipMode = ShipMode.NORMAL_MODE;
     }
 
