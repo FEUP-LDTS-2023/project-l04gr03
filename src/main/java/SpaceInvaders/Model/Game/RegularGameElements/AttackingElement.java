@@ -20,9 +20,19 @@ public class AttackingElement extends DestroyableElement {
         if(this == o){
             return true;
         }
-        if(this.getClass() != o.getClass() || this == null){
+        if(!(o instanceof AttackingElement)){
             return false;
         }
         return this.getPosition().equals(((AttackingElement) o).getPosition()) && this.getHealth() == ((AttackingElement) o).getHealth() && this.getDamagePerShot() == ((AttackingElement) o).getDamagePerShot();
+    }
+
+    @Override
+    public int hashCode() {
+        int prime = 31;
+        int result = 1;
+        result = prime * result + damagePerShot;
+        result = prime * result + getHealth();
+        result = prime * result + getPosition().hashCode();
+        return result;
     }
 }
