@@ -1,6 +1,5 @@
 package SpaceInvaders.Viewer.Game;
 
-import SpaceInvaders.Controller.Game.AlienShipController;
 import SpaceInvaders.GUI.GUI;
 import SpaceInvaders.Model.Game.Collectables.*;
 import SpaceInvaders.Model.Game.Element;

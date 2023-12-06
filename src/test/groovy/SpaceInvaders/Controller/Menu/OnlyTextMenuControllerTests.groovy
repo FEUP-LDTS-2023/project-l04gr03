@@ -1,14 +1,7 @@
 package SpaceInvaders.Controller.Menu
 
-import SpaceInvaders.Controller.Menu.GameOverController
-import SpaceInvaders.Controller.Menu.OnlyTextMenuController
-import SpaceInvaders.Controller.Menu.PauseMenuController
-import SpaceInvaders.Controller.Menu.StartMenuController
 import SpaceInvaders.Game
-import SpaceInvaders.Model.Menu.GameOverMenu
 import SpaceInvaders.Model.Menu.Leaderboard
-import SpaceInvaders.Model.Menu.PauseMenu
-import SpaceInvaders.Model.Menu.StartMenu
 import com.googlecode.lanterna.input.KeyStroke
 import com.googlecode.lanterna.input.KeyType
 import spock.lang.Specification

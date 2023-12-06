@@ -23,7 +23,6 @@ class TestArenaBuilderByRound extends Specification{
 
     def 'ReadArenaLines'(){
         given:
-        int round = 1;
         ArenaBuilderByRound arenaBuilderByRound = new ArenaBuilderByRound(1)
         when:
         List<String> arenaLines = arenaBuilderByRound.getArenaLines()
