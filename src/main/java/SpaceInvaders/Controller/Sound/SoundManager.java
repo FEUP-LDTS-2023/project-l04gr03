@@ -33,15 +33,15 @@ public class SoundManager {
         playSound(switchOptionClip);
     }
 
-    private static Clip loadingClip(String filePath) throws IOException, UnsupportedAudioFileException, LineUnavailableException {
-        AudioInputStream inputStream = AudioSystem.getAudioInputStream(new File(filePath));
+    private static Clip loadingClip(String file) throws IOException, UnsupportedAudioFileException, LineUnavailableException {
+        AudioInputStream inputStream = AudioSystem.getAudioInputStream(new File(file));
         Clip clip = AudioSystem.getClip();
         clip.open(inputStream);
         return clip;
     }
 
-    private static Clip loadingLoopClip(String filePath) throws IOException, UnsupportedAudioFileException, LineUnavailableException {
-        Clip clip = loadingClip(filePath);
+    private static Clip loadingLoopClip(String file) throws IOException, UnsupportedAudioFileException, LineUnavailableException {
+        Clip clip = loadingClip(file);
         clip.loop(Clip.LOOP_CONTINUOUSLY);
         return clip;
     }
