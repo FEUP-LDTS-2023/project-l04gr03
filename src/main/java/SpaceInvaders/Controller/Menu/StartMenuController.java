@@ -40,6 +40,7 @@ public class StartMenuController extends Controller<StartMenu> {
                     game.setState(GameStates.QUIT_GAME);
                 }
                 break;
+            default: //other keys don´t have effect
         }
     }
 }

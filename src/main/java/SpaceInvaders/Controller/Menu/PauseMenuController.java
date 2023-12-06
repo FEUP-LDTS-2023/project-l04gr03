@@ -40,6 +40,7 @@ public class PauseMenuController extends Controller<PauseMenu> {
                     game.setState(GameStates.START_MENU);
                 }
                 break;
+            default: //Other keys don't have effect
         }
     }
 }

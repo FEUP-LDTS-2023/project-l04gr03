@@ -1,5 +1,6 @@
 package SpaceInvaders.Model.Game.Collectables;
 
+import SpaceInvaders.Model.Game.Element;
 import SpaceInvaders.Model.Position;
 import SpaceInvaders.Model.Game.Arena;
 import SpaceInvaders.Model.Game.RegularGameElements.Alien;

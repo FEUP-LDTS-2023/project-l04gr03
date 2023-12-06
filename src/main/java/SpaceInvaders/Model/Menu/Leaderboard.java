@@ -8,6 +8,8 @@ public class Leaderboard extends OnlyTextMenu {
         super("/text/Leaderboard.txt");
         sortByScore();
     }
+
+    @SuppressWarnings("StringSplitter")
     public void sortByScore(){
         text.sort((s1, s2) -> {
             String[] splitS1 = s1.split(" ");
