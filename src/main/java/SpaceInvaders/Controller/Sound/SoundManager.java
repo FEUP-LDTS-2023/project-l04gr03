@@ -1,6 +1,5 @@
 package SpaceInvaders.Controller.Sound;
 
-
 import javax.sound.sampled.*;
 import java.io.File;
 import java.io.IOException;
@@ -10,21 +9,13 @@ public class SoundManager {
     private static Clip dyingSoundClip;
     private static Clip switchOptionClip;
     private static Clip backgroundMusicClip;
+
     static {
         try {
-            AudioInputStream shootingInputStream = AudioSystem.getAudioInputStream(new File("src/resources/sounds/shoot.wav"));
-            shootClip = AudioSystem.getClip();
-            shootClip.open(shootingInputStream);
-            AudioInputStream explosionInputStream = AudioSystem.getAudioInputStream(new File("src/resources/sounds/invaderkilled.wav"));
-            dyingSoundClip = AudioSystem.getClip();
-            dyingSoundClip.open(explosionInputStream);
-            AudioInputStream switchOptionInputStream = AudioSystem.getAudioInputStream(new File("src/resources/sounds/light-switch-156813.mp3"));
-            switchOptionClip = AudioSystem.getClip();
-            switchOptionClip.open(switchOptionInputStream);
-            AudioInputStream backgroundMusicInputStream = AudioSystem.getAudioInputStream(new File("src/resources/sounds/spaceinvaders1.mpeg"));
-            backgroundMusicClip = AudioSystem.getClip();
-            backgroundMusicClip.open(backgroundMusicInputStream);
-            backgroundMusicClip.loop(Clip.LOOP_CONTINUOUSLY);
+            shootClip = loadingClip("src/resources/sounds/shoot.wav");
+            dyingSoundClip = loadingClip("src/resources/sounds/invaderkilled.wav");
+            switchOptionClip = loadingClip("src/resources/sounds/light-switch-156813.mp3");
+            backgroundMusicClip = loadingLoopClip("src/resources/sounds/spaceinvaders1.mpeg");
         } catch (UnsupportedAudioFileException | IOException | LineUnavailableException e) {
             e.printStackTrace();
         }
@@ -40,6 +31,19 @@ public class SoundManager {
 
     public static void playSwitchOptionSound() {
         playSound(switchOptionClip);
+    }
+
+    private static Clip loadingClip(String filePath) throws IOException, UnsupportedAudioFileException, LineUnavailableException {
+        AudioInputStream inputStream = AudioSystem.getAudioInputStream(new File(filePath));
+        Clip clip = AudioSystem.getClip();
+        clip.open(inputStream);
+        return clip;
+    }
+
+    private static Clip loadingLoopClip(String filePath) throws IOException, UnsupportedAudioFileException, LineUnavailableException {
+        Clip clip = loadingClip(filePath);
+        clip.loop(Clip.LOOP_CONTINUOUSLY);
+        return clip;
     }
 
     private static void playSound(Clip clip) {
