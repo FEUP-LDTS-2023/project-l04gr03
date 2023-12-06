@@ -3,7 +3,6 @@ plugins {
     id 'application'
     id 'groovy'
     id 'info.solidsoft.pitest' version '1.7.0'
-    id 'org.jetbrains.kotlin.jvm' version '2.0.0-Beta'
 }
 
 group = 'SpaceInvaders'
@@ -22,7 +21,6 @@ dependencies {
     testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine'
     testImplementation 'org.spockframework:spock-core:2.0-groovy-3.0'
     testImplementation 'org.codehaus.groovy:groovy-all:3.0.8'
-    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk8"
 }
 
 
@@ -40,8 +38,5 @@ pitest {
 
 application{
     mainClass.set("SpaceInvaders.Game")
-}
-kotlin {
-    jvmToolchain(20)
 }
 
