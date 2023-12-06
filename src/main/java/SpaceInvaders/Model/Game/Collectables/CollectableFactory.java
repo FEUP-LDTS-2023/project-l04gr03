@@ -35,7 +35,6 @@ public class CollectableFactory<T> {
             case SCORE -> new ScoreCollectable(position, (List<Alien>) attackingElement, multiplier);
             case MACHINE_GUN_MODE -> new MachineGunModeCollectable(position, (Ship) attackingElement);
             case GOD_MODE -> new GodModeCollectable(position,(Ship) attackingElement);
-            default -> null;
         };
     }
 
