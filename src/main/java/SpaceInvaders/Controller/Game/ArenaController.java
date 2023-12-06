@@ -200,7 +200,7 @@ public class ArenaController extends GameController {
             game.setState(GameStates.GAME_OVER);
         }
         if(getModel().getAliens().isEmpty()){
-           game.setState(GameStates.GAME);
+           game.setState(GameStates.NEW_GAME_ROUND);
         }
         shipController.step(game,key,time);
         alienController.step(game,key,time);

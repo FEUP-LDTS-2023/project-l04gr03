@@ -34,7 +34,7 @@ public class PauseMenuController extends Controller<PauseMenu> {
                     game.setState(GameStates.INSTRUCTIONS);
                 }
                 else if(getModel().isSelectedRestart()){
-                    game.setState(GameStates.RESTART_GAME);
+                    game.setState(GameStates.NEW_GAME);
                 }
                 else if(getModel().isSelectedExit()){
                     game.setState(GameStates.START_MENU);
