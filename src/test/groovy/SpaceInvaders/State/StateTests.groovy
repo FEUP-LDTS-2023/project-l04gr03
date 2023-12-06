@@ -9,16 +9,16 @@ class StateTests extends Specification{
         given:
             State state = State.getInstance();
         when:
-            state.UpdateState(GameStates.GAME)
+            state.UpdateState(GameStates.NEW_GAME)
         then:
-            state.currentState == GameStates.GAME
+            state.currentState == GameStates.NEW_GAME
     }
 
     def "Update State When New State is Start Menu"(){
         given:
             State state = State.getInstance();
         when:
-            state.UpdateState(GameStates.GAME)
+            state.UpdateState(GameStates.NEW_GAME)
             state.UpdateState(GameStates.GAME_OVER)
             state.UpdateState(GameStates.START_MENU)
         then:
@@ -30,11 +30,11 @@ class StateTests extends Specification{
         given:
             State state = State.getInstance();
         when:
-            state.UpdateState(GameStates.GAME)
+            state.UpdateState(GameStates.NEW_GAME)
             state.UpdateToPrevious()
         then:
             state.currentState == GameStates.START_MENU
-            state.previousState == GameStates.GAME
+            state.previousState == GameStates.NEW_GAME
 
     }
 
