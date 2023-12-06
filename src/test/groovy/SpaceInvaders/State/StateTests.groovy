@@ -1,12 +1,8 @@
 package SpaceInvaders.State
 
-import SpaceInvaders.Controller.Controller
-import SpaceInvaders.Controller.Menu.StartMenuController
 import SpaceInvaders.GUI.GUI
 import SpaceInvaders.Game
 import SpaceInvaders.Model.Game.Arena
-import SpaceInvaders.Model.Menu.StartMenu
-import SpaceInvaders.Viewer.Menu.StartMenuViewer
 import spock.lang.Specification
 
 class StateTests extends Specification{

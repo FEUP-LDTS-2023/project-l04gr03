@@ -41,10 +41,6 @@ public class ArenaController extends GameController {
 
     public AlienController getAlienController() {return alienController;}
 
-    public ProjectileController getProjectileController() {return projectileController;}
-
-
-
     public boolean collisionBetween(Element element1, Element element2){
         return element1.getPosition().equals(element2.getPosition());
     }

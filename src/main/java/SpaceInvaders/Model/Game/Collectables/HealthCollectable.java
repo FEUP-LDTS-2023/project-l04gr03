@@ -1,6 +1,5 @@
 package SpaceInvaders.Model.Game.Collectables;
 
-import SpaceInvaders.Model.Game.RegularGameElements.AttackingElement;
 import SpaceInvaders.Model.Game.RegularGameElements.Ship;
 import SpaceInvaders.Model.Position;
 
