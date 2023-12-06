@@ -39,6 +39,8 @@ public class GameViewer extends Viewer<Arena> {
         gui.drawText(new Position(15,5), String.valueOf(getModel().getScore()),"#F8F8FF" );
         gui.drawText(new Position(55,5), "HEALTH = ", "#F8F8FF");
         gui.drawText(new Position(65,5), String.valueOf(getModel().getShip().getHealth()),"#F8F8FF" );
+        gui.drawText((new Position(5,8)),"ROUND ","#F8F8FF");
+        gui.drawText((new Position(10,8)),String.valueOf(getModel().getRound()),"#F8F8FF");
         if(getModel().getShip().getShipMode() != ShipMode.NORMAL_MODE){
             gui.drawText(new Position(55,8), String.valueOf(getModel().getShip().getShipMode()),"#F8F8FF");
         }
