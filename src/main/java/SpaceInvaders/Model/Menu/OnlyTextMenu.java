@@ -1,11 +1,13 @@
 package SpaceInvaders.Model.Menu;
 
-import SpaceInvaders.Model.Game.ArenaBuilderByRound;
 
 import java.io.*;
-import java.net.URL;
+import java.nio.charset.Charset;
+import java.nio.file.Files;
+import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.List;
+
 
 public abstract class OnlyTextMenu {
     protected List<String> text;
@@ -20,8 +22,9 @@ public abstract class OnlyTextMenu {
     }
 
     private List<String> readFile(String filename) throws IOException {
-        URL resource = ArenaBuilderByRound.class.getResource(filename);
-        BufferedReader br = new BufferedReader(new FileReader(resource.getFile()));
+        Path resource = new File(OnlyTextMenu.class.getResource(filename).getFile()).toPath();
+        Reader fileReader = Files.newBufferedReader(resource, Charset.defaultCharset());
+        BufferedReader br = new BufferedReader(fileReader);
         List<String> newText = new ArrayList<>();
         for (String line; (line = br.readLine()) != null; )
             newText.add(line);

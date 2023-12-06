@@ -1,13 +1,12 @@
 package SpaceInvaders.Model.Game;
 
 import SpaceInvaders.Model.Game.RegularGameElements.*;
-import SpaceInvaders.Model.Game.RegularGameElements.*;
 import SpaceInvaders.Model.Position;
 
-import java.io.BufferedReader;
-import java.io.FileReader;
-import java.io.IOException;
-import java.net.URL;
+import java.io.*;
+import java.nio.charset.Charset;
+import java.nio.file.Files;
+import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -19,8 +18,9 @@ public class ArenaBuilderByRound extends ArenaBuilder {
 
     public ArenaBuilderByRound(int round) throws IOException {
         this.round = round;
-        URL resource = ArenaBuilderByRound.class.getResource("/rounds/round" + round + ".txt");
-        BufferedReader br = new BufferedReader(new FileReader(resource.getFile()));
+        Path resource = new File(ArenaBuilderByRound.class.getResource("/rounds/round" + round + ".txt").getFile()).toPath();
+        Reader fileReader = Files.newBufferedReader(resource, Charset.defaultCharset());
+        BufferedReader br = new BufferedReader(fileReader);
         arenaLines = readArenaLines(br);
     }
 
@@ -74,7 +74,6 @@ public class ArenaBuilderByRound extends ArenaBuilder {
     @Override
     public List<Alien> createAliens() {
         List<Alien> aliens = new ArrayList<>();
-        AlienState alienState;
         for(int x = 0; x < arenaLines.get(0).length(); x++){
             int type = 0;
             for (int y = 0; y < arenaLines.size(); y++){
