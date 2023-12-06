@@ -112,6 +112,7 @@ public class AlienController extends GameController {
         }
     }
 
+    @Override
     public void step(Game game, KeyStroke key, long time) {
         if(time - lastShotTime > 800){
             shootProjectile();

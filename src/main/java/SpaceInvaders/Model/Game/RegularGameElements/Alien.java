@@ -4,8 +4,6 @@ import SpaceInvaders.Model.Position;
 
 public class Alien extends AttackingElement {
 
-    private int damagePerShot;
-
     private int score;
 
 

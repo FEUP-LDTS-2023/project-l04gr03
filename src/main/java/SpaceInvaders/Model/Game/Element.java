@@ -23,9 +23,14 @@ public abstract class Element {
         if(this == o){
             return true;
         }
-        if(this.getClass() != o.getClass() || this == null){
+        if(!(o instanceof Element)){
             return false;
         }
-        return this.getPosition() == ((Element) o).getPosition();
+        return this.getPosition().equals(((Element) o).getPosition());
+    }
+
+    @Override
+    public int hashCode() {
+        return position.hashCode();
     }
 }

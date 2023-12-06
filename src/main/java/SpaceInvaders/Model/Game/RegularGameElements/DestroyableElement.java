@@ -6,7 +6,7 @@ import SpaceInvaders.Model.Position;
 public class DestroyableElement extends Element {
 
     private int health;
-    
+
     public DestroyableElement(Position position, int health) {
         super(position);
         this.health = health;
