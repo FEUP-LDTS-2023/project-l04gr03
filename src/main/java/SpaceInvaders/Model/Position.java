@@ -27,9 +27,18 @@ public class Position {
         if(this == o){
             return true;
         }
-        if(this.getClass() != o.getClass() || this == null){
+        if(!(o instanceof Position)){
             return false;
         }
         return this.x == ((Position) o).x && this.y == ((Position) o).y;
+    }
+
+    @Override
+    public int hashCode() {
+        final int prime = 31;
+        int result = 1;
+        result = prime * result + x;
+        result = prime * result + y;
+        return result;
     }
 }

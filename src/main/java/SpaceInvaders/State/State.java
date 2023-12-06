@@ -138,6 +138,8 @@ public class State {
                 controller = new OnlyTextMenuController(instructions);
                 viewer = new InstructionsViewer(instructions);
                 break;
+
+            case QUIT_GAME: // No new controllers or viewers, the main function will close the game
         }
 
     }

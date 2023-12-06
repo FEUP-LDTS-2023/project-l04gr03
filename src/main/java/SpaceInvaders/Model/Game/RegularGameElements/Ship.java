@@ -4,8 +4,6 @@ import SpaceInvaders.Model.Position;
 
 public class Ship extends AttackingElement {
 
-    private int damagePerShot;
-
     private ShipMode shipMode;
 
     public Ship(Position position, int health, int damagePerShot){
