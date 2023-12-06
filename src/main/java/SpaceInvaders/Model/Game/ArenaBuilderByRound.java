@@ -19,7 +19,7 @@ public class ArenaBuilderByRound extends ArenaBuilder {
 
     public ArenaBuilderByRound(int round) throws IOException {
         this.round = round;
-        if(round <= 3){
+        if(round <= 5){
             URL resource = ArenaBuilderByRound.class.getResource("/rounds/round" + round + ".txt");
             assert resource != null;
             BufferedReader br = new BufferedReader(new FileReader(resource.getFile()));
@@ -74,7 +74,7 @@ public class ArenaBuilderByRound extends ArenaBuilder {
         for(int x = 0; x < arenaLines.get(0).length(); x++){
             for(int y = 0; y < arenaLines.size(); y++){
                 if(arenaLines.get(y).charAt(x) == 'S'){
-                    return new Ship(new Position(x,y),round * getBaseShipHealth(), round * getBaseShipDamage(),round * getBaseShipHealth());
+                    return new Ship(new Position(x,y),getBaseShipHealth(), getBaseShipDamage());
                 }
             }
         }

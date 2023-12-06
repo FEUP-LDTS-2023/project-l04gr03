@@ -25,7 +25,7 @@ public class Game {
 
     private Game() throws IOException, URISyntaxException, FontFormatException {
         Screen screen = null;
-        this.gui = new GUILanterna(74,30);
+        this.gui = new GUILanterna(74,32);
         this.state = State.getInstance();
         this.score = 0;
         this.launchTime = System.currentTimeMillis();

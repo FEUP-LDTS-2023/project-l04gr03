@@ -113,11 +113,11 @@ public class AlienController extends GameController {
     }
 
     public void step(Game game, KeyStroke key, long time) {
-        if(time - lastShotTime > 800){
+        if(time - lastShotTime > 800 - (getModel().getRound() - 1) * 100L){
             shootProjectile();
             lastShotTime = time;
         }
-        if(time - lastMovimentTime > 300){
+        if(time - lastMovimentTime > 300 - (getModel().getRound() - 1) * 20L){
             updateMovementDirection();
             moveAliens();
             lastMovimentTime = time;
