@@ -1,61 +1,61 @@
 package SpaceInvaders.Controller.Sound;
 
-import javax.sound.sampled.*;
-import java.io.File;
-import java.io.FileReader;
-import java.io.IOException;
-import java.nio.file.Path;
-import java.nio.file.Paths;
+import SpaceInvaders.Model.Sound.Sound;
+import SpaceInvaders.Model.Sound.Sound_Options;
 
 public class SoundManager {
-    private static Clip shootClip;
-    private static Clip dyingSoundClip;
-    private static Clip switchOptionClip;
-    private static Clip backgroundMusicClip;
+    private final Sound laser;
+    private final Sound dyingSound;
+    private final Sound switchOption;
+    private final Sound backgroundMusic;
 
-    static {
-        try {
-            shootClip = loadingClip("src/main/resources/sounds/shoot.wav");
-            dyingSoundClip = loadingClip("src/main/resources/sounds/invaderkilled.wav");
-            switchOptionClip = loadingClip("src/main/resources/sounds/light-switch-156813.wav");
-            backgroundMusicClip = loadingLoopClip("src/main/resources/sounds/spaceinvaders1.wav");
-        } catch (UnsupportedAudioFileException | IOException | LineUnavailableException e) {
-            e.printStackTrace();
+    private static SoundManager soundManager;
+
+    private SoundManager(){
+            this.laser = new Sound("src/main/resources/sounds/shoot.wav");
+            this.dyingSound = new Sound("src/main/resources/sounds/invaderkilled.wav");
+            this.switchOption = new Sound("src/main/resources/sounds/light-switch-156813.wav");
+            this.backgroundMusic = new Sound("src/main/resources/sounds/spaceinvaders1.wav");
+    }
+
+    public static SoundManager getInstance(){
+        if(soundManager == null){
+            soundManager = new SoundManager();
+        }
+        return soundManager;
+    }
+
+    public void playSound(Sound_Options option){
+        switch (option){
+            case MUSIC -> backgroundMusic.playContinuously();
+            case LASER -> laser.play();
+            case MENU_SWITCH -> switchOption.play();
+            case DESTRUCTION -> dyingSound.play();
         }
     }
 
-    public static void playShootingSound() {
-        playSound(shootClip);
-    }
-
-    public static void playExplosionSound() {
-        playSound(dyingSoundClip);
-    }
-
-    public static void playSwitchOptionSound() {
-        playSound(switchOptionClip);
-    }
-
-    private static Clip loadingClip(String file) throws IOException, UnsupportedAudioFileException, LineUnavailableException {
-        Path path = Paths.get(file);
-        AudioInputStream inputStream = AudioSystem.getAudioInputStream(path.toFile());
-        Clip clip = AudioSystem.getClip();
-        clip.open(inputStream);
-        return clip;
-    }
-
-    private static Clip loadingLoopClip(String file) throws IOException, UnsupportedAudioFileException, LineUnavailableException {
-        Clip clip = loadingClip(file);
-        clip.loop(Clip.LOOP_CONTINUOUSLY);
-        return clip;
-    }
-
-    private static void playSound(Clip clip) {
-        if (clip.isRunning()) {
-            clip.stop();
+    public void stopSound(Sound_Options option){
+        switch (option){
+            case MUSIC -> backgroundMusic.stop();
+            case LASER -> laser.stop();
+            case MENU_SWITCH -> switchOption.stop();
+            case DESTRUCTION -> dyingSound.stop();
         }
-        clip.setFramePosition(0);
-        clip.start();
+    }
+    public void stopAllSounds(){
+        backgroundMusic.stop();
+        laser.stop();
+        switchOption.stop();
+        dyingSound.stop();
+    }
+
+    public boolean isSoundPlaying(Sound_Options option){
+        return switch (option){
+            case MUSIC -> backgroundMusic.isPlaying();
+            case LASER -> laser.isPlaying();
+            case MENU_SWITCH -> switchOption.isPlaying();
+            case DESTRUCTION -> dyingSound.isPlaying();
+        };
     }
 }
 

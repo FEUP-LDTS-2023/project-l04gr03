@@ -1,6 +1,7 @@
 package SpaceInvaders.Controller.Game;
 
 
+import SpaceInvaders.Controller.Sound.SoundManager;
 import SpaceInvaders.Game;
 import SpaceInvaders.Model.Game.ArenaModifier;
 import SpaceInvaders.Model.Game.RegularGameElements.Projectile;
@@ -9,12 +10,12 @@ import SpaceInvaders.Model.Game.RegularGameElements.ShipMode;
 import SpaceInvaders.Model.Position;
 import SpaceInvaders.Model.Game.Arena;
 
+import SpaceInvaders.Model.Sound.Sound_Options;
 import com.googlecode.lanterna.input.KeyStroke;
 import com.googlecode.lanterna.input.KeyType;
 
 import java.io.IOException;
 
-import static SpaceInvaders.Controller.Sound.SoundManager.playShootingSound;
 
 public class ShipController extends GameController {
 
@@ -51,7 +52,7 @@ public class ShipController extends GameController {
         Position projectilePosition = new Position(ship.getPosition().getX(),ship.getPosition().getY());
         Projectile projectile = new Projectile(projectilePosition, ship);
         arenaModifier.addProjectile(projectile);
-        playShootingSound();
+        SoundManager.getInstance().playSound(Sound_Options.LASER);
     }
 
     public void hitByProjectile(Projectile projectile){
