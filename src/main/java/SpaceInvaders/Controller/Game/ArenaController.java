@@ -9,6 +9,7 @@ import SpaceInvaders.Model.Game.Element;
 import SpaceInvaders.Model.Game.RegularGameElements.*;
 import SpaceInvaders.Model.Sound.Sound_Options;
 import SpaceInvaders.State.GameStates;
+import SpaceInvaders.State.State;
 import com.googlecode.lanterna.input.KeyStroke;
 import com.googlecode.lanterna.input.KeyType;
 
@@ -37,7 +38,6 @@ public class ArenaController extends GameController {
         this.arenaModifier = new ArenaModifier(arena);
         this.collectableController = new CollectableController(arena);
         this.alienShipController = new AlienShipController(arena);
-        SoundManager.getInstance().playSound(Sound_Options.MUSIC);
     }
 
     public ShipController getShipController() {return shipController;}

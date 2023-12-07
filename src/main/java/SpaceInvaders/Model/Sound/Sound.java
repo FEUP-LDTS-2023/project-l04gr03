@@ -41,6 +41,10 @@ public class Sound {
         sound.stop();
     }
 
+    public void resumePlaying(){
+        sound.start();
+    }
+
     public boolean isPlaying(){
         return sound.isRunning();
     }

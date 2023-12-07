@@ -41,6 +41,10 @@ public class SoundManager {
             case DESTRUCTION -> dyingSound.stop();
         }
     }
+
+    public void resumePlayingMusic(){
+        backgroundMusic.resumePlaying();
+    }
     public void stopAllSounds(){
         backgroundMusic.stop();
         laser.stop();
