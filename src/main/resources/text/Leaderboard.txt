@@ -141,3 +141,13 @@ R 0
 Unknown 0
 Unknown 15700
 Unknown 8380
+R 0
+Unknown 0
+R 0
+Unknown 0
+R 0
+Unknown 0
+R 0
+Unknown 0
+Unknown 5860
+Unknown 12400
