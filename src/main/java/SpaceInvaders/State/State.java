@@ -3,8 +3,10 @@ package SpaceInvaders.State;
 import SpaceInvaders.Controller.Menu.GameOverController;
 import SpaceInvaders.Controller.Menu.PauseMenuController;
 import SpaceInvaders.Controller.Menu.StartMenuController;
+import SpaceInvaders.Controller.Sound.SoundManager;
 import SpaceInvaders.GUI.GUI;
 import SpaceInvaders.Model.Menu.*;
+import SpaceInvaders.Model.Sound.Sound_Options;
 import SpaceInvaders.Viewer.Menu.*;
 import SpaceInvaders.Controller.Controller;
 import SpaceInvaders.Controller.Game.ArenaController;
@@ -114,6 +116,7 @@ public class State {
                 this.arena = arenaBuilder.buildArena();
                 controller = new ArenaController(arena);
                 viewer = new GameViewer(arena);
+                SoundManager.getInstance().playSound(Sound_Options.MUSIC);
                 break;
 
             case LEADERBOARD:
@@ -131,6 +134,7 @@ public class State {
             case RESUME_GAME:
                 controller = new ArenaController(arena);
                 viewer = new GameViewer(arena);
+                SoundManager.getInstance().resumePlayingMusic();
                 break;
 
             case INSTRUCTIONS:
