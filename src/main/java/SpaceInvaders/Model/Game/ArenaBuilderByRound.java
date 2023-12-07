@@ -1,6 +1,7 @@
 package SpaceInvaders.Model.Game;
 
 import SpaceInvaders.Model.Game.RegularGameElements.*;
+import SpaceInvaders.Model.Menu.OnlyTextMenu;
 import SpaceInvaders.Model.Position;
 
 import java.io.*;
@@ -20,15 +21,15 @@ public class ArenaBuilderByRound extends ArenaBuilder {
     public ArenaBuilderByRound(int round) throws IOException {
         this.round = round;
         if(round <= 5){
-            URL resource = ArenaBuilderByRound.class.getResource("/rounds/round" + round + ".txt");
-            assert resource != null;
-            BufferedReader br = new BufferedReader(new FileReader(resource.getFile()));
+            Path resource = new File(ArenaBuilderByRound.class.getResource("/rounds/round" + round + ".txt").getFile()).toPath();
+            Reader fileReader = Files.newBufferedReader(resource, Charset.defaultCharset());
+            BufferedReader br = new BufferedReader(fileReader);
             arenaLines = readArenaLines(br);
         }
         else{
-            URL resource = ArenaBuilderByRound.class.getResource("/rounds/round3.txt");
-            assert resource != null;
-            BufferedReader br = new BufferedReader(new FileReader(resource.getFile()));
+            Path resource = new File(ArenaBuilderByRound.class.getResource("/rounds/round3.txt").getFile()).toPath();
+            Reader fileReader = Files.newBufferedReader(resource, Charset.defaultCharset());
+            BufferedReader br = new BufferedReader(fileReader);
             arenaLines = readArenaLines(br);
         }
     }
@@ -125,7 +126,7 @@ public class ArenaBuilderByRound extends ArenaBuilder {
         for(int x = 0; x < arenaLines.get(0).length(); x++){
             for(int y = 0; y < arenaLines.size(); y++){
                 if(arenaLines.get(y).charAt(x) == 'W'){
-                    coverWalls.add(new CoverWall(new Position(x,y),getBaseCoverWallHealth() * (round * round)));
+                    coverWalls.add(new CoverWall(new Position(x,y),getBaseCoverWallHealth()));
                 }
             }
         }

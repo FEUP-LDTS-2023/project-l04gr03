@@ -41,7 +41,7 @@ class GameViewerTests extends Specification{
 
         then:
             6 * gui.drawElement(_,_,_)
-            6 * gui.drawText(_,_,_)
+            8 * gui.drawText(_,_,_)
     }
 
 
