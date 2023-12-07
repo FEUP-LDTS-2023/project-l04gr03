@@ -8,7 +8,6 @@ public class SoundManager {
     private final Sound dyingSound;
     private final Sound switchOption;
     private final Sound backgroundMusic;
-
     private static SoundManager soundManager;
 
     private SoundManager(){

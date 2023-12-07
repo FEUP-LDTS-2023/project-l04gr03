@@ -14,7 +14,9 @@ import java.io.*;
 public class GameOverController extends Controller<GameOverMenu> {
 
     public GameOverController(GameOverMenu menu) {
+
         super(menu);
+        SoundManager.getInstance().stopSound(Sound_Options.MUSIC);
     }
 
     @Override
@@ -35,6 +37,7 @@ public class GameOverController extends Controller<GameOverMenu> {
                 if (getModel().isSelectedRestart()) {
                     UpdateLeaderboard(getModel().getScore(), getModel().getUsername());
                     game.setState(GameStates.GAME);
+                    SoundManager.getInstance().playSound(Sound_Options.MUSIC);
                 } else if (getModel().isSelectedExit()) {
                     UpdateLeaderboard(getModel().getScore(), getModel().getUsername());
                     game.setState(GameStates.START_MENU);
