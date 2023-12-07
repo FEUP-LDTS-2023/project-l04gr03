@@ -3,7 +3,6 @@ package SpaceInvaders.Model.Sound
 import spock.lang.Specification
 
 import javax.sound.sampled.Clip
-import javax.sound.sampled.UnsupportedAudioFileException
 
 class SoundTests extends Specification{
 
@@ -19,6 +18,7 @@ class SoundTests extends Specification{
             1 * clip.setFramePosition(0)
             1 * clip.start()
     }
+
 
     def "Play Continuously"(){
         given:
@@ -60,6 +60,16 @@ class SoundTests extends Specification{
             sound.setSound(clip)
         then:
             !sound.isPlaying()
+    }
+
+    def "resumePlaying"(){
+        given:
+            def sound = new Sound("src/main/resources/sounds/shoot.wav")
+        when:
+            sound.setSound(clip)
+            sound.resumePlaying()
+        then:
+            1 * clip.start()
     }
 
     def "getSound"(){

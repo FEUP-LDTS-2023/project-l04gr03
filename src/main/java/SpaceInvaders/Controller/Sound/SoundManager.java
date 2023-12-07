@@ -8,13 +8,19 @@ public class SoundManager {
     private final Sound dyingSound;
     private final Sound switchOption;
     private final Sound backgroundMusic;
+    private final Sound collectableSound;
+    private final Sound alienShipLowPitch;
+    private final Sound alienShipHighPitch;
     private static SoundManager soundManager;
 
     private SoundManager(){
             this.laser = new Sound("src/main/resources/sounds/shoot.wav");
             this.dyingSound = new Sound("src/main/resources/sounds/invaderkilled.wav");
-            this.switchOption = new Sound("src/main/resources/sounds/light-switch-156813.wav");
+            this.switchOption = new Sound("src/main/resources/sounds/Menu_option.wav");
             this.backgroundMusic = new Sound("src/main/resources/sounds/spaceinvaders1.wav");
+            this.collectableSound = new Sound("src/main/resources/sounds/Collectable.wav");
+            this.alienShipHighPitch = new Sound("src/main/resources/sounds/ufo_highpitch.wav");
+            this.alienShipLowPitch = new Sound("src/main/resources/sounds/ufo_lowpitch.wav");
     }
 
     public static SoundManager getInstance(){
@@ -30,6 +36,9 @@ public class SoundManager {
             case LASER -> laser.play();
             case MENU_SWITCH -> switchOption.play();
             case DESTRUCTION -> dyingSound.play();
+            case COLLECTABLE -> collectableSound.play();
+            case ALIEN_SHIP_LOW -> alienShipLowPitch.playContinuously();
+            case ALIEN_SHIP_HIGH -> alienShipHighPitch.playContinuously();
         }
     }
 
@@ -39,6 +48,9 @@ public class SoundManager {
             case LASER -> laser.stop();
             case MENU_SWITCH -> switchOption.stop();
             case DESTRUCTION -> dyingSound.stop();
+            case COLLECTABLE -> collectableSound.stop();
+            case ALIEN_SHIP_HIGH -> alienShipHighPitch.stop();
+            case ALIEN_SHIP_LOW -> alienShipLowPitch.stop();
         }
     }
 
@@ -50,6 +62,7 @@ public class SoundManager {
         laser.stop();
         switchOption.stop();
         dyingSound.stop();
+        collectableSound.stop();
     }
 
     public boolean isSoundPlaying(Sound_Options option){
@@ -58,6 +71,9 @@ public class SoundManager {
             case LASER -> laser.isPlaying();
             case MENU_SWITCH -> switchOption.isPlaying();
             case DESTRUCTION -> dyingSound.isPlaying();
+            case COLLECTABLE -> collectableSound.isPlaying();
+            case ALIEN_SHIP_LOW -> alienShipLowPitch.isPlaying();
+            case ALIEN_SHIP_HIGH -> alienShipHighPitch.isPlaying();
         };
     }
 }

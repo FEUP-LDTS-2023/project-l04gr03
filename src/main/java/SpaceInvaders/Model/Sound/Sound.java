@@ -33,8 +33,9 @@ public class Sound {
     }
 
     public void playContinuously(){
+        sound.setFramePosition(0);
+        sound.start();
         sound.loop(Clip.LOOP_CONTINUOUSLY);
-        play();
     }
 
     public void stop(){

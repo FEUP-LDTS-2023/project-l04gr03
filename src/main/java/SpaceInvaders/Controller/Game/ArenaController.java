@@ -147,6 +147,7 @@ public class ArenaController extends GameController {
             if(collisionBetween(ship, collectable)){
                 getModel().getActiveCollectable().execute();
                 getArenaModifier().removeActiveCollectable();
+                SoundManager.getInstance().playSound(Sound_Options.COLLECTABLE);
             }
         }
     }
