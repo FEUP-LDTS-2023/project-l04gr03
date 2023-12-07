@@ -24,12 +24,12 @@ public class StartMenuController extends Controller<StartMenu> {
         }
         switch(key.getKeyType()){
             case ArrowUp:
-                getModel().previousOption();
                 SoundManager.getInstance().playSound(Sound_Options.MENU_SWITCH);
+                getModel().previousOption();
                 break;
             case ArrowDown:
-                getModel().nextOption();
                 SoundManager.getInstance().playSound(Sound_Options.MENU_SWITCH);
+                getModel().nextOption();
                 break;
             case Enter:
                 if(getModel().isSelectedPlay()){
