@@ -16,11 +16,14 @@ import java.io.IOException;
 
 public class ShipController extends GameController {
 
-    private long inputTime;
+    private long movementTime;
+
+    private long shootingTime;
 
     public ShipController(Arena arena) {
         super(arena);
-        this.inputTime = 0;
+        this.movementTime = 0;
+        this.shootingTime = 0;
     }
 
     public boolean canMoveShip(Position position){
@@ -60,22 +63,22 @@ public class ShipController extends GameController {
         if(key == null){
             return;
         }
-        if(key.getKeyType() == KeyType.ArrowLeft && time - inputTime > 100){
+        if(key.getKeyType() == KeyType.ArrowLeft && time - movementTime > 50){
             moveLeft();
-            inputTime = time;
+            movementTime = time;
         }
-        if(key.getKeyType() == KeyType.ArrowRight && time - inputTime > 100){
+        if(key.getKeyType() == KeyType.ArrowRight && time - movementTime > 50){
             moveRight();
-            inputTime = time;
+            movementTime = time;
         }
-        if(key.getKeyType() == KeyType.ArrowUp && getModel().getShip().getShipMode() == ShipMode.MACHINE_GUN_MODE && time - inputTime > 75){
+        if(key.getKeyType() == KeyType.ArrowUp && getModel().getShip().getShipMode() == ShipMode.MACHINE_GUN_MODE && time - shootingTime > 75){
             shootProjectile();
-            inputTime = time;
+            shootingTime = time;
             return;
         }
-        if(key.getKeyType() == KeyType.ArrowUp && time - inputTime > 300){
+        if(key.getKeyType() == KeyType.ArrowUp && time - shootingTime > 300){
             shootProjectile();
-            inputTime = time;
+            shootingTime = time;
         }
     }
 }

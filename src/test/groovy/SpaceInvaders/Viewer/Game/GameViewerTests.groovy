@@ -31,7 +31,7 @@ class GameViewerTests extends Specification{
             arena.getShip() >> Mock(Ship)
             arena.getWalls() >> Arrays.asList(Mock(Wall))
             arena.getProjectiles() >> Arrays.asList(Mock(Projectile))
-            arena.getCoverWalls() >> Arrays.asList(Mock( CoverWall))
+            arena.getCoverWalls() >> Arrays.asList(Mock(CoverWall))
             arena.getAliens() >> Arrays.asList((Mock(Alien)))
             arena.getActiveCollectable() >> Mock(Collectable)
             arena.getAlienShip() >> Mock(AlienShip)

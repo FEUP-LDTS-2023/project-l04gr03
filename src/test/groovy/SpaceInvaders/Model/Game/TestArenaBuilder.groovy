@@ -15,8 +15,8 @@ class TestArenaBuilder extends Specification {
         then:
         spyArenaBuilderByRound.getBaseShipHealth() == 100
         spyArenaBuilderByRound.getBaseShipDamage() == 50
-        spyArenaBuilderByRound.getBaseAlienHealth() == 20
-        spyArenaBuilderByRound.getBaseAlienDamage() == 20
+        spyArenaBuilderByRound.getBaseAlienHealth() == 10
+        spyArenaBuilderByRound.getBaseAlienDamage() == 10
         spyArenaBuilderByRound.getBaseAlienScore() == 20
         1 * spyArenaBuilderByRound.createShip()
         1 * spyArenaBuilderByRound.createAliens()

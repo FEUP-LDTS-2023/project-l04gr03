@@ -44,7 +44,7 @@ class StartMenuControllerTests extends Specification{
             def key = new KeyStroke(KeyType.Enter)
             StartMenuController.step(game,key,0)
         then:
-            1 * game.setState(GameStates.GAME)
+            1 * game.setState(GameStates.NEW_GAME)
     }
 
     def "Step Enter Key is selected Leaderboard"(){

@@ -118,11 +118,11 @@ public class ArenaModifier {
         int movementChoiceIndex = random.nextInt(movementOptions.size());
         int movement = movementOptions.get(movementChoiceIndex);
         if(movement == -1){
-            AlienShip alienShip = new AlienShip(new Position(arena.getWidth() - 4, 8),50 , 500, movement);
+            AlienShip alienShip = new AlienShip(new Position(arena.getWidth() - 4, 6),50 , 500, movement);
             arena.setAlienShip(alienShip);
         }
         else {
-            AlienShip alienShip = new AlienShip(new Position(4, 8),50 , 500, movement);
+            AlienShip alienShip = new AlienShip(new Position(4, 6),50 , 500, movement);
             arena.setAlienShip(alienShip);
         }
     }

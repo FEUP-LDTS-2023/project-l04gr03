@@ -28,7 +28,7 @@ public class StartMenuController extends Controller<StartMenu> {
                 break;
             case Enter:
                 if(getModel().isSelectedPlay()){
-                    game.setState(GameStates.GAME);
+                    game.setState(GameStates.NEW_GAME);
                 }
                 else if(getModel().isSelectedLeaderboard()){
                     game.setState(GameStates.LEADERBOARD);

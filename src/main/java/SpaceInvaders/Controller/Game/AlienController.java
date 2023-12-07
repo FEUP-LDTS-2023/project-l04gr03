@@ -15,14 +15,14 @@ public class AlienController extends GameController {
 
     private MovementDirection movementDirection;
 
-    private long lastMovimentTime;
+    private long lastMovementTime;
 
     private long lastShotTime;
 
     public AlienController(Arena arena) {
         super(arena);
         this.movementDirection = MovementDirection.RIGHT;
-        this.lastMovimentTime = 0;
+        this.lastMovementTime = 0;
         this.lastShotTime = 0;
     }
 
@@ -112,16 +112,32 @@ public class AlienController extends GameController {
         }
     }
 
+    public long movementCoolDown(){
+        long movementCoolDown = 300 - (getModel().getRound() - 1) * 50L;
+        if(movementCoolDown < 50){
+            return 50;
+        }
+        return movementCoolDown;
+    }
+
+    public long shootingCoolDown(){
+        long shootingCoolDown = 800 - (getModel().getRound() - 1) * 100L;
+        if(shootingCoolDown < 100){
+            return 100;
+        }
+        return shootingCoolDown;
+    }
+
     @Override
     public void step(Game game, KeyStroke key, long time) {
-        if(time - lastShotTime > 800){
+        if(time - lastShotTime > shootingCoolDown()){
             shootProjectile();
             lastShotTime = time;
         }
-        if(time - lastMovimentTime > 300){
+        if(time - lastMovementTime > movementCoolDown()){
             updateMovementDirection();
             moveAliens();
-            lastMovimentTime = time;
+            lastMovementTime = time;
         }
     }
 }
