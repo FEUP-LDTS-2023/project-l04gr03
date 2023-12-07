@@ -1,16 +1,16 @@
 package SpaceInvaders.Controller.Game;
 
+import SpaceInvaders.Controller.Sound.SoundManager;
 import SpaceInvaders.Game;
 import SpaceInvaders.Model.Game.Arena;
-import SpaceInvaders.Model.Game.ArenaModifier;
 import SpaceInvaders.Model.Game.RegularGameElements.AlienShip;
 import SpaceInvaders.Model.Game.RegularGameElements.Projectile;
 import SpaceInvaders.Model.Position;
+import SpaceInvaders.Model.Sound.Sound_Options;
 import com.googlecode.lanterna.input.KeyStroke;
 
 import java.io.IOException;
 
-import static SpaceInvaders.Controller.Sound.SoundManager.playExplosionSound;
 
 
 public class AlienShipController extends GameController{
@@ -45,7 +45,7 @@ public class AlienShipController extends GameController{
         if(getModel().getAlienShip() != null) {
             if (getModel().getAlienShip().isDestroyed()) {
                 getArenaModifier().removeAlienShip();
-                playExplosionSound();
+                SoundManager.getInstance().playSound(Sound_Options.DESTRUCTION);
             }
         }
     }
