@@ -14,7 +14,9 @@ import java.io.IOException;
 public class PauseMenuController extends Controller<PauseMenu> {
     PauseMenu menu;
     public PauseMenuController(PauseMenu menu){
+
         super(menu);
+        SoundManager.getInstance().stopSound(Sound_Options.MUSIC);
     }
 
     @Override
@@ -34,6 +36,7 @@ public class PauseMenuController extends Controller<PauseMenu> {
             case Enter:
                 if(getModel().isSelectedContinue()){
                     game.setState(GameStates.RESUME_GAME);
+                    SoundManager.getInstance().playSound(Sound_Options.MUSIC);
                 }
                 else if(getModel().isSelectedInstructions()){
                     game.setState(GameStates.INSTRUCTIONS);
