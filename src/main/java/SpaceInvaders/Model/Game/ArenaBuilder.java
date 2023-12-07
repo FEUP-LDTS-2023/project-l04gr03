@@ -26,10 +26,11 @@ public abstract class ArenaBuilder{
         Arena newArena = new Arena(getWidth(),getHeight());
         baseShipHealth = 100;
         baseShipDamage = 50;
-        baseAlienHealth = 20;
-        baseAlienDamage = 20;
+        baseAlienHealth = 10;
+        baseAlienDamage = 10;
         baseAlienScore = 20;
         baseCoverWallHealth = 100;
+        newArena.setRound(getRound());
         newArena.setShip(createShip());
         newArena.setAliens(createAliens());
         newArena.setWalls(createWalls());
@@ -63,6 +64,8 @@ public abstract class ArenaBuilder{
     public abstract int getWidth();
 
     public abstract int getHeight();
+
+    public abstract int getRound();
 
     public abstract Ship createShip();
 

@@ -36,7 +36,7 @@ public class GameOverController extends Controller<GameOverMenu> {
             case Enter:
                 if (getModel().isSelectedRestart()) {
                     UpdateLeaderboard(getModel().getScore(), getModel().getUsername());
-                    game.setState(GameStates.GAME);
+                    game.setState(GameStates.NEW_GAME);
                 } else if (getModel().isSelectedExit()) {
                     UpdateLeaderboard(getModel().getScore(), getModel().getUsername());
                     game.setState(GameStates.START_MENU);
