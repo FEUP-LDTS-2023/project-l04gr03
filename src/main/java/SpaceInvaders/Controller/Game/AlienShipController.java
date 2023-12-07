@@ -23,7 +23,10 @@ public class AlienShipController extends GameController{
     }
 
     public void generateAlienShip(){
+
         getArenaModifier().createAlienShip();
+        SoundManager.getInstance().playSound(Sound_Options.ALIEN_SHIP_HIGH);
+        SoundManager.getInstance().playSound(Sound_Options.ALIEN_SHIP_LOW);
     }
 
     public void moveAlienShip(){
@@ -33,6 +36,8 @@ public class AlienShipController extends GameController{
         }
         else{
             getArenaModifier().removeAlienShip();
+            SoundManager.getInstance().stopSound(Sound_Options.ALIEN_SHIP_HIGH);
+            SoundManager.getInstance().stopSound(Sound_Options.ALIEN_SHIP_LOW);
         }
     }
 
@@ -46,6 +51,8 @@ public class AlienShipController extends GameController{
             if (getModel().getAlienShip().isDestroyed()) {
                 getArenaModifier().removeAlienShip();
                 SoundManager.getInstance().playSound(Sound_Options.DESTRUCTION);
+                SoundManager.getInstance().stopSound(Sound_Options.ALIEN_SHIP_HIGH);
+                SoundManager.getInstance().stopSound(Sound_Options.ALIEN_SHIP_LOW);
             }
         }
     }
