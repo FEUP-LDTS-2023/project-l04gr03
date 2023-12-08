@@ -1,13 +1,14 @@
 package SpaceInvaders.Model.Game;
 
 import SpaceInvaders.Model.Game.RegularGameElements.*;
-import SpaceInvaders.Model.Game.RegularGameElements.*;
+import SpaceInvaders.Model.Menu.OnlyTextMenu;
 import SpaceInvaders.Model.Position;
 
-import java.io.BufferedReader;
-import java.io.FileReader;
-import java.io.IOException;
+import java.io.*;
 import java.net.URL;
+import java.nio.charset.Charset;
+import java.nio.file.Files;
+import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -19,9 +20,18 @@ public class ArenaBuilderByRound extends ArenaBuilder {
 
     public ArenaBuilderByRound(int round) throws IOException {
         this.round = round;
-        URL resource = ArenaBuilderByRound.class.getResource("/rounds/round" + round + ".txt");
-        BufferedReader br = new BufferedReader(new FileReader(resource.getFile()));
-        arenaLines = readArenaLines(br);
+        if(round <= 5){
+            Path resource = new File(ArenaBuilderByRound.class.getResource("/rounds/round" + round + ".txt").getFile()).toPath();
+            Reader fileReader = Files.newBufferedReader(resource, Charset.defaultCharset());
+            BufferedReader br = new BufferedReader(fileReader);
+            arenaLines = readArenaLines(br);
+        }
+        else{
+            Path resource = new File(ArenaBuilderByRound.class.getResource("/rounds/round3.txt").getFile()).toPath();
+            Reader fileReader = Files.newBufferedReader(resource, Charset.defaultCharset());
+            BufferedReader br = new BufferedReader(fileReader);
+            arenaLines = readArenaLines(br);
+        }
     }
 
     public List<String> readArenaLines(BufferedReader br) throws IOException {
@@ -41,6 +51,7 @@ public class ArenaBuilderByRound extends ArenaBuilder {
         return arenaLines.size();
     }
 
+    @Override
     public int getRound(){
         return round;
     }
@@ -64,7 +75,7 @@ public class ArenaBuilderByRound extends ArenaBuilder {
         for(int x = 0; x < arenaLines.get(0).length(); x++){
             for(int y = 0; y < arenaLines.size(); y++){
                 if(arenaLines.get(y).charAt(x) == 'S'){
-                    return new Ship(new Position(x,y),round * getBaseShipHealth(), round * getBaseShipDamage());
+                    return new Ship(new Position(x,y),getBaseShipHealth(), getBaseShipDamage());
                 }
             }
         }
@@ -74,7 +85,6 @@ public class ArenaBuilderByRound extends ArenaBuilder {
     @Override
     public List<Alien> createAliens() {
         List<Alien> aliens = new ArrayList<>();
-        AlienState alienState;
         for(int x = 0; x < arenaLines.get(0).length(); x++){
             int type = 0;
             for (int y = 0; y < arenaLines.size(); y++){
@@ -116,7 +126,7 @@ public class ArenaBuilderByRound extends ArenaBuilder {
         for(int x = 0; x < arenaLines.get(0).length(); x++){
             for(int y = 0; y < arenaLines.size(); y++){
                 if(arenaLines.get(y).charAt(x) == 'W'){
-                    coverWalls.add(new CoverWall(new Position(x,y),getBaseCoverWallHealth() * (round * round)));
+                    coverWalls.add(new CoverWall(new Position(x,y),getBaseCoverWallHealth()));
                 }
             }
         }

@@ -6,7 +6,8 @@ public enum GameStates {
     PAUSE,
     LEADERBOARD,
     INSTRUCTIONS,
-    GAME,
+    NEW_GAME,
     RESUME_GAME,
+    NEW_GAME_ROUND,
     QUIT_GAME
 }

@@ -20,7 +20,7 @@ public class Game {
 
 
     private Game() throws IOException, URISyntaxException, FontFormatException {
-        this.gui = new GUILanterna(74,30);
+        this.gui = new GUILanterna(74,32);
         this.state = State.getInstance();
     }
 
@@ -30,7 +30,7 @@ public class Game {
     public void setState(GameStates gameStates) throws IOException {state.UpdateState(gameStates);}
 
 
-    private void startGame() throws IOException {
+    private void startGame() throws IOException, InterruptedException {
         int FPS = 30;
         int frameTime = 1000 / FPS;
         while(this.state.getCurrentState() != GameStates.QUIT_GAME){
@@ -41,12 +41,13 @@ public class Game {
             try {
                 if (sleepTime > 0) Thread.sleep(sleepTime);
             } catch (InterruptedException e) {
+                throw e;
             }
         }
         gui.close();
     }
 
-    public static void main(String[] args) throws IOException, URISyntaxException, FontFormatException {
+    public static void main(String[] args) throws IOException, URISyntaxException, FontFormatException, InterruptedException {
         Game game = new Game();
         game.startGame();
     }

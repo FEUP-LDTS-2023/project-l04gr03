@@ -1,6 +1,7 @@
 The goal is to kill the aliens and avoid they reach you or the cover
-walls.You control a ship that shoot lasers. Randomly, an alien ship
-may appear.
+walls.You control a ship that shoot lasers to kill the aliens. Randomly,
+an alien ship may appear and if you hiy it, you will receive a big
+amount of points.
 
 How to Play:
 
@@ -12,17 +13,15 @@ to pause the game
 Menus:
 Use the UP and DOWN ARROW KEYS to change the different menu options
 and press the ENTER KEY to select the option. Use the ESCAPE KEY when
-you want to pause the game or exit the LEADERBOARD and INSTRUCTIONS
-menus.
+you want to exit the LEADERBOARD and INSTRUCTIONS menus.
 
 Punctuations:
 - Aliens: 20 * round number
-- Alien Ship : 500 * round number
+- Alien Ship : 1000
 
 Collectables:
 - GodMode (star symbol): your ship doesn't lose health
 - Health (hearth symbol): refiles your ship's health
 - Machine Gun (lightning symbol): Bigger rate of shoots for you ship
 - Score (dollar symbol): gives a multiplier for the points you receive
-- Damage (flame symbol): multiplier for your ship's damage
-
+- Damage (flame symbol): multiplier for your ship's shoot damage

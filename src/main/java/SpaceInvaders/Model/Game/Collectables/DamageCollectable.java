@@ -1,5 +1,4 @@
 package SpaceInvaders.Model.Game.Collectables;
-import SpaceInvaders.Model.Game.Collectables.CollectableWithMultiplier;
 import SpaceInvaders.Model.Game.RegularGameElements.Ship;
 import SpaceInvaders.Model.Game.RegularGameElements.ShipMode;
 import SpaceInvaders.Model.Position;

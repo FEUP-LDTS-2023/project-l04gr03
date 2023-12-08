@@ -15,6 +15,8 @@ public class Arena {
 
     private int height;
 
+    private int round;
+
     private Ship ship;
 
     private List<Alien> aliens;
@@ -47,6 +49,9 @@ public class Arena {
         return height;
     }
 
+    public int getRound() {return round;}
+
+    public void setRound(int round) {this.round = round;}
 
     public int getScore(){
         return score;

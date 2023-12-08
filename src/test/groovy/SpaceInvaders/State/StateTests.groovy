@@ -1,12 +1,8 @@
 package SpaceInvaders.State
 
-import SpaceInvaders.Controller.Controller
-import SpaceInvaders.Controller.Menu.StartMenuController
 import SpaceInvaders.GUI.GUI
 import SpaceInvaders.Game
 import SpaceInvaders.Model.Game.Arena
-import SpaceInvaders.Model.Menu.StartMenu
-import SpaceInvaders.Viewer.Menu.StartMenuViewer
 import spock.lang.Specification
 
 class StateTests extends Specification{
@@ -14,16 +10,16 @@ class StateTests extends Specification{
         given:
             State state = State.getInstance();
         when:
-            state.UpdateState(GameStates.GAME)
+            state.UpdateState(GameStates.NEW_GAME)
         then:
-            state.currentState == GameStates.GAME
+            state.currentState == GameStates.NEW_GAME
     }
 
     def "Update State When New State is Start Menu"(){
         given:
             State state = State.getInstance();
         when:
-            state.UpdateState(GameStates.GAME)
+            state.UpdateState(GameStates.NEW_GAME)
             state.UpdateState(GameStates.GAME_OVER)
             state.UpdateState(GameStates.START_MENU)
         then:
@@ -35,11 +31,11 @@ class StateTests extends Specification{
         given:
             def state = State.getInstance()
         when:
-            state.UpdateState(GameStates.GAME)
+            state.UpdateState(GameStates.NEW_GAME)
             state.UpdateToPrevious()
         then:
             state.currentState == GameStates.START_MENU
-            state.previousState == GameStates.GAME
+            state.previousState == GameStates.NEW_GAME
 
     }
 

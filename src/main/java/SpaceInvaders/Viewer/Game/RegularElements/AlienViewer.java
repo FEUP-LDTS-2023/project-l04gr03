@@ -4,12 +4,12 @@ import SpaceInvaders.GUI.GUI;
 import SpaceInvaders.Model.Game.RegularGameElements.Alien;
 
 public class AlienViewer implements ElementViewer<Alien> {
-    final private  char[] AlienChars = {'\u00ca','\u00cc','\u00ce'}; // Ê, Ì, Î
+    final private  char[] AlienChars = {'\u00ca','\u00cc','\u00ce'};
 
     final private char[] AlienChars2 = {'\u00cb','\u00cd','\u00cf'};
 
     final private String [] AlienColors = {"#DB55DD", "#EBDF64", "#62DE6D"};
-    private int charChoice = 0;
+    private final int charChoice;
     public AlienViewer(int charChoice){
         this.charChoice = charChoice;
     }

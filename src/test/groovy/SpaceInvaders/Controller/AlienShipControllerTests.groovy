@@ -25,18 +25,22 @@ class AlienShipControllerTests extends Specification{
 
     def "Move AlienShip - can move"() {
         given:
-        def arena = Mock(Arena.class)
-        def controller = Spy(AlienShipController.class)
-        def alienShip = Mock(AlienShip.class)
-        arena.getAlienShip() >> alienShip
-        controller.getModel() >> arena
+            def arena = Mock(Arena.class)
+            def controller = Spy(AlienShipController.class)
+            def alienShip = Mock(AlienShip.class)
+            arena.getAlienShip() >> alienShip
+            controller.getModel() >> arena
+            alienShip.getPosition() >> new Position(10,10)
+            alienShip.getMovementDirection() >> 1
+            def newPosition = new Position(alienShip.getPosition().getX() + alienShip.getMovementDirection(),alienShip.getPosition().getY())
 
         when:
-        controller.canMoveAlienShip() >> true
-        alienShip.getPosition() >> Mock(Position)
-        controller.moveAlienShip()
+            controller.canMoveAlienShip() >> true
+            controller.moveAlienShip()
         then:
-        1 * alienShip.setPosition(_)
+            1 * alienShip.setPosition(newPosition)
+            newPosition == new Position(11, 10)
+
     }
 
 
@@ -103,7 +107,7 @@ class AlienShipControllerTests extends Specification{
         controller.getModel() >> arena
         arena.getWidth() >> 74
         when:
-        def alienShip = new AlienShip(new Position(0, 10), 100, 100, 1)
+        def alienShip = new AlienShip(new Position(1, 10), 100, 100, 1)
         arena.getAlienShip() >> alienShip
         then:
         controller.canMoveAlienShip() == false
@@ -116,7 +120,7 @@ class AlienShipControllerTests extends Specification{
         controller.getModel() >> arena
         arena.getWidth() >> 74
         when:
-        def alienShip = new AlienShip(new Position(74, 10), 100, 100, 1)
+        def alienShip = new AlienShip(new Position(72, 10), 100, 100, 1)
         arena.getAlienShip() >> alienShip
         then:
         controller.canMoveAlienShip() == false
@@ -231,12 +235,22 @@ class AlienShipControllerTests extends Specification{
             1 * controller.moveAlienShip()
 
         when: "Move Alien Ship kill mutation replaced long subtraction with addition"
-            controller.step(Mock(Game), Mock(KeyStroke), - 50002)
+            controller.step(Mock(Game), Mock(KeyStroke),  50002)
         then:
             0 * controller.moveAlienShip()
 
-        when: "Generate alien ship 2 kill mutation Replaced long subtraction with addition"
-            controller.step(Mock(Game), Mock(KeyStroke), -100002 )
+        when: "Generate alien ship kill mutation Replaced long subtraction with addition"
+            controller.step(Mock(Game), Mock(KeyStroke), 50001 )
+        then:
+            0 * controller.generateAlienShip()
+
+        when: "Move Alien Ship kill mutation change conditional boundary"
+            controller.step(Mock(Game), Mock(KeyStroke), 50102)
+        then:
+            0 * controller.moveAlienShip()
+
+        when: "Generate alien ship kill mutation change conditional boundary"
+            controller.step(Mock(Game), Mock(KeyStroke), 100001)
         then:
             0 * controller.generateAlienShip()
     }
