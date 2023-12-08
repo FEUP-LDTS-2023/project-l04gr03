@@ -113,6 +113,7 @@ class SoundManagerTests extends Specification {
             !soundManager.isSoundPlaying(Sound_Options.ALIEN_SHIP_HIGH)
             !soundManager.isSoundPlaying(Sound_Options.DESTRUCTION)
     }
+    
 
 
 }

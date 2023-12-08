@@ -16,7 +16,6 @@ public class GameOverController extends Controller<GameOverMenu> {
     public GameOverController(GameOverMenu menu) {
 
         super(menu);
-        SoundManager.getInstance().stopSound(Sound_Options.MUSIC);
     }
 
     @Override
