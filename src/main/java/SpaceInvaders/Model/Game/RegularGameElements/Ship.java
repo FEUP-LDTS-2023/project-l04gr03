@@ -4,16 +4,18 @@ import SpaceInvaders.Model.Position;
 
 public class Ship extends AttackingElement {
 
-    private int damagePerShot;
-
+    private final int maxHealth;
     private ShipMode shipMode;
 
     public Ship(Position position, int health, int damagePerShot){
         super(position,health,damagePerShot);
+        this.maxHealth = 100;
         this.shipMode = ShipMode.NORMAL_MODE;
     }
 
     public ShipMode getShipMode() {return shipMode;}
+
+    public int getMaxHealth() {return maxHealth;}
 
     @Override
     public int getDamagePerShot(){
@@ -40,7 +42,7 @@ public class Ship extends AttackingElement {
     }
 
     public void restoreHealth(){
-        this.setHealth(100);
+        this.setHealth(maxHealth);
     }
 
     public void setShipMode(ShipMode shipMode) {this.shipMode = shipMode;}

@@ -9,7 +9,6 @@ class TextMenuTest extends Specification{
             def menu = new Instructions()
         expect:
             menu.getText() != null
-
     }
 
 

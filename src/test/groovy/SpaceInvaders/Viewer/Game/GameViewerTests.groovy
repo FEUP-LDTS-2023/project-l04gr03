@@ -18,6 +18,7 @@ import SpaceInvaders.Model.Game.RegularGameElements.Ship
 import SpaceInvaders.Model.Game.RegularGameElements.ShipMode
 import SpaceInvaders.Model.Game.RegularGameElements.Wall
 import SpaceInvaders.Viewer.Game.Collectables.GodModeCollectableViewer
+import SpaceInvaders.Viewer.Game.RegularElements.AlienViewer
 import spock.lang.Specification
 
 class GameViewerTests extends Specification{
@@ -31,7 +32,7 @@ class GameViewerTests extends Specification{
             arena.getShip() >> Mock(Ship)
             arena.getWalls() >> Arrays.asList(Mock(Wall))
             arena.getProjectiles() >> Arrays.asList(Mock(Projectile))
-            arena.getCoverWalls() >> Arrays.asList(Mock( CoverWall))
+            arena.getCoverWalls() >> Arrays.asList(Mock(CoverWall))
             arena.getAliens() >> Arrays.asList((Mock(Alien)))
             arena.getActiveCollectable() >> Mock(Collectable)
             arena.getAlienShip() >> Mock(AlienShip)
@@ -41,7 +42,23 @@ class GameViewerTests extends Specification{
 
         then:
             6 * gui.drawElement(_,_,_)
-            6 * gui.drawText(_,_,_)
+            8 * gui.drawText(_,_,_)
+
+        when: "No Char change (boundary limit)"
+            gameViewerSpy.draw(gui, 300)
+            gameViewerSpy.draw(gui,600)
+        then:
+            2 * gui.drawElement(_, '\u00ca', _)
+            10 * gui.drawElement(_,_,_)
+            16 * gui.drawText(_,_,_)
+
+        when: "Char change"
+            gameViewerSpy.draw(gui,1000 )
+            gameViewerSpy.draw(gui,1001)
+        then:
+            1 * gui.drawElement(_, '\u00cb', _)
+            11 * gui.drawElement(_,_,_)
+            16 * gui.drawText(_,_,_)
     }
 
 

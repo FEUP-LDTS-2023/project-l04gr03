@@ -112,8 +112,9 @@ public class State {
                 SoundManager.getInstance().stopAllSounds();
                 break;
 
-            case GAME:
-                ArenaBuilderByRound arenaBuilder = new ArenaBuilderByRound(1);
+            case NEW_GAME:
+                ArenaBuilderByRound arenaBuilder;
+                arenaBuilder = new ArenaBuilderByRound(1);
                 this.arena = arenaBuilder.buildArena();
                 controller = new ArenaController(arena);
                 viewer = new GameViewer(arena);
@@ -133,6 +134,15 @@ public class State {
                 SoundManager.getInstance().stopAllSounds();
                 break;
 
+            case NEW_GAME_ROUND:
+                ArenaBuilderByRound newArenaBuilder = new ArenaBuilderByRound(arena.getRound() + 1);
+                int score = this.arena.getScore();
+                this.arena = newArenaBuilder.buildArena();
+                this.arena.increaseScore(score);
+                controller = new ArenaController(arena);
+                viewer = new GameViewer(arena);
+                break;
+
             case RESUME_GAME:
                 controller = new ArenaController(arena);
                 viewer = new GameViewer(arena);
@@ -144,6 +154,8 @@ public class State {
                 controller = new OnlyTextMenuController(instructions);
                 viewer = new InstructionsViewer(instructions);
                 break;
+
+            case QUIT_GAME: // No new controllers or viewers, the main function will close the game
         }
 
     }

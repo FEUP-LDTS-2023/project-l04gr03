@@ -1,6 +1,5 @@
 package SpaceInvaders.Viewer.Game;
 
-import SpaceInvaders.Controller.Game.AlienShipController;
 import SpaceInvaders.GUI.GUI;
 import SpaceInvaders.Model.Game.Collectables.*;
 import SpaceInvaders.Model.Game.Element;
@@ -25,28 +24,15 @@ public class GameViewer extends Viewer<Arena> {
     @Override
     public void drawElements(GUI gui, long time) {
         drawElements(gui, getModel().getAliens(), new AlienViewer(alienCharChoice));
-
-        //Changes char for the next frame (only if needed)
+        //Changes alien char for the next frame (only if needed)
         ChangeChar(time);
-
         drawElements(gui,getModel().getCoverWalls(), new CoverWallViewer());
         drawElements(gui, getModel().getWalls(), new WallViewer());
         drawElement(gui, getModel().getShip(), new ShipViewer());
         drawElements(gui, getModel().getProjectiles(), new ProjectileViewer());
         drawElement(gui,getModel().getAlienShip(),new AlienShipViewer());
         drawCollectable(gui, getModel().getActiveCollectable());
-        gui.drawText(new Position(5,5), "SCORE = ", "#F8F8FF");
-        gui.drawText(new Position(15,5), String.valueOf(getModel().getScore()),"#F8F8FF" );
-        gui.drawText(new Position(55,5), "HEALTH = ", "#F8F8FF");
-        gui.drawText(new Position(65,5), String.valueOf(getModel().getShip().getHealth()),"#F8F8FF" );
-        if(getModel().getShip().getShipMode() != ShipMode.NORMAL_MODE){
-            gui.drawText(new Position(55,8), String.valueOf(getModel().getShip().getShipMode()),"#F8F8FF");
-        }
-        if(!getModel().getAliens().isEmpty()){
-            if(getModel().getAliens().get(0).getAlienMode() != AlienMode.NORMAL_MODE){
-                gui.drawText(new Position(55,10), String.valueOf(getModel().getAliens().get(0).getAlienMode()),"#F8F8FF");
-            }
-        }
+        drawGameHUD(gui);
     }
 
     private void ChangeChar(long time){
@@ -65,8 +51,22 @@ public class GameViewer extends Viewer<Arena> {
         return lastCharChange;
     }
 
-
-
+    private void drawGameHUD(GUI gui){
+        gui.drawText(new Position(5,3), "SCORE = ", "#F8F8FF");
+        gui.drawText(new Position(15,3), String.valueOf(getModel().getScore()),"#F8F8FF" );
+        gui.drawText(new Position(55,3), "HEALTH = ", "#F8F8FF");
+        gui.drawText(new Position(65,3), String.valueOf(getModel().getShip().getHealth()),"#F8F8FF" );
+        gui.drawText(new Position(5,5),"ROUND ","#F8F8FF");
+        gui.drawText(new Position(10,5),String.valueOf(getModel().getRound()),"#F8F8FF");
+        if(getModel().getShip().getShipMode() != ShipMode.NORMAL_MODE){
+            gui.drawText(new Position(55,5), String.valueOf(getModel().getShip().getShipMode()),"#F8F8FF");
+        }
+        if(!getModel().getAliens().isEmpty()){
+            if(getModel().getAliens().get(0).getAlienMode() != AlienMode.NORMAL_MODE){
+                gui.drawText(new Position(55,5), String.valueOf(getModel().getAliens().get(0).getAlienMode()),"#F8F8FF");
+            }
+        }
+    }
 
     private <T extends Element> void drawElements(GUI gui, List<T> elements, ElementViewer<T> viewer) {
         for (T element : elements)

@@ -44,11 +44,6 @@ public class ArenaController extends GameController {
 
     public AlienController getAlienController() {return alienController;}
 
-    public ProjectileController getProjectileController() {return projectileController;}
-
-
-    public ArenaModifier getArenaModifier() {return arenaModifier;}
-
     public boolean collisionBetween(Element element1, Element element2){
         return element1.getPosition().equals(element2.getPosition());
     }
@@ -200,8 +195,11 @@ public class ArenaController extends GameController {
                 game.setState(GameStates.PAUSE);
             }
         }
-        if(getModel().getShip().getHealth() == 0 || shipCollidesWithAlien() || alienCollidesWithCoverWall() || getModel().getAliens().isEmpty()){
+        if(getModel().getShip().isDestroyed() || shipCollidesWithAlien() || alienCollidesWithCoverWall()){
             game.setState(GameStates.GAME_OVER);
+        }
+        if(getModel().getAliens().isEmpty()){
+           game.setState(GameStates.NEW_GAME_ROUND);
         }
         shipController.step(game,key,time);
         alienController.step(game,key,time);

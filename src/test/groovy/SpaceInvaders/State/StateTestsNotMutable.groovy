@@ -37,11 +37,11 @@ class StateTestsNotMutable extends Specification{
             state.viewer.getClass() == PauseMenuViewer.class
     }
 
-    def "StateActions Game State" () {
+    def "StateActions New Game State" () {
         given:
             State state = State.getInstance()
         when:
-            state.UpdateState(GameStates.GAME)
+            state.UpdateState(GameStates.NEW_GAME)
             state.StateActions()
         then:
             state.controller.getClass() == ArenaController.class

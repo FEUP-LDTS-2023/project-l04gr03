@@ -6,6 +6,7 @@ import SpaceInvaders.Viewer.Game.RegularElements.ElementViewer;
 
 
 public class MachineGunCollectableViewer implements ElementViewer<MachineGunModeCollectable> {
+   @Override
     public void draw(GUI gui, MachineGunModeCollectable collectable) {
         gui.drawElement(collectable.getPosition(), '\u00c9', "#B0E0E6");
             }

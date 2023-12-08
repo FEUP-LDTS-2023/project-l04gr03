@@ -9,12 +9,17 @@ import SpaceInvaders.State.GameStates;
 import com.googlecode.lanterna.input.KeyStroke;
 
 import java.io.*;
+import java.nio.file.Files;
+import java.nio.file.Paths;
+
+import static java.nio.charset.StandardCharsets.UTF_8;
+import static java.nio.file.StandardOpenOption.APPEND;
+import static java.nio.file.StandardOpenOption.CREATE;
 
 
 public class GameOverController extends Controller<GameOverMenu> {
 
     public GameOverController(GameOverMenu menu) {
-
         super(menu);
     }
 
@@ -35,7 +40,7 @@ public class GameOverController extends Controller<GameOverMenu> {
             case Enter:
                 if (getModel().isSelectedRestart()) {
                     UpdateLeaderboard(getModel().getScore(), getModel().getUsername());
-                    game.setState(GameStates.GAME);
+                    game.setState(GameStates.NEW_GAME);
                     SoundManager.getInstance().playSound(Sound_Options.MUSIC);
                 } else if (getModel().isSelectedExit()) {
                     UpdateLeaderboard(getModel().getScore(), getModel().getUsername());
@@ -50,12 +55,14 @@ public class GameOverController extends Controller<GameOverMenu> {
             case Backspace:
                 getModel().removeLetter();
                 break;
+
+            default: //Other keys don´t have actions
         }
     }
 
     public void UpdateLeaderboard(Integer score, String username) throws IOException {
         File file = new File("src/main/resources/text/Leaderboard.txt");
-        BufferedWriter bw = new BufferedWriter(new FileWriter(file.getAbsolutePath(),true));
+        BufferedWriter bw =  Files.newBufferedWriter(Paths.get(file.getAbsolutePath()), UTF_8, CREATE, APPEND);
         if(username.isEmpty()){
             username = "Unknown";
         }

@@ -7,7 +7,6 @@ public class DestroyableElement extends Element {
 
     private int health;
 
-    private final int maxHealth = 100;
     public DestroyableElement(Position position, int health) {
         super(position);
         this.health = health;
@@ -32,9 +31,18 @@ public class DestroyableElement extends Element {
         if(this == o){
             return true;
         }
-        if(this.getClass() != o.getClass() || this == null){
+        if(!(o instanceof DestroyableElement)){
             return false;
         }
         return this.getPosition().equals(((DestroyableElement) o).getPosition()) && this.health == ((DestroyableElement) o).getHealth();
+    }
+
+    @Override
+    public int hashCode() {
+        int prime = 31;
+        int result = 1;
+        result = prime * result + health;
+        result = prime * result + getPosition().hashCode();
+        return result;
     }
 }
