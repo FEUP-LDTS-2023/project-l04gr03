@@ -19,13 +19,21 @@ This project was developed by:
   LDTS 2023⁄24 <br>
   Software Design and Testing Laboratory
 
-### HOW TO PLAY
-
--**Menus** -
-  - **Menu navigation** - 
+### GAME CONTROLS
 
 
--**Game** - Use
+- **Menus** 
+  - **Menu Navigation** - Up and Down arrow Keys;
+  - **Menu Selection** - Enter Key;
+  - **Exit from Leaderboard and Instructions Menus** - Escape Key.
+
+
+- **Game**  
+  - **Shoot** -  Up Arrow key;
+  - **Move** -  Left and Right Arrow Keys;
+  - **Pause Game** - Escape Key.
+
+
 ### IMPLEMENTED FEATURES
 
 - **Playable Character** - The playable character is a spaceship. The player controls its movements by pressing the right and left arrow keys. It can shoot by pressing the up arrow key.
@@ -54,7 +62,7 @@ This project was developed by:
     - **Exit** - Exists the game.
 
 
-- **Pause Menu** - Can be accessed pressing the escape key. It as the following options:
+- **Pause Menu** - Can be accessed pressing the escape key during the game. It as the following options:
     - **Continue** - Resumes the game;
     - **Instructions** - Displays the instructions;
     - **Restart** - Restarts the game;

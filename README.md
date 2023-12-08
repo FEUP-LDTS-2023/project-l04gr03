@@ -5,6 +5,19 @@ The objective is to defeat a wave of descending aliens with a horizontally movin
 
 The player controls a spaceship that can shoot lasers. The game ends when the player is shot and has no lives left. The player can also collect some power ups that can help him.
 
+### GAME CONTROLS
+
+
+- **Menus**
+    - **Menu Navigation** - Up and Down arrow Keys;
+    - **Menu Selection** - Enter Key;
+    - **Exit from Leaderboard and Instructions Menus** - Escape Key.
+
+
+- **Game**
+    - **Shoot** -  Up Arrow key;
+    - **Move** -  Left and Right Arrow Keys;
+    - **Pause Game** - Escape Key.
 
 ### Project Main Goals
 
