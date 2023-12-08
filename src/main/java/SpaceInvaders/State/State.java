@@ -22,11 +22,13 @@ import com.groupcdg.pitest.annotations.DoNotMutate;
 import java.io.IOException;
 
 public class State {
-
     private GameStates currentState;
     private GameStates previousState;
 
     private Controller controller;
+
+    private ArenaController arenaController;
+
     private Viewer viewer;
 
    private Arena arena;
@@ -114,6 +116,7 @@ public class State {
                 arenaBuilder = new ArenaBuilderByRound(1);
                 this.arena = arenaBuilder.buildArena();
                 controller = new ArenaController(arena);
+                arenaController = (ArenaController) controller;
                 viewer = new GameViewer(arena);
                 break;
 
@@ -135,11 +138,12 @@ public class State {
                 this.arena = newArenaBuilder.buildArena();
                 this.arena.increaseScore(score);
                 controller = new ArenaController(arena);
+                arenaController = (ArenaController) controller;
                 viewer = new GameViewer(arena);
                 break;
 
             case RESUME_GAME:
-                controller = new ArenaController(arena);
+                controller = arenaController;
                 viewer = new GameViewer(arena);
                 break;
 
