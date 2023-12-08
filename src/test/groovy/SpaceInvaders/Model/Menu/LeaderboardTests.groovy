@@ -12,6 +12,5 @@ class LeaderboardTests extends Specification{
         then:
         menu.text == Arrays.asList("Maria 234", "João 123", "Lucas 010")
     }
-
 }
 

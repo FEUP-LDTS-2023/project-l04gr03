@@ -19,6 +19,13 @@ This project was developed by:
   LDTS 2023⁄24 <br>
   Software Design and Testing Laboratory
 
+### HOW TO PLAY
+
+-**Menus** -
+  - **Menu navigation** - 
+
+
+-**Game** - Use
 ### IMPLEMENTED FEATURES
 
 - **Playable Character** - The playable character is a spaceship. The player controls its movements by pressing the right and left arrow keys. It can shoot by pressing the up arrow key.
