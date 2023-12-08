@@ -2,11 +2,8 @@ package SpaceInvaders.Model.Game.Collectables;
 
 import SpaceInvaders.Model.Game.Element;
 import SpaceInvaders.Model.Position;
-import SpaceInvaders.Model.Game.Arena;
 import SpaceInvaders.Model.Game.RegularGameElements.Alien;
-import SpaceInvaders.Model.Game.RegularGameElements.AttackingElement;
 import SpaceInvaders.Model.Game.RegularGameElements.Ship;
-import SpaceInvaders.Model.Position;
 
 
 import java.util.List;

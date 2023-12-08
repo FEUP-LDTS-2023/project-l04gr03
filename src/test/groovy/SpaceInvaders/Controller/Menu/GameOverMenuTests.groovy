@@ -38,6 +38,8 @@ class GameOverMenuTests extends Specification{
             def gameOverController = Spy(GameOverController)
             gameOverController.getModel() >> gameOverMenu
             def game = Mock(Game)
+            gameOverMenu.getUsername() >> "R"
+            gameOverMenu.getScore() >> 0
         when: 'Enter key'
             def key = new KeyStroke(KeyType.Enter)
             gameOverController.step(game, key, 0)
@@ -71,7 +73,8 @@ class GameOverMenuTests extends Specification{
             gameOverController.getModel() >> gameOverMenu
             gameOverMenu.isSelectedRestart() >> false
             gameOverMenu.isSelectedExit() >> true
-            gameOverMenu.getUsername() >> ""
+            def username = ""
+            gameOverMenu.getUsername() >> username
             gameOverMenu.getScore() >> 0
             def game = Mock(Game)
         when: 'Enter key'
@@ -80,23 +83,25 @@ class GameOverMenuTests extends Specification{
         then:
             1 * game.setState(GameStates.START_MENU)
             1 * gameOverController.UpdateLeaderboard(0,_)
+            username.isEmpty()
     }
 
     def "Step Enter key is selected Leaderboard"(){
         given:
-        def gameOverMenu = Mock(GameOverMenu)
-        def gameOverController = Spy(GameOverController.class)
-        gameOverController.getModel() >> gameOverMenu
-        gameOverMenu.isSelectedRestart() >> false
-        gameOverMenu.isSelectedExit() >> false
-        gameOverMenu.isSelectedLeaderboard() >> true
-        gameOverMenu.getUsername() >> ""
-        def game = Mock(Game)
+            def gameOverMenu = Mock(GameOverMenu)
+            def gameOverController = Spy(GameOverController.class)
+            gameOverController.getModel() >> gameOverMenu
+            gameOverMenu.isSelectedRestart() >> false
+            gameOverMenu.isSelectedExit() >> false
+            gameOverMenu.isSelectedLeaderboard() >> true
+            def username = ""
+            gameOverMenu.getUsername() >> username
+            def game = Mock(Game)
         when: 'Enter key'
-        def key = new KeyStroke(KeyType.Enter)
-        gameOverController.step(game, key, 0)
+            def key = new KeyStroke(KeyType.Enter)
+            gameOverController.step(game, key, 0)
         then:
-        1 * game.setState(GameStates.LEADERBOARD)
+            1 * game.setState(GameStates.LEADERBOARD)
     }
 
     def "Step Character Key"() {
@@ -133,6 +138,7 @@ class GameOverMenuTests extends Specification{
         then:
             1 * gameOverMenu.removeLetter()
     }
+
 
 }
 
