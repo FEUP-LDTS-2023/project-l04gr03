@@ -56,9 +56,6 @@ public class SoundManager {
 
     public void resumePlaying(){
         backgroundMusic.resumePlaying();
-        laser.resumePlaying();
-        dyingSound.resumePlaying();
-        collectableSound.resumePlaying();
         alienShipLowPitch.resumePlaying();
         alienShipHighPitch.resumePlaying();
     }
