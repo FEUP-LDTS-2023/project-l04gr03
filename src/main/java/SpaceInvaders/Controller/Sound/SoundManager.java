@@ -68,6 +68,8 @@ public class SoundManager {
         switchOption.stop();
         dyingSound.stop();
         collectableSound.stop();
+        alienShipHighPitch.stop();
+        alienShipLowPitch.stop();
     }
 
     public boolean isSoundPlaying(Sound_Options option){

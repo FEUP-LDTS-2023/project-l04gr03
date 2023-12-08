@@ -109,6 +109,7 @@ public class State {
                 PauseMenu menuP = new PauseMenu();
                 controller = new PauseMenuController(menuP);
                 viewer = new PauseMenuViewer(menuP);
+                SoundManager.getInstance().stopAllSounds();
                 break;
 
             case GAME:
@@ -129,6 +130,7 @@ public class State {
                 GameOverMenu menuG = new GameOverMenu(arena.getScore());
                 controller = new GameOverController(menuG);
                 viewer = new GameOverMenuViewer(menuG);
+                SoundManager.getInstance().stopAllSounds();
                 break;
 
             case RESUME_GAME:
