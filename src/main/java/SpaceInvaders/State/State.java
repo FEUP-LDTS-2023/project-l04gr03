@@ -134,7 +134,7 @@ public class State {
             case RESUME_GAME:
                 controller = new ArenaController(arena);
                 viewer = new GameViewer(arena);
-                SoundManager.getInstance().resumePlayingMusic();
+                SoundManager.getInstance().resumePlaying();
                 break;
 
             case INSTRUCTIONS:
