@@ -26,6 +26,22 @@ public class AlienController extends GameController {
         this.lastShotTime = 0;
     }
 
+    public long getLastMovementTime() {
+        return lastMovementTime;
+    }
+
+    public long getLastShotTime() {
+        return lastShotTime;
+    }
+
+    public void setLastMovementTime(long lastMovementTime) {
+        this.lastMovementTime = lastMovementTime;
+    }
+
+    public void setLastShotTime(long lastShotTime) {
+        this.lastShotTime = lastShotTime;
+    }
+
     public boolean canMoveAlien(Alien alien) {
         switch (movementDirection) {
             case LEFT:

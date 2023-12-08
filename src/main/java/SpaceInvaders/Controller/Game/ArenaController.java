@@ -27,6 +27,10 @@ public class ArenaController extends GameController {
 
     private ArenaModifier arenaModifier;
 
+    private boolean needToUpdateTimers;
+
+    private long pauseGameTime;
+
     public ArenaController(Arena arena) {
         super(arena);
         this.shipController = new ShipController(arena);
@@ -35,11 +39,22 @@ public class ArenaController extends GameController {
         this.arenaModifier = new ArenaModifier(arena);
         this.collectableController = new CollectableController(arena);
         this.alienShipController = new AlienShipController(arena);
+        this.needToUpdateTimers = false;
+        this.pauseGameTime = 0;
     }
 
     public ShipController getShipController() {return shipController;}
 
     public AlienController getAlienController() {return alienController;}
+
+    public void setTimers(long time){
+        long timeGameWasPaused = time - pauseGameTime;
+        shipController.setMovementTime(shipController.getMovementTime() + timeGameWasPaused);
+        shipController.setShootingTime(shipController.getShootingTime() + timeGameWasPaused);
+        alienController.setLastMovementTime(alienController.getLastMovementTime() + timeGameWasPaused);
+        alienController.setLastShotTime(alienController.getLastShotTime() + timeGameWasPaused);
+        collectableController.setGenerateCollectableTime(collectableController.getGenerateCollectableTime() + timeGameWasPaused);
+    }
 
     public boolean collisionBetween(Element element1, Element element2){
         return element1.getPosition().equals(element2.getPosition());
@@ -186,8 +201,14 @@ public class ArenaController extends GameController {
 
     @Override
     public void step(Game game, KeyStroke key, long time) throws IOException {
+        if(needToUpdateTimers){
+            setTimers(time);
+            needToUpdateTimers = false;
+        }
         if(key != null){
             if(key.getKeyType() == KeyType.Escape){
+                pauseGameTime = time;
+                needToUpdateTimers = true;
                 game.setState(GameStates.PAUSE);
             }
         }

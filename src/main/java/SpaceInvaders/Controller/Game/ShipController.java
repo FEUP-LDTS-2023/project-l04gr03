@@ -26,6 +26,14 @@ public class ShipController extends GameController {
         this.shootingTime = 0;
     }
 
+    public long getMovementTime() {return movementTime;}
+
+    public void setMovementTime(long movementTime) {this.movementTime = movementTime;}
+
+    public long getShootingTime() {return shootingTime;}
+
+    public void setShootingTime(long shootingTime) {this.shootingTime = shootingTime;}
+
     public boolean canMoveShip(Position position){
         return position.getX() > 0 && position.getX() < getModel().getWidth() - 1 && position.getY() > 0 && position.getY() < getModel().getHeight() - 1;
     }

@@ -12,15 +12,19 @@ import java.io.IOException;
 
 public class CollectableController extends GameController {
 
-    private long generateCollectorTime;
+    private long generateCollectableTime;
 
     private long movementTime;
 
     public CollectableController(Arena arena) {
         super(arena);
-        this.generateCollectorTime = 0;
+        this.generateCollectableTime = 0;
         this.movementTime = 0;
     }
+
+    public long getGenerateCollectableTime() {return generateCollectableTime;}
+
+    public void setGenerateCollectableTime(long generateCollectableTime) {this.generateCollectableTime = generateCollectableTime;}
 
     public void generateCollectable(){
         getArenaModifier().createCollectable();
@@ -40,16 +44,16 @@ public class CollectableController extends GameController {
 
     @Override
     public void step(Game game, KeyStroke key, long time) throws IOException {
-        if(time - generateCollectorTime > 20000){
+        if(time - generateCollectableTime > 20000){
             generateCollectable();
-            generateCollectorTime = time;
+            generateCollectableTime = time;
         }
         if(getModel().getActiveCollectable() != null && time - movementTime > 150){
             moveCollectable();
             movementTime = time;
         }
         if(!getModel().getAliens().isEmpty()){
-            if((getModel().getShip().getShipMode() != ShipMode.NORMAL_MODE || getModel().getAliens().get(0).getAlienMode() != AlienMode.NORMAL_MODE) && time - generateCollectorTime > 19900){
+            if((getModel().getShip().getShipMode() != ShipMode.NORMAL_MODE || getModel().getAliens().get(0).getAlienMode() != AlienMode.NORMAL_MODE) && time - generateCollectableTime > 19900){
                 endCollectableEffect();
             }
         }
