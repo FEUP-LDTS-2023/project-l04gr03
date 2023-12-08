@@ -1,3 +1,5 @@
+package SpaceInvaders.Controller.Sound
+
 import SpaceInvaders.Model.Sound.Sound_Options
 import spock.lang.Specification
 
