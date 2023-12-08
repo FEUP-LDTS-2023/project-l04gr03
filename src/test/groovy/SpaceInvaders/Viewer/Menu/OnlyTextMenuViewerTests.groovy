@@ -17,9 +17,11 @@ class OnlyTextMenuViewerTests extends Specification{
         then:
             if(Menu.text.size() <= 5) {
                 (Menu.text.size() + 1) * gui.drawText(_, _, _)
+
                 }
             else{
-                    6 * gui.drawText(_,_,_)
+                    1 * gui.drawText(new Position(OnlyTextMenuViewer.getReference_x(), OnlyTextMenuViewer.getReference_y() + 1 +  0), "1 - " + OnlyTextMenuViewer.getModel().getText().get(0),_)
+                    5 * gui.drawText(_,_,_)
                 }
     }
 
@@ -31,7 +33,9 @@ class OnlyTextMenuViewerTests extends Specification{
         when:
         OnlyTextMenuViewer.drawElements(gui,0)
         then:
-        (Menu.text.size() + 1) * gui.drawText(_,_,_)
+            1 * gui.drawText(new Position(OnlyTextMenuViewer.getReference_x(), OnlyTextMenuViewer.getReference_y() + 0 + 1),_,_)
+            Menu.text.size() * gui.drawText(_,_,_)
+
     }
 
     def "Draw FileText"(){

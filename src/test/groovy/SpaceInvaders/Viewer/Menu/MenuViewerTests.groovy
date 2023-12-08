@@ -48,17 +48,21 @@ class MenuViewerTests extends Specification{
 
     def "Draw Options"(){
         given:
-            def MenuViewer = Mock(MenuViewer)
+            def MenuViewer = Spy(PauseMenuViewer.class)
             def gui = Mock(GUI)
+            def pauseMenu = new PauseMenu()
+            MenuViewer.getModel() >> pauseMenu
         when:
             MenuViewer.drawOptions(gui)
         then:
             1 * MenuViewer.drawOptions(gui)
+            1 * gui.drawText(new Position(MenuViewer.getReference_x(), MenuViewer.getReference_y()  + 3 * 0), "->" + MenuViewer.getModel().getOption(0), _)
+            3 * gui.drawText(_,_,_)
+
     }
 
     def "Draw Menu Title"(){
         given:
-            def Menu = new StartMenu()
             def MenuViewer = Mock(MenuViewer)
             def gui = Mock(GUI)
             def position = Mock(Position)
@@ -66,6 +70,20 @@ class MenuViewerTests extends Specification{
             MenuViewer.drawMenuTitle(gui,"123","123",position)
         then:
             1 * MenuViewer.drawMenuTitle(_,_,_,_)
+    }
+
+    def"get reference_x"(){
+        given:
+            def MenuViewer = new PauseMenuViewer(Mock(PauseMenu))
+        expect:
+            MenuViewer.getReference_x() == 35
+    }
+
+    def"get reference_y"(){
+        given:
+        def MenuViewer = new PauseMenuViewer(Mock(PauseMenu))
+        expect:
+        MenuViewer.getReference_y() == 13
     }
 
 

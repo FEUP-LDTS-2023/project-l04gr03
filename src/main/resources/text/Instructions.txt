@@ -1,7 +1,7 @@
 The goal is to kill the aliens and avoid they reach you or the cover
 walls.You control a ship that shoot lasers to kill the aliens. Randomly,
-an alien ship may appear and if you hiy it, you will receive a big amount of
-points.
+an alien ship may appear and if you hiy it, you will receive a big
+amount of points.
 
 How to Play:
 
