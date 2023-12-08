@@ -22,14 +22,14 @@ public class Sound {
     public void play(){
        if(sound.isRunning()){
            stop();
+           try {
+               Thread.sleep(10);
+           } catch (InterruptedException e) {
+               throw new RuntimeException(e);
+           }
         }
         sound.setFramePosition(0);
         sound.start();
-        try {
-            Thread.sleep(10);
-        } catch (InterruptedException e) {
-            throw new RuntimeException(e);
-        }
     }
 
     public void playContinuously(){

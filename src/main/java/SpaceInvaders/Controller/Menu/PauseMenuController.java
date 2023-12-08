@@ -14,9 +14,7 @@ import java.io.IOException;
 public class PauseMenuController extends Controller<PauseMenu> {
 
     public PauseMenuController(PauseMenu menu){
-
         super(menu);
-        SoundManager.getInstance().stopSound(Sound_Options.MUSIC);
     }
 
     @Override
