@@ -57,6 +57,8 @@ public class ArenaController extends GameController {
         alienController.setLastMovementTime(alienController.getLastMovementTime() + timeGameWasPaused);
         alienController.setLastShotTime(alienController.getLastShotTime() + timeGameWasPaused);
         collectableController.setGenerateCollectableTime(collectableController.getGenerateCollectableTime() + timeGameWasPaused);
+        alienShipController.setLastMovementTime(alienShipController.getLastMovementTime() + timeGameWasPaused);
+        alienShipController.setLastAppearance(alienShipController.getLastAppearance() + timeGameWasPaused);
     }
 
     public boolean collisionBetween(Element element1, Element element2){
