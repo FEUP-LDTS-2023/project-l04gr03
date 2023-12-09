@@ -1,36 +1,51 @@
 package SpaceInvaders.Controller.Menu
 
+import SpaceInvaders.Controller.Sound.SoundManager
 import SpaceInvaders.Game
 import SpaceInvaders.Model.Menu.StartMenu
+import SpaceInvaders.Model.Sound.Sound_Options
 import SpaceInvaders.State.GameStates
 import com.googlecode.lanterna.input.KeyStroke
 import com.googlecode.lanterna.input.KeyType
+import org.mockito.MockedStatic
+import org.mockito.Mockito
 import spock.lang.Specification
 
 class StartMenuControllerTests extends Specification{
+
+    def soundManager = Mockito.mock(SoundManager.class)
+
     def "Start Menu"() {
         given:
-        StartMenu startMenu = Mock(StartMenu)
-        def StartMenuController = new StartMenuController(startMenu)
-        def game = Mock(Game)
+        try (MockedStatic<SoundManager> utilities = Mockito.mockStatic(SoundManager.class)) {
+            utilities.when(SoundManager::getInstance).thenReturn(soundManager)
+                StartMenu startMenu = Mockito.mock(StartMenu)
+                def StartMenuController = new StartMenuController(startMenu)
+                def game = Mock(Game)
 
-        when: 'ArrowDown Key'
-        def key = new KeyStroke(KeyType.ArrowDown)
-        StartMenuController.step(game, key, 0)
-        then:
-        1 * startMenu.nextOption()
+            when: 'ArrowDown Key'
+                def key = new KeyStroke(KeyType.ArrowDown)
+                StartMenuController.step(game, key, 0)
+            then:
+                Mockito.verify(soundManager, Mockito.times(1)).playSound(Sound_Options.MENU_SWITCH)
+                Mockito.verify(startMenu, Mockito.times(1)).nextOption()
+        }
     }
 
     def "Step ArrowUp Key"() {
         given:
-            StartMenu startMenu = Mock(StartMenu)
-            def StartMenuController = new StartMenuController(startMenu)
-            def game = Mock(Game)
-        when: 'ArrowUp Key'
-            def key = new KeyStroke(KeyType.ArrowUp)
-            StartMenuController.step(game, key, 0)
-        then:
-            1 * startMenu.previousOption()
+        try (MockedStatic<SoundManager> utilities = Mockito.mockStatic(SoundManager.class)) {
+            utilities.when(SoundManager::getInstance).thenReturn(soundManager)
+                StartMenu startMenu = Mockito.mock(StartMenu)
+                def StartMenuController = new StartMenuController(startMenu)
+                def game = Mock(Game)
+            when: 'ArrowUp Key'
+                def key = new KeyStroke(KeyType.ArrowUp)
+                StartMenuController.step(game, key, 0)
+            then:
+                Mockito.verify(soundManager, Mockito.times(1)).playSound(Sound_Options.MENU_SWITCH)
+                Mockito.verify(startMenu, Mockito.times(1)).previousOption()
+        }
     }
 
     def "Step Enter Key is selected Play"(){

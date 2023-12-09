@@ -116,7 +116,6 @@ class StateActionsTests extends Specification{
     def "StateActions Resume Game State alien ship not null"() {
         given:
             State state = State.getInstance()
-            def stateSpy = Spy(state)
             def arena = Mock(Arena)
             arena.getAlienShip() >> Mock(AlienShip)
             state.setArena(arena)

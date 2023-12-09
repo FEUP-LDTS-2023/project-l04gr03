@@ -44,8 +44,9 @@ public class Alien extends AttackingElement {
                 return score * 5;
             case SCORE_10X:
                 return score * 10;
+            default: //no score collectable active
+                return score;
         }
-        return score;
     }
 
     public void setScore(int score) {this.score = score;}

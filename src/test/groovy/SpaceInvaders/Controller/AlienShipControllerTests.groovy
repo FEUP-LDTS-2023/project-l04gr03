@@ -1,6 +1,7 @@
 package SpaceInvaders.Controller
 
 import SpaceInvaders.Controller.Game.AlienShipController
+import SpaceInvaders.Controller.Sound.SoundManager
 import SpaceInvaders.Game
 import SpaceInvaders.Model.Game.Arena
 import SpaceInvaders.Model.Game.ArenaModifier
@@ -8,19 +9,32 @@ import SpaceInvaders.Model.Game.RegularGameElements.AlienShip
 import SpaceInvaders.Model.Game.RegularGameElements.AttackingElement
 import SpaceInvaders.Model.Game.RegularGameElements.Projectile
 import SpaceInvaders.Model.Position
+import SpaceInvaders.Model.Sound.Sound_Options
 import com.googlecode.lanterna.input.KeyStroke
+import org.mockito.MockedStatic
+import org.mockito.Mockito
 import spock.lang.Specification
 
 class AlienShipControllerTests extends Specification{
+    def soundManager = Mockito.mock(SoundManager.class)
+
     def "Generate Alien Ship"(){
         given:
-            def arena = Mock(Arena)
+            def arena = Mockito.mock(Arena)
             def controller = new AlienShipController(arena)
-        when:
-            controller.generateAlienShip()
-        then:
-            1 * arena.setAlienShip(_)
+            def controllerSpy = Spy(controller)
+            def arenaModifierMock =  Mockito.mock(ArenaModifier)
+            controllerSpy.getArenaModifier() >> arenaModifierMock
+        try (MockedStatic<SoundManager> utilities = Mockito.mockStatic(SoundManager.class)) {
+            utilities.when(SoundManager::getInstance).thenReturn(soundManager)
 
+            when:
+                controllerSpy.generateAlienShip()
+            then:
+                Mockito.verify(soundManager, Mockito.times(1)).playSound(Sound_Options.ALIEN_SHIP_HIGH)
+                Mockito.verify(soundManager, Mockito.times(1)).playSound(Sound_Options.ALIEN_SHIP_LOW)
+                Mockito.verify(arenaModifierMock, Mockito.times(1)).createAlienShip()
+        }
     }
 
     def "Move AlienShip - can move"() {
@@ -46,19 +60,24 @@ class AlienShipControllerTests extends Specification{
 
     def "Move AlienShip - can't move"() {
         given:
-            def arena = Mock(Arena.class)
-            def controller = Spy(AlienShipController.class)
-            def alienShip = Mock(AlienShip.class)
-            def arenaModifier = Mock(ArenaModifier.class)
-            arena.getAlienShip() >> alienShip
-            controller.getModel() >> arena
-            controller.getArenaModifier() >> arenaModifier
-        when:
-            controller.canMoveAlienShip() >> false
-            controller.moveAlienShip()
-        then:
-            1 * arenaModifier.removeAlienShip()
+                def arena = Mock(Arena.class)
+                def controller = Spy(AlienShipController.class)
+                def alienShip = Mock(AlienShip.class)
+                def arenaModifier = Mockito.mock(ArenaModifier.class)
+                arena.getAlienShip() >> alienShip
+                controller.getModel() >> arena
+                controller.getArenaModifier() >> arenaModifier
+            try (MockedStatic<SoundManager> utilities = Mockito.mockStatic(SoundManager.class)) {
+                utilities.when(SoundManager::getInstance).thenReturn(soundManager)
 
+            when:
+                controller.canMoveAlienShip() >> false
+                controller.moveAlienShip()
+            then:
+                Mockito.verify(soundManager, Mockito.times(1)).stopSound(Sound_Options.ALIEN_SHIP_HIGH)
+                Mockito.verify(soundManager, Mockito.times(1)).stopSound(Sound_Options.ALIEN_SHIP_LOW)
+                Mockito.verify(arenaModifier, Mockito.times(1)).removeAlienShip()
+        }
     }
 
     def "Can move alien ship Correct position"() {
@@ -130,17 +149,26 @@ class AlienShipControllerTests extends Specification{
         given:
             def controller = Spy(AlienShipController.class)
             def arena = Mock(Arena.class)
-            def arenaModifier = Mock(ArenaModifier.class)
+            def arenaModifier = Mockito.mock(ArenaModifier.class)
             controller.getModel() >> arena
             controller.getArenaModifier() >> arenaModifier
             def alienShip = Mock(AlienShip.class)
             arena.getAlienShip() >> alienShip
             alienShip.isDestroyed() >> true
-        when:
-            controller.removeAlienShip()
-        then:
-            1 * arenaModifier.removeAlienShip()
 
+        try (MockedStatic<SoundManager> utilities = Mockito.mockStatic(SoundManager.class)) {
+            utilities.when(SoundManager::getInstance).thenReturn(soundManager)
+
+            when:
+                controller.removeAlienShip()
+
+            then:
+                Mockito.verify(soundManager, Mockito.times(1)).playSound(Sound_Options.DESTRUCTION)
+                Mockito.verify(soundManager, Mockito.times(1)).stopSound(Sound_Options.ALIEN_SHIP_HIGH)
+                Mockito.verify(soundManager, Mockito.times(1)).stopSound(Sound_Options.ALIEN_SHIP_LOW)
+                Mockito.verify(arenaModifier, Mockito.times(1)).removeAlienShip()
+
+        }
     }
 
     def "remove alien ship - ship is null "(){
@@ -168,10 +196,12 @@ class AlienShipControllerTests extends Specification{
             def alienShip = Mock(AlienShip.class)
             arena.getAlienShip() >> alienShip
             alienShip.isDestroyed() >> false
-        when:
-            controller.removeAlienShip()
-        then:
-            0 * arenaModifier.removeAlienShip(alienShip)
+
+            when:
+                controller.removeAlienShip()
+
+            then:
+                0 * arenaModifier.removeAlienShip()
     }
 
     def "hitByProjectile and ship is destroyed"() {
@@ -185,6 +215,7 @@ class AlienShipControllerTests extends Specification{
             arena.getAlienShip() >> alienShip
             controller.getModel() >> arena
             alienShip.isDestroyed() >> true
+
         when:
             controller.hitByProjectile(alienShip, projectile)
         then:
@@ -212,50 +243,138 @@ class AlienShipControllerTests extends Specification{
 
     }
 
-    def "Alien Ship Step"(){
+    def "Alien Ship Step generate"() {
         given:
-            def controller = Spy(AlienShipController.class)
             def arena = Mock(Arena.class)
-            def arenaModifier = Mock(ArenaModifier.class)
-            def alienShip = Mock(AlienShip.class)
-            controller.getArenaModifier() >> arenaModifier
-            controller.getModel() >> arena
-            arena.getAlienShip() >> alienShip
-            alienShip.getPosition() >> Mock(Position)
+            def controller = new AlienShipController(arena)
+            def controllerSpy = Mockito.spy(controller)
 
-        when: "Generate alien ship"
-            controller.step(Mock(Game), Mock(KeyStroke), 50001 )
-        then:
-            1 * controller.generateAlienShip()
+        try (MockedStatic<SoundManager> utilities = Mockito.mockStatic(SoundManager.class)) {
+            utilities.when(SoundManager::getInstance).thenReturn(soundManager)
+
+            when: "Generate alien ship"
+            controllerSpy.step(Mock(Game), Mock(KeyStroke), 50001)
+            then:
+
+            Mockito.verify(controllerSpy, Mockito.times(1)).generateAlienShip()
             controller.lastAppearance == 50001
-
-        when: "Move Alien Ship"
-            controller.step(Mock(Game), Mock(KeyStroke), 50002)
-        then:
-            1 * controller.moveAlienShip()
-
-        when: "Move Alien Ship kill mutation replaced long subtraction with addition"
-            controller.step(Mock(Game), Mock(KeyStroke),  50002)
-        then:
-            0 * controller.moveAlienShip()
-
-        when: "Generate alien ship kill mutation Replaced long subtraction with addition"
-            controller.step(Mock(Game), Mock(KeyStroke), 50001 )
-        then:
-            0 * controller.generateAlienShip()
-
-        when: "Move Alien Ship kill mutation change conditional boundary"
-            controller.step(Mock(Game), Mock(KeyStroke), 50102)
-        then:
-            0 * controller.moveAlienShip()
-
-        when: "Generate alien ship kill mutation change conditional boundary"
-            controller.step(Mock(Game), Mock(KeyStroke), 100001)
-        then:
-            0 * controller.generateAlienShip()
+        }
     }
 
+    def " Alien ship step move"(){
+        given:
+            def arena = Mockito.mock(Arena.class)
+            def controller = new AlienShipController(arena)
+            def controllerSpy = Mockito.spy(controller)
+            Mockito.when(controllerSpy.getModel()).thenReturn(arena)
+            Mockito.when(arena.getAlienShip()).thenReturn(new AlienShip(Mock(Position), 0, 0, 1))
+            controllerSpy.setLastMovementTime(0)
+            controllerSpy.setLastAppearance(50002)
 
+        try (MockedStatic<SoundManager> utilities = Mockito.mockStatic(SoundManager.class)) {
+            utilities.when(SoundManager::getInstance).thenReturn(soundManager)
 
+            when: "Move Alien Ship"
+                controllerSpy.step(Mock(Game), Mock(KeyStroke), 50002)
+
+            then:
+                Mockito.verify(controllerSpy, Mockito.times(1)).moveAlienShip()
+        }
+    }
+
+    def "Alien ship step kill mutations long subtractions with addition move alien"() {
+        given:
+            def arena = Mockito.mock(Arena.class)
+            def controller = new AlienShipController(arena)
+            def controllerSpy = Mockito.spy(controller)
+            Mockito.when(controllerSpy.getModel()).thenReturn(arena)
+            Mockito.when(arena.getAlienShip()).thenReturn(new AlienShip(Mock(Position), 0, 0, 1))
+            controllerSpy.setLastAppearance(50001)
+            controllerSpy.setLastMovementTime(50002)
+
+        try (MockedStatic<SoundManager> utilities = Mockito.mockStatic(SoundManager.class)) {
+            utilities.when(SoundManager::getInstance).thenReturn(soundManager)
+
+            when: "Move Alien Ship kill mutation replaced long subtraction with addition"
+                controllerSpy.step(Mock(Game), Mock(KeyStroke), 50002)
+
+            then:
+                Mockito.verify(controllerSpy, Mockito.times(0)).moveAlienShip()
+        }
+    }
+
+    def "Alien ship step kill mutations long subtractions with addition generate alien"(){
+        given:
+            def arena = Mockito.mock(Arena.class)
+            def controller = new AlienShipController(arena)
+            def controllerSpy = Mockito.spy(controller)
+            Mockito.when(controllerSpy.getModel()).thenReturn(arena)
+            Mockito.when(arena.getAlienShip()).thenReturn(new AlienShip(Mock(Position), 0, 0, 1))
+            controllerSpy.setLastAppearance(50001)
+
+        try (MockedStatic<SoundManager> utilities = Mockito.mockStatic(SoundManager.class)) {
+            utilities.when(SoundManager::getInstance).thenReturn(soundManager)
+            when: "Generate alien ship kill mutation Replaced long subtraction with addition"
+                controller.step(Mock(Game), Mock(KeyStroke), 50001)
+            then:
+                Mockito.verify(controllerSpy, Mockito.times(0)).generateAlienShip()
+        }
+    }
+
+    def"Alien ship step kill mutations change conditional boundary move alien"() {
+        given:
+        def arena = Mockito.mock(Arena.class)
+        def controller = new AlienShipController(arena)
+        def controllerSpy = Mockito.spy(controller)
+        Mockito.when(controllerSpy.getModel()).thenReturn(arena)
+        Mockito.when(arena.getAlienShip()).thenReturn(new AlienShip(Mock(Position), 0, 0, 1))
+        controllerSpy.setLastAppearance(50001)
+        controllerSpy.setLastMovementTime(50002)
+
+        try (MockedStatic<SoundManager> utilities = Mockito.mockStatic(SoundManager.class)) {
+            utilities.when(SoundManager::getInstance).thenReturn(soundManager)
+
+            when: "Move Alien Ship kill mutation replaced long subtraction with addition"
+            controllerSpy.step(Mock(Game), Mock(KeyStroke), 50102)
+            then:
+            Mockito.verify(controllerSpy, Mockito.times(0)).moveAlienShip()
+        }
+    }
+
+    def "Alien ship step kill mutations change conditional boundary generate alien"(){
+        given:
+        def arena = Mockito.mock(Arena.class)
+        def controller = new AlienShipController(arena)
+        def controllerSpy = Mockito.spy(controller)
+        Mockito.when(controllerSpy.getModel()).thenReturn(arena)
+        Mockito.when(arena.getAlienShip()).thenReturn(new AlienShip(Mock(Position), 0, 0, 1))
+        controllerSpy.setLastAppearance(50001)
+
+        try (MockedStatic<SoundManager> utilities = Mockito.mockStatic(SoundManager.class)) {
+            utilities.when(SoundManager::getInstance).thenReturn(soundManager)
+            when: "Generate alien ship kill mutation Replaced long subtraction with addition"
+            controllerSpy.step(Mock(Game), Mock(KeyStroke), 100001)
+            then:
+            Mockito.verify(controllerSpy, Mockito.times(0)).generateAlienShip()
+        }
+    }
+
+    def "Get lastMovement"(){
+        given:
+            def controller = new AlienShipController(Mock(Arena))
+        when:
+            controller.setLastMovementTime(10)
+        then:
+            controller.getLastMovementTime() == 10
+    }
+
+    def "Get lastAppearance"(){
+        given:
+        def controller = new AlienShipController(Mock(Arena))
+        when:
+        controller.setLastAppearance(10)
+        then:
+        controller.getLastAppearance() == 10
+    }
 }
 
