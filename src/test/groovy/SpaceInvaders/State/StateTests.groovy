@@ -44,13 +44,16 @@ class StateTests extends Specification{
 
     def "State Step"(){
         given:
-        GUI gui = Mock(GUI.class)
-        Game game = Mock(Game.class)
-        State stateMock = Mock(State.class)
+            GUI gui = Mock(GUI.class)
+            Game game = Mock(Game.class)
+            State state = State.getInstance()
         when: 'State mocked'
-        stateMock.step(gui,game,0)
+            state.step(gui,game,0)
         then:
-        1 * stateMock.step(_,_,_)
+            5 * gui.drawText(_,_,_)
+            1 * gui.clear()
+            1 * gui.refresh()
+            1 * gui.getNextAction()
     }
 
     def "Get arena"(){
