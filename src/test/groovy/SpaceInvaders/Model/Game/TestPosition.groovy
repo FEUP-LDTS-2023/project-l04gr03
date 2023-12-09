@@ -11,7 +11,7 @@ class TestPosition extends Specification {
         when:
         boolean result = pos.equals(pos2)
         then:
-        result == true
+        result
     }
 
     def "equals false"(){
@@ -21,6 +21,6 @@ class TestPosition extends Specification {
         when:
         boolean result = pos.equals(pos2)
         then:
-        result == false
+        !result
     }
 }

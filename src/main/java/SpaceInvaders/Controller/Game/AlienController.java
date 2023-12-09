@@ -29,6 +29,7 @@ public class AlienController extends GameController {
         this.lastShotTime = 0;
     }
 
+
     public long getLastMovementTime() {
         return lastMovementTime;
     }
@@ -45,8 +46,10 @@ public class AlienController extends GameController {
         this.lastShotTime = lastShotTime;
     }
 
+    public MovementDirection getMovementDirection() {return movementDirection;}
+
     public boolean canMoveAlien(Alien alien) {
-        switch (movementDirection) {
+        switch (this.getMovementDirection()) {
             case LEFT:
                return alien.getPosition().getX() - 3 > 0;
             case RIGHT:
@@ -69,7 +72,7 @@ public class AlienController extends GameController {
 
     public void moveAlien(Alien alien){
         Position alienPosition = new Position(alien.getPosition().getX(),alien.getPosition().getY());
-        switch(movementDirection){
+        switch(this.getMovementDirection()){
             case LEFT:
                 alien.setPosition(new Position(alienPosition.getX() - 1,alienPosition.getY()));
                 break;
@@ -117,7 +120,7 @@ public class AlienController extends GameController {
 
 
     public void updateMovementDirection(){
-        switch (movementDirection){
+        switch (this.getMovementDirection()){
             case LEFT:
                 if(!canMoveAliens()){
                     this.movementDirection = MovementDirection.DOWN;
