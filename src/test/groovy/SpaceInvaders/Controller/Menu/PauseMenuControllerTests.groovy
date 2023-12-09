@@ -1,39 +1,53 @@
 package SpaceInvaders.Controller.Menu
 
+import SpaceInvaders.Controller.Sound.SoundManager
 import SpaceInvaders.Game
 import SpaceInvaders.Model.Menu.PauseMenu
+import SpaceInvaders.Model.Sound.Sound_Options
 import SpaceInvaders.State.GameStates
 import com.googlecode.lanterna.input.KeyStroke
 import com.googlecode.lanterna.input.KeyType
+import org.mockito.MockedStatic
+import org.mockito.Mockito
 import spock.lang.Specification
 
 class PauseMenuControllerTests extends Specification{
+    def soundManager = Mockito.mock(SoundManager.class)
+
     def "step arrowDown Key"() {
         given:
-            PauseMenu pauseMenu = Mock(PauseMenu)
-            def PauseMenuController = new PauseMenuController(pauseMenu)
-            def game = Mock(Game)
+        try (MockedStatic<SoundManager> utilities = Mockito.mockStatic(SoundManager.class)) {
+            utilities.when(SoundManager::getInstance).thenReturn(soundManager)
+                PauseMenu pauseMenu = Mockito.mock(PauseMenu)
+                def PauseMenuController = new PauseMenuController(pauseMenu)
+                def game = Mock(Game)
 
-        when: 'ArrowDown Key'
-            def key = new KeyStroke(KeyType.ArrowDown)
-            PauseMenuController.step(game, key, 0)
+            when: 'ArrowDown Key'
+                def key = new KeyStroke(KeyType.ArrowDown)
+                PauseMenuController.step(game, key, 0)
 
-        then:
-            1 * pauseMenu.nextOption()
+            then:
+                Mockito.verify(soundManager, Mockito.times(1)).playSound(Sound_Options.MENU_SWITCH)
+                Mockito.verify(pauseMenu, Mockito.times(1)).nextOption()
+        }
     }
 
     def "step ArrowUp key"() {
         given:
-            PauseMenu pauseMenu = Mock(PauseMenu)
-            def PauseMenuController = new PauseMenuController(pauseMenu)
-            def game = Mock(Game)
+        try (MockedStatic<SoundManager> utilities = Mockito.mockStatic(SoundManager.class)) {
+            utilities.when(SoundManager::getInstance).thenReturn(soundManager)
+                PauseMenu pauseMenu = Mockito.mock(PauseMenu)
+                def PauseMenuController = new PauseMenuController(pauseMenu)
+                def game = Mock(Game)
 
-        when: 'ArrowUp Key'
-            def key = new KeyStroke(KeyType.ArrowUp)
-            PauseMenuController.step(game, key, 0)
+            when: 'ArrowUp Key'
+                def key = new KeyStroke(KeyType.ArrowUp)
+                PauseMenuController.step(game, key, 0)
 
-        then:
-            1 * pauseMenu.previousOption()
+            then:
+                Mockito.verify(soundManager, Mockito.times(1)).playSound(Sound_Options.MENU_SWITCH)
+                Mockito.verify(pauseMenu, Mockito.times(1)).previousOption()
+        }
     }
 
     def "step Enter Key is selected continue"(){

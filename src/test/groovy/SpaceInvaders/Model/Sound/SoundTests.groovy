@@ -19,6 +19,19 @@ class SoundTests extends Specification{
             1 * clip.start()
     }
 
+    def "Play and is already playing"(){
+        given:
+            def sound = new Sound("src/main/resources/sounds/shoot.wav")
+        when:
+            sound.setSound(clip)
+            clip.isRunning() >> true
+            sound.play()
+        then:
+            1 * clip.setFramePosition(0)
+            1 * clip.start()
+            1 * clip.stop()
+    }
+
 
     def "Play Continuously"(){
         given:
@@ -70,6 +83,7 @@ class SoundTests extends Specification{
             sound.resumePlaying()
         then:
             1 * clip.start()
+            1 * clip.loop(_)
     }
 
     def "getSound"(){
