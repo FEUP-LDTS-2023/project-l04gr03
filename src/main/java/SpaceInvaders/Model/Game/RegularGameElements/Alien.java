@@ -34,8 +34,6 @@ public class Alien extends AttackingElement {
 
     public int getScore() {
         switch (alienMode){
-            case NORMAL_MODE:
-                return score;
             case SCORE_2X:
                 return score * 2;
             case SCORE_3X:
