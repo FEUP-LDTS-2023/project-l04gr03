@@ -67,20 +67,30 @@ class SoundManagerTests extends Specification {
             !soundManager.isSoundPlaying(Sound_Options.DESTRUCTION)
     }
 
-    def "should resume playing"() {
+    def "should resume playing Music"() {
         given:
             def soundManager = SoundManager.getInstance()
             soundManager.playSound(Sound_Options.MUSIC)
+
+        when: "Starts playing"
+            soundManager.stopAllSounds()
+            soundManager.resumePlayingMusic()
+        then:
+            soundManager.isSoundPlaying(Sound_Options.MUSIC)
+    }
+
+    def "should resume playing AlieShip sound"(){
+        given:
+            def soundManager = SoundManager.getInstance()
             soundManager.playSound(Sound_Options.ALIEN_SHIP_HIGH)
             soundManager.playSound(Sound_Options.ALIEN_SHIP_LOW)
 
         when: "Starts playing"
             soundManager.stopAllSounds()
-            soundManager.resumePlaying()
+            soundManager.resumePlayingAlienShipSound()
         then:
-            soundManager.isSoundPlaying(Sound_Options.MUSIC)
-            soundManager.isSoundPlaying(Sound_Options.ALIEN_SHIP_LOW)
             soundManager.isSoundPlaying(Sound_Options.ALIEN_SHIP_HIGH)
+            soundManager.isSoundPlaying(Sound_Options.ALIEN_SHIP_LOW)
     }
 
 

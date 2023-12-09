@@ -54,8 +54,11 @@ public class SoundManager {
         }
     }
 
-    public void resumePlaying(){
+    public void resumePlayingMusic(){
         backgroundMusic.resumePlaying();
+    }
+
+    public void resumePlayingAlienShipSound(){
         alienShipLowPitch.resumePlaying();
         alienShipHighPitch.resumePlaying();
     }

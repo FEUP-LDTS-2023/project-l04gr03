@@ -44,6 +44,7 @@ public class Sound {
 
     public void resumePlaying(){
         sound.start();
+        sound.loop(Clip.LOOP_CONTINUOUSLY);
     }
 
     public boolean isPlaying(){

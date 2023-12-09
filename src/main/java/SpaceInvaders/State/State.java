@@ -97,7 +97,6 @@ public class State {
         viewer.draw(gui, time);
     }
 
-    @DoNotMutate
     public void StateActions () throws IOException {
 
         switch (currentState){
@@ -150,7 +149,10 @@ public class State {
             case RESUME_GAME:
                 controller = arenaController;
                 viewer = new GameViewer(arena);
-                SoundManager.getInstance().resumePlaying();
+                SoundManager.getInstance().resumePlayingMusic();
+                if(arena.getAlienShip() != null){
+                    SoundManager.getInstance().resumePlayingAlienShipSound();
+                }
                 break;
 
             case INSTRUCTIONS:

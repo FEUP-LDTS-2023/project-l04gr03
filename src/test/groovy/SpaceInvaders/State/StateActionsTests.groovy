@@ -11,13 +11,14 @@ import SpaceInvaders.Viewer.Menu.StartMenuViewer
 import SpaceInvaders.Controller.Menu.*
 import spock.lang.Specification
 
-class StateTestsNotMutable extends Specification{
+class StateActionsTests extends Specification{
 
 
     def "StateActions Start Menu State" () {
         given:
             State state = State.getInstance()
         when:
+            state.UpdateState(GameStates.START_MENU)
             state.StateActions()
         then:
             state.controller.getClass() == StartMenuController.class
@@ -95,6 +96,17 @@ class StateTestsNotMutable extends Specification{
         state.controller.getClass() == OnlyTextMenuController.class
         state.viewer.getClass() == InstructionsViewer.class
 
+    }
+
+    def "Stateactions New_Game_Round State"() {
+        given:
+        State state = State.getInstance()
+        when: 'New_Game_Round State'
+        state.UpdateState(GameStates.NEW_GAME_ROUND)
+        state.StateActions()
+        then:
+        state.controller.getClass() == ArenaController.class
+        state.viewer.getClass() == GameViewer.class
     }
 
 }
