@@ -22,6 +22,15 @@ public class AlienShipController extends GameController{
         this.lastMovementTime = 0;
     }
 
+    public long getLastMovementTime() {return lastMovementTime;}
+
+    public long getLastAppearance() {return lastAppearance;}
+
+    public void setLastMovementTime(long lastMovementTime) {this.lastMovementTime = lastMovementTime;}
+
+    public void setLastAppearance(long lastAppearance) {this.lastAppearance = lastAppearance;}
+
+
     public void generateAlienShip(){
 
         getArenaModifier().createAlienShip();
