@@ -3,8 +3,10 @@ package SpaceInvaders.State;
 import SpaceInvaders.Controller.Menu.GameOverController;
 import SpaceInvaders.Controller.Menu.PauseMenuController;
 import SpaceInvaders.Controller.Menu.StartMenuController;
+import SpaceInvaders.Controller.Sound.SoundManager;
 import SpaceInvaders.GUI.GUI;
 import SpaceInvaders.Model.Menu.*;
+import SpaceInvaders.Model.Sound.Sound_Options;
 import SpaceInvaders.Viewer.Menu.*;
 import SpaceInvaders.Controller.Controller;
 import SpaceInvaders.Controller.Game.ArenaController;
@@ -95,7 +97,6 @@ public class State {
         viewer.draw(gui, time);
     }
 
-    @DoNotMutate
     public void StateActions () throws IOException {
 
         switch (currentState){
@@ -109,6 +110,7 @@ public class State {
                 PauseMenu menuP = new PauseMenu();
                 controller = new PauseMenuController(menuP);
                 viewer = new PauseMenuViewer(menuP);
+                SoundManager.getInstance().stopAllSounds();
                 break;
 
             case NEW_GAME:
@@ -118,6 +120,7 @@ public class State {
                 controller = new ArenaController(arena);
                 arenaController = (ArenaController) controller;
                 viewer = new GameViewer(arena);
+                SoundManager.getInstance().playSound(Sound_Options.MUSIC);
                 break;
 
             case LEADERBOARD:
@@ -130,6 +133,7 @@ public class State {
                 GameOverMenu menuG = new GameOverMenu(arena.getScore());
                 controller = new GameOverController(menuG);
                 viewer = new GameOverMenuViewer(menuG);
+                SoundManager.getInstance().stopAllSounds();
                 break;
 
             case NEW_GAME_ROUND:
@@ -145,6 +149,10 @@ public class State {
             case RESUME_GAME:
                 controller = arenaController;
                 viewer = new GameViewer(arena);
+                SoundManager.getInstance().resumePlayingMusic();
+                if(arena.getAlienShip() != null){
+                    SoundManager.getInstance().resumePlayingAlienShipSound();
+                }
                 break;
 
             case INSTRUCTIONS:

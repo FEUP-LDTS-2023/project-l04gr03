@@ -1,12 +1,15 @@
 package SpaceInvaders.Controller.Menu;
 
 import SpaceInvaders.Controller.Controller;
+import SpaceInvaders.Controller.Sound.SoundManager;
 import SpaceInvaders.Game;
 import SpaceInvaders.Model.Menu.StartMenu;
+import SpaceInvaders.Model.Sound.Sound_Options;
 import SpaceInvaders.State.GameStates;
 import com.googlecode.lanterna.input.KeyStroke;
 
 import java.io.IOException;
+
 
 public class StartMenuController extends Controller<StartMenu> {
 
@@ -21,9 +24,11 @@ public class StartMenuController extends Controller<StartMenu> {
         }
         switch(key.getKeyType()){
             case ArrowUp:
+                SoundManager.getInstance().playSound(Sound_Options.MENU_SWITCH);
                 getModel().previousOption();
                 break;
             case ArrowDown:
+                SoundManager.getInstance().playSound(Sound_Options.MENU_SWITCH);
                 getModel().nextOption();
                 break;
             case Enter:
