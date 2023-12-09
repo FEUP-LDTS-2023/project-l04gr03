@@ -53,6 +53,18 @@ public class State {
         return instance;
     }
 
+    public void setController(Controller controller) {
+        this.controller = controller;
+    }
+
+    public void setViewer(Viewer viewer) {
+        this.viewer = viewer;
+    }
+
+    public void setArena(Arena arena) {
+        this.arena = arena;
+    }
+
     public Arena getArena() {
         return arena;
     }

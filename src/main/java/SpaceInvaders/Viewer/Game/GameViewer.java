@@ -57,7 +57,7 @@ public class GameViewer extends Viewer<Arena> {
         gui.drawText(new Position(55,3), "HEALTH = ", "#F8F8FF");
         gui.drawText(new Position(65,3), String.valueOf(getModel().getShip().getHealth()),"#F8F8FF" );
         gui.drawText(new Position(5,5),"ROUND ","#F8F8FF");
-        gui.drawText(new Position(10,5),String.valueOf(getModel().getRound()),"#F8F8FF");
+        gui.drawText(new Position(11,5),String.valueOf(getModel().getRound()),"#F8F8FF");
         if(getModel().getShip().getShipMode() != ShipMode.NORMAL_MODE){
             gui.drawText(new Position(55,5), String.valueOf(getModel().getShip().getShipMode()),"#F8F8FF");
         }
