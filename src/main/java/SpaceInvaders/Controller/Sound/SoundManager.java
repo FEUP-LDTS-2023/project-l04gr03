@@ -3,14 +3,16 @@ package SpaceInvaders.Controller.Sound;
 import SpaceInvaders.Model.Sound.Sound;
 import SpaceInvaders.Model.Sound.Sound_Options;
 
+import javax.sound.sampled.FloatControl;
+
 public class SoundManager {
-    private final Sound laser;
-    private final Sound dyingSound;
-    private final Sound switchOption;
-    private final Sound backgroundMusic;
-    private final Sound collectableSound;
-    private final Sound alienShipLowPitch;
-    private final Sound alienShipHighPitch;
+    private Sound laser;
+    private Sound dyingSound;
+    private Sound switchOption;
+    private Sound backgroundMusic;
+    private Sound collectableSound;
+    private Sound alienShipLowPitch;
+    private Sound alienShipHighPitch;
     private static SoundManager soundManager;
 
     private SoundManager(){
@@ -72,16 +74,33 @@ public class SoundManager {
         alienShipLowPitch.stop();
     }
 
-    public boolean isSoundPlaying(Sound_Options option){
-        return switch (option){
-            case MUSIC -> backgroundMusic.isPlaying();
-            case LASER -> laser.isPlaying();
-            case MENU_SWITCH -> switchOption.isPlaying();
-            case DESTRUCTION -> dyingSound.isPlaying();
-            case COLLECTABLE -> collectableSound.isPlaying();
-            case ALIEN_SHIP_LOW -> alienShipLowPitch.isPlaying();
-            case ALIEN_SHIP_HIGH -> alienShipHighPitch.isPlaying();
-        };
+    public void setLaser(Sound laser){
+        this.laser = laser;
     }
+
+    public void setDyingSound(Sound dyingSound) {
+        this.dyingSound = dyingSound;
+    }
+
+    public void setSwitchOption(Sound switchOption) {
+        this.switchOption = switchOption;
+    }
+
+    public void setBackgroundMusic(Sound backgroundMusic) {
+        this.backgroundMusic = backgroundMusic;
+    }
+
+    public void setCollectableSound(Sound collectableSound) {
+        this.collectableSound = collectableSound;
+    }
+
+    public void setAlienShipLowPitch(Sound alienShipLowPitch) {
+        this.alienShipLowPitch = alienShipLowPitch;
+    }
+
+    public void setAlienShipHighPitch(Sound alienShipHighPitch) {
+        this.alienShipHighPitch = alienShipHighPitch;
+    }
+
 }
 

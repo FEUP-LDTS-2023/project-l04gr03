@@ -2,6 +2,10 @@ package SpaceInvaders.State
 
 
 import SpaceInvaders.Controller.Game.ArenaController
+import SpaceInvaders.Controller.Sound.SoundManager
+import SpaceInvaders.Model.Game.Arena
+import SpaceInvaders.Model.Game.RegularGameElements.AlienShip
+import SpaceInvaders.Model.Sound.Sound_Options
 import SpaceInvaders.Viewer.Game.GameViewer
 import SpaceInvaders.Viewer.Menu.GameOverMenuViewer
 import SpaceInvaders.Viewer.Menu.InstructionsViewer
@@ -9,10 +13,14 @@ import SpaceInvaders.Viewer.Menu.LeaderboardViewer
 import SpaceInvaders.Viewer.Menu.PauseMenuViewer
 import SpaceInvaders.Viewer.Menu.StartMenuViewer
 import SpaceInvaders.Controller.Menu.*
+import org.mockito.MockedStatic
+import org.mockito.Mockito
 import spock.lang.Specification
 
 class StateActionsTests extends Specification{
 
+
+    def soundManager = Mockito.mock(SoundManager.class)
 
     def "StateActions Start Menu State" () {
         given:
@@ -26,27 +34,37 @@ class StateActionsTests extends Specification{
         }
 
 
-
     def "StateActions Pause Menu State" () {
         given:
             State state = State.getInstance()
-        when:
-            state.UpdateState(GameStates.PAUSE)
-            state.StateActions()
-        then:
-            state.controller.getClass() == PauseMenuController.class
-            state.viewer.getClass() == PauseMenuViewer.class
+            try (MockedStatic<SoundManager> utilities = Mockito.mockStatic(SoundManager.class)) {
+                utilities.when(SoundManager::getInstance).thenReturn(soundManager)
+
+                when:
+                    state.UpdateState(GameStates.PAUSE)
+                    state.StateActions()
+                then:
+                    Mockito.verify(soundManager, Mockito.times(2)).stopAllSounds()
+                    state.controller.getClass() == PauseMenuController.class
+                    state.viewer.getClass() == PauseMenuViewer.class
+            }
     }
 
     def "StateActions New Game State" () {
         given:
             State state = State.getInstance()
-        when:
-            state.UpdateState(GameStates.NEW_GAME)
-            state.StateActions()
-        then:
-            state.controller.getClass() == ArenaController.class
-            state.viewer.getClass() == GameViewer.class
+        try (MockedStatic<SoundManager> utilities = Mockito.mockStatic(SoundManager.class)) {
+            utilities.when(SoundManager::getInstance).thenReturn(soundManager)
+
+            when:
+                state.UpdateState(GameStates.NEW_GAME)
+                state.StateActions()
+            then:
+                Mockito.verify(soundManager, Mockito.times(2)).playSound(Sound_Options.MUSIC)
+                state.controller.getClass() == ArenaController.class
+                state.viewer.getClass() == GameViewer.class
+
+        }
     }
 
     def "StateActions Leaderboard State" () {
@@ -65,24 +83,54 @@ class StateActionsTests extends Specification{
     def "StateActions Game Over State" () {
         given:
             State state = State.getInstance()
-        when: 'Game Over State'
-            state.UpdateState(GameStates.GAME_OVER)
-            state.StateActions()
-        then:
-            state.controller.getClass() == GameOverController.class
-            state.viewer.getClass() == GameOverMenuViewer.class
+        try (MockedStatic<SoundManager> utilities = Mockito.mockStatic(SoundManager.class)) {
+                utilities.when(SoundManager::getInstance).thenReturn(soundManager)
+
+            when: 'Game Over State'
+                state.UpdateState(GameStates.GAME_OVER)
+                state.StateActions()
+            then:
+                Mockito.verify(soundManager, Mockito.times(2)).stopAllSounds()
+                state.controller.getClass() == GameOverController.class
+                state.viewer.getClass() == GameOverMenuViewer.class
+        }
     }
 
 
-    def "StateActions Resume Game State"() {
+    def "StateActions Resume Game State alien ship null"() {
         given:
             State state = State.getInstance()
-        when: 'Resume Game State'
-            state.UpdateState(GameStates.RESUME_GAME)
-            state.StateActions()
-        then:
-            state.controller.getClass() == ArenaController.class
-            state.viewer.getClass() == GameViewer.class
+            try (MockedStatic<SoundManager> utilities = Mockito.mockStatic(SoundManager.class)) {
+                    utilities.when(SoundManager::getInstance).thenReturn(soundManager)
+
+                when: 'Resume Game State'
+                    state.UpdateState(GameStates.RESUME_GAME)
+                    state.StateActions()
+                then:
+                    Mockito.verify(soundManager, Mockito.times(2)).resumePlayingMusic()
+                    state.controller.getClass() == ArenaController.class
+                    state.viewer.getClass() == GameViewer.class
+            }
+    }
+
+    def "StateActions Resume Game State alien ship not null"() {
+        given:
+            State state = State.getInstance()
+            def stateSpy = Spy(state)
+            def arena = Mock(Arena)
+            arena.getAlienShip() >> Mock(AlienShip)
+            state.setArena(arena)
+        try (MockedStatic<SoundManager> utilities = Mockito.mockStatic(SoundManager.class)) {
+                utilities.when(SoundManager::getInstance).thenReturn(soundManager)
+            when: 'Resume Game State'
+                state.UpdateState(GameStates.RESUME_GAME)
+                state.StateActions()
+            then:
+                state.controller.getClass() == ArenaController.class
+                state.viewer.getClass() == GameViewer.class
+                Mockito.verify(soundManager, Mockito.times(2)).resumePlayingMusic()
+                Mockito.verify(soundManager, Mockito.times(2)).resumePlayingAlienShipSound()
+        }
     }
 
 
@@ -98,7 +146,7 @@ class StateActionsTests extends Specification{
 
     }
 
-    def "Stateactions New_Game_Round State"() {
+    def "StateActions New_Game_Round State"() {
         given:
         State state = State.getInstance()
         when: 'New_Game_Round State'

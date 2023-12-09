@@ -1,8 +1,10 @@
 package SpaceInvaders.State
 
+import SpaceInvaders.Controller.Controller
 import SpaceInvaders.GUI.GUI
 import SpaceInvaders.Game
 import SpaceInvaders.Model.Game.Arena
+import SpaceInvaders.Viewer.Viewer
 import spock.lang.Specification
 
 class StateTests extends Specification{
@@ -42,18 +44,23 @@ class StateTests extends Specification{
 
 
 
-    def "State Step"(){
+    def "State Step"() {
         given:
             GUI gui = Mock(GUI.class)
             Game game = Mock(Game.class)
             State state = State.getInstance()
-        when: 'State mocked'
-            state.step(gui,game,0)
+            def controller = Mock(Controller)
+            def viewer = Mock(Viewer)
+            state.setController(controller)
+            state.setViewer(viewer)
+            def stateSpy = Spy(state)
+
+        when: 'State Spy'
+            stateSpy.step(gui, game, 0)
         then:
-            5 * gui.drawText(_,_,_)
-            1 * gui.clear()
-            1 * gui.refresh()
             1 * gui.getNextAction()
+            1 * viewer.draw(_, _)
+            1 * controller.step(_, _, _)
     }
 
     def "Get arena"(){
