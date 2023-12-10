@@ -11,6 +11,7 @@ import SpaceInvaders.Model.Game.RegularGameElements.Projectile
 import SpaceInvaders.Model.Game.RegularGameElements.Ship
 import SpaceInvaders.Model.Game.RegularGameElements.ShipMode
 import SpaceInvaders.Model.Position
+import org.assertj.core.internal.Arrays
 import spock.lang.Specification
 
 class TestArenaModifier extends Specification{
@@ -147,4 +148,5 @@ class TestArenaModifier extends Specification{
         then:
         1 * arena.setAlienShip(null)
     }
+
 }
