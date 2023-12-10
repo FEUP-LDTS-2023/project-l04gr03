@@ -50,6 +50,14 @@ public class ArenaController extends GameController {
 
     public AlienController getAlienController() {return alienController;}
 
+    public AlienShipController getAlienShipController() {return alienShipController;}
+
+    public void setArenaModifier(ArenaModifier arenaModifier){this.arenaModifier = arenaModifier;}
+
+    public void setShipController(ShipController shipController) {
+        this.shipController = shipController;
+    }
+
     public void setTimers(long time){
         long timeGameWasPaused = time - pauseGameTime;
         shipController.setMovementTime(shipController.getMovementTime() + timeGameWasPaused);
@@ -95,7 +103,7 @@ public class ArenaController extends GameController {
         for(int i = 0; i < walls.size(); i++){
             for(int j = 0; j < projectiles.size(); j++){
                 if(collisionBetween(walls.get(i),projectiles.get(j))){
-                    arenaModifier.removeProjectile(projectiles.get(j));
+                    this.getArenaModifier().removeProjectile(projectiles.get(j));
                 }
             }
         }
@@ -106,8 +114,8 @@ public class ArenaController extends GameController {
         Ship ship = getModel().getShip();
         for(int i = 0; i < projectiles.size(); i++){
             if(collisionBetween(ship,projectiles.get(i))){
-                getShipController().hitByProjectile(projectiles.get(i));
-                arenaModifier.removeProjectile(projectiles.get(i));
+                this.getShipController().hitByProjectile(projectiles.get(i));
+                this.getArenaModifier().removeProjectile(projectiles.get(i));
             }
         }
     }
@@ -119,8 +127,8 @@ public class ArenaController extends GameController {
         for(int i = 0; i < aliens.size(); i++){
             for (int j = 0; j < projectiles.size(); j++){
                 if(collisionBetween(aliens.get(i), projectiles.get(j))){
-                    getAlienController().hitByProjectile(aliens.get(i),projectiles.get(j));
-                    arenaModifier.removeProjectile(projectiles.get(j));
+                    this.getAlienController().hitByProjectile(aliens.get(i),projectiles.get(j));
+                    this.getArenaModifier().removeProjectile(projectiles.get(j));
                 }
             }
         }
@@ -133,7 +141,7 @@ public class ArenaController extends GameController {
             for (int j = 0; j < projectiles.size(); j++){
                 if(collisionBetween(coverWalls.get(i),projectiles.get(j))){
                     coverWallHitByProjectile(coverWalls.get(i),projectiles.get(j));
-                    arenaModifier.removeProjectile(projectiles.get(j));
+                    this.getArenaModifier().removeProjectile(projectiles.get(j));
                 }
             }
         }
@@ -145,8 +153,8 @@ public class ArenaController extends GameController {
         if(alienShip != null) {
             for (int i = 0; i < projectiles.size(); i++) {
                 if (collisionBetween(projectiles.get(i), alienShip)) {
-                    alienShipController.hitByProjectile(alienShip, projectiles.get(i));
-                    arenaModifier.removeProjectile(projectiles.get(i));
+                    this.getAlienShipController().hitByProjectile(alienShip, projectiles.get(i));
+                    this.getArenaModifier().removeProjectile(projectiles.get(i));
                 }
             }
         }
@@ -158,7 +166,7 @@ public class ArenaController extends GameController {
         if(collectable != null){
             if(collisionBetween(ship, collectable)){
                 getModel().getActiveCollectable().execute();
-                getArenaModifier().removeActiveCollectable();
+                this.getArenaModifier().removeActiveCollectable();
                 SoundManager.getInstance().playSound(Sound_Options.COLLECTABLE);
             }
         }
@@ -190,9 +198,9 @@ public class ArenaController extends GameController {
     }
 
     public void removeDestroyedElements(){
-        alienController.removeDestroyedAliens();
+        this.getAlienController().removeDestroyedAliens();
         removeDestroyedCoverWalls();
-        alienShipController.removeAlienShip();
+        this.getAlienShipController().removeAlienShip();
     }
 
     public void checkCollisions(){

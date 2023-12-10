@@ -15,9 +15,16 @@ public class ArenaModifier {
 
     private Arena arena;
 
+    private Random random;
+
     public ArenaModifier(Arena arena){
         this.arena = arena;
+        this.random = new Random();
     }
+
+    public Arena getArena() {return arena;}
+
+    public void setRandom(Random random){this.random = random;}
 
     public void resetShipMode(){
         arena.getShip().setShipMode(ShipMode.NORMAL_MODE);
@@ -31,7 +38,6 @@ public class ArenaModifier {
     }
     public void createCollectable() {
         List<Integer> columns = arena.getFreeArenaColumns();
-        Random random = new Random();
         int randomElement = random.nextInt(2);
         int randomIndex = random.nextInt(columns.size());
         Position position = new Position(columns.get(randomIndex),1);
@@ -44,8 +50,7 @@ public class ArenaModifier {
     }
 
     public void createCollectableAffectingShip(Position position){
-        Random random = new Random();
-        List<CollectableType> collectableTypes =new ArrayList<>(Arrays.asList(CollectableType.HEALTH, CollectableType.DAMAGE, CollectableType.MACHINE_GUN_MODE, CollectableType.GOD_MODE));
+        List<CollectableType> collectableTypes = new ArrayList<>(Arrays.asList(CollectableType.HEALTH, CollectableType.DAMAGE, CollectableType.MACHINE_GUN_MODE, CollectableType.GOD_MODE));
         int randomCollectableTypeIndex = random.nextInt(collectableTypes.size());
         List<Integer> collectableMultiplier = new ArrayList<>(Arrays.asList(2,3,4,5,10));
         int randomCollectableMultiplierIndex = random.nextInt(collectableMultiplier.size());
@@ -57,7 +62,6 @@ public class ArenaModifier {
 
 
     public void createCollectableAffectingAliens(Position position){
-        Random random = new Random();
         List<Integer> collectableMultiplier = new ArrayList<>(Arrays.asList(2,3,4,5,10));
         int randomCollectableMultiplierIndex = random.nextInt(collectableMultiplier.size());
         int multiplier = collectableMultiplier.get(randomCollectableMultiplierIndex);
@@ -66,7 +70,7 @@ public class ArenaModifier {
     }
 
     public boolean hasAlienInFront(Alien alien, Alien excludedAlien){
-        List<Alien> aliens = arena.getAliens();
+        List<Alien> aliens = getArena().getAliens();
         int i = 0;
         while (i < aliens.size() && aliens.get(i).getPosition().getX() <= alien.getPosition().getX()){
             if(aliens.get(i).getPosition().getX() == alien.getPosition().getX()){
@@ -80,7 +84,7 @@ public class ArenaModifier {
     }
 
     public void removeAlien(Alien alien) {
-        List<Alien> aliens = arena.getAliens();
+        List<Alien> aliens = getArena().getAliens();
         for(int i = 0; i < aliens.size(); i++){
             if(aliens.get(i).equals(alien)){
                 if(i > 0){
@@ -94,24 +98,19 @@ public class ArenaModifier {
         }
     }
 
-    public void removeCoverWall(CoverWall coverWall){arena.getCoverWalls().remove(coverWall);}
+    public void removeCoverWall(CoverWall coverWall){getArena().getCoverWalls().remove(coverWall);}
 
 
-    public void removeActiveCollectable(){
-        arena.setActiveCollectable(null);
-    }
+    public void removeActiveCollectable(){getArena().setActiveCollectable(null);}
 
-    public void addProjectile(Projectile projectile) {arena.getProjectiles().add(projectile);}
+    public void addProjectile(Projectile projectile) {getArena().getProjectiles().add(projectile);}
 
-    public void removeProjectile(Projectile projectile) {arena.getProjectiles().remove(projectile);}
+    public void removeProjectile(Projectile projectile) {getArena().getProjectiles().remove(projectile);}
 
-    public void removeAlienShip(){
-        arena.setAlienShip(null);
-    }
+    public void removeAlienShip(){getArena().setAlienShip(null);}
 
 
     public void createAlienShip() {
-        Random random = new Random();
         List<Integer> movementOptions = new ArrayList<>(Arrays.asList(-1,1));
         int movementChoiceIndex = random.nextInt(movementOptions.size());
         int movement = movementOptions.get(movementChoiceIndex);

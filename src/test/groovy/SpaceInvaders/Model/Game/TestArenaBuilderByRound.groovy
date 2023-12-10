@@ -21,6 +21,16 @@ class TestArenaBuilderByRound extends Specification{
         !arenaBuilderByRound.getArenaLines().isEmpty()
     }
 
+    def "Arena Builder round > 5"(){
+        given:
+            int round = 6
+        when:
+            def arenaBuilderByRound = new ArenaBuilderByRound(round)
+        then:
+            arenaBuilderByRound.getRound() == round
+            !arenaBuilderByRound.getArenaLines().isEmpty()
+    }
+
     def 'ReadArenaLines'(){
         given:
         ArenaBuilderByRound arenaBuilderByRound = new ArenaBuilderByRound(1)
@@ -33,6 +43,7 @@ class TestArenaBuilderByRound extends Specification{
         arenaLines.get(arenaLines.size() - 1).length() == 74
     }
 
+
     def 'CreateShip'(){
         given:
         ArenaBuilderByRound arenaBuilderByRound = new ArenaBuilderByRound(1)
@@ -43,6 +54,16 @@ class TestArenaBuilderByRound extends Specification{
         ship.getHealth() == 1 * arenaBuilderByRound.getBaseShipHealth()
         ship.getDamagePerShot() == 1 * arenaBuilderByRound.getBaseShipDamage()
     }
+
+    def "CreateShip null"(){
+        given:
+            ArenaBuilderByRound arenaBuilderByRound = new ArenaBuilderByRound(1)
+            def arenaLines = Arrays.asList("")
+            arenaBuilderByRound.setArenaLines(arenaLines)
+        expect:
+            arenaBuilderByRound.createShip() == null
+    }
+
 
     def 'CreateAliens'(){
         given:

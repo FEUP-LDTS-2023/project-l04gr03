@@ -1,7 +1,11 @@
 package SpaceInvaders.Model.Game
 
 import SpaceInvaders.Model.Game.Collectables.Collectable
+import SpaceInvaders.Model.Game.Collectables.CollectableFactory
+import SpaceInvaders.Model.Game.Collectables.CollectableType
+import SpaceInvaders.Model.Game.Collectables.DamageCollectable
 import SpaceInvaders.Model.Game.Collectables.HealthCollectable
+import SpaceInvaders.Model.Game.Collectables.ScoreCollectable
 import SpaceInvaders.Model.Game.RegularGameElements.Alien
 import SpaceInvaders.Model.Game.RegularGameElements.AlienMode
 import SpaceInvaders.Model.Game.RegularGameElements.AlienShip
@@ -11,6 +15,7 @@ import SpaceInvaders.Model.Game.RegularGameElements.Projectile
 import SpaceInvaders.Model.Game.RegularGameElements.Ship
 import SpaceInvaders.Model.Game.RegularGameElements.ShipMode
 import SpaceInvaders.Model.Position
+import org.assertj.core.internal.Arrays
 import spock.lang.Specification
 
 class TestArenaModifier extends Specification{
@@ -128,14 +133,34 @@ class TestArenaModifier extends Specification{
         5 * alien.setAlienMode(AlienMode.NORMAL_MODE)
     }
 
-    def "CreateAlienShip"() {
+    def "CreateAlienShip movement -1"() {
         given:
-        Arena arena = new Arena(75, 30)
-        ArenaModifier arenaModifier = new ArenaModifier((arena))
+            Arena arena = new Arena(75, 30)
+            ArenaModifier arenaModifier = new ArenaModifier((arena))
+            def randomMock = Mock(Random)
+            arenaModifier.setRandom(randomMock)
+            randomMock.nextInt(2) >> 0
+
         when:
-        arenaModifier.createAlienShip()
+            arenaModifier.createAlienShip()
+
         then:
-        arena.getAlienShip() != null
+            arena.getAlienShip().getMovementDirection() == -1
+    }
+
+    def "CreateAlienShip movement 0"() {
+        given:
+            Arena arena = new Arena(75, 30)
+            ArenaModifier arenaModifier = new ArenaModifier((arena))
+            def randomMock = Mock(Random)
+            arenaModifier.setRandom(randomMock)
+            randomMock.nextInt(2) >> 1
+
+        when:
+            arenaModifier.createAlienShip()
+
+        then:
+            arena.getAlienShip().getMovementDirection() == 1
     }
 
     def "RemoveAlienShip"() {
@@ -147,4 +172,108 @@ class TestArenaModifier extends Specification{
         then:
         1 * arena.setAlienShip(null)
     }
+
+    def "create collectable random element 0"(){
+        given:
+            def arena = Mock(Arena)
+            def arenaModifier = new ArenaModifier(arena)
+            def randomMock = Mock(Random)
+            def position = new Position(3,1)
+            arenaModifier.setRandom(randomMock)
+            def arenaModifierSpy = Spy(arenaModifier)
+            List<Integer> freeColumns = java.util.Arrays.asList(3,1)
+            arena.getFreeArenaColumns() >> freeColumns
+            randomMock.nextInt(2) >> 0
+
+        when:
+            arenaModifierSpy.createCollectable()
+
+        then:
+            1 * arenaModifierSpy.createCollectableAffectingShip(position)
+    }
+
+    def "create collectable random element 1"(){
+        given:
+            def arena = Mock(Arena)
+            def arenaModifier = new ArenaModifier(arena)
+            def randomMock = Mock(Random)
+            def position = new Position(4,1)
+            arenaModifier.setRandom(randomMock)
+            def arenaModifierSpy = Spy(arenaModifier)
+            List<Integer> freeColumns = java.util.Arrays.asList(3,4)
+            arena.getFreeArenaColumns() >> freeColumns
+            randomMock.nextInt(2) >> 1
+
+        when:
+            arenaModifierSpy.createCollectable()
+        then:
+            1 * arenaModifierSpy.createCollectableAffectingAliens(position)
+    }
+
+    def "create collectable affecting Ship"(){
+        given:
+            def arena = new Arena(74,37)
+            def arenaModifier = new ArenaModifier(arena)
+            def randomMock = Mock(Random)
+            arenaModifier.setRandom(randomMock)
+            def position = new Position(10,10)
+            randomMock.nextInt(4) >> 1
+            randomMock.nextInt(5) >> 2
+
+        when:
+            arenaModifier.createCollectableAffectingShip(position)
+
+        then:
+            arena.getActiveCollectable().getPosition() == position
+            arena.getActiveCollectable().getClass() == DamageCollectable.class
+            arena.getActiveCollectable().getMultiplier() == 4
+    }
+
+    def "create collectable affecting aliens"(){
+        given:
+            def arena = new Arena(74,37)
+            def arenaModifier = new ArenaModifier(arena)
+            def randomMock = Mock(Random)
+            arenaModifier.setRandom(randomMock)
+            def position = new Position(10,10)
+            randomMock.nextInt(5) >> 2
+
+        when:
+            arenaModifier.createCollectableAffectingAliens(position)
+
+        then:
+            arena.getActiveCollectable().getPosition() == position
+            arena.getActiveCollectable().getClass() == ScoreCollectable.class
+            arena.getActiveCollectable().getMultiplier() == 4
+    }
+
+    def "hasAlienInFront"(){
+        given:
+            def arena = new Arena(74,37)
+            def alien = new Alien(new Position(2,1),10,10,10,AlienState.PASSIVE,1)
+            def excludedAlien = new Alien(new Position(3,2),10,10,10,AlienState.PASSIVE,1)
+            def otherAlien = new Alien(new Position(2,2),10,10,10,AlienState.PASSIVE,1)
+            List<Alien> aliens = java.util.Arrays.asList(alien, otherAlien, excludedAlien)
+            arena.setAliens(aliens)
+            def arenaModifier = new ArenaModifier(arena)
+
+        expect:
+            arenaModifier.hasAlienInFront(alien, excludedAlien)
+
+    }
+
+    def "hasAlienInFront false"(){
+        given:
+            def arena = new Arena(74,37)
+            def alien = new Alien(new Position(2,1),10,10,10,AlienState.PASSIVE,1)
+            def excludedAlien = new Alien(new Position(3,2),10,10,10,AlienState.PASSIVE,1)
+            def otherAlien = new Alien(new Position(4,2),10,10,10,AlienState.PASSIVE,1)
+            List<Alien> aliens = java.util.Arrays.asList(alien,otherAlien,  excludedAlien)
+            arena.setAliens(aliens)
+            def arenaModifier = new ArenaModifier(arena)
+
+        expect:
+            !arenaModifier.hasAlienInFront(alien, excludedAlien)
+    }
+
 }
