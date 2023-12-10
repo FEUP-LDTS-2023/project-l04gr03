@@ -6,13 +6,13 @@ import SpaceInvaders.Model.Position;
 
 public class LeaderboardViewer extends OnlyTextMenuViewer<Leaderboard> {
     public LeaderboardViewer(Leaderboard menu){
-        super(menu, new Position(5, 3));
+        super(menu, new Position(35, 13));
     }
 
     @Override
     protected void drawElements(GUI gui, long time) {
         drawFileText(gui);
-        drawMenuTitle(gui, "LEADERBOARD", colorTitle, new Position(5, 2));
+        drawMenuTitle(gui, "LEADERBOARD", colorTitle, new Position(35, 10));
     }
 
 

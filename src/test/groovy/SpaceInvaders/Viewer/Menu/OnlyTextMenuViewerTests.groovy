@@ -67,8 +67,8 @@ class OnlyTextMenuViewerTests extends Specification{
         given:
             def menu = new LeaderboardViewer(Mock(Leaderboard))
         expect:
-            menu.getReference_x() == 5
-            menu.getReference_y() == 3
+            menu.getReference_x() == 35
+            menu.getReference_y() == 13
     }
 
 }
