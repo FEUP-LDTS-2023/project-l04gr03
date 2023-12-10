@@ -56,6 +56,10 @@ public class ArenaBuilderByRound extends ArenaBuilder {
         return round;
     }
 
+    public void setArenaLines(List<String> arenaLines) {
+        this.arenaLines = arenaLines;
+    }
+
     public List<String> getArenaLines(){
         return arenaLines;
     }

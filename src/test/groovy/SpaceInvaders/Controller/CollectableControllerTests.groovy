@@ -17,6 +17,21 @@ import spock.lang.Specification
 
 class CollectableControllerTests extends Specification {
 
+    def "setGenerateCollectableTime"(){
+        given:
+        CollectableController collectableController = new CollectableController(Mock(Arena.class))
+        when:
+        collectableController.setGenerateCollectableTime(time)
+        then:
+        collectableController.getGenerateCollectableTime() == expectedTime
+        where:
+        time | expectedTime
+         0   |      0
+        350  |     350
+        700  |     700
+        1200 |     1200
+    }
+
     def "generateCollectable"(){
         def collectableController = Spy(CollectableController.class)
         def arena = Mock(Arena.class)
