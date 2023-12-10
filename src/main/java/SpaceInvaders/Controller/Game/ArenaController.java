@@ -52,10 +52,42 @@ public class ArenaController extends GameController {
 
     public AlienShipController getAlienShipController() {return alienShipController;}
 
+    public long getPauseGameTime() {
+        return pauseGameTime;
+    }
+
     public void setArenaModifier(ArenaModifier arenaModifier){this.arenaModifier = arenaModifier;}
 
     public void setShipController(ShipController shipController) {
         this.shipController = shipController;
+    }
+
+    public void setAlienController(AlienController alienController) {
+        this.alienController = alienController;
+    }
+
+    public void setCollectableController(CollectableController collectableController) {
+        this.collectableController = collectableController;
+    }
+
+    public void setAlienShipController(AlienShipController alienShipController) {
+        this.alienShipController = alienShipController;
+    }
+
+    public void setPauseGameTime(long pauseGameTime) {
+        this.pauseGameTime = pauseGameTime;
+    }
+
+    public void setNeedToUpdateTimers(boolean needToUpdateTimers) {
+        this.needToUpdateTimers = needToUpdateTimers;
+    }
+
+    public void setProjectileController(ProjectileController projectileController) {
+        this.projectileController = projectileController;
+    }
+
+    public boolean isNeedToUpdateTimers() {
+        return needToUpdateTimers;
     }
 
     public void setTimers(long time){
