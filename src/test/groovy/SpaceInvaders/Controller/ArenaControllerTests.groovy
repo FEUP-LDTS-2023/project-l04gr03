@@ -6,6 +6,7 @@ import SpaceInvaders.Controller.Game.ArenaController
 import SpaceInvaders.Controller.Game.ShipController
 import SpaceInvaders.Model.Game.Arena
 import SpaceInvaders.Model.Game.ArenaModifier
+import SpaceInvaders.Model.Game.Collectables.Collectable
 import SpaceInvaders.Model.Game.Element
 import SpaceInvaders.Model.Game.RegularGameElements.Alien
 import SpaceInvaders.Model.Game.RegularGameElements.AlienShip
@@ -376,5 +377,73 @@ class ArenaControllerTests extends Specification{
         then:
         0 * alienShipController.hitByProjectile(_,_)
         0 * arenaModifier.removeProjectile(_)
+    }
+
+    def "RemoveDestroyedElements"(){
+        def arenaController = Spy(ArenaController.class)
+        def alienController = Mock(AlienController.class)
+        def alienShipController = Mock(AlienShipController.class)
+        def arena = Mock(Arena.class)
+        def alien = Mock(Alien.class)
+        def alienShip = Mock(AlienShip.class)
+        def coverWall = Mock(CoverWall.class)
+        List<Alien> aliens = new ArrayList<>(Arrays.asList(alien))
+        List<CoverWall> coverWalls = new ArrayList<>(Arrays.asList(coverWall))
+        arenaController.getAlienController() >> alienController
+        arenaController.getAlienShipController() >> alienShipController
+        arenaController.getModel() >> arena
+        arena.getCoverWalls() >> coverWalls
+        arena.getAliens() >> aliens
+        arena.getAlienShip() >> alienShip
+        when:
+        arenaController.removeDestroyedElements()
+        then:
+        1 * alienController.removeDestroyedAliens()
+        1 * arenaController.removeDestroyedCoverWalls()
+        1 * alienShipController.removeAlienShip()
+    }
+
+    def "CheckCollisions"(){
+        def arenaController = Spy(ArenaController.class)
+        def arena = Mock(Arena.class)
+        def wall = Mock(Wall.class)
+        wall.getPosition() >> Mock(Position.class)
+        def coverWall = Mock(CoverWall.class)
+        coverWall.getPosition() >> Mock(Position.class)
+        def ship = Mock(Ship.class)
+        ship.getPosition() >> Mock(Position.class)
+        def alien = Mock(Alien.class)
+        alien.getPosition() >> Mock(Position.class)
+        def alienShip = Mock(AlienShip.class)
+        alienShip.getPosition() >> Mock(Position.class)
+        def projectile = Mock(Projectile.class)
+        projectile.getPosition() >> Mock(Position.class)
+        def collectable = Mock(Collectable.class)
+        collectable.getPosition() >> Mock(Position.class)
+        arenaController.getModel() >> arena
+        arenaController.getShipController() >> Mock(ShipController.class)
+        arenaController.getAlienController() >> Mock(AlienController.class)
+        arenaController.getAlienShipController() >> Mock(AlienShipController.class)
+        List<Wall> walls = new ArrayList<>(Arrays.asList(wall))
+        List<CoverWall> coverWalls = new ArrayList<>(Arrays.asList(coverWall))
+        List<Alien> aliens = new ArrayList<>()
+        List<Projectile> projectiles = new ArrayList<>(Arrays.asList(projectile))
+        arena.getWalls() >> walls
+        arena.getCoverWalls() >> coverWalls
+        arena.getShip() >> ship
+        arena.getAliens() >> aliens
+        arena.getProjectiles() >> projectiles
+        arena.getActiveCollectable() >> collectable
+        arena.getAlienShip() >> alienShip
+        when:
+        arenaController.checkCollisions()
+        then:
+        1 * arenaController.projectileCollisionsWithWalls()
+        1 * arenaController.projectileCollisionsWithShip()
+        1 * arenaController.projectileCollisionsWithAliens()
+        1 * arenaController.shipCollisionsWithCollectables()
+        1 * arenaController.collectableCollisionsWithWalls()
+        1 * arenaController.projectileCollisionsWithCoverWalls()
+        1 * arenaController.projectileCollisionWithAlienShip()
     }
 }

@@ -198,9 +198,9 @@ public class ArenaController extends GameController {
     }
 
     public void removeDestroyedElements(){
-        alienController.removeDestroyedAliens();
+        this.getAlienController().removeDestroyedAliens();
         removeDestroyedCoverWalls();
-        alienShipController.removeAlienShip();
+        this.getAlienShipController().removeAlienShip();
     }
 
     public void checkCollisions(){

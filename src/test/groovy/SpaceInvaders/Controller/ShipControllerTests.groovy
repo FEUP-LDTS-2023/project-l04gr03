@@ -15,6 +15,36 @@ import com.googlecode.lanterna.input.KeyType;
 
 class ShipControllerTests extends Specification {
 
+    def "SetMovementTime"(){
+      given:
+      ShipController shipController = new ShipController(Mock(Arena.class))
+      when:
+      shipController.setMovementTime(time)
+      then:
+      shipController.getMovementTime() == expectedTime
+      where:
+      time  | expectedTime
+       0    |      0
+       50   |      50
+       100  |      100
+       500  |      500
+    }
+
+    def "SetShootingTime"(){
+        given:
+        ShipController shipController = new ShipController(Mock(Arena.class))
+        when:
+        shipController.setShootingTime(time)
+        then:
+        shipController.getShootingTime() == expectedTime
+        where:
+        time  | expectedTime
+        0    |      0
+        50   |      50
+        100  |      100
+        500  |      500
+    }
+
     def "CanMoveShip - True"(){
         given:
         def shipController = Spy(ShipController.class)
