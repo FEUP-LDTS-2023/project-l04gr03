@@ -1,4 +1,4 @@
-package SpaceInvaders.Model.Game
+package SpaceInvaders.Model
 
 import SpaceInvaders.Model.Game.RegularGameElements.Alien
 import SpaceInvaders.Model.Menu.PauseMenu
