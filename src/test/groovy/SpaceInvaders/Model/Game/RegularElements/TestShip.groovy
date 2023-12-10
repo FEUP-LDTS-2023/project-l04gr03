@@ -50,6 +50,16 @@ public class TestShip extends Specification {
 
     }
 
+    def "DecreaseHealthNormalMode behaviour"(){
+        given:
+            Ship ship = new Ship(Mock(Position),100,50)
+            def shipSpy = Spy(ship)
+        when:
+            shipSpy.decreaseHealth(10)
+        then:
+            1 * shipSpy.setHealth(shipSpy.getHealth() - 10)
+    }
+
     def "DecreaseHealthInGodMode"(){
         given:
         Ship ship = new Ship(Mock(Position),100,50)
@@ -88,4 +98,13 @@ public class TestShip extends Specification {
         shipMode << [ShipMode.NORMAL_MODE,ShipMode.DAMAGE_2X,ShipMode.DAMAGE_3X,ShipMode.DAMAGE_4X,ShipMode.DAMAGE_5X,ShipMode.DAMAGE_10X,
                      ShipMode.MACHINE_GUN_MODE,ShipMode.GOD_MODE]
     }
+
+    def "Get max health"(){
+        given:
+            def ship = new Ship(Mock(Position),100, 12)
+        expect:
+            ship.getMaxHealth() == 100
+    }
+
+
 }

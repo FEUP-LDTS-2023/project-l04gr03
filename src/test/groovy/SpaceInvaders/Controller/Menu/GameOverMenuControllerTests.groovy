@@ -11,7 +11,7 @@ import org.mockito.MockedStatic
 import org.mockito.Mockito
 import spock.lang.Specification
 
-class GameOverMenuTests extends Specification {
+class GameOverMenuControllerTests extends Specification {
     def soundManager = Mockito.mock(SoundManager.class)
 
     def "Step arrow down key"() {

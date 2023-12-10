@@ -92,4 +92,12 @@ class TestDestroyableElement extends Specification {
         then:
         destroyableElement1.equals(destroyableElement2)
     }
+
+    def "Hash code"(){
+        given:
+            def position = new Position(10,10)
+            def destroyableElement = new DestroyableElement(position, 100)
+        expect:
+            destroyableElement.hashCode() == (31 + 100) * 31 + position.hashCode()
+    }
 }

@@ -29,8 +29,7 @@ public class AttackingElement extends DestroyableElement {
     @Override
     public int hashCode() {
         int prime = 31;
-        int result = 1;
-        result = prime * result + damagePerShot;
+        int result = prime + damagePerShot;
         result = prime * result + getHealth();
         result = prime * result + getPosition().hashCode();
         return result;
