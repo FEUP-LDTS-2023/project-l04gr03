@@ -1,4 +1,4 @@
-package SpaceInvaders.Model.Game.RegularElements
+package SpaceInvaders.Model.Game
 
 import SpaceInvaders.Model.Game.Arena
 import SpaceInvaders.Model.Game.RegularGameElements.Alien
