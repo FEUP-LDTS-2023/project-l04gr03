@@ -46,18 +46,21 @@ public class AlienController extends GameController {
         this.lastShotTime = lastShotTime;
     }
 
+    public void setMovementDirection(MovementDirection direction){
+        movementDirection = direction;
+    }
+
     public MovementDirection getMovementDirection() {return movementDirection;}
 
     public boolean canMoveAlien(Alien alien) {
-        switch (this.getMovementDirection()) {
+       return switch (this.getMovementDirection()) {
             case LEFT:
-               return alien.getPosition().getX() - 3 > 0;
+                yield alien.getPosition().getX() - 3 > 0;
             case RIGHT:
-                return alien.getPosition().getX() + 3 < getModel().getWidth() - 1;
+                yield alien.getPosition().getX() + 3 < getModel().getWidth() - 1;
             case DOWN:
-                return true;
-        }
-        return false;
+                yield true;
+        };
     }
 
     public boolean canMoveAliens(){
@@ -139,7 +142,7 @@ public class AlienController extends GameController {
 
     public long movementCoolDown(){
         long movementCoolDown = 300 - (getModel().getRound() - 1) * 50L;
-        if(movementCoolDown < 50){
+        if(movementCoolDown < 100){
             return 50;
         }
         return movementCoolDown;
@@ -147,7 +150,7 @@ public class AlienController extends GameController {
 
     public long shootingCoolDown(){
         long shootingCoolDown = 800 - (getModel().getRound() - 1) * 100L;
-        if(shootingCoolDown < 100){
+        if(shootingCoolDown < 200){
             return 100;
         }
         return shootingCoolDown;

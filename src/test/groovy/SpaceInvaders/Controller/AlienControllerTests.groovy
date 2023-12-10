@@ -6,6 +6,7 @@ import SpaceInvaders.Game
 import SpaceInvaders.Model.Game.Arena
 import SpaceInvaders.Model.Game.ArenaModifier
 import SpaceInvaders.Model.Game.RegularGameElements.Alien
+import SpaceInvaders.Model.Game.RegularGameElements.AlienState
 import SpaceInvaders.Model.Game.RegularGameElements.Projectile
 import SpaceInvaders.Model.Game.RegularGameElements.Ship
 import SpaceInvaders.Model.Position
@@ -13,6 +14,22 @@ import com.googlecode.lanterna.input.KeyStroke
 import spock.lang.Specification
 
 class AlienControllerTests extends Specification {
+
+    def "Get last Movement"(){
+        given:
+            def alienController = new AlienController(Mock(Arena))
+            alienController.setLastMovementTime(10)
+        expect:
+            alienController.getLastMovementTime() == 10
+    }
+
+    def "last Shot time"(){
+        given:
+            def alienController = new AlienController(Mock(Arena))
+            alienController.setLastShotTime(1)
+        expect:
+            alienController.getLastShotTime() == 1
+    }
 
     def "CanMoveAlien - True Case Left"(){
         given:
@@ -364,5 +381,114 @@ class AlienControllerTests extends Specification {
         1 * alienController.updateMovementDirection()
         1 * alienController.moveAliens()
         1 * alienController.shootProjectile()
+    }
+
+    def "updateMovementDirection left"(){
+        given:
+            def alienController = Spy(AlienController.class)
+            def arena = Mock(Arena.class)
+            def alien1 = new Alien(new Position(10,1), 1,1,1, AlienState.PASSIVE,1)
+            def alien2 = new Alien(new Position(0,2), 1,1,1, AlienState.ATTACKING,1)
+            def alien3 = new Alien(new Position(1,5), 1,1,1, AlienState.ATTACKING,1)
+            def aliens = Arrays.asList(alien1,alien2, alien3)
+            arena.getAliens() >> aliens
+            arena.getWidth() >> 9
+            alienController.getModel() >> arena
+            alienController.setMovementDirection(MovementDirection.LEFT)
+            alienController.canMoveAliens() >> false
+
+        when:
+            alienController.updateMovementDirection()
+
+        then:
+            alienController.getMovementDirection() == MovementDirection.DOWN
+
+    }
+
+    def "UpdateMovement right"(){
+        given:
+        def alienController = Spy(AlienController.class)
+        def arena = Mock(Arena.class)
+        def alien1 = new Alien(new Position(10,1), 1,1,1, AlienState.PASSIVE,1)
+        def alien2 = new Alien(new Position(0,2), 1,1,1, AlienState.ATTACKING,1)
+        def alien3 = new Alien(new Position(1,5), 1,1,1, AlienState.ATTACKING,1)
+        def aliens = Arrays.asList(alien1,alien2, alien3)
+        arena.getAliens() >> aliens
+        arena.getWidth() >> 9
+        alienController.getModel() >> arena
+        alienController.setMovementDirection(MovementDirection.RIGHT)
+        alienController.canMoveAliens() >> false
+
+        when:
+        alienController.updateMovementDirection()
+
+        then:
+        alienController.getMovementDirection() == MovementDirection.LEFT
+
+    }
+
+    def "UpdateMovement Down"(){
+        given:
+            def alienController = Spy(AlienController.class)
+            alienController.setMovementDirection(MovementDirection.DOWN)
+        when:
+            alienController.updateMovementDirection()
+
+        then:
+            alienController.getMovementDirection() == MovementDirection.RIGHT
+    }
+
+    def "Movement cool down"(){
+        given:
+            def arena = Mock(Arena.class)
+            def alienController = new AlienController(arena)
+            arena.getRound() >> 2
+        expect:
+            alienController.movementCoolDown() == 250
+    }
+
+    def "Movement cool down less than 100"(){
+        given:
+            def arena = Mock(Arena.class)
+            def alienController = new AlienController(arena)
+            arena.getRound() >> 6
+            expect:
+            alienController.movementCoolDown() == 50
+    }
+
+    def "Movement cool down equal to 100"(){
+        given:
+            def arena = Mock(Arena.class)
+            def alienController = new AlienController(arena)
+            arena.getRound() >> 5
+        expect:
+            alienController.movementCoolDown() == 100
+    }
+
+    def "Shooting cool down"(){
+        given:
+            def arena = Mock(Arena.class)
+            def alienController = new AlienController(arena)
+            arena.getRound() >> 2
+        expect:
+            alienController.shootingCoolDown() == 700
+    }
+
+    def "Shooting cool down is equal to 200"(){
+        given:
+            def arena = Mock(Arena.class)
+            def alienController = new AlienController(arena)
+            arena.getRound() >> 7
+        expect:
+            alienController.shootingCoolDown() == 200
+    }
+
+    def "Shooting cool down is less than 200"(){
+        given:
+            def arena = Mock(Arena.class)
+            def alienController = new AlienController(arena)
+            arena.getRound() >> 8
+        expect:
+            alienController.shootingCoolDown() == 100
     }
 }
