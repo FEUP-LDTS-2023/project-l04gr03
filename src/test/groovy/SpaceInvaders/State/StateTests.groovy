@@ -17,44 +17,36 @@ class StateTests extends Specification{
     def "Update State"(){
         given:
             State state = State.getInstance()
-        try (MockedStatic<SoundManager> utilities = Mockito.mockStatic(SoundManager.class)) {
-            utilities.when(SoundManager::getInstance).thenReturn(soundManager)
             when:
                 state.UpdateState(GameStates.NEW_GAME)
             then:
-                state.currentState == GameStates.NEW_GAME
-        }
+                state.getCurrentState() == GameStates.NEW_GAME
     }
 
     def "Update State When New State is Start Menu"(){
         given:
             State state = State.getInstance()
-        try (MockedStatic<SoundManager> utilities = Mockito.mockStatic(SoundManager.class)) {
-            utilities.when(SoundManager::getInstance).thenReturn(soundManager)
             when:
                 state.UpdateState(GameStates.NEW_GAME)
                 state.UpdateState(GameStates.GAME_OVER)
                 state.UpdateState(GameStates.START_MENU)
             then:
-                state.currentState == GameStates.START_MENU
-                state.previousState == GameStates.START_MENU
-        }
+                state.getCurrentState() == GameStates.START_MENU
+                state.getPreviousState() == GameStates.START_MENU
+
     }
 
     def "Update to Previous"(){
         given:
             def state = State.getInstance()
-            def stateSpy = Mockito.spy(state)
-        try (MockedStatic<SoundManager> utilities = Mockito.mockStatic(SoundManager.class)) {
-            utilities.when(SoundManager::getInstance).thenReturn(soundManager)
+            def stateSpy = Spy(state)
             when:
                 stateSpy.UpdateState(GameStates.NEW_GAME)
                 stateSpy.UpdateToPrevious()
             then:
                 stateSpy.currentState == GameStates.START_MENU
                 stateSpy.previousState == GameStates.NEW_GAME
-               Mockito.verify(stateSpy, Mockito.times(2)).StateActions()
-        }
+                2 * stateSpy.StateActions()
 
     }
 
@@ -81,6 +73,7 @@ class StateTests extends Specification{
     def "Get arena"(){
         given:
             def state = State.getInstance()
+            state.setArena(new Arena(10,10))
         expect:
             state.getArena().getClass() == Arena.class
     }

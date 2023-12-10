@@ -42,7 +42,13 @@ This project was developed by:
 - **Enemy Characters** - The enemy characters are aliens that want to invade the planet. They can shoot lasers and kill the player. They can also move from left to right and when they hit the wall they move from right to left and vice-versa.
 
 
+- **Enemy Spaceship** - Sometimes, the aliens spaceship appears and moves from left to right or from right to left. If the player hits this spaceship, he will receive a bonus punctuation.
+
+
 - **Cover Walls** - Walls that protect the player from the enemy lasers.
+
+
+- **Cover Walls Destruction**- Cover walls can be destructed and have different looks depending on the damage.
 
 
 - **Lasers** - Both aliens and the player can shoot lasers.
@@ -52,6 +58,21 @@ This project was developed by:
 
 
 - **Collision Detection** - The game detects if a laser collided with an alien or a player. It may also detect if a laser collided with a cover wall and if an aliens or the player collided with the arena walls. Other important thing the game needs to detect is the collision of the aliens with the cover walls because in that case the game ends.
+
+
+- **Collectable Lives** - The player can extend his lives by collecting this collectable.
+
+
+- **Collectable Projectiles** - This collectables can help the player by given him the option to shoot special projectiles.
+
+
+- **Background Music** - Music that plays when the game starts.
+
+
+- **Sound Effects** - Sound of the lasers, collisions, collectables and menu navigation .
+
+
+- **Better Aliens Animation** - Aliens have an animation when moving.
 
 
 - **Main Menu** - The game Main Menu is accessed at the beginning of the game. It can also be accessed through the Pause menu and Game Over menu.
@@ -109,35 +130,6 @@ This project was developed by:
 ![General_UML](Images_UML/General_UML.drawio.png)
 
 
-### PLANNED FEATURES
-
-- **Enemy Spaceship** - Sometimes, the aliens spaceship appears and moves from left to right or from right to left. If the player hits this spaceship, he will receive a bonus punctuation.
-
-![Mocks](Mocks/Alien_ship.png)
-
-- **Collectable Lives** - The player can extend his lives by collecting this collectable.
-
-
-- **Collectable Projectiles** - This collectables can help the player by given him the option to shoot special projectiles.
-
-
-  **Collectable lives/Health** and **Projectile** appearance:
-
-![Mocks](Mocks/Collectabel.png)
-
-- **Background Music** - Music that plays when the game starts.
-
-
-- **Sound Effects** - Sound of the lasers and collisions.
-
-
-- **Better Aliens Animation** - Aliens have an animation when moving
-
-![Mocks](Mocks/Aliens.png)
-
-- **Cover Walls Destruction**- Cover walls can be destructed and have different looks depending on the damage
-
-![Mocks](Mocks/cover_walls.png)
 ### DESIGN
 
 ### Structure
@@ -160,11 +152,11 @@ This project was developed by:
 
 **The packages can be found on these folders:**
 
-[Controller](../src/main/java/SpaceInvaders/sourceCode/Controller)
-[State](../src/main/java/SpaceInvaders/sourceCode/State)
-[GUI](../src/main/java/SpaceInvaders/sourceCode/GUI)
-[Model](../src/main/java/SpaceInvaders/sourceCode/Model)
-[Viewer](../src/main/java/SpaceInvaders/sourceCode/Viewer)
+[Controller](../src/main/java/SpaceInvaders/Controller)
+[State](../src/main/java/SpaceInvaders/State)
+[GUI](../src/main/java/SpaceInvaders/GUI)
+[Model](../src/main/java/SpaceInvaders/Model)
+[Viewer](../src/main/java/SpaceInvaders/Viewer)
 
 
 
@@ -190,7 +182,7 @@ This leads us to the necessity of having a simple and organized way to handle th
 
 **These implementation can be found on these folders:**
 
-[State](../src/main/java/SpaceInvaders/sourceCode/State)
+[State](../src/main/java/SpaceInvaders/State)
 
 
 **UML:**
@@ -212,7 +204,7 @@ Because of that we might end up writing the same code repeatedly.
 
 **This implementation can be found on these folders:**
 
-[Element](../src/main/java/SpaceInvaders/sourceCode/Model/Game/RegularGameElements)
+[Element](../src/main/java/SpaceInvaders/Model/Game/RegularGameElements)
 
 
 **UML:**
@@ -234,7 +226,7 @@ However, the subclasses will always depend on their superclasses, reducing their
 
 **These implementation can be found on these folders:**
 
-[State](../src/main/java/SpaceInvaders/sourceCode/State)
+[State](../src/main/java/SpaceInvaders/State)
 
 **UML:**
 
@@ -256,7 +248,7 @@ are updated in each loop.
 
 **These implementation can be found in:**
 
-[Game](../src/main/java/SpaceInvaders/sourceCode/Game.java)
+[Game](../src/main/java/SpaceInvaders/Game.java)
 
 **UML:**
 
@@ -277,7 +269,7 @@ is efficient because that peace of code will run a lot of times during the Game 
 
 **These implementation can be found on these folder:**
 
-[Collectables](../src/main/java/SpaceInvaders/sourceCode/Model/Game/Collectables)
+[Collectables](../src/main/java/SpaceInvaders/Model/Game/Collectables)
 
 **UML:**
 
@@ -299,13 +291,49 @@ facilitates the addition of new commands.
 
 **These implementation can be found on these folder:**
 
-[Collectables](../src/main/java/SpaceInvaders/sourceCode/Model/Game/Collectables)
+[Collectables](../src/main/java/SpaceInvaders/Model/Game/Collectables)
 
 **UML:**
 
 ![pattern](Images_UML/Factory_Pattern.png)
 
 - **Consequences.**  The code becomes easier to reuse and maintain. It also becomes more modular and enables the creation of objects without knowing the implementation details. 
+
+### Code Smells
+
+Currently, we can identify at least 3 code smells:
+
+- **Long switch statement**:
+  The State class handles the various states of the code. However, in order to do that, the class needs to have a big switch statement. This could be fixed by using polymorphism
+and dividing the code in several classes. This problem can be found in:
+  [State](../src/main/java/SpaceInvaders/State)
+
+
+- **Long if statement**:
+  The Game Viewer class coordinates the logic related to the visual look of the game. It creates the individual viewers of each element of the game and calls the GUI class to display the HUD of the game.
+However, this class has a big if statement in the function that handles the collectables. This problem is related with how the viewers need to be constructed and how the Collectables class is designed. This
+could be fixed by better using the polymorphism properties or by using a switch statement. This last option produces other problems such as the need to alter the code in other classes and the production of a big switch statement, but 
+this switch statement is at least more readable, a bit easier to maintain than a long if statement and a lot faster. This all problem can be found in:
+ [GameViewer](../src/main/java/SpaceInvaders/Viewer/Game/GameViewer.java)
+
+
+### Error Prone Warnings
+
+During the project, we used the Error Prone tool to help us improve the code. Some of the improvements were:
+
+- **Added Has code functions** - Some of the classes override the Equals method. When this happens, is appropriate to override the Hash Code as well.
+Some examples can be found in: [Element](../src/main/java/SpaceInvaders/Model/Game/Element.java) [Position](../src/main/java/SpaceInvaders/Model/Position.java)
+[AttackingElement](../src/main/java/SpaceInvaders/Model/Game/RegularGameElements/AttackingElement.java) [DestroyableElement](../src/main/java/SpaceInvaders/Model/Game/RegularGameElements/DestroyableElement.java)
+
+
+- **Eliminated unused methods, variables and imports** - Some methods, variables and imports that were not being used were eliminated.
+
+
+- **Undefined behaviour** - This problem was specific to one class and occurred because we were using String.split() method. This could cause an undefined behaviour if not used correctly.
+To fix that we added -1 to the method's limit parameter. This change can be found in the sortByScore method in: 
+[Leaderboard](../src/main/java/SpaceInvaders/Model/Menu/Leaderboard.java)
+
+
 
 ### TESTING
 
