@@ -19,6 +19,8 @@ public class ArenaModifier {
         this.arena = arena;
     }
 
+    public Arena getArena() {return arena;}
+
     public void resetShipMode(){
         arena.getShip().setShipMode(ShipMode.NORMAL_MODE);
     }
@@ -66,7 +68,7 @@ public class ArenaModifier {
     }
 
     public boolean hasAlienInFront(Alien alien, Alien excludedAlien){
-        List<Alien> aliens = arena.getAliens();
+        List<Alien> aliens = getArena().getAliens();
         int i = 0;
         while (i < aliens.size() && aliens.get(i).getPosition().getX() <= alien.getPosition().getX()){
             if(aliens.get(i).getPosition().getX() == alien.getPosition().getX()){
@@ -80,7 +82,7 @@ public class ArenaModifier {
     }
 
     public void removeAlien(Alien alien) {
-        List<Alien> aliens = arena.getAliens();
+        List<Alien> aliens = getArena().getAliens();
         for(int i = 0; i < aliens.size(); i++){
             if(aliens.get(i).equals(alien)){
                 if(i > 0){
@@ -94,20 +96,16 @@ public class ArenaModifier {
         }
     }
 
-    public void removeCoverWall(CoverWall coverWall){arena.getCoverWalls().remove(coverWall);}
+    public void removeCoverWall(CoverWall coverWall){getArena().getCoverWalls().remove(coverWall);}
 
 
-    public void removeActiveCollectable(){
-        arena.setActiveCollectable(null);
-    }
+    public void removeActiveCollectable(){getArena().setActiveCollectable(null);}
 
-    public void addProjectile(Projectile projectile) {arena.getProjectiles().add(projectile);}
+    public void addProjectile(Projectile projectile) {getArena().getProjectiles().add(projectile);}
 
-    public void removeProjectile(Projectile projectile) {arena.getProjectiles().remove(projectile);}
+    public void removeProjectile(Projectile projectile) {getArena().getProjectiles().remove(projectile);}
 
-    public void removeAlienShip(){
-        arena.setAlienShip(null);
-    }
+    public void removeAlienShip(){getArena().setAlienShip(null);}
 
 
     public void createAlienShip() {
