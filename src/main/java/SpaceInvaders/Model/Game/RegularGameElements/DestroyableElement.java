@@ -40,8 +40,7 @@ public class DestroyableElement extends Element {
     @Override
     public int hashCode() {
         int prime = 31;
-        int result = 1;
-        result = prime * result + health;
+        int result = prime + health;
         result = prime * result + getPosition().hashCode();
         return result;
     }

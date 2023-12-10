@@ -148,12 +148,15 @@ class StateActionsTests extends Specification{
     def "StateActions New_Game_Round State"() {
         given:
         State state = State.getInstance()
+        def arena = Mock(Arena)
+        arena.getScore() >> 10
+        state.setArena(arena)
         when: 'New_Game_Round State'
         state.UpdateState(GameStates.NEW_GAME_ROUND)
-        state.StateActions()
         then:
         state.controller.getClass() == ArenaController.class
         state.viewer.getClass() == GameViewer.class
+        state.getArena().getScore() != 0
     }
 
 }

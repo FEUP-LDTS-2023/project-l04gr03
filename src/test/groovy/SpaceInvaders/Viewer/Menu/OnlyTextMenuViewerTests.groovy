@@ -16,14 +16,16 @@ class OnlyTextMenuViewerTests extends Specification{
             OnlyTextMenuViewer.drawElements(gui,0)
         then:
             if(Menu.text.size() <= 5) {
-                (Menu.text.size() + 1) * gui.drawText(_, _, _)
+                1 * gui.drawText(new Position(OnlyTextMenuViewer.getReference_x(), OnlyTextMenuViewer.getReference_y() + 1 +  1), "2 - " + OnlyTextMenuViewer.getModel().getText().get(1),_)
+                (Menu.text.size()) * gui.drawText(_, _, _)
 
                 }
             else{
-                    1 * gui.drawText(new Position(OnlyTextMenuViewer.getReference_x(), OnlyTextMenuViewer.getReference_y() + 1 +  0), "1 - " + OnlyTextMenuViewer.getModel().getText().get(0),_)
+                    1 * gui.drawText(new Position(OnlyTextMenuViewer.getReference_x(), OnlyTextMenuViewer.getReference_y() + 1 +  1), "2 - " + OnlyTextMenuViewer.getModel().getText().get(1),_)
                     5 * gui.drawText(_,_,_)
                 }
     }
+
 
     def "Draw elements Instructions"(){
         given:

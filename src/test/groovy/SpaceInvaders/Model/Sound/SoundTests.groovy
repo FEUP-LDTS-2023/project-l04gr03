@@ -1,5 +1,8 @@
 package SpaceInvaders.Model.Sound
 
+import SpaceInvaders.Controller.Sound.SoundManager
+import org.mockito.MockedStatic
+import org.mockito.Mockito
 import spock.lang.Specification
 
 import javax.sound.sampled.Clip
@@ -31,7 +34,6 @@ class SoundTests extends Specification{
             1 * clip.start()
             1 * clip.stop()
     }
-
 
     def "Play Continuously"(){
         given:
@@ -110,5 +112,6 @@ class SoundTests extends Specification{
         then:
             thrown RuntimeException
     }
+
 }
 
