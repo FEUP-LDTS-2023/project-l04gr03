@@ -1,4 +1,4 @@
-package SpaceInvaders.Controller
+package SpaceInvaders.Controller.Game
 
 import SpaceInvaders.Controller.Game.ShipController
 import SpaceInvaders.Game

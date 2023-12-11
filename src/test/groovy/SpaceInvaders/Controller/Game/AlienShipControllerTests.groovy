@@ -1,4 +1,4 @@
-package SpaceInvaders.Controller
+package SpaceInvaders.Controller.Game
 
 import SpaceInvaders.Controller.Game.AlienShipController
 import SpaceInvaders.Controller.Sound.SoundManager
