@@ -5,10 +5,18 @@ import SpaceInvaders.Model.Game.RegularGameElements.Alien
 import SpaceInvaders.Model.Game.RegularGameElements.AlienShip
 import SpaceInvaders.Model.Game.RegularGameElements.AlienState
 import SpaceInvaders.Model.Game.RegularGameElements.CoverWall
+import SpaceInvaders.Model.Game.RegularGameElements.Wall
 import SpaceInvaders.Model.Position
 import spock.lang.Specification
 
 class TestArena extends Specification{
+
+    def "width"(){
+        given:
+            def arena = new Arena(10,10)
+        expect:
+            arena.getWidth() == 10
+    }
 
     def "height"(){
         given:
@@ -17,6 +25,34 @@ class TestArena extends Specification{
             arena.getHeight() == 10
     }
 
+    def "Round"(){
+        given:
+            def arena = new Arena(10,10)
+        when:
+            arena.setRound(2)
+        then:
+            arena.getRound() == 2
+    }
+
+    def "Score"(){
+        given:
+            def arena = new Arena(10,10)
+        when:
+            arena.increaseScore(10)
+        then:
+            arena.getScore() == 10
+    }
+
+    def "get walls"(){
+        given:
+            def arena = new Arena(10,10)
+            def wall = Mock(Wall)
+            def walls = Arrays.asList(wall)
+        when:
+            arena.setWalls(walls)
+        then:
+            arena.getWalls() == walls
+    }
     def "get attackingAliens"(){
         given:
             def arena = new Arena(10,10)
@@ -82,6 +118,20 @@ class TestArena extends Specification{
             arena.setAlienShip(alienShip)
         expect:
             arena.freeArenaPosition(new Position(3,4))
+    }
+
+    def "free arena position alien ship null"(){
+        given:
+        def arena = new Arena(10,10)
+        def alien1 = new Alien(new Position(1,1), 1,1,1, AlienState.PASSIVE,1)
+        def aliens = Arrays.asList(alien1)
+        arena.setAliens(aliens)
+        def coverWall = new CoverWall(new Position(2,2),1)
+        def coverWalls = Arrays.asList(coverWall)
+        arena.setCoverWalls(coverWalls)
+        arena.setAlienShip(null)
+        expect:
+        arena.freeArenaPosition(new Position(3,4))
     }
 
     def "Free columns"(){
