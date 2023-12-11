@@ -14,6 +14,14 @@ class TestElement extends Specification{
             !element.equals(other)
     }
 
+    def "Equals"(){
+        given:
+            def element = new Wall(new Position(1,1))
+            def element2 = new Wall(new Position(1,1))
+        expect:
+            element.equals(element2)
+    }
+
     def "Has code"(){
         given:
             def position = new Position(10,1)

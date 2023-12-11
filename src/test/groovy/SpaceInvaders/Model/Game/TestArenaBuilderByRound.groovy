@@ -11,6 +11,20 @@ import spock.lang.Specification
 
 class TestArenaBuilderByRound extends Specification{
 
+    def"Get Height"(){
+        given:
+            def arenaBuilderByRound = new ArenaBuilderByRound(1)
+        expect:
+            arenaBuilderByRound.getHeight() == arenaBuilderByRound.getArenaLines().size()
+    }
+
+    def "Get Width"(){
+        given:
+            def arenaBuilderByRound = new ArenaBuilderByRound(1)
+        expect:
+            arenaBuilderByRound.getWidth() == arenaBuilderByRound.getArenaLines().get(0).length()
+    }
+
     def 'ArenaBuilder'(){
         given:
         int round = 1
