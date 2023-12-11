@@ -1,11 +1,5 @@
 package SpaceInvaders.Controller.Game
 
-import SpaceInvaders.Controller.Game.AlienController
-import SpaceInvaders.Controller.Game.AlienShipController
-import SpaceInvaders.Controller.Game.ArenaController
-import SpaceInvaders.Controller.Game.CollectableController
-import SpaceInvaders.Controller.Game.ProjectileController
-import SpaceInvaders.Controller.Game.ShipController
 import SpaceInvaders.Controller.Sound.SoundManager
 import SpaceInvaders.Game
 import SpaceInvaders.Model.Game.Arena

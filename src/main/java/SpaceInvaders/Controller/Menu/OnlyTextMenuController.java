@@ -10,7 +10,6 @@ import java.io.IOException;
 
 public class OnlyTextMenuController extends Controller<OnlyTextMenu> {
 
-    OnlyTextMenu menu;
     public OnlyTextMenuController(OnlyTextMenu menu){
         super(menu);
     }

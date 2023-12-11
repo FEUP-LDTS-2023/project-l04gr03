@@ -271,6 +271,5 @@ public class ArenaController extends GameController {
         collectableController.step(game,key,time);
         checkCollisions();
         removeDestroyedElements();
-
     }
 }

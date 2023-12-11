@@ -1,6 +1,5 @@
 package SpaceInvaders.Model.Game.RegularElements
 
-import SpaceInvaders.Model.Game.Collectables.Collectable
 import SpaceInvaders.Model.Game.Collectables.HealthCollectable
 import SpaceInvaders.Model.Game.RegularGameElements.DestroyableElement
 import SpaceInvaders.Model.Game.RegularGameElements.Ship

@@ -1,8 +1,5 @@
 package SpaceInvaders.Model.Sound
 
-import SpaceInvaders.Controller.Sound.SoundManager
-import org.mockito.MockedStatic
-import org.mockito.Mockito
 import spock.lang.Specification
 
 import javax.sound.sampled.Clip

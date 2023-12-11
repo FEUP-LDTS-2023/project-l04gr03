@@ -3,5 +3,3 @@ Joao 1000
 Maria 1020
 Faria 1280
 Pedro 10000
-R 0
-Unknown 0

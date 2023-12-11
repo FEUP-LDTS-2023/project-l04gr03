@@ -1,21 +1,15 @@
 package SpaceInvaders.Model.Game
 
-import SpaceInvaders.Model.Game.Collectables.Collectable
-import SpaceInvaders.Model.Game.Collectables.CollectableFactory
-import SpaceInvaders.Model.Game.Collectables.CollectableType
 import SpaceInvaders.Model.Game.Collectables.DamageCollectable
-import SpaceInvaders.Model.Game.Collectables.HealthCollectable
 import SpaceInvaders.Model.Game.Collectables.ScoreCollectable
 import SpaceInvaders.Model.Game.RegularGameElements.Alien
 import SpaceInvaders.Model.Game.RegularGameElements.AlienMode
-import SpaceInvaders.Model.Game.RegularGameElements.AlienShip
 import SpaceInvaders.Model.Game.RegularGameElements.AlienState
 import SpaceInvaders.Model.Game.RegularGameElements.CoverWall
 import SpaceInvaders.Model.Game.RegularGameElements.Projectile
 import SpaceInvaders.Model.Game.RegularGameElements.Ship
 import SpaceInvaders.Model.Game.RegularGameElements.ShipMode
 import SpaceInvaders.Model.Position
-import org.assertj.core.internal.Arrays
 import spock.lang.Specification
 
 class TestArenaModifier extends Specification{
