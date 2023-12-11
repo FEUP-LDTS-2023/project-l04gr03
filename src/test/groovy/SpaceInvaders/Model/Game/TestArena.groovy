@@ -1,6 +1,5 @@
 package SpaceInvaders.Model.Game
 
-import SpaceInvaders.Model.Game.Arena
 import SpaceInvaders.Model.Game.RegularGameElements.Alien
 import SpaceInvaders.Model.Game.RegularGameElements.AlienShip
 import SpaceInvaders.Model.Game.RegularGameElements.AlienState

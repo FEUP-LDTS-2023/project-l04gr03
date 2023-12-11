@@ -1,6 +1,5 @@
 package SpaceInvaders.Model.Game.RegularElements
 
-import SpaceInvaders.Controller.Game.MovementDirection
 import SpaceInvaders.Model.Game.RegularGameElements.AlienShip
 import SpaceInvaders.Model.Position
 import spock.lang.Specification

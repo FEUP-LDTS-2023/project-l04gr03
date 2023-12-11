@@ -1,6 +1,5 @@
 package SpaceInvaders.Controller.Game
 
-import SpaceInvaders.Controller.Game.ShipController
 import SpaceInvaders.Game
 import SpaceInvaders.Model.Game.Arena
 import SpaceInvaders.Model.Game.ArenaModifier

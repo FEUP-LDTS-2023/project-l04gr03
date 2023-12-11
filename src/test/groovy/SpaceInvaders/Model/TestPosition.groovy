@@ -1,8 +1,6 @@
 package SpaceInvaders.Model
 
-import SpaceInvaders.Model.Game.RegularGameElements.Alien
 import SpaceInvaders.Model.Menu.PauseMenu
-import SpaceInvaders.Model.Position
 import spock.lang.Specification
 
 class TestPosition extends Specification {
