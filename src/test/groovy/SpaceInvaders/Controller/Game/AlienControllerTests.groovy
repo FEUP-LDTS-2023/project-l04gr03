@@ -1,7 +1,5 @@
-package SpaceInvaders.Controller
+package SpaceInvaders.Controller.Game
 
-import SpaceInvaders.Controller.Game.AlienController
-import SpaceInvaders.Controller.Game.MovementDirection
 import SpaceInvaders.Game
 import SpaceInvaders.Model.Game.Arena
 import SpaceInvaders.Model.Game.ArenaModifier

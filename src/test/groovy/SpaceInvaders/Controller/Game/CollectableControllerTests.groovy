@@ -1,13 +1,11 @@
-package SpaceInvaders.Controller
+package SpaceInvaders.Controller.Game
 
-import SpaceInvaders.Controller.Game.CollectableController
 import SpaceInvaders.Game
 import SpaceInvaders.Model.Game.Arena
 import SpaceInvaders.Model.Game.ArenaModifier
 import SpaceInvaders.Model.Game.Collectables.Collectable
 import SpaceInvaders.Model.Game.RegularGameElements.Alien
 import SpaceInvaders.Model.Game.RegularGameElements.AlienMode
-import SpaceInvaders.Model.Game.RegularGameElements.Projectile
 import SpaceInvaders.Model.Game.RegularGameElements.Ship
 import SpaceInvaders.Model.Game.RegularGameElements.ShipMode
 import SpaceInvaders.Model.Position
