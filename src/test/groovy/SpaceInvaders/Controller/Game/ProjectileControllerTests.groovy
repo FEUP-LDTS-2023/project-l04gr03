@@ -1,6 +1,5 @@
-package SpaceInvaders.Controller
+package SpaceInvaders.Controller.Game
 
-import SpaceInvaders.Controller.Game.ProjectileController
 import SpaceInvaders.Game
 import SpaceInvaders.Model.Game.Arena
 import SpaceInvaders.Model.Game.RegularGameElements.Alien
@@ -10,7 +9,6 @@ import SpaceInvaders.Model.Position
 import com.googlecode.lanterna.input.KeyStroke
 import spock.lang.Specification
 
-import java.lang.reflect.Array
 
 class ProjectileControllerTests extends Specification{
 

@@ -1,7 +1,5 @@
-package SpaceInvaders.Controller
+package SpaceInvaders.Controller.Game
 
-import SpaceInvaders.Controller.Game.ShipController
-import SpaceInvaders.Controller.Sound.SoundManager
 import SpaceInvaders.Game
 import SpaceInvaders.Model.Game.Arena
 import SpaceInvaders.Model.Game.ArenaModifier
@@ -10,7 +8,6 @@ import SpaceInvaders.Model.Game.RegularGameElements.Projectile
 import SpaceInvaders.Model.Game.RegularGameElements.Ship
 import SpaceInvaders.Model.Game.RegularGameElements.ShipMode
 import SpaceInvaders.Model.Position
-import SpaceInvaders.Model.Sound.Sound_Options
 import spock.lang.Specification
 import com.googlecode.lanterna.input.KeyStroke;
 import com.googlecode.lanterna.input.KeyType;

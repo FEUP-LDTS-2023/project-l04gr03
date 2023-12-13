@@ -1,7 +1,6 @@
 package SpaceInvaders
 
 import SpaceInvaders.State.GameStates
-import SpaceInvaders.State.State
 import spock.lang.Specification
 
 class GameTests extends Specification{
