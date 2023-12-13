@@ -1,6 +1,7 @@
 package SpaceInvaders.Controller
 
 import SpaceInvaders.Controller.Game.ShipController
+import SpaceInvaders.Controller.Sound.SoundManager
 import SpaceInvaders.Game
 import SpaceInvaders.Model.Game.Arena
 import SpaceInvaders.Model.Game.ArenaModifier
@@ -9,6 +10,7 @@ import SpaceInvaders.Model.Game.RegularGameElements.Projectile
 import SpaceInvaders.Model.Game.RegularGameElements.Ship
 import SpaceInvaders.Model.Game.RegularGameElements.ShipMode
 import SpaceInvaders.Model.Position
+import SpaceInvaders.Model.Sound.Sound_Options
 import spock.lang.Specification
 import com.googlecode.lanterna.input.KeyStroke;
 import com.googlecode.lanterna.input.KeyType;
@@ -56,7 +58,7 @@ class ShipControllerTests extends Specification {
         shipController.canMoveShip(new Position(15,27))
     }
 
-    def "CanMoveShip - False"(){
+    def "CanMoveShip - False : Collision with left wall of the Arena"(){
         given:
         def shipController = Spy(ShipController.class)
         def arena = Mock(Arena.class)
@@ -64,10 +66,10 @@ class ShipControllerTests extends Specification {
         arena.getWidth() >> 74
         arena.getHeight() >> 30
         expect:
-        !shipController.canMoveShip(new Position(-2,27))
+        !shipController.canMoveShip(new Position(0,27))
     }
 
-    def "CanMoveShip - False In Upper Boundary"(){
+    def "CanMoveShip - False : Collision with right wall of the Arena"(){
         given:
         def shipController = Spy(ShipController.class)
         def arena = Mock(Arena.class)
@@ -75,7 +77,29 @@ class ShipControllerTests extends Specification {
         arena.getWidth() >> 74
         arena.getHeight() >> 30
         expect:
-        !shipController.canMoveShip(new Position(73,30))
+        !shipController.canMoveShip(new Position(73,10))
+    }
+
+    def "CanMoveShip - False : Collision with bottom wall of the Arena"(){
+        given:
+        def shipController = Spy(ShipController.class)
+        def arena = Mock(Arena.class)
+        shipController.getModel() >> arena
+        arena.getWidth() >> 74
+        arena.getHeight() >> 30
+        expect:
+        !shipController.canMoveShip(new Position(5,29))
+    }
+
+    def "CanMoveShip - False : Collision with top wall of the Arena"(){
+        given:
+        def shipController = Spy(ShipController.class)
+        def arena = Mock(Arena.class)
+        shipController.getModel() >> arena
+        arena.getWidth() >> 74
+        arena.getHeight() >> 30
+        expect:
+        !shipController.canMoveShip(new Position(47,0))
     }
 
     def "MoveLeft - Cannot Move"(){
@@ -241,7 +265,7 @@ class ShipControllerTests extends Specification {
         shipController.getModel() >> arena
         when:
         key.getKeyType() >> KeyType.ArrowRight
-        shipController.step(game,key,30)
+        shipController.step(game,key,50)
         then:
         0 * shipController.moveRight()
     }
@@ -279,7 +303,7 @@ class ShipControllerTests extends Specification {
         shipController.getArenaModifier() >> arenaModifier
         when:
         key.getKeyType() >> KeyType.ArrowUp
-        shipController.step(game,key,150)
+        shipController.step(game,key,300)
         then:
         0 * shipController.shootProjectile()
     }
@@ -303,6 +327,27 @@ class ShipControllerTests extends Specification {
         shipController.step(game,key,340)
         then:
         1 * shipController.shootProjectile()
+    }
+
+    def "ShipControllerStep - Pressed ArrowUp and did not shoot in MachineGunMode"(){
+        given:
+        def game = Mock(Game.class)
+        def shipController = Spy(ShipController.class)
+        def arena = Mock(Arena.class)
+        def arenaModifier = Mock(ArenaModifier.class)
+        def ship = Mock(Ship.class)
+        def position = Mock(Position.class)
+        def key = Mock(KeyStroke.class)
+        ship.getPosition() >> position
+        ship.getShipMode() >> ShipMode.MACHINE_GUN_MODE
+        arena.getShip() >> ship
+        shipController.getModel() >> arena
+        shipController.getArenaModifier() >> arenaModifier
+        when:
+        key.getKeyType() >> KeyType.ArrowUp
+        shipController.step(game,key,75)
+        then:
+        0 * shipController.shootProjectile()
     }
 
     def "ShipControllerStep - Pressed ArrowUp and successfully shot in MachineGunMode"(){
