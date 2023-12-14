@@ -66,6 +66,7 @@ public class GameOverController extends Controller<GameOverMenu> {
             username = "Unknown";
         }
         bw.write(username + " " + score + '\n');
+        bw.flush();
         bw.close();
     }
 }

@@ -5,6 +5,6 @@ import java.io.IOException;
 public class Instructions extends OnlyTextMenu {
 
     public Instructions() throws IOException {
-        super("/text/Instructions.txt");
+        super("src/main/resources/text/Instructions.txt");
     }
 }

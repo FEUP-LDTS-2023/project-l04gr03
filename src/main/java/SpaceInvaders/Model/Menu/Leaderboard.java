@@ -5,7 +5,7 @@ import java.io.IOException;
 public class Leaderboard extends OnlyTextMenu {
 
     public Leaderboard() throws IOException {
-        super("/text/Leaderboard.txt");
+        super("src/main/resources/text/Leaderboard.txt");
         sortByScore();
     }
 
