@@ -1,5 +1,3 @@
-Lucas 1200
-Joao 1000
-Maria 1020
-Faria 1280
-Pedro 10000
+Pedro 3000
+Maria 1000
+Lucas 10000

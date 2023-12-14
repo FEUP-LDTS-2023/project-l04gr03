@@ -22,7 +22,7 @@ public abstract class OnlyTextMenu {
     }
 
     private List<String> readFile(String filename) throws IOException {
-        Path resource = new File(OnlyTextMenu.class.getResource(filename).getFile()).toPath();
+        Path resource = new File(filename).toPath();
         Reader fileReader = Files.newBufferedReader(resource, Charset.defaultCharset());
         BufferedReader br = new BufferedReader(fileReader);
         List<String> newText = new ArrayList<>();
