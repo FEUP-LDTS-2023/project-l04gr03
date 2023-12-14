@@ -1,63 +1,73 @@
 package SpaceInvaders.GUI
 
 import SpaceInvaders.Model.Position
+import com.googlecode.lanterna.graphics.TextGraphics
+import com.googlecode.lanterna.graphics.TextGraphicsWriter
+import com.googlecode.lanterna.input.KeyStroke
+import com.googlecode.lanterna.input.KeyType
+import com.googlecode.lanterna.screen.Screen
+import com.googlecode.lanterna.screen.TerminalScreen
 import spock.lang.Specification
 
 class GUITests extends Specification{
 
+    Screen screen
+    GUILanterna gui
+    TextGraphics tg
 
-    def "Draw element"(){
-        given:
-            def gui = Mock(GUI)
-        when:
-            gui.drawElement(Mock(Position), 'a' as char, "#djow")
-        then:
-            1 * gui.drawElement(_,_,_)
+    def setup(){
+        screen = Mock(TerminalScreen.class)
+        tg = Mock(TextGraphics.class)
+
+        screen.newTextGraphics() >> tg
+        gui = new GUILanterna(screen)
     }
 
-    def "Draw text"(){
-        given:
-            def gui = Mock(GUI)
+    def "Draw element"(){
         when:
-            gui.drawText(Mock(Position), "lefjop", "iphfO")
+            gui.drawElement(new Position(1,1), 'a' as char, "#001000")
         then:
-            1 * gui.drawText(_,_,_)
+            1 * tg.putString(1,2,'a')
+            1 * tg.setForegroundColor(_)
+
+    }
+
+
+    def "Draw text"(){
+        when:
+            gui.drawText(new Position(1,1), "lefjop", "#010101")
+        then:
+            1 * tg.putString(1,1,"lefjop")
+            1 * tg.setForegroundColor(_)
     }
 
     def "getNextAction"(){
         given:
-            def gui = Mock(GUI)
-        when:
-            gui.getNextAction()
-        then:
-            1 * gui.getNextAction()
+            def key = new KeyStroke(KeyType.Enter)
+            screen.pollInput() >> key
+        expect:
+            gui.getNextAction() == key
     }
 
     def "Refresh"(){
-        given:
-            def gui = Mock(GUI)
         when:
             gui.refresh()
         then:
-            1 * gui.refresh()
+            1 * screen.refresh()
     }
 
     def "Close"(){
-        given:
-            def gui = Mock(GUI)
         when:
             gui.close()
         then:
-            1 * gui.close()
+            1 * screen.close()
     }
 
     def "clear"(){
-        given:
-            def gui = Mock(GUI)
         when:
             gui.clear()
         then:
-            1 * gui.clear()
+            1 * screen.clear()
     }
 }
 
