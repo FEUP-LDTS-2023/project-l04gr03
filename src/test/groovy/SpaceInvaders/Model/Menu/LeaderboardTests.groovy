@@ -12,5 +12,17 @@ class LeaderboardTests extends Specification{
         then:
         menu.text == Arrays.asList("Maria 234", "João 123", "Lucas 010")
     }
+
+    def "Leaderboard Constructor"(){
+        given:
+            def menu = new Leaderboard()
+            def text = menu.getText()
+            def s1 = text.get(0)
+            def s2 = text.get(1)
+            String[] splitS1 = s1.split(" ", -1);
+            String[] splitS2 = s2.split(" ", -1);
+        expect:
+            Integer.parseInt(splitS2[1]) < Integer.parseInt(splitS1[1]);
+    }
 }
 
