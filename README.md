@@ -25,7 +25,7 @@ Therefore, the main goals of this game are the testing and design of the code.
     - **Pause Game** - Escape Key.
 
 ### Game Screenshot
-  ![ScreenShots](docs/ScreenShots/Game.png)
+  ![ScreenShots](docs/ScreenShots/Animação.gif)
 
 
 

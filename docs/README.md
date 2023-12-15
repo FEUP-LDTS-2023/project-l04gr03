@@ -101,7 +101,7 @@ This project was developed by:
 
   - ### **Game**:
 
-  ![ScreenShots](ScreenShots/Game.png)
+  ![ScreenShots](ScreenShots/Animação.gif)
 
   - ### **Start Menu**:
 

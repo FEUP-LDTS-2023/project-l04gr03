@@ -7,7 +7,7 @@ import SpaceInvaders.Model.Position
 import spock.lang.Specification
 
 class OnlyTextMenuViewerTests extends Specification{
-    def "Draw elements Leaderboard"(){
+    def "Draw elements Leaderboard size Text bigger than 5"(){
         given:
             def Menu = new Leaderboard()
             def OnlyTextMenuViewer = new LeaderboardViewer(Menu)
@@ -15,15 +15,36 @@ class OnlyTextMenuViewerTests extends Specification{
         when:
             OnlyTextMenuViewer.drawElements(gui,0)
         then:
-            if(Menu.text.size() <= 5) {
-                1 * gui.drawText(new Position(OnlyTextMenuViewer.getReference_x(), OnlyTextMenuViewer.getReference_y() + 1 +  1), "2 - " + OnlyTextMenuViewer.getModel().getText().get(1),_)
-                (Menu.text.size()) * gui.drawText(_, _, _)
-
-                }
-            else{
                     1 * gui.drawText(new Position(OnlyTextMenuViewer.getReference_x(), OnlyTextMenuViewer.getReference_y() + 1 +  1), "2 - " + OnlyTextMenuViewer.getModel().getText().get(1),_)
                     5 * gui.drawText(_,_,_)
-                }
+    }
+
+    def "Draw elements Leaderboard size Text equal to 5"(){
+        given:
+            def Menu = Mock(Leaderboard.class)
+            def OnlyTextMenuViewer = new LeaderboardViewer(Menu)
+            def gui = Mock(GUI)
+            def text = Arrays.asList("a","b","c","d","e")
+            Menu.getText() >> text
+        when:
+            OnlyTextMenuViewer.drawElements(gui,0)
+        then:
+            6 * gui.drawText(_,_,_)
+
+    }
+
+    def "Draw elements Leaderboard size Text less than 5"(){
+        given:
+            def Menu = Mock(Leaderboard.class)
+            def OnlyTextMenuViewer = new LeaderboardViewer(Menu)
+            def gui = Mock(GUI)
+            def text = Arrays.asList("a","b","c","d")
+            Menu.getText() >> text
+        when:
+            OnlyTextMenuViewer.drawElements(gui,0)
+        then:
+            5 * gui.drawText(_,_,_)
+
     }
 
 
@@ -49,7 +70,8 @@ class OnlyTextMenuViewerTests extends Specification{
             OnlyTextMenuViewer.drawFileText(gui)
         then:
             1 * OnlyTextMenuViewer.drawFileText(gui)
-            27 * gui.drawText(_,_,_)
+            1 * gui.drawText(new Position(1, 2 + 26 + 1),_,_)
+            26 * gui.drawText(_,_,_)
     }
 
     def "Draw Menu Title"(){
