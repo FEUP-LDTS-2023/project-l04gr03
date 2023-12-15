@@ -9,9 +9,11 @@ import spock.lang.Specification
 class OnlyTextMenuViewerTests extends Specification{
     def "Draw elements Leaderboard size Text bigger than 5"(){
         given:
-            def Menu = new Leaderboard()
+            def Menu = Mock(Leaderboard.class)
+            def text = Arrays.asList("a","b","c","d","e","f")
             def OnlyTextMenuViewer = new LeaderboardViewer(Menu)
             def gui = Mock(GUI)
+            Menu.getText() >> text
         when:
             OnlyTextMenuViewer.drawElements(gui,0)
         then:

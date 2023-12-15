@@ -11,6 +11,13 @@ import org.mockito.MockedStatic
 import org.mockito.Mockito
 import spock.lang.Specification
 
+import static java.nio.charset.StandardCharsets.UTF_8;
+import static java.nio.file.StandardOpenOption.APPEND;
+import static java.nio.file.StandardOpenOption.CREATE;
+
+import java.nio.file.Files
+import java.nio.file.Paths
+
 class GameOverMenuControllerTests extends Specification {
     def soundManager = Mockito.mock(SoundManager.class)
 
@@ -66,38 +73,50 @@ class GameOverMenuControllerTests extends Specification {
 
     def "Step Enter Key is selected Restart"(){
         given:
-        def gameOverMenu = Mock(GameOverMenu)
-        def gameOverController = Spy(GameOverController.class)
-        gameOverController.getModel() >> gameOverMenu
-        gameOverMenu.isSelectedRestart() >> true
-        gameOverMenu.getUsername() >> "R"
-        gameOverMenu.getScore() >> 0
-        def game = Mock(Game)
+
+            def gameOverMenu = Mock(GameOverMenu)
+            def gameOverController = Spy(GameOverController.class)
+            def bufferMock = Mock(BufferedWriter.class)
+            def file = new File("src/main/resources/text/Leaderboard.txt")
+            def game = Mock(Game)
+
+            gameOverController.getModel() >> gameOverMenu
+            gameOverMenu.isSelectedRestart() >> true
+            gameOverMenu.getUsername() >> "R"
+            gameOverMenu.getScore() >> 0
+            gameOverController.createBuffer(file) >> bufferMock
+
         when: 'Enter key'
-        def key = new KeyStroke(KeyType.Enter)
-        gameOverController.step(game, key, 0)
-        then:
-            1 * game.setState(GameStates.NEW_GAME)
-            1 * gameOverController.UpdateLeaderboard(0,_)
+            def key = new KeyStroke(KeyType.Enter)
+            gameOverController.step(game, key, 0)
+            then:
+                1 * game.setState(GameStates.NEW_GAME)
+                1 * gameOverController.updateLeaderboard(0,_)
     }
 
     def "Step Enter Key is selected Exit"(){
         given:
+
             def gameOverMenu = Mock(GameOverMenu)
             def gameOverController = Spy(GameOverController.class)
+            def game = Mock(Game)
+            def bufferMock = Mock(BufferedWriter.class)
+            def file = new File("src/main/resources/text/Leaderboard.txt")
+            def username = ""
+
             gameOverController.getModel() >> gameOverMenu
             gameOverMenu.isSelectedRestart() >> false
             gameOverMenu.isSelectedExit() >> true
-            def username = ""
             gameOverMenu.getUsername() >> username
             gameOverMenu.getScore() >> 0
-            def game = Mock(Game)
+            gameOverController.createBuffer(file) >> bufferMock
+
         when: 'Enter key'
             def key = new KeyStroke(KeyType.Enter)
             gameOverController.step(game, key, 0)
         then:
             1 * game.setState(GameStates.START_MENU)
-            1 * gameOverController.UpdateLeaderboard(0,_)
+            1 * gameOverController.updateLeaderboard(0,_)
             username.isEmpty()
     }
 
@@ -152,6 +171,31 @@ class GameOverMenuControllerTests extends Specification {
             gameOverController.step(game,key,0)
         then:
             1 * gameOverMenu.removeLetter()
+    }
+
+    def "update Leaderboard"(){
+        given:
+            def controller = new GameOverController(Mock(GameOverMenu))
+            def controllerSpy = Spy(controller)
+            def bufferMock = Mock(BufferedWriter.class)
+            def file = new File("src/main/resources/text/Leaderboard.txt");
+            controllerSpy.createBuffer(file) >> bufferMock
+
+        when:
+            controllerSpy.updateLeaderboard(0,"")
+        then:
+            1 * bufferMock.write("Unknown 0\n")
+            1 * bufferMock.flush()
+            1 * bufferMock.close()
+    }
+
+    def "createBuffer"(){
+        given:
+            def controller = new GameOverController(Mock(GameOverMenu))
+            def file = new File("src/main/resources/text/Leaderboard.txt")
+        expect:
+            controller.createBuffer(file).getClass() == BufferedWriter.class
+            controller.createBuffer(file) != null
     }
 
 

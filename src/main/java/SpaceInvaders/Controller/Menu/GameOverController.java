@@ -39,10 +39,10 @@ public class GameOverController extends Controller<GameOverMenu> {
                 break;
             case Enter:
                 if (getModel().isSelectedRestart()) {
-                    UpdateLeaderboard(getModel().getScore(), getModel().getUsername());
+                    updateLeaderboard(getModel().getScore(), getModel().getUsername());
                     game.setState(GameStates.NEW_GAME);
                 } else if (getModel().isSelectedExit()) {
-                    UpdateLeaderboard(getModel().getScore(), getModel().getUsername());
+                    updateLeaderboard(getModel().getScore(), getModel().getUsername());
                     game.setState(GameStates.START_MENU);
                 } else if (getModel().isSelectedLeaderboard()) {
                     game.setState(GameStates.LEADERBOARD);
@@ -59,15 +59,19 @@ public class GameOverController extends Controller<GameOverMenu> {
         }
     }
 
-    public void UpdateLeaderboard(Integer score, String username) throws IOException {
+    public void updateLeaderboard(Integer score, String username) throws IOException {
         File file = new File("src/main/resources/text/Leaderboard.txt");
-        BufferedWriter bw =  Files.newBufferedWriter(Paths.get(file.getAbsolutePath()), UTF_8, CREATE, APPEND);
+        BufferedWriter bw =  createBuffer(file);
         if(username.isEmpty()){
             username = "Unknown";
         }
         bw.write(username + " " + score + '\n');
         bw.flush();
         bw.close();
+    }
+
+    BufferedWriter createBuffer(File file) throws IOException {
+        return Files.newBufferedWriter(Paths.get(file.getAbsolutePath()), UTF_8, CREATE, APPEND);
     }
 }
 
