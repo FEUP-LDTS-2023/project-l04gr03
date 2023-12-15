@@ -51,13 +51,15 @@ class MenuViewerTests extends Specification{
             def MenuViewer = Spy(PauseMenuViewer.class)
             def gui = Mock(GUI)
             def pauseMenu = new PauseMenu()
+            pauseMenu.nextOption()
             MenuViewer.getModel() >> pauseMenu
         when:
             MenuViewer.drawOptions(gui)
         then:
             1 * MenuViewer.drawOptions(gui)
-            1 * gui.drawText(new Position(MenuViewer.getReference_x(), MenuViewer.getReference_y()  + 3 * 0), "->" + MenuViewer.getModel().getOption(0), _)
-            3 * gui.drawText(_,_,_)
+            1 * gui.drawText(new Position(35, 13  + 3 * 1), "->" + MenuViewer.getModel().getOption(1), _)
+            1 * gui.drawText(new Position(35, 13  + 3 * 3),MenuViewer.getModel().getOption(3), _)
+            2 * gui.drawText(_,_,_)
 
     }
 
