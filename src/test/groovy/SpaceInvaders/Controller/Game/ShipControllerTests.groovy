@@ -1,5 +1,6 @@
 package SpaceInvaders.Controller.Game
 
+import SpaceInvaders.Controller.Sound.SoundManager
 import SpaceInvaders.Game
 import SpaceInvaders.Model.Game.Arena
 import SpaceInvaders.Model.Game.ArenaModifier
@@ -8,6 +9,9 @@ import SpaceInvaders.Model.Game.RegularGameElements.Projectile
 import SpaceInvaders.Model.Game.RegularGameElements.Ship
 import SpaceInvaders.Model.Game.RegularGameElements.ShipMode
 import SpaceInvaders.Model.Position
+import SpaceInvaders.Model.Sound.Sound_Options
+import org.mockito.MockedStatic
+import org.mockito.Mockito
 import spock.lang.Specification
 import com.googlecode.lanterna.input.KeyStroke;
 import com.googlecode.lanterna.input.KeyType;
@@ -160,6 +164,7 @@ class ShipControllerTests extends Specification {
     }
 
     def "ShootProjectile"(){
+        given:
         def shipController = Spy(ShipController.class)
         def arena = Mock(Arena.class)
         def arenaModifier = Mock(ArenaModifier.class)
@@ -175,7 +180,30 @@ class ShipControllerTests extends Specification {
         1 * arenaModifier.addProjectile(_)
     }
 
+    def "ShootProjectile - Checking play sound invocation"(){
+        given:
+        def soundManager = Mockito.mock(SoundManager.class)
+        def shipController = Spy(ShipController.class)
+        def arena = Mock(Arena.class)
+        def arenaModifier = Mock(ArenaModifier.class)
+        def ship = Mock(Ship.class)
+        def position = Mock(Position.class)
+        shipController.getModel() >> arena
+        arena.getShip() >> ship
+        ship.getPosition() >> position
+        shipController.getArenaModifier() >> arenaModifier
+        try (MockedStatic<SoundManager> utilities = Mockito.mockStatic(SoundManager.class)) {
+            utilities.when(SoundManager::getInstance).thenReturn(soundManager)
+            when:
+            shipController.shootProjectile()
+            then:
+            Mockito.verify(soundManager, Mockito.times(1)).playSound(Sound_Options.LASER)
+        }
+
+    }
+
     def "HitByProjectile"(){
+        given:
         def shipController = Spy(ShipController.class)
         def arena = Mock(Arena.class)
         def ship = Mock(Ship.class)

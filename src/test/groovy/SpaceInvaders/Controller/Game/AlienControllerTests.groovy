@@ -1,5 +1,6 @@
 package SpaceInvaders.Controller.Game
 
+import SpaceInvaders.Controller.Sound.SoundManager
 import SpaceInvaders.Game
 import SpaceInvaders.Model.Game.Arena
 import SpaceInvaders.Model.Game.ArenaModifier
@@ -8,10 +9,14 @@ import SpaceInvaders.Model.Game.RegularGameElements.AlienState
 import SpaceInvaders.Model.Game.RegularGameElements.Projectile
 import SpaceInvaders.Model.Game.RegularGameElements.Ship
 import SpaceInvaders.Model.Position
+import SpaceInvaders.Model.Sound.Sound_Options
 import com.googlecode.lanterna.input.KeyStroke
+import org.mockito.MockedStatic
+import org.mockito.Mockito
 import spock.lang.Specification
 
 class AlienControllerTests extends Specification {
+
 
     def "Get last Movement"(){
         given:
@@ -80,7 +85,7 @@ class AlienControllerTests extends Specification {
         arena.getWidth() >> 74
         when:
         alienController.getMovementDirection() >> MovementDirection.RIGHT
-        alien.getPosition() >> new Position(71,12)
+        alien.getPosition() >> new Position(70,12)
         then:
         !alienController.canMoveAlien(alien)
     }
@@ -327,6 +332,40 @@ class AlienControllerTests extends Specification {
         0 * arenaModifier.removeAlien(alien5)
     }
 
+    def "RemoveDestroyedAliens - Aliens to remove - Checking play sound invocation"(){
+        given:
+        def soundManager = Mockito.mock(SoundManager.class)
+        def alienController = Spy(AlienController.class)
+        def arena = Mock(Arena.class)
+        def arenaModifier = Mock(ArenaModifier.class)
+        def alien1 = Mock(Alien.class)
+        def alien2 = Mock(Alien.class)
+        def alien3 = Mock(Alien.class)
+        def alien4 = Mock(Alien.class)
+        def alien5 = Mock(Alien.class)
+        List<Alien> aliens = new ArrayList<>()
+        aliens.add(alien1)
+        aliens.add(alien2)
+        aliens.add(alien3)
+        aliens.add(alien4)
+        aliens.add(alien5)
+        alienController.getModel() >> arena
+        alienController.getArenaModifier() >> arenaModifier
+        arena.getAliens() >> aliens
+        try (MockedStatic<SoundManager> utilities = Mockito.mockStatic(SoundManager.class)) {
+            utilities.when(SoundManager::getInstance).thenReturn(soundManager)
+            when:
+            alien1.isDestroyed() >> true
+            alien2.isDestroyed() >> true
+            alien3.isDestroyed() >> true
+            alien4.isDestroyed() >> false
+            alien5.isDestroyed() >> false
+            alienController.removeDestroyedAliens()
+            then:
+            Mockito.verify(soundManager, Mockito.times(3)).playSound(Sound_Options.DESTRUCTION)
+        }
+    }
+
     def "AlienControllerStep - No movement or shot"(){
         given:
         def alienController = Spy(AlienController.class)
@@ -354,7 +393,7 @@ class AlienControllerTests extends Specification {
         alienController.shootingCoolDown() >> 800
         arena.getAliens() >> aliens
         when:
-        alienController.step(game,key,600)
+        alienController.step(game,key,800)
         then:
         1 * alienController.updateMovementDirection()
         1 * alienController.moveAliens()

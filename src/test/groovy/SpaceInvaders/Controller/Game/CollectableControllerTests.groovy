@@ -134,11 +134,38 @@ class CollectableControllerTests extends Specification {
         arena.getAliens() >> aliens
         arena.getActiveCollectable() >> collectable
         collectable.getPosition() >> position
+        ship.getShipMode() >> ShipMode.NORMAL_MODE
+        alien.getAlienMode() >> AlienMode.NORMAL_MODE
         when:
         collectableController.step(game,key,150)
         then:
         0 * collectableController.generateCollectable()
         0 * collectableController.moveCollectable()
+    }
+
+    def "CollectableControllerStep - Only moving a collectable - killing changing conditional boundary"(){
+        given:
+        def collectableController = Spy(CollectableController.class)
+        def arena = Mock(Arena.class)
+        def ship = Mock(Ship.class)
+        def alien = Mock(Alien.class)
+        List<Alien> aliens = new ArrayList<>(Arrays.asList(alien))
+        def collectable = Mock(Collectable.class)
+        def position = Mock(Position.class)
+        def game = Mock(Game.class)
+        def key = Mock(KeyStroke)
+        collectableController.getModel() >> arena
+        arena.getShip() >> ship
+        arena.getAliens() >> aliens
+        arena.getActiveCollectable() >> collectable
+        collectable.getPosition() >> position
+        ship.getShipMode() >> ShipMode.NORMAL_MODE
+        alien.getAlienMode() >> AlienMode.NORMAL_MODE
+        when:
+        collectableController.step(game,key,20000)
+        then:
+        0 * collectableController.generateCollectable()
+        1 * collectableController.moveCollectable()
     }
 
     def "CollectableControllerStep - No collectable active"(){
@@ -161,6 +188,50 @@ class CollectableControllerTests extends Specification {
         0 * collectableController.moveCollectable()
     }
 
+    def "CollectableControllerStep - Ship collectable effect active"(){
+        given:
+        def collectableController = Spy(CollectableController.class)
+        def arena = Mock(Arena.class)
+        def arenaModifier = Mock(ArenaModifier.class)
+        def ship = Mock(Ship.class)
+        def alien = Mock(Alien.class)
+        List<Alien> aliens = new ArrayList<>(Arrays.asList(alien))
+        def game = Mock(Game.class)
+        def key = Mock(KeyStroke)
+        collectableController.getModel() >> arena
+        collectableController.getArenaModifier() >> arenaModifier
+        ship.getShipMode() >> ShipMode.GOD_MODE
+        arena.getShip() >> ship
+        arena.getAliens() >> aliens
+        arena.getActiveCollectable() >> null
+        when:
+        collectableController.step(game,key,19900)
+        then:
+        0 * collectableController.endCollectableEffect()
+    }
+
+    def "CollectableControllerStep - Ending alien collectable effect"(){
+        given:
+        def collectableController = Spy(CollectableController.class)
+        def arena = Mock(Arena.class)
+        def arenaModifier = Mock(ArenaModifier.class)
+        def ship = Mock(Ship.class)
+        def alien = Mock(Alien.class)
+        List<Alien> aliens = new ArrayList<>(Arrays.asList(alien))
+        def game = Mock(Game.class)
+        def key = Mock(KeyStroke)
+        collectableController.getModel() >> arena
+        collectableController.getArenaModifier() >> arenaModifier
+        alien.getAlienMode() >> AlienMode.SCORE_10X
+        arena.getShip() >> ship
+        arena.getAliens() >> aliens
+        arena.getActiveCollectable() >> null
+        when:
+        collectableController.step(game,key,19900)
+        then:
+        0 * collectableController.endCollectableEffect()
+    }
+
     def "CollectableControllerStep - Ending ship collectable effect"(){
         given:
         def collectableController = Spy(CollectableController.class)
@@ -168,8 +239,6 @@ class CollectableControllerTests extends Specification {
         def arenaModifier = Mock(ArenaModifier.class)
         def ship = Mock(Ship.class)
         def alien = Mock(Alien.class)
-        def collectable =  Mock(Collectable.class)
-        def position = Mock(Position.class)
         List<Alien> aliens = new ArrayList<>(Arrays.asList(alien))
         def game = Mock(Game.class)
         def key = Mock(KeyStroke)
@@ -178,8 +247,7 @@ class CollectableControllerTests extends Specification {
         ship.getShipMode() >> ShipMode.MACHINE_GUN_MODE
         arena.getShip() >> ship
         arena.getAliens() >> aliens
-        arena.getActiveCollectable() >> collectable
-        collectable.getPosition() >> position
+        arena.getActiveCollectable() >> null
         when:
         collectableController.step(game,key,19950)
         then:
@@ -193,8 +261,6 @@ class CollectableControllerTests extends Specification {
         def arenaModifier = Mock(ArenaModifier.class)
         def ship = Mock(Ship.class)
         def alien = Mock(Alien.class)
-        def collectable =  Mock(Collectable.class)
-        def position = Mock(Position.class)
         List<Alien> aliens = new ArrayList<>(Arrays.asList(alien))
         def game = Mock(Game.class)
         def key = Mock(KeyStroke)
@@ -203,8 +269,7 @@ class CollectableControllerTests extends Specification {
         alien.getAlienMode() >> AlienMode.SCORE_4X
         arena.getShip() >> ship
         arena.getAliens() >> aliens
-        arena.getActiveCollectable() >> collectable
-        collectable.getPosition() >> position
+        arena.getActiveCollectable() >> null
         when:
         collectableController.step(game,key,19950)
         then:
