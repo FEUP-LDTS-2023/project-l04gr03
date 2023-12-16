@@ -368,56 +368,83 @@ class AlienControllerTests extends Specification {
 
     def "AlienControllerStep - No movement or shot"(){
         given:
-        def alienController = Spy(AlienController.class)
+        def arena = Mockito.mock(Arena.class)
+        def arenaModifier = Mockito.mock(ArenaModifier.class)
+        def alienController = new AlienController(arena)
+        def alienControllerSpy = Mockito.spy(alienController)
         def game = Mock(Game.class)
         def key = Mock(KeyStroke.class)
-        alienController.movementCoolDown() >> 300
-        alienController.shootingCoolDown() >> 800
+        long movementCoolDown = 300
+        long shootingCoolDown = 800
+        List<Alien> aliens = new ArrayList<>()
+        Mockito.when(alienControllerSpy.getModel()).thenReturn(arena)
+        Mockito.when(alienControllerSpy.getArenaModifier()).thenReturn(arenaModifier)
+        Mockito.when(arena.getAliens()).thenReturn(aliens)
+        Mockito.when(arena.getAttackingAliens()).thenReturn(aliens)
+        Mockito.doReturn(movementCoolDown).when(alienControllerSpy).movementCoolDown()
+        Mockito.doReturn(shootingCoolDown).when(alienControllerSpy).shootingCoolDown()
+        alienControllerSpy.setLastMovementTime(49700)
+        alienControllerSpy.setLastShotTime(49750)
         when:
-        alienController.step(game,key,300)
+        alienControllerSpy.step(game,key,50000)
         then:
-        0 * alienController.updateMovementDirection()
-        0 * alienController.moveAliens()
-        0 * alienController.shootProjectile()
+        Mockito.verify(alienControllerSpy,Mockito.times(0)).updateMovementDirection()
+        Mockito.verify(alienControllerSpy,Mockito.times(0)).moveAliens()
+        Mockito.verify(alienControllerSpy,Mockito.times(0)).shootProjectile()
     }
 
     def "AlienControllerStep - Movement but no shot"(){
         given:
-        def alienController = Spy(AlienController.class)
-        def arena = Mock(Arena.class)
+        def arena = Mockito.mock(Arena.class)
+        def arenaModifier = Mockito.mock(ArenaModifier.class)
+        def alienController = new AlienController(arena)
+        def alienControllerSpy = Mockito.spy(alienController)
         def game = Mock(Game.class)
         def key = Mock(KeyStroke.class)
+        long movementCoolDown = 300
+        long shootingCoolDown = 800
         List<Alien> aliens = new ArrayList<>()
-        alienController.getModel() >> arena
-        alienController.movementCoolDown() >> 300
-        alienController.shootingCoolDown() >> 800
-        arena.getAliens() >> aliens
+        Mockito.when(alienControllerSpy.getModel()).thenReturn(arena)
+        Mockito.when(alienControllerSpy.getArenaModifier()).thenReturn(arenaModifier)
+        Mockito.when(arena.getAliens()).thenReturn(aliens)
+        Mockito.when(arena.getAttackingAliens()).thenReturn(aliens)
+        Mockito.doReturn(movementCoolDown).when(alienControllerSpy).movementCoolDown()
+        Mockito.doReturn(shootingCoolDown).when(alienControllerSpy).shootingCoolDown()
+        alienControllerSpy.setLastMovementTime(49699)
+        alienControllerSpy.setLastShotTime(49200)
         when:
-        alienController.step(game,key,800)
+        alienControllerSpy.step(game,key,50000)
         then:
-        1 * alienController.updateMovementDirection()
-        1 * alienController.moveAliens()
-        0 * alienController.shootProjectile()
+        Mockito.verify(alienControllerSpy,Mockito.times(1)).updateMovementDirection()
+        Mockito.verify(alienControllerSpy,Mockito.times(1)).moveAliens()
+        Mockito.verify(alienControllerSpy,Mockito.times(0)).shootProjectile()
     }
 
     def "AlienControllerStep - Movement and shot"(){
         given:
-        def alienController = Spy(AlienController.class)
-        def arena = Mock(Arena.class)
+        def arena = Mockito.mock(Arena.class)
+        def arenaModifier = Mockito.mock(ArenaModifier.class)
+        def alienController = new AlienController(arena)
+        def alienControllerSpy = Mockito.spy(alienController)
         def game = Mock(Game.class)
         def key = Mock(KeyStroke.class)
+        long movementCoolDown = 300
+        long shootingCoolDown = 800
         List<Alien> aliens = new ArrayList<>()
-        alienController.getModel() >> arena
-        alienController.movementCoolDown() >> 300
-        alienController.shootingCoolDown() >> 800
-        arena.getAliens() >> aliens
-        arena.getAttackingAliens() >> aliens
+        Mockito.when(alienControllerSpy.getModel()).thenReturn(arena)
+        Mockito.when(alienControllerSpy.getArenaModifier()).thenReturn(arenaModifier)
+        Mockito.when(arena.getAliens()).thenReturn(aliens)
+        Mockito.when(arena.getAttackingAliens()).thenReturn(aliens)
+        Mockito.doReturn(movementCoolDown).when(alienControllerSpy).movementCoolDown()
+        Mockito.doReturn(shootingCoolDown).when(alienControllerSpy).shootingCoolDown()
+        alienControllerSpy.setLastMovementTime(49500)
+        alienControllerSpy.setLastShotTime(49199)
         when:
-        alienController.step(game,key,850)
+        alienControllerSpy.step(game,key,50000)
         then:
-        1 * alienController.updateMovementDirection()
-        1 * alienController.moveAliens()
-        1 * alienController.shootProjectile()
+        Mockito.verify(alienControllerSpy,Mockito.times(1)).updateMovementDirection()
+        Mockito.verify(alienControllerSpy,Mockito.times(1)).moveAliens()
+        Mockito.verify(alienControllerSpy,Mockito.times(1)).shootProjectile()
     }
 
     def "updateMovementDirection left"(){
