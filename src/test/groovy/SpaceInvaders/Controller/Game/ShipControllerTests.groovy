@@ -244,155 +244,188 @@ class ShipControllerTests extends Specification {
     def "ShipControllerStep - Pressed ArrowLeft and did not move"(){
         given:
         def game = Mock(Game.class)
-        def shipController = Spy(ShipController.class)
-        def arena = Mock(Arena.class)
-        def ship = Mock(Ship)
-        def position = Mock(Position)
+        def arena = Mockito.mock(Arena.class)
+        def shipController = new ShipController(arena)
+        def shipControllerSpy = Mockito.spy(shipController)
+        def arenaModifier = Mockito.mock(ArenaModifier.class)
+        def ship = Mockito.mock(Ship.class)
+        def position = Mockito.mock(Position.class)
         def key = Mock(KeyStroke.class)
-        ship.getPosition() >> position
-        arena.getShip() >> ship
-        shipController.getModel() >> arena
+        Mockito.when(shipControllerSpy.getModel()).thenReturn(arena)
+        Mockito.when(shipControllerSpy.getArenaModifier()).thenReturn(arenaModifier)
+        Mockito.when(arena.getShip()).thenReturn(ship)
+        Mockito.when(ship.getPosition()).thenReturn(position)
+        shipControllerSpy.setMovementTime(19950)
+        shipControllerSpy.setShootingTime(19990)
         when:
         key.getKeyType() >> KeyType.ArrowLeft
-        shipController.step(game,key,50)
+        shipControllerSpy.step(game,key,20000)
         then:
-        0 * shipController.moveLeft()
+        Mockito.verify(shipControllerSpy,Mockito.times(0)).moveLeft()
     }
 
     def "ShipControllerStep - Pressed ArrowLeft and moved"(){
         given:
         def game = Mock(Game.class)
-        def shipController = Spy(ShipController.class)
-        def arena = Mock(Arena.class)
-        def ship = Mock(Ship)
-        def position = Mock(Position)
+        def arena = Mockito.mock(Arena.class)
+        def shipController = new ShipController(arena)
+        def shipControllerSpy = Mockito.spy(shipController)
+        def arenaModifier = Mockito.mock(ArenaModifier.class)
+        def ship = Mockito.mock(Ship.class)
+        def position = Mockito.mock(Position.class)
         def key = Mock(KeyStroke.class)
-        ship.getPosition() >> position
-        arena.getShip() >> ship
-        shipController.getModel() >> arena
+        Mockito.when(shipControllerSpy.getModel()).thenReturn(arena)
+        Mockito.when(shipControllerSpy.getArenaModifier()).thenReturn(arenaModifier)
+        Mockito.when(arena.getShip()).thenReturn(ship)
+        Mockito.when(ship.getPosition()).thenReturn(position)
+        shipControllerSpy.setMovementTime(19700)
+        shipControllerSpy.setShootingTime(19650)
         when:
         key.getKeyType() >> KeyType.ArrowLeft
-        shipController.step(game,key,110)
+        shipControllerSpy.step(game,key,20000)
         then:
-        1 * shipController.moveLeft()
+        Mockito.verify(shipControllerSpy,Mockito.times(1)).moveLeft()
     }
 
     def "ShipControllerStep - Pressed ArrowRight and did not move"(){
         given:
         def game = Mock(Game.class)
-        def shipController = Spy(ShipController.class)
-        def arena = Mock(Arena.class)
-        def ship = Mock(Ship)
-        def position = Mock(Position)
+        def arena = Mockito.mock(Arena.class)
+        def shipController = new ShipController(arena)
+        def shipControllerSpy = Mockito.spy(shipController)
+        def arenaModifier = Mockito.mock(ArenaModifier.class)
+        def ship = Mockito.mock(Ship.class)
+        def position = Mockito.mock(Position.class)
         def key = Mock(KeyStroke.class)
-        ship.getPosition() >> position
-        arena.getShip() >> ship
-        shipController.getModel() >> arena
+        Mockito.when(shipControllerSpy.getModel()).thenReturn(arena)
+        Mockito.when(shipControllerSpy.getArenaModifier()).thenReturn(arenaModifier)
+        Mockito.when(arena.getShip()).thenReturn(ship)
+        Mockito.when(ship.getPosition()).thenReturn(position)
+        shipControllerSpy.setMovementTime(19950)
+        shipControllerSpy.setShootingTime(19900)
         when:
         key.getKeyType() >> KeyType.ArrowRight
-        shipController.step(game,key,50)
+        shipControllerSpy.step(game,key,20000)
         then:
-        0 * shipController.moveRight()
+        Mockito.verify(shipControllerSpy,Mockito.times(0)).moveRight()
     }
 
     def "ShipControllerStep - Pressed ArrowRight and moved"(){
         given:
         def game = Mock(Game.class)
-        def shipController = Spy(ShipController.class)
-        def arena = Mock(Arena.class)
-        def ship = Mock(Ship)
-        def position = Mock(Position)
+        def arena = Mockito.mock(Arena.class)
+        def shipController = new ShipController(arena)
+        def shipControllerSpy = Mockito.spy(shipController)
+        def arenaModifier = Mockito.mock(ArenaModifier.class)
+        def ship = Mockito.mock(Ship.class)
+        def position = Mockito.mock(Position.class)
         def key = Mock(KeyStroke.class)
-        ship.getPosition() >> position
-        arena.getShip() >> ship
-        shipController.getModel() >> arena
+        Mockito.when(shipControllerSpy.getModel()).thenReturn(arena)
+        Mockito.when(shipControllerSpy.getArenaModifier()).thenReturn(arenaModifier)
+        Mockito.when(arena.getShip()).thenReturn(ship)
+        Mockito.when(ship.getPosition()).thenReturn(position)
+        shipControllerSpy.setMovementTime(19000)
+        shipControllerSpy.setShootingTime(19600)
         when:
         key.getKeyType() >> KeyType.ArrowRight
-        shipController.step(game,key,200)
+        shipControllerSpy.step(game,key,20000)
         then:
-        1 * shipController.moveRight()
+        Mockito.verify(shipControllerSpy,Mockito.times(1)).moveRight()
     }
 
     def "ShipControllerStep - Pressed ArrowUp and did not shoot in NormalMode"(){
+        given:
         def game = Mock(Game.class)
-        def shipController = Spy(ShipController.class)
-        def arena = Mock(Arena.class)
-        def arenaModifier = Mock(ArenaModifier.class)
-        def ship = Mock(Ship.class)
-        def position = Mock(Position)
+        def arena = Mockito.mock(Arena.class)
+        def shipController = new ShipController(arena)
+        def shipControllerSpy = Mockito.spy(shipController)
+        def arenaModifier = Mockito.mock(ArenaModifier.class)
+        def ship = Mockito.mock(Ship.class)
+        def position = Mockito.mock(Position.class)
         def key = Mock(KeyStroke.class)
-        ship.getPosition() >> position
-        ship.getShipMode() >> ShipMode.NORMAL_MODE
-        arena.getShip() >> ship
-        shipController.getModel() >> arena
-        shipController.getArenaModifier() >> arenaModifier
+        Mockito.when(shipControllerSpy.getModel()).thenReturn(arena)
+        Mockito.when(shipControllerSpy.getArenaModifier()).thenReturn(arenaModifier)
+        Mockito.when(arena.getShip()).thenReturn(ship)
+        Mockito.when(ship.getShipMode()).thenReturn(ShipMode.NORMAL_MODE)
+        Mockito.when(ship.getPosition()).thenReturn(position)
+        shipControllerSpy.setMovementTime(24700)
+        shipControllerSpy.setShootingTime(24700)
         when:
         key.getKeyType() >> KeyType.ArrowUp
-        shipController.step(game,key,300)
+        shipControllerSpy.step(game,key,25000)
         then:
-        0 * shipController.shootProjectile()
+        Mockito.verify(shipControllerSpy,Mockito.times(0)).shootProjectile()
     }
 
     def "ShipControllerStep - Pressed ArrowUp and successfully shot in NormalMode"(){
         given:
         def game = Mock(Game.class)
-        def shipController = Spy(ShipController.class)
-        def arena = Mock(Arena.class)
-        def arenaModifier = Mock(ArenaModifier.class)
-        def ship = Mock(Ship)
-        def position = Mock(Position)
+        def arena = Mockito.mock(Arena.class)
+        def shipController = new ShipController(arena)
+        def shipControllerSpy = Mockito.spy(shipController)
+        def arenaModifier = Mockito.mock(ArenaModifier.class)
+        def ship = Mockito.mock(Ship.class)
+        def position = Mockito.mock(Position.class)
         def key = Mock(KeyStroke.class)
-        ship.getPosition() >> position
-        ship.getShipMode() >> ShipMode.NORMAL_MODE
-        arena.getShip() >> ship
-        shipController.getModel() >> arena
-        shipController.getArenaModifier() >> arenaModifier
+        Mockito.when(shipControllerSpy.getModel()).thenReturn(arena)
+        Mockito.when(shipControllerSpy.getArenaModifier()).thenReturn(arenaModifier)
+        Mockito.when(arena.getShip()).thenReturn(ship)
+        Mockito.when(ship.getShipMode()).thenReturn(ShipMode.NORMAL_MODE)
+        Mockito.when(ship.getPosition()).thenReturn(position)
+        shipControllerSpy.setMovementTime(24990)
+        shipControllerSpy.setShootingTime(24250)
         when:
         key.getKeyType() >> KeyType.ArrowUp
-        shipController.step(game,key,340)
+        shipControllerSpy.step(game,key,25000)
         then:
-        1 * shipController.shootProjectile()
+        Mockito.verify(shipControllerSpy,Mockito.times(1)).shootProjectile()
     }
 
     def "ShipControllerStep - Pressed ArrowUp and did not shoot in MachineGunMode"(){
         given:
         def game = Mock(Game.class)
-        def shipController = Spy(ShipController.class)
-        def arena = Mock(Arena.class)
-        def arenaModifier = Mock(ArenaModifier.class)
-        def ship = Mock(Ship.class)
-        def position = Mock(Position.class)
+        def arena = Mockito.mock(Arena.class)
+        def shipController = new ShipController(arena)
+        def shipControllerSpy = Mockito.spy(shipController)
+        def arenaModifier = Mockito.mock(ArenaModifier.class)
+        def ship = Mockito.mock(Ship.class)
+        def position = Mockito.mock(Position.class)
         def key = Mock(KeyStroke.class)
-        ship.getPosition() >> position
-        ship.getShipMode() >> ShipMode.MACHINE_GUN_MODE
-        arena.getShip() >> ship
-        shipController.getModel() >> arena
-        shipController.getArenaModifier() >> arenaModifier
+        Mockito.when(shipControllerSpy.getModel()).thenReturn(arena)
+        Mockito.when(shipControllerSpy.getArenaModifier()).thenReturn(arenaModifier)
+        Mockito.when(arena.getShip()).thenReturn(ship)
+        Mockito.when(ship.getShipMode()).thenReturn(ShipMode.MACHINE_GUN_MODE)
+        Mockito.when(ship.getPosition()).thenReturn(position)
+        shipControllerSpy.setMovementTime(39900)
+        shipControllerSpy.setShootingTime(39925)
         when:
         key.getKeyType() >> KeyType.ArrowUp
-        shipController.step(game,key,75)
+        shipControllerSpy.step(game,key,40000)
         then:
-        0 * shipController.shootProjectile()
+        Mockito.verify(shipControllerSpy,Mockito.times(0)).shootProjectile()
     }
 
     def "ShipControllerStep - Pressed ArrowUp and successfully shot in MachineGunMode"(){
         given:
         def game = Mock(Game.class)
-        def shipController = Spy(ShipController.class)
-        def arena = Mock(Arena.class)
-        def arenaModifier = Mock(ArenaModifier.class)
-        def ship = Mock(Ship.class)
-        def position = Mock(Position.class)
+        def arena = Mockito.mock(Arena.class)
+        def shipController = new ShipController(arena)
+        def shipControllerSpy = Mockito.spy(shipController)
+        def arenaModifier = Mockito.mock(ArenaModifier.class)
+        def ship = Mockito.mock(Ship.class)
+        def position = Mockito.mock(Position.class)
         def key = Mock(KeyStroke.class)
-        ship.getPosition() >> position
-        ship.getShipMode() >> ShipMode.MACHINE_GUN_MODE
-        arena.getShip() >> ship
-        shipController.getModel() >> arena
-        shipController.getArenaModifier() >> arenaModifier
+        Mockito.when(shipControllerSpy.getModel()).thenReturn(arena)
+        Mockito.when(shipControllerSpy.getArenaModifier()).thenReturn(arenaModifier)
+        Mockito.when(arena.getShip()).thenReturn(ship)
+        Mockito.when(ship.getShipMode()).thenReturn(ShipMode.MACHINE_GUN_MODE)
+        Mockito.when(ship.getPosition()).thenReturn(position)
+        shipControllerSpy.setMovementTime(39500)
+        shipControllerSpy.setShootingTime(39900)
         when:
         key.getKeyType() >> KeyType.ArrowUp
-        shipController.step(game,key,150)
+        shipControllerSpy.step(game,key,40000)
         then:
-        1 * shipController.shootProjectile()
+        Mockito.verify(shipControllerSpy,Mockito.times(1)).shootProjectile()
     }
 }
