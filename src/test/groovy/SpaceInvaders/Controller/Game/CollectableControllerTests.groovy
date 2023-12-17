@@ -10,6 +10,7 @@ import SpaceInvaders.Model.Game.RegularGameElements.Ship
 import SpaceInvaders.Model.Game.RegularGameElements.ShipMode
 import SpaceInvaders.Model.Position
 import com.googlecode.lanterna.input.KeyStroke
+import org.mockito.Mockito
 import spock.lang.Specification
 
 
@@ -70,102 +71,132 @@ class CollectableControllerTests extends Specification {
         1 * arenaModifier.resetAliensMode()
     }
 
-    def "CollectableControllerStep - Generated and moved collectable"(){
+    def "CollectableControllerStep - Generated new collectable"(){
         given:
-        def collectableController = Spy(CollectableController.class)
-        def arena = Mock(Arena.class)
-        def arenaModifier = Mock(ArenaModifier.class)
-        def ship = Mock(Ship.class)
-        def alien = Mock(Alien.class)
-        List<Alien> aliens = new ArrayList<>(Arrays.asList(alien))
-        def collectable = Mock(Collectable.class)
-        def position = Mock(Position.class)
         def game = Mock(Game.class)
         def key = Mock(KeyStroke)
-        collectableController.getModel() >> arena
-        collectableController.getArenaModifier() >> arenaModifier
-        arena.getShip() >> ship
-        arena.getAliens() >> aliens
-        arena.getActiveCollectable() >> collectable
-        collectable.getPosition() >> position
+        def arena = Mockito.mock(Arena.class)
+        def arenaModifier = Mockito.mock(ArenaModifier.class)
+        def collectableController = new CollectableController(arena)
+        def collectableControllerSpy = Mockito.spy(collectableController)
+        def ship = Mockito.mock(Ship.class)
+        def alien = Mockito.mock(Alien.class)
+        List<Alien> aliens = new ArrayList<>(Arrays.asList(alien))
+        List<Integer> columns = new ArrayList<>(Arrays.asList(23,34,55,56,71))
+        Mockito.when(collectableControllerSpy.getModel()).thenReturn(arena)
+        Mockito.when(collectableControllerSpy.getArenaModifier()).thenReturn(arenaModifier)
+        Mockito.when(arena.getShip()).thenReturn(ship)
+        Mockito.when(arena.getAliens()).thenReturn(aliens)
+        Mockito.doReturn(columns).when(arena).getFreeArenaColumns()
+        Mockito.doReturn(aliens).when(arena).getAttackingAliens()
+        Mockito.when(arena.getActiveCollectable()).thenReturn(null)
+        Mockito.when(ship.getShipMode()).thenReturn(ShipMode.NORMAL_MODE)
+        Mockito.when(alien.getAlienMode()).thenReturn(AlienMode.NORMAL_MODE)
+        collectableControllerSpy.setGenerateCollectableTime(35000)
+        collectableControllerSpy.setMovementTime(45000)
         when:
-        collectableController.step(game,key,23000)
+        collectableControllerSpy.step(game,key,60000)
         then:
-        1 * collectableController.generateCollectable()
-        1 * collectableController.moveCollectable()
+        Mockito.verify(collectableControllerSpy,Mockito.times(1)).generateCollectable()
     }
 
     def "CollectableControllerStep - Only moving a collectable"(){
         given:
-        def collectableController = Spy(CollectableController.class)
-        def arena = Mock(Arena.class)
-        def ship = Mock(Ship.class)
-        def alien = Mock(Alien.class)
-        List<Alien> aliens = new ArrayList<>(Arrays.asList(alien))
-        def collectable = Mock(Collectable.class)
-        def position = Mock(Position.class)
         def game = Mock(Game.class)
         def key = Mock(KeyStroke)
-        collectableController.getModel() >> arena
-        arena.getShip() >> ship
-        arena.getAliens() >> aliens
-        arena.getActiveCollectable() >> collectable
-        collectable.getPosition() >> position
+        def arena = Mockito.mock(Arena.class)
+        def arenaModifier = Mockito.mock(ArenaModifier.class)
+        def collectableController = new CollectableController(arena)
+        def collectableControllerSpy = Mockito.spy(collectableController)
+        def ship = Mockito.mock(Ship.class)
+        def alien = Mockito.mock(Alien.class)
+        def collectable = Mockito.mock(Collectable.class)
+        def position = Mockito.mock(Position.class)
+        List<Alien> aliens = new ArrayList<>(Arrays.asList(alien))
+        List<Integer> columns = new ArrayList<>(Arrays.asList(10,22,29,45,46,47,69,10,71,72))
+        Mockito.when(collectableControllerSpy.getModel()).thenReturn(arena)
+        Mockito.when(collectableControllerSpy.getArenaModifier()).thenReturn(arenaModifier)
+        Mockito.when(arena.getShip()).thenReturn(ship)
+        Mockito.when(arena.getAliens()).thenReturn(aliens)
+        Mockito.doReturn(columns).when(arena).getFreeArenaColumns()
+        Mockito.doReturn(aliens).when(arena).getAttackingAliens()
+        Mockito.when(arena.getActiveCollectable()).thenReturn(collectable)
+        Mockito.when(ship.getShipMode()).thenReturn(ShipMode.NORMAL_MODE)
+        Mockito.when(alien.getAlienMode()).thenReturn(AlienMode.NORMAL_MODE)
+        Mockito.when(collectable.getPosition()).thenReturn(position)
+        collectableControllerSpy.setGenerateCollectableTime(56000)
+        collectableControllerSpy.setMovementTime(59800)
         when:
-        collectableController.step(game,key,200)
+        collectableControllerSpy.step(game,key,60000)
         then:
-        0 * collectableController.generateCollectable()
-        1 * collectableController.moveCollectable()
+        Mockito.verify(collectableControllerSpy,Mockito.times(0)).generateCollectable()
+        Mockito.verify(collectableControllerSpy,Mockito.times(1)).moveCollectable()
     }
 
     def "CollectableControllerStep - Collectable not moving"(){
         given:
-        def collectableController = Spy(CollectableController.class)
-        def arena = Mock(Arena.class)
-        def ship = Mock(Ship.class)
-        def alien = Mock(Alien.class)
-        List<Alien> aliens = new ArrayList<>(Arrays.asList(alien))
-        def collectable = Mock(Collectable.class)
-        def position = Mock(Position.class)
         def game = Mock(Game.class)
         def key = Mock(KeyStroke)
-        collectableController.getModel() >> arena
-        arena.getShip() >> ship
-        arena.getAliens() >> aliens
-        arena.getActiveCollectable() >> collectable
-        collectable.getPosition() >> position
-        ship.getShipMode() >> ShipMode.NORMAL_MODE
-        alien.getAlienMode() >> AlienMode.NORMAL_MODE
+        def arena = Mockito.mock(Arena.class)
+        def arenaModifier = Mockito.mock(ArenaModifier.class)
+        def collectableController = new CollectableController(arena)
+        def collectableControllerSpy = Mockito.spy(collectableController)
+        def ship = Mockito.mock(Ship.class)
+        def alien = Mockito.mock(Alien.class)
+        def collectable = Mockito.mock(Collectable.class)
+        def position = Mockito.mock(Position.class)
+        List<Alien> aliens = new ArrayList<>(Arrays.asList(alien))
+        List<Integer> columns = new ArrayList<>(Arrays.asList(10,22,29,45,46,47,69,10,71,72))
+        Mockito.when(collectableControllerSpy.getModel()).thenReturn(arena)
+        Mockito.when(collectableControllerSpy.getArenaModifier()).thenReturn(arenaModifier)
+        Mockito.when(arena.getShip()).thenReturn(ship)
+        Mockito.when(arena.getAliens()).thenReturn(aliens)
+        Mockito.doReturn(columns).when(arena).getFreeArenaColumns()
+        Mockito.doReturn(aliens).when(arena).getAttackingAliens()
+        Mockito.when(arena.getActiveCollectable()).thenReturn(collectable)
+        Mockito.when(ship.getShipMode()).thenReturn(ShipMode.NORMAL_MODE)
+        Mockito.when(alien.getAlienMode()).thenReturn(AlienMode.NORMAL_MODE)
+        Mockito.when(collectable.getPosition()).thenReturn(position)
+        collectableControllerSpy.setGenerateCollectableTime(50000)
+        collectableControllerSpy.setMovementTime(59850)
         when:
-        collectableController.step(game,key,150)
+        collectableControllerSpy.step(game,key,60000)
         then:
-        0 * collectableController.generateCollectable()
-        0 * collectableController.moveCollectable()
+        Mockito.verify(collectableControllerSpy,Mockito.times(0)).generateCollectable()
+        Mockito.verify(collectableControllerSpy,Mockito.times(0)).moveCollectable()
     }
 
-    def "CollectableControllerStep - Only moving a collectable - killing changing conditional boundary"(){
+    def "CollectableControllerStep - Only moving a collectable - killing changing conditional boundary for generateCollectable condition"(){
         given:
-        def collectableController = Spy(CollectableController.class)
-        def arena = Mock(Arena.class)
-        def ship = Mock(Ship.class)
-        def alien = Mock(Alien.class)
-        List<Alien> aliens = new ArrayList<>(Arrays.asList(alien))
-        def collectable = Mock(Collectable.class)
-        def position = Mock(Position.class)
         def game = Mock(Game.class)
         def key = Mock(KeyStroke)
-        collectableController.getModel() >> arena
-        arena.getShip() >> ship
-        arena.getAliens() >> aliens
-        arena.getActiveCollectable() >> collectable
-        collectable.getPosition() >> position
-        ship.getShipMode() >> ShipMode.NORMAL_MODE
-        alien.getAlienMode() >> AlienMode.NORMAL_MODE
+        def arena = Mockito.mock(Arena.class)
+        def arenaModifier = Mockito.mock(ArenaModifier.class)
+        def collectableController = new CollectableController(arena)
+        def collectableControllerSpy = Mockito.spy(collectableController)
+        def ship = Mockito.mock(Ship.class)
+        def alien = Mockito.mock(Alien.class)
+        def collectable = Mockito.mock(Collectable.class)
+        def position = Mockito.mock(Position.class)
+        List<Alien> aliens = new ArrayList<>(Arrays.asList(alien))
+        List<Integer> columns = new ArrayList<>(Arrays.asList(10,22,29,45,46,47,69,10,71,72))
+        Mockito.when(collectableControllerSpy.getModel()).thenReturn(arena)
+        Mockito.when(collectableControllerSpy.getArenaModifier()).thenReturn(arenaModifier)
+        Mockito.when(arena.getShip()).thenReturn(ship)
+        Mockito.when(arena.getAliens()).thenReturn(aliens)
+        Mockito.doReturn(columns).when(arena).getFreeArenaColumns()
+        Mockito.doReturn(aliens).when(arena).getAttackingAliens()
+        Mockito.when(arena.getActiveCollectable()).thenReturn(collectable)
+        Mockito.when(ship.getShipMode()).thenReturn(ShipMode.NORMAL_MODE)
+        Mockito.when(alien.getAlienMode()).thenReturn(AlienMode.NORMAL_MODE)
+        Mockito.when(collectable.getPosition()).thenReturn(position)
+        collectableControllerSpy.setGenerateCollectableTime(40000)
+        collectableControllerSpy.setMovementTime(59849)
         when:
-        collectableController.step(game,key,20000)
+        collectableControllerSpy.step(game,key,60000)
         then:
-        0 * collectableController.generateCollectable()
-        1 * collectableController.moveCollectable()
+        Mockito.verify(collectableControllerSpy,Mockito.times(0)).generateCollectable()
+        Mockito.verify(collectableControllerSpy,Mockito.times(1)).moveCollectable()
     }
 
     def "CollectableControllerStep - No collectable active"(){
@@ -190,89 +221,113 @@ class CollectableControllerTests extends Specification {
 
     def "CollectableControllerStep - Ship collectable effect active"(){
         given:
-        def collectableController = Spy(CollectableController.class)
-        def arena = Mock(Arena.class)
-        def arenaModifier = Mock(ArenaModifier.class)
-        def ship = Mock(Ship.class)
-        def alien = Mock(Alien.class)
-        List<Alien> aliens = new ArrayList<>(Arrays.asList(alien))
         def game = Mock(Game.class)
         def key = Mock(KeyStroke)
-        collectableController.getModel() >> arena
-        collectableController.getArenaModifier() >> arenaModifier
-        ship.getShipMode() >> ShipMode.GOD_MODE
-        arena.getShip() >> ship
-        arena.getAliens() >> aliens
-        arena.getActiveCollectable() >> null
+        def arena = Mockito.mock(Arena.class)
+        def arenaModifier = Mockito.mock(ArenaModifier.class)
+        def collectableController = new CollectableController(arena)
+        def collectableControllerSpy = Mockito.spy(collectableController)
+        def ship = Mockito.mock(Ship.class)
+        def alien = Mockito.mock(Alien.class)
+        List<Alien> aliens = new ArrayList<>(Arrays.asList(alien))
+        List<Integer> columns = new ArrayList<>(Arrays.asList(1,2,3,5,7,12,17,44,60,70))
+        Mockito.when(collectableControllerSpy.getModel()).thenReturn(arena)
+        Mockito.when(collectableControllerSpy.getArenaModifier()).thenReturn(arenaModifier)
+        Mockito.when(arena.getShip()).thenReturn(ship)
+        Mockito.when(arena.getAliens()).thenReturn(aliens)
+        Mockito.doReturn(columns).when(arena).getFreeArenaColumns()
+        Mockito.doReturn(aliens).when(arena).getAttackingAliens()
+        Mockito.when(arena.getActiveCollectable()).thenReturn(null)
+        Mockito.when(ship.getShipMode()).thenReturn(ShipMode.GOD_MODE)
+        Mockito.when(alien.getAlienMode()).thenReturn(AlienMode.NORMAL_MODE)
+        collectableControllerSpy.setGenerateCollectableTime(48960)
         when:
-        collectableController.step(game,key,19900)
+        collectableControllerSpy.step(game,key,60000)
         then:
-        0 * collectableController.endCollectableEffect()
+        Mockito.verify(collectableControllerSpy,Mockito.times(0)).endCollectableEffect()
     }
 
-    def "CollectableControllerStep - Ending alien collectable effect"(){
+    def "CollectableControllerStep - Alien collectable effect active"(){
         given:
-        def collectableController = Spy(CollectableController.class)
-        def arena = Mock(Arena.class)
-        def arenaModifier = Mock(ArenaModifier.class)
-        def ship = Mock(Ship.class)
-        def alien = Mock(Alien.class)
-        List<Alien> aliens = new ArrayList<>(Arrays.asList(alien))
         def game = Mock(Game.class)
         def key = Mock(KeyStroke)
-        collectableController.getModel() >> arena
-        collectableController.getArenaModifier() >> arenaModifier
-        alien.getAlienMode() >> AlienMode.SCORE_10X
-        arena.getShip() >> ship
-        arena.getAliens() >> aliens
-        arena.getActiveCollectable() >> null
+        def arena = Mockito.mock(Arena.class)
+        def arenaModifier = Mockito.mock(ArenaModifier.class)
+        def collectableController = new CollectableController(arena)
+        def collectableControllerSpy = Mockito.spy(collectableController)
+        def ship = Mockito.mock(Ship.class)
+        def alien = Mockito.mock(Alien.class)
+        List<Alien> aliens = new ArrayList<>(Arrays.asList(alien))
+        List<Integer> columns = new ArrayList<>(Arrays.asList(1,2,3,5,7,12,17,44,60,70))
+        Mockito.when(collectableControllerSpy.getModel()).thenReturn(arena)
+        Mockito.when(collectableControllerSpy.getArenaModifier()).thenReturn(arenaModifier)
+        Mockito.when(arena.getShip()).thenReturn(ship)
+        Mockito.when(arena.getAliens()).thenReturn(aliens)
+        Mockito.doReturn(columns).when(arena).getFreeArenaColumns()
+        Mockito.doReturn(aliens).when(arena).getAttackingAliens()
+        Mockito.when(arena.getActiveCollectable()).thenReturn(null)
+        Mockito.when(ship.getShipMode()).thenReturn(ShipMode.NORMAL_MODE)
+        Mockito.when(alien.getAlienMode()).thenReturn(AlienMode.SCORE_10X)
+        collectableControllerSpy.setGenerateCollectableTime(40100)
         when:
-        collectableController.step(game,key,19900)
+        collectableControllerSpy.step(game,key,60000)
         then:
-        0 * collectableController.endCollectableEffect()
+        Mockito.verify(collectableControllerSpy,Mockito.times(0)).endCollectableEffect()
     }
 
     def "CollectableControllerStep - Ending ship collectable effect"(){
         given:
-        def collectableController = Spy(CollectableController.class)
-        def arena = Mock(Arena.class)
-        def arenaModifier = Mock(ArenaModifier.class)
-        def ship = Mock(Ship.class)
-        def alien = Mock(Alien.class)
-        List<Alien> aliens = new ArrayList<>(Arrays.asList(alien))
         def game = Mock(Game.class)
         def key = Mock(KeyStroke)
-        collectableController.getModel() >> arena
-        collectableController.getArenaModifier() >> arenaModifier
-        ship.getShipMode() >> ShipMode.MACHINE_GUN_MODE
-        arena.getShip() >> ship
-        arena.getAliens() >> aliens
-        arena.getActiveCollectable() >> null
+        def arena = Mockito.mock(Arena.class)
+        def arenaModifier = Mockito.mock(ArenaModifier.class)
+        def collectableController = new CollectableController(arena)
+        def collectableControllerSpy = Mockito.spy(collectableController)
+        def ship = Mockito.mock(Ship.class)
+        def alien = Mockito.mock(Alien.class)
+        List<Alien> aliens = new ArrayList<>(Arrays.asList(alien))
+        List<Integer> columns = new ArrayList<>(Arrays.asList(3,45,56,57,58,59,64,71))
+        Mockito.when(collectableControllerSpy.getModel()).thenReturn(arena)
+        Mockito.when(collectableControllerSpy.getArenaModifier()).thenReturn(arenaModifier)
+        Mockito.when(arena.getShip()).thenReturn(ship)
+        Mockito.when(arena.getAliens()).thenReturn(aliens)
+        Mockito.doReturn(columns).when(arena).getFreeArenaColumns()
+        Mockito.doReturn(aliens).when(arena).getAttackingAliens()
+        Mockito.when(arena.getActiveCollectable()).thenReturn(null)
+        Mockito.when(ship.getShipMode()).thenReturn(ShipMode.MACHINE_GUN_MODE)
+        Mockito.when(alien.getAlienMode()).thenReturn(AlienMode.NORMAL_MODE)
+        collectableControllerSpy.setGenerateCollectableTime(40000)
         when:
-        collectableController.step(game,key,19950)
+        collectableControllerSpy.step(game,key,60000)
         then:
-        1 * collectableController.endCollectableEffect()
+        Mockito.verify(collectableControllerSpy,Mockito.times(1)).endCollectableEffect()
     }
 
     def "CollectableControllerStep - Ending alien collectable effect"(){
         given:
-        def collectableController = Spy(CollectableController.class)
-        def arena = Mock(Arena.class)
-        def arenaModifier = Mock(ArenaModifier.class)
-        def ship = Mock(Ship.class)
-        def alien = Mock(Alien.class)
-        List<Alien> aliens = new ArrayList<>(Arrays.asList(alien))
         def game = Mock(Game.class)
         def key = Mock(KeyStroke)
-        collectableController.getModel() >> arena
-        collectableController.getArenaModifier() >> arenaModifier
-        alien.getAlienMode() >> AlienMode.SCORE_4X
-        arena.getShip() >> ship
-        arena.getAliens() >> aliens
-        arena.getActiveCollectable() >> null
+        def arena = Mockito.mock(Arena.class)
+        def arenaModifier = Mockito.mock(ArenaModifier.class)
+        def collectableController = new CollectableController(arena)
+        def collectableControllerSpy = Mockito.spy(collectableController)
+        def ship = Mockito.mock(Ship.class)
+        def alien = Mockito.mock(Alien.class)
+        List<Alien> aliens = new ArrayList<>(Arrays.asList(alien))
+        List<Integer> columns = new ArrayList<>(Arrays.asList(3,45,56,57,58,59,64,71))
+        Mockito.when(collectableControllerSpy.getModel()).thenReturn(arena)
+        Mockito.when(collectableControllerSpy.getArenaModifier()).thenReturn(arenaModifier)
+        Mockito.when(arena.getShip()).thenReturn(ship)
+        Mockito.when(arena.getAliens()).thenReturn(aliens)
+        Mockito.doReturn(columns).when(arena).getFreeArenaColumns()
+        Mockito.doReturn(aliens).when(arena).getAttackingAliens()
+        Mockito.when(arena.getActiveCollectable()).thenReturn(null)
+        Mockito.when(ship.getShipMode()).thenReturn(ShipMode.NORMAL_MODE)
+        Mockito.when(alien.getAlienMode()).thenReturn(AlienMode.SCORE_4X)
+        collectableControllerSpy.setGenerateCollectableTime(40090)
         when:
-        collectableController.step(game,key,19950)
+        collectableControllerSpy.step(game,key,60000)
         then:
-        1 * collectableController.endCollectableEffect()
+        Mockito.verify(collectableControllerSpy,Mockito.times(1)).endCollectableEffect()
     }
 }
