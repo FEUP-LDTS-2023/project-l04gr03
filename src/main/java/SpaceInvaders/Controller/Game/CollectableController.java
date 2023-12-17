@@ -26,6 +26,8 @@ public class CollectableController extends GameController {
 
     public void setGenerateCollectableTime(long generateCollectableTime) {this.generateCollectableTime = generateCollectableTime;}
 
+    public void setMovementTime(long movementTime) {this.movementTime = movementTime;}
+
     public void generateCollectable(){
         getArenaModifier().createCollectable();
     }
