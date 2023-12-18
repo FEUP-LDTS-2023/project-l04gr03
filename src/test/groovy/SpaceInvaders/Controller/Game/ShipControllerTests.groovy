@@ -18,6 +18,8 @@ import com.googlecode.lanterna.input.KeyType;
 
 class ShipControllerTests extends Specification {
 
+    def soundManager = Mockito.mock(SoundManager.class)
+
     def "SetMovementTime"(){
       given:
       ShipController shipController = new ShipController(Mock(Arena.class))
@@ -165,39 +167,47 @@ class ShipControllerTests extends Specification {
 
     def "ShootProjectile"(){
         given:
-        def shipController = Spy(ShipController.class)
-        def arena = Mock(Arena.class)
-        def arenaModifier = Mock(ArenaModifier.class)
-        def ship = Mock(Ship.class)
-        def position = Mock(Position.class)
-        shipController.getModel() >> arena
-        arena.getShip() >> ship
-        ship.getPosition() >> position
-        shipController.getArenaModifier() >> arenaModifier
-        when:
-        shipController.shootProjectile()
-        then:
-        1 * arenaModifier.addProjectile(_)
-    }
-
-    def "ShootProjectile - Checking play sound invocation"(){
-        given:
-        def soundManager = Mockito.mock(SoundManager.class)
-        def shipController = Spy(ShipController.class)
-        def arena = Mock(Arena.class)
-        def arenaModifier = Mock(ArenaModifier.class)
-        def ship = Mock(Ship.class)
-        def position = Mock(Position.class)
-        shipController.getModel() >> arena
-        arena.getShip() >> ship
-        ship.getPosition() >> position
-        shipController.getArenaModifier() >> arenaModifier
+            def shipController = Spy(ShipController.class)
+            def arena = Mock(Arena.class)
+            def arenaModifier = Mockito.mock(ArenaModifier.class)
+            def ship = Mock(Ship.class)
+            def position = new Position(10,10)
+            def soundManager = Mockito.mock(SoundManager.class)
+            def projectile = new Projectile(position,ship)
+            shipController.getModel() >> arena
+            arena.getShip() >> ship
+            ship.getPosition() >> position
+            shipController.getArenaModifier() >> arenaModifier
         try (MockedStatic<SoundManager> utilities = Mockito.mockStatic(SoundManager.class)) {
             utilities.when(SoundManager::getInstance).thenReturn(soundManager)
             when:
             shipController.shootProjectile()
             then:
-            Mockito.verify(soundManager, Mockito.times(1)).playSound(Sound_Options.LASER)
+            Mockito.verify(arenaModifier, Mockito.times(1)).addProjectile(projectile)
+        }
+    }
+
+    def "ShootProjectile - Checking play sound invocation"(){
+        given:
+            def soundManager = Mockito.mock(SoundManager.class)
+            def shipController = Spy(ShipController.class)
+            def arena = Mock(Arena.class)
+            def arenaModifier = Mock(ArenaModifier.class)
+            def ship = Mock(Ship.class)
+            def position = Mock(Position.class)
+            shipController.getModel() >> arena
+            arena.getShip() >> ship
+            ship.getPosition() >> position
+            shipController.getArenaModifier() >> arenaModifier
+
+        try (MockedStatic<SoundManager> utilities = Mockito.mockStatic(SoundManager.class)) {
+            utilities.when(SoundManager::getInstance).thenReturn(soundManager)
+
+            when:
+                shipController.shootProjectile()
+            then:
+
+                Mockito.verify(soundManager, Mockito.times(1)).playSound(Sound_Options.LASER)
         }
 
     }
@@ -374,11 +384,14 @@ class ShipControllerTests extends Specification {
         Mockito.when(ship.getPosition()).thenReturn(position)
         shipControllerSpy.setMovementTime(24990)
         shipControllerSpy.setShootingTime(24250)
-        when:
-        key.getKeyType() >> KeyType.ArrowUp
-        shipControllerSpy.step(game,key,25000)
-        then:
-        Mockito.verify(shipControllerSpy,Mockito.times(1)).shootProjectile()
+        try (MockedStatic<SoundManager> utilities = Mockito.mockStatic(SoundManager.class)) {
+            utilities.when(SoundManager::getInstance).thenReturn(soundManager)
+            when:
+            key.getKeyType() >> KeyType.ArrowUp
+            shipControllerSpy.step(game, key, 25000)
+            then:
+            Mockito.verify(shipControllerSpy, Mockito.times(1)).shootProjectile()
+        }
     }
 
     def "ShipControllerStep - Pressed ArrowUp and did not shoot in MachineGunMode"(){
@@ -422,10 +435,13 @@ class ShipControllerTests extends Specification {
         Mockito.when(ship.getPosition()).thenReturn(position)
         shipControllerSpy.setMovementTime(39500)
         shipControllerSpy.setShootingTime(39900)
-        when:
-        key.getKeyType() >> KeyType.ArrowUp
-        shipControllerSpy.step(game,key,40000)
-        then:
-        Mockito.verify(shipControllerSpy,Mockito.times(1)).shootProjectile()
+        try (MockedStatic<SoundManager> utilities = Mockito.mockStatic(SoundManager.class)) {
+            utilities.when(SoundManager::getInstance).thenReturn(soundManager)
+            when:
+            key.getKeyType() >> KeyType.ArrowUp
+            shipControllerSpy.step(game, key, 40000)
+            then:
+            Mockito.verify(shipControllerSpy, Mockito.times(1)).shootProjectile()
+        }
     }
 }

@@ -68,7 +68,7 @@ public class ArenaBuilderByRound extends ArenaBuilder {
         int i = 0;
         for(i = arenaLines.size() - 1; i >= 0; i--){
             if(arenaLines.get(i).indexOf('A') != -1){
-                return i;
+                break;
             }
         }
         return i;
