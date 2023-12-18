@@ -186,6 +186,44 @@ class ArenaControllerTests extends Specification{
         !arenaController.alienCollidesWithCoverWall()
     }
 
+    def "AlienCollidesWithBottomArenaWall - True"(){
+        given:
+        def arenaController = Spy(ArenaController.class)
+        def arena = Mock(Arena.class)
+        def alien1 = Mock(Alien.class)
+        def alien2 = Mock(Alien.class)
+        def alien3 = Mock(Alien.class)
+        List<Alien> aliens = new ArrayList<>(Arrays.asList(alien1,alien2,alien3))
+        arenaController.getModel() >> arena
+        arena.getHeight() >> 32
+        arena.getAliens() >> aliens
+        when:
+        alien1.getPosition() >> new Position(4,31)
+        alien2.getPosition() >> new Position(4,31)
+        alien3.getPosition() >> new Position(56,29)
+        then:
+        arenaController.alienReachesBottomArenaWall()
+    }
+
+    def "AlienCollidesWithBottomArenaWall - False"(){
+        given:
+        def arenaController = Spy(ArenaController.class)
+        def arena = Mock(Arena.class)
+        def alien1 = Mock(Alien.class)
+        def alien2 = Mock(Alien.class)
+        def alien3 = Mock(Alien.class)
+        List<Alien> aliens = new ArrayList<>(Arrays.asList(alien1,alien2,alien3))
+        arenaController.getModel() >> arena
+        arena.getHeight() >> 32
+        arena.getAliens() >> aliens
+        when:
+        alien1.getPosition() >> new Position(4,30)
+        alien2.getPosition() >> new Position(18,30)
+        alien3.getPosition() >> new Position(70,26)
+        then:
+        !arenaController.alienReachesBottomArenaWall()
+    }
+
     def "ProjectileCollisionsWithCoverWalls - Collision detected"(){
         def arenaController = Spy(ArenaController.class)
         def arenaModifier = Mock(ArenaModifier.class)
@@ -729,9 +767,12 @@ class ArenaControllerTests extends Specification{
         arena.getActiveCollectable() >> collectable
         arena.getAlienShip() >> alienShip
         arena.getRound() >> 1
+        ship.isDestroyed() >> false
+        arenaController.shipCollidesWithAlien() >> true
+        arenaController.alienCollidesWithCoverWall() >> false
+        arenaController.alienReachesBottomArenaWall() >> false
 
         when:
-            arenaController.shipCollidesWithAlien() >> true
             arenaController.step(game, Mock(KeyStroke), 10)
         then:
         1 * game.setState(GameStates.GAME_OVER)
@@ -809,7 +850,6 @@ class ArenaControllerTests extends Specification{
         coverWall.getPosition() >> Mock(Position.class)
         def ship = Mock(Ship.class)
         ship.getPosition() >> Mock(Position.class)
-        ship.isDestroyed() >> true
         def alien = Mock(Alien.class)
         alien.getPosition() >> Mock(Position.class)
         def alienShip = Mock(AlienShip.class)
@@ -846,6 +886,10 @@ class ArenaControllerTests extends Specification{
         arena.getActiveCollectable() >> collectable
         arena.getAlienShip() >> alienShip
         arena.getRound() >> 1
+        ship.isDestroyed() >> true
+        arenaController.shipCollidesWithAlien() >> false
+        arenaController.alienCollidesWithCoverWall() >> false
+        arenaController.alienReachesBottomArenaWall() >> false
 
         when:
         arenaController.step(game, Mock(KeyStroke), 10)
@@ -907,7 +951,10 @@ class ArenaControllerTests extends Specification{
         arena.getActiveCollectable() >> collectable
         arena.getAlienShip() >> alienShip
         arena.getRound() >> 1
+        ship.isDestroyed() >> false
+        arenaController.shipCollidesWithAlien() >> false
         arenaController.alienCollidesWithCoverWall() >> true
+        arenaController.alienReachesBottomArenaWall() >> false
 
         when:
             arenaController.step(game, Mock(KeyStroke), 10)
@@ -920,5 +967,69 @@ class ArenaControllerTests extends Specification{
             1 * alienShipControllerSpy.step(game, _, _)
             1 * projectileControllerSpy.step(game,_,_)
             1 * collectableControllerSpy.step(game,_,_)
+    }
+
+    def "Step alien collides with bottom arena wall"(){
+        given:
+        def arenaController = Spy(ArenaController.class)
+        def arena = Mock(Arena.class)
+        def wall = Mock(Wall.class)
+        def game = Mock(Game.class)
+        wall.getPosition() >> Mock(Position.class)
+        def coverWall = Mock(CoverWall.class)
+        coverWall.getPosition() >> Mock(Position.class)
+        def ship = Mock(Ship.class)
+        ship.getPosition() >> Mock(Position.class)
+        def alien = Mock(Alien.class)
+        alien.getPosition() >> Mock(Position.class)
+        def alienShip = Mock(AlienShip.class)
+        alienShip.getPosition() >> Mock(Position.class)
+        def projectile = Mock(Projectile.class)
+        projectile.getPosition() >> Mock(Position.class)
+        def collectable = Mock(Collectable.class)
+        collectable.getPosition() >> Mock(Position.class)
+        arenaController.getModel() >> arena
+        def shipController = new ShipController(arena)
+        def alienController = new AlienController(arena)
+        def collectableController = new CollectableController(arena)
+        def alienShipController =  new AlienShipController(arena)
+        def projectileController = new ProjectileController(arena)
+        def shipControllerSpy = Spy(shipController)
+        def alienControllerSpy = Spy(alienController)
+        def collectableControllerSpy = Spy(collectableController)
+        def alienShipControllerSpy = Spy(alienShipController)
+        def projectileControllerSpy = Spy(projectileController)
+        arenaController.setShipController(shipControllerSpy)
+        arenaController.setAlienController(alienControllerSpy)
+        arenaController.setAlienShipController(alienShipControllerSpy)
+        arenaController.setCollectableController(collectableControllerSpy)
+        arenaController.setProjectileController(projectileControllerSpy)
+        List<Wall> walls = new ArrayList<>(Arrays.asList(wall))
+        List<CoverWall> coverWalls = new ArrayList<>(Arrays.asList(coverWall))
+        List<Alien> aliens = new ArrayList<>(Arrays.asList(alien))
+        List<Projectile> projectiles = new ArrayList<>(Arrays.asList(projectile))
+        arena.getWalls() >> walls
+        arena.getCoverWalls() >> coverWalls
+        arena.getShip() >> ship
+        arena.getAliens() >> aliens
+        arena.getProjectiles() >> projectiles
+        arena.getActiveCollectable() >> collectable
+        arena.getAlienShip() >> alienShip
+        arena.getRound() >> 1
+        ship.isDestroyed() >> false
+        arenaController.shipCollidesWithAlien() >> false
+        arenaController.alienCollidesWithCoverWall() >> false
+        arenaController.alienReachesBottomArenaWall() >> true
+        when:
+        arenaController.step(game, Mock(KeyStroke), 10)
+        then:
+        1 * game.setState(GameStates.GAME_OVER)
+        1 * arenaController.checkCollisions();
+        1 * arenaController.removeDestroyedElements()
+        1 * shipControllerSpy.step(game,_,_)
+        1 * alienControllerSpy.step(game,_,_)
+        1 * alienShipControllerSpy.step(game, _, _)
+        1 * projectileControllerSpy.step(game,_,_)
+        1 * collectableControllerSpy.step(game,_,_)
     }
 }

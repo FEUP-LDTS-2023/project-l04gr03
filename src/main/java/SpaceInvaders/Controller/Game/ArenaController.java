@@ -129,6 +129,16 @@ public class ArenaController extends GameController {
         return false;
     }
 
+    public boolean alienReachesBottomArenaWall(){
+        List<Alien> aliens = getModel().getAliens();
+        for(Alien alien : aliens){
+            if(alien.getPosition().getY() >= getModel().getHeight() - 1){
+                return true;
+            }
+        }
+        return false;
+    }
+
     public void projectileCollisionsWithWalls(){
         List<Projectile> projectiles = getModel().getProjectiles();
         List<Wall> walls = getModel().getWalls();
@@ -258,7 +268,7 @@ public class ArenaController extends GameController {
                 game.setState(GameStates.PAUSE);
             }
         }
-        if(getModel().getShip().isDestroyed() || shipCollidesWithAlien() || alienCollidesWithCoverWall()){
+        if(getModel().getShip().isDestroyed() || shipCollidesWithAlien() || alienCollidesWithCoverWall() || alienReachesBottomArenaWall()){
             game.setState(GameStates.GAME_OVER);
         }
         if(getModel().getAliens().isEmpty()){
