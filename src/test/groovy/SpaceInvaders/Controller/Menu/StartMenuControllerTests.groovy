@@ -14,11 +14,19 @@ import spock.lang.Specification
 class StartMenuControllerTests extends Specification{
 
     def soundManager = Mockito.mock(SoundManager.class)
+    def startMenu = Mock(StartMenu.class)
+    def startMenuController = new StartMenuController(startMenu)
+
+    def setup(){
+        startMenuController = Spy(startMenuController)
+        startMenuController.getModel() >> startMenu
+    }
 
     def "Start Menu"() {
         given:
         try (MockedStatic<SoundManager> utilities = Mockito.mockStatic(SoundManager.class)) {
             utilities.when(SoundManager::getInstance).thenReturn(soundManager)
+
                 StartMenu startMenu = Mockito.mock(StartMenu)
                 def StartMenuController = new StartMenuController(startMenu)
                 def game = Mock(Game)
@@ -26,6 +34,7 @@ class StartMenuControllerTests extends Specification{
             when: 'ArrowDown Key'
                 def key = new KeyStroke(KeyType.ArrowDown)
                 StartMenuController.step(game, key, 0)
+
             then:
                 Mockito.verify(soundManager, Mockito.times(1)).playSound(Sound_Options.MENU_SWITCH)
                 Mockito.verify(startMenu, Mockito.times(1)).nextOption()
@@ -36,12 +45,15 @@ class StartMenuControllerTests extends Specification{
         given:
         try (MockedStatic<SoundManager> utilities = Mockito.mockStatic(SoundManager.class)) {
             utilities.when(SoundManager::getInstance).thenReturn(soundManager)
+
                 StartMenu startMenu = Mockito.mock(StartMenu)
                 def StartMenuController = new StartMenuController(startMenu)
                 def game = Mock(Game)
+
             when: 'ArrowUp Key'
                 def key = new KeyStroke(KeyType.ArrowUp)
                 StartMenuController.step(game, key, 0)
+
             then:
                 Mockito.verify(soundManager, Mockito.times(1)).playSound(Sound_Options.MENU_SWITCH)
                 Mockito.verify(startMenu, Mockito.times(1)).previousOption()
@@ -50,69 +62,65 @@ class StartMenuControllerTests extends Specification{
 
     def "Step Enter Key is selected Play"(){
         given:
-            StartMenu startMenu = Mock(StartMenu)
-            def StartMenuController = Spy(StartMenuController)
             def game = Mock(Game)
-            StartMenuController.getModel() >> startMenu
             startMenu.isSelectedPlay() >> true
+
         when: 'Enter key'
             def key = new KeyStroke(KeyType.Enter)
-            StartMenuController.step(game,key,0)
+            startMenuController.step(game,key,0)
+
         then:
             1 * game.setState(GameStates.NEW_GAME)
     }
 
     def "Step Enter Key is selected Leaderboard"(){
         given:
-            StartMenu startMenu = Mock(StartMenu)
-            def StartMenuController = Spy(StartMenuController)
             def game = Mock(Game)
-            StartMenuController.getModel() >> startMenu
             startMenu.isSelectedPlay() >> false
             startMenu.isSelectedLeaderboard() >> true
+
         when: 'Enter key'
             def key = new KeyStroke(KeyType.Enter)
-            StartMenuController.step(game,key,0)
+            startMenuController.step(game,key,0)
+
         then:
             1 * game.setState(GameStates.LEADERBOARD)
     }
 
     def "Step Enter Key is selected Leaderboard"(){
         given:
-            StartMenu startMenu = Mock(StartMenu)
-            def StartMenuController = Spy(StartMenuController)
             def game = Mock(Game)
-            StartMenuController.getModel() >> startMenu
             startMenu.isSelectedPlay() >> false
             startMenu.isSelectedLeaderboard() >> false
             startMenu.isSelectedInstructions() >> true
+
         when: 'Enter key'
             def key = new KeyStroke(KeyType.Enter)
-            StartMenuController.step(game,key,0)
+            startMenuController.step(game,key,0)
+
         then:
             1 * game.setState(GameStates.INSTRUCTIONS)
     }
 
     def "Step Enter Key is selected Leaderboard"(){
         given:
-            StartMenu startMenu = Mock(StartMenu)
-            def StartMenuController = Spy(StartMenuController)
             def game = Mock(Game)
             StartMenuController.getModel() >> startMenu
             startMenu.isSelectedPlay() >> false
             startMenu.isSelectedLeaderboard() >> false
             startMenu.isSelectedInstructions() >> false
             startMenu.isSelectedExit() >> true
+
         when: 'Enter key'
             def key = new KeyStroke(KeyType.Enter)
-            StartMenuController.step(game,key,0)
+            startMenuController.step(game,key,0)
+
         then:
             1 * game.setState(GameStates.QUIT_GAME)
     }
 
     def "Step no key pressed"(){
         given:
-            def startMenuController = Spy(StartMenuController)
             def key = null
         when:
             startMenuController.step(Mock(Game), key, 0)

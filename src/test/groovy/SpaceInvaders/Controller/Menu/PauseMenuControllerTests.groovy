@@ -12,7 +12,15 @@ import org.mockito.Mockito
 import spock.lang.Specification
 
 class PauseMenuControllerTests extends Specification{
+
     def soundManager = Mockito.mock(SoundManager.class)
+    def pauseMenu = Mock(PauseMenu.class)
+    def pauseMenuController = new PauseMenuController(pauseMenu)
+
+    def setup(){
+        pauseMenuController = Spy(pauseMenuController)
+        pauseMenuController.getModel() >> pauseMenu
+    }
 
     def "step arrowDown Key"() {
         given:
@@ -51,60 +59,48 @@ class PauseMenuControllerTests extends Specification{
     }
 
     def "step Enter Key is selected continue"(){
-            given:
-            PauseMenu pauseMenu = Mock(PauseMenu)
-            def PauseMenuController = Spy(PauseMenuController)
+        given:
             def game = Mock(Game)
-            PauseMenuController.getModel() >> pauseMenu
             pauseMenu.isSelectedContinue() >> true
 
         when: 'Enter key'
             def key = new KeyStroke(KeyType.Enter)
-            PauseMenuController.step(game,key,0)
+            pauseMenuController.step(game,key,0)
 
         then:
             1 * game.setState(GameStates.RESUME_GAME)
     }
 
-    def "step Enter Key is selected continue"(){
+    def "step Enter Key is selected instructions"(){
         given:
-            PauseMenu pauseMenu = Mock(PauseMenu)
-            def PauseMenuController = Spy(PauseMenuController)
             def game = Mock(Game)
-            PauseMenuController.getModel() >> pauseMenu
             pauseMenu.isSelectedContinue() >> false
             pauseMenu.isSelectedInstructions() >> true
 
         when: 'Enter key'
             def key = new KeyStroke(KeyType.Enter)
-            PauseMenuController.step(game,key,0)
+            pauseMenuController.step(game,key,0)
         then:
             1 * game.setState(GameStates.INSTRUCTIONS)
     }
 
     def "step Enter Key is selected Restart"(){
         given:
-            PauseMenu pauseMenu = Mock(PauseMenu)
-            def PauseMenuController = Spy(PauseMenuController)
             def game = Mock(Game)
-            PauseMenuController.getModel() >> pauseMenu
             pauseMenu.isSelectedContinue() >> false
             pauseMenu.isSelectedInstructions() >> false
             pauseMenu.isSelectedRestart() >> true
 
         when: 'Enter key'
             def key = new KeyStroke(KeyType.Enter)
-            PauseMenuController.step(game,key,0)
+            pauseMenuController.step(game,key,0)
         then:
             1 * game.setState(GameStates.NEW_GAME)
     }
 
     def "step Enter Key is selected Exit"(){
         given:
-            PauseMenu pauseMenu = Mock(PauseMenu)
-            def PauseMenuController = Spy(PauseMenuController)
             def game = Mock(Game)
-            PauseMenuController.getModel() >> pauseMenu
             pauseMenu.isSelectedContinue() >> false
             pauseMenu.isSelectedInstructions() >> false
             pauseMenu.isSelectedRestart() >> false
@@ -112,21 +108,19 @@ class PauseMenuControllerTests extends Specification{
 
         when: 'Enter key'
             def key = new KeyStroke(KeyType.Enter)
-            PauseMenuController.step(game,key,0)
+            pauseMenuController.step(game,key,0)
         then:
             1 * game.setState(GameStates.START_MENU)
     }
 
     def "Step no key pressed"(){
         given:
-            def pauseMenu = Mock(PauseMenu)
-            def PauseMenuController = Spy(PauseMenuController)
             def key = null
         when:
-            PauseMenuController.step(Mock(Game),key,0)
+            pauseMenuController.step(Mock(Game),key,0)
 
         then:
-            0 * PauseMenuController.getModel()
+            0 * pauseMenuController.getModel()
     }
 }
 
