@@ -148,5 +148,25 @@ class TestArena extends Specification{
         expect:
             arena.getFreeArenaColumns() == Arrays.asList(0,3)
     }
+
+    def "Free columns kill boundary changed mutations"(){
+        given:
+        def arena = new Arena(5,5)
+        def arenaSpy = Spy(arena)
+        def alien1 = new Alien(new Position(1,1), 1,1,1, AlienState.PASSIVE,1)
+        def aliens = Arrays.asList(alien1)
+        arenaSpy.setAliens(aliens)
+        def coverWall = new CoverWall(new Position(2,2),1)
+        def coverWalls = Arrays.asList(coverWall)
+        arenaSpy.setCoverWalls(coverWalls)
+        def alienShip = new AlienShip(new Position(4,4), 10,10,1)
+        arenaSpy.setAlienShip(alienShip)
+        when:
+            arenaSpy.getFreeArenaColumns()
+        then:
+            0 * arenaSpy.freeArenaPosition(new Position(5,0))
+            0 * arenaSpy.freeArenaPosition(new Position(0,5))
+
+    }
 }
 

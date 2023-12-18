@@ -16,36 +16,55 @@ class TestArenaModifier extends Specification{
 
     def "RemoveAlien"(){
         given:
-        Arena arena = new Arena(75,30)
-        List<Alien> aliens = new ArrayList<>();
-        aliens.add(new Alien(new Position(13,11),30,20,20,AlienState.PASSIVE,0))
-        aliens.add(new Alien(new Position(13,13),30,20,20,AlienState.PASSIVE,1))
-        aliens.add(new Alien(new Position(13,15),30,20,20,AlienState.ATTACKING,2))
-        aliens.add(new Alien(new Position(16,11),30,20,20,AlienState.ATTACKING,0))
-        arena.setAliens(aliens);
-        ArenaModifier arenaModifier = new ArenaModifier(arena)
-        when:
-        arenaModifier.removeAlien(aliens.get(3))
+            Arena arena = new Arena(75,30)
+            List<Alien> aliens = new ArrayList<>();
+            aliens.add(new Alien(new Position(13,11),30,20,20,AlienState.PASSIVE,0))
+            aliens.add(new Alien(new Position(13,13),30,20,20,AlienState.PASSIVE,1))
+            aliens.add(new Alien(new Position(13,15),30,20,20,AlienState.ATTACKING,2))
+            aliens.add(new Alien(new Position(16,11),30,20,20,AlienState.ATTACKING,0))
+            arena.setAliens(aliens);
+            ArenaModifier arenaModifier = new ArenaModifier(arena)
+        when: "removed 1 alien"
+            arenaModifier.removeAlien(aliens.get(3))
         then:
-        arena.getAliens().size() == 3
-        arena.getAliens().get(2).getAlienState() == AlienState.ATTACKING
-        arena.getAliens().get(1).getAlienState() == AlienState.PASSIVE
-        arena.getAliens().get(0).getAlienState() == AlienState.PASSIVE
-        when:
-        arenaModifier.removeAlien(aliens.get(2))
+            arena.getAliens().size() == 3
+            arena.getAliens().get(2).getAlienState() == AlienState.ATTACKING
+            arena.getAliens().get(1).getAlienState() == AlienState.PASSIVE
+            arena.getAliens().get(0).getAlienState() == AlienState.PASSIVE
+        when: "removed 2 aliens"
+            arenaModifier.removeAlien(aliens.get(2))
         then:
-        arena.getAliens().size() == 2
-        arena.getAliens().get(1).getAlienState() == AlienState.ATTACKING
-        arena.getAliens().get(0).getAlienState() == AlienState.PASSIVE
-        when:
-        arenaModifier.removeAlien(aliens.get(1))
+            arena.getAliens().size() == 2
+            arena.getAliens().get(1).getAlienState() == AlienState.ATTACKING
+            arena.getAliens().get(0).getAlienState() == AlienState.PASSIVE
+        when: "Removed 3 aliens"
+            arenaModifier.removeAlien(aliens.get(1))
         then:
-        arena.getAliens().size() == 1
-        arena.getAliens().get(0).getAlienState() == AlienState.ATTACKING
-        when:
-        arenaModifier.removeAlien(aliens.get(0))
+            arena.getAliens().size() == 1
+            arena.getAliens().get(0).getAlienState() == AlienState.ATTACKING
+        when: "Removed 4 aliens"
+            arenaModifier.removeAlien(aliens.get(0))
         then:
-        arena.getAliens().empty
+            arena.getAliens().empty
+    }
+
+
+    def "RemoveAlien - alien not in alien list"(){
+        given:
+            Arena arena = new Arena(75,30)
+            List<Alien> aliens = new ArrayList<>();
+            aliens.add(new Alien(new Position(13,11),30,20,20,AlienState.PASSIVE,0))
+            aliens.add(new Alien(new Position(13,13),30,20,20,AlienState.PASSIVE,1))
+            aliens.add(new Alien(new Position(13,15),30,20,20,AlienState.ATTACKING,2))
+            aliens.add(new Alien(new Position(16,11),30,20,20,AlienState.ATTACKING,0))
+            arena.setAliens(aliens);
+            def alien = new Alien(Mock(Position), 10,10,10, AlienState.PASSIVE,1)
+            def arenaModifier = new ArenaModifier(arena)
+        when:
+            arenaModifier.removeAlien(alien)
+        then:
+            aliens.size() == 4
+            0 * aliens.remove(_)
     }
 
 
