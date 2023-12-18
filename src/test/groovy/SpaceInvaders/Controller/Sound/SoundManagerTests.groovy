@@ -40,6 +40,7 @@ class SoundManagerTests extends Specification {
     def "Should Play Alien ship high"(){
         when:
             soundManagerSpy.playSound(Sound_Options.ALIEN_SHIP_HIGH)
+
         then:
             1 * alienShipHighPitch.playContinuously()
     }
@@ -47,6 +48,7 @@ class SoundManagerTests extends Specification {
     def "Should Play Alien ship low"(){
         when:
             soundManagerSpy.playSound(Sound_Options.ALIEN_SHIP_LOW)
+
         then:
             1 * alienShipLowPitch.playContinuously()
     }
@@ -54,6 +56,7 @@ class SoundManagerTests extends Specification {
     def "Should Play dying sound"(){
         when:
             soundManagerSpy.playSound(Sound_Options.DESTRUCTION)
+
         then:
             1 * dyingSound.play()
     }
@@ -61,6 +64,7 @@ class SoundManagerTests extends Specification {
     def"Should Play collectable sound"(){
         when:
             soundManagerSpy.playSound(Sound_Options.COLLECTABLE)
+
         then:
             1 * collectableSound.play()
     }
@@ -68,6 +72,7 @@ class SoundManagerTests extends Specification {
     def "Should Play laser sound"(){
         when:
             soundManagerSpy.playSound(Sound_Options.LASER)
+
         then:
             1 * laserSound.play()
     }
@@ -75,6 +80,7 @@ class SoundManagerTests extends Specification {
     def "Should Play menu switch"(){
         when:
             soundManagerSpy.playSound(Sound_Options.MENU_SWITCH)
+
         then:
             1 * switchOption.play()
     }
@@ -98,6 +104,7 @@ class SoundManagerTests extends Specification {
 
         when: "Starts playing"
             soundManagerSpy.resumePlayingMusic()
+
         then:
             1 * backgroundMusic.resumePlaying()
     }
@@ -106,6 +113,7 @@ class SoundManagerTests extends Specification {
 
         when: "Starts playing"
             soundManagerSpy.resumePlayingAlienShipSound()
+
         then:
             1 * alienShipHighPitch.resumePlaying()
             1 * alienShipLowPitch.resumePlaying()
@@ -115,6 +123,7 @@ class SoundManagerTests extends Specification {
     def "Should stop music"(){
         when:
             soundManagerSpy.stopSound(Sound_Options.MUSIC)
+
         then:
             1 * backgroundMusic.stop()
     }
@@ -122,6 +131,7 @@ class SoundManagerTests extends Specification {
     def "Should stop alien ship high"(){
         when:
             soundManagerSpy.stopSound(Sound_Options.ALIEN_SHIP_HIGH)
+
         then:
             1 * alienShipHighPitch.stop()
     }
@@ -129,6 +139,7 @@ class SoundManagerTests extends Specification {
     def "Should stop alien ship low"(){
         when:
             soundManagerSpy.stopSound(Sound_Options.ALIEN_SHIP_LOW)
+
         then:
             1 * alienShipLowPitch.stop()
     }
@@ -136,6 +147,7 @@ class SoundManagerTests extends Specification {
     def "Should stop dying sound"(){
         when:
             soundManagerSpy.stopSound(Sound_Options.DESTRUCTION)
+
         then:
             1 * dyingSound.stop()
     }
@@ -143,6 +155,7 @@ class SoundManagerTests extends Specification {
     def "Should stop collectable sound"(){
         when:
             soundManagerSpy.stopSound(Sound_Options.COLLECTABLE)
+
         then:
             1 * collectableSound.stop()
     }
@@ -150,6 +163,7 @@ class SoundManagerTests extends Specification {
     def "Should stop menu switch"(){
         when:
             soundManagerSpy.stopSound(Sound_Options.MENU_SWITCH)
+
         then:
             1 * switchOption.stop()
     }
@@ -157,6 +171,7 @@ class SoundManagerTests extends Specification {
     def "Should stop laser"(){
         when:
             soundManagerSpy.stopSound(Sound_Options.LASER)
+        
         then:
             1 * laserSound.stop()
     }

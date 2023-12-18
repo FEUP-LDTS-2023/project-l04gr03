@@ -14,8 +14,10 @@ class OnlyTextMenuControllerTests extends Specification{
             def onlyTextMenuController = new OnlyTextMenuController(onlyTextMenu)
             def key = new KeyStroke(KeyType.Escape)
             def game = Mock(Game)
+
         when:
             onlyTextMenuController.step(game,key,0)
+
         then:
             1 * game.setPrevState()
 
@@ -26,8 +28,10 @@ class OnlyTextMenuControllerTests extends Specification{
             def onlyTextMenuController = Spy(OnlyTextMenuController)
             def key = null
             def game = Mock(Game)
+
         when:
             onlyTextMenuController.step(game, key, 0)
+
         then:
             0 * game.setPrevState()
     }
