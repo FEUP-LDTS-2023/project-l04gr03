@@ -15,7 +15,17 @@ import org.mockito.Mockito
 import spock.lang.Specification
 
 class AlienShipControllerTests extends Specification{
+
     def soundManager = Mockito.mock(SoundManager.class)
+    def arena = Mock(Arena)
+    def controller = new AlienShipController(arena)
+    def alienShip = Mock(AlienShip.class)
+
+    def setup(){
+        controller = Spy(controller)
+        controller.getModel() >> arena
+        arena.getAlienShip() >> alienShip
+    }
 
     def "Generate Alien Ship"(){
         given:
@@ -23,12 +33,15 @@ class AlienShipControllerTests extends Specification{
             def controller = new AlienShipController(arena)
             def controllerSpy = Spy(controller)
             def arenaModifierMock =  Mockito.mock(ArenaModifier)
+
             controllerSpy.getArenaModifier() >> arenaModifierMock
+
         try (MockedStatic<SoundManager> utilities = Mockito.mockStatic(SoundManager.class)) {
             utilities.when(SoundManager::getInstance).thenReturn(soundManager)
 
-            when:
+            when: 'alien ship is generated'
                 controllerSpy.generateAlienShip()
+
             then:
                 Mockito.verify(soundManager, Mockito.times(1)).playSound(Sound_Options.ALIEN_SHIP_HIGH)
                 Mockito.verify(soundManager, Mockito.times(1)).playSound(Sound_Options.ALIEN_SHIP_LOW)
@@ -38,18 +51,15 @@ class AlienShipControllerTests extends Specification{
 
     def "Move AlienShip - can move"() {
         given:
-            def arena = Mock(Arena.class)
-            def controller = Spy(AlienShipController.class)
-            def alienShip = Mock(AlienShip.class)
-            arena.getAlienShip() >> alienShip
-            controller.getModel() >> arena
+
             alienShip.getPosition() >> new Position(10,10)
             alienShip.getMovementDirection() >> 1
             def newPosition = new Position(alienShip.getPosition().getX() + alienShip.getMovementDirection(),alienShip.getPosition().getY())
 
-        when:
+        when: 'AlienShip can move'
             controller.canMoveAlienShip() >> true
             controller.moveAlienShip()
+
         then:
             1 * alienShip.setPosition(newPosition)
             newPosition == new Position(11, 10)
@@ -59,19 +69,17 @@ class AlienShipControllerTests extends Specification{
 
     def "Move AlienShip - can't move"() {
         given:
-                def arena = Mock(Arena.class)
-                def controller = Spy(AlienShipController.class)
-                def alienShip = Mock(AlienShip.class)
                 def arenaModifier = Mockito.mock(ArenaModifier.class)
-                arena.getAlienShip() >> alienShip
-                controller.getModel() >> arena
+
                 controller.getArenaModifier() >> arenaModifier
+
             try (MockedStatic<SoundManager> utilities = Mockito.mockStatic(SoundManager.class)) {
                 utilities.when(SoundManager::getInstance).thenReturn(soundManager)
 
-            when:
+            when: 'AlienShip can not move'
                 controller.canMoveAlienShip() >> false
                 controller.moveAlienShip()
+
             then:
                 Mockito.verify(soundManager, Mockito.times(1)).stopSound(Sound_Options.ALIEN_SHIP_HIGH)
                 Mockito.verify(soundManager, Mockito.times(1)).stopSound(Sound_Options.ALIEN_SHIP_LOW)
@@ -81,84 +89,46 @@ class AlienShipControllerTests extends Specification{
 
     def "Can move alien ship Correct position"() {
         given:
-            def controller = Spy(AlienShipController.class)
-            def arena = Mock(Arena.class)
-            controller.getModel() >> arena
             arena.getWidth() >> 74
-        when:
-            def alienShip = new AlienShip(new Position(20, 10), 100, 100, 1)
-            arena.getAlienShip() >> alienShip
-        then:
-            controller.canMoveAlienShip() == true
+            alienShip.getPosition() >> new Position(20, 10)
+
+        expect:
+            controller.canMoveAlienShip()
     }
 
     def "Can move alien ship wrong position x-1 < 0  "() {
         given:
-            def controller = Spy(AlienShipController.class)
-            def arena = Mock(Arena.class)
-            controller.getModel() >> arena
             arena.getWidth() >> 74
-        when:
-            def alienShip = new AlienShip(new Position(1, 10), 100, 100, 1)
-            arena.getAlienShip() >> alienShip
-        then:
-            controller.canMoveAlienShip() == false
+            alienShip.getPosition() >> new Position(1, 10)
+
+        expect:
+            !controller.canMoveAlienShip()
     }
 
     def "Can move alien ship wrong position x+2 > arena.width() "(){
         given:
-            def controller = Spy(AlienShipController.class)
-            def arena = Mock(Arena.class)
-            controller.getModel() >> arena
+            alienShip.getPosition() >> new Position(73, 10)
             arena.getWidth() >> 74
-        when:
-            def alienShip = new AlienShip(new Position(73, 10), 100, 100, 1)
-            arena.getAlienShip() >> alienShip
-        then:
-            controller.canMoveAlienShip() == false
-    }
 
-    def "Can move alien ship wrong position x-1 < 0 "(){
-        given:
-        def controller = Spy(AlienShipController.class)
-        def arena = Mock(Arena.class)
-        controller.getModel() >> arena
-        arena.getWidth() >> 74
-        when:
-        def alienShip = new AlienShip(new Position(1, 10), 100, 100, 1)
-        arena.getAlienShip() >> alienShip
-        then:
-        controller.canMoveAlienShip() == false
-    }
-
-    def "Can move alien ship wrong position x + 2 > arena.width() "(){
-        given:
-        def controller = Spy(AlienShipController.class)
-        def arena = Mock(Arena.class)
-        controller.getModel() >> arena
-        arena.getWidth() >> 74
-        when:
-        def alienShip = new AlienShip(new Position(72, 10), 100, 100, 1)
-        arena.getAlienShip() >> alienShip
-        then:
-        controller.canMoveAlienShip() == false
+        expect:
+            !controller.canMoveAlienShip()
     }
 
     def "remove alien ship - ship not null and is destroyed"(){
         given:
-            def controller = Spy(AlienShipController.class)
-            def arena = Mock(Arena.class)
+
             def arenaModifier = Mockito.mock(ArenaModifier.class)
-            controller.getModel() >> arena
+
             controller.getArenaModifier() >> arenaModifier
-            def alienShip = Mock(AlienShip.class)
-            arena.getAlienShip() >> alienShip
+
+            'alienShip is destroyed'
             alienShip.isDestroyed() >> true
+
 
         try (MockedStatic<SoundManager> utilities = Mockito.mockStatic(SoundManager.class)) {
             utilities.when(SoundManager::getInstance).thenReturn(soundManager)
 
-            when:
+            when:'Ship is not null and is not destroyed'
                 controller.removeAlienShip()
 
             then:
@@ -172,14 +142,21 @@ class AlienShipControllerTests extends Specification{
 
     def "remove alien ship - ship is null "(){
         given:
+
             def controller = Spy(AlienShipController.class)
             def arena = Mock(Arena.class)
             def arenaModifier = Mock(ArenaModifier.class)
+
+
             controller.getModel() >> arena
             controller.getArenaModifier() >> arenaModifier
+
+            'Ship is null'
             arena.getAlienShip() >> null
-        when:
+
+        when:'Ship is null'
             controller.removeAlienShip()
+
         then:
             0 * arenaModifier.removeAlienShip(_)
 
@@ -187,16 +164,14 @@ class AlienShipControllerTests extends Specification{
 
     def "remove alien ship - ship not null and not destroyed"(){
         given:
-            def controller = Spy(AlienShipController.class)
-            def arena = Mock(Arena.class)
+
             def arenaModifier = Mock(ArenaModifier.class)
-            controller.getModel() >> arena
             controller.getArenaModifier() >> arenaModifier
-            def alienShip = Mock(AlienShip.class)
-            arena.getAlienShip() >> alienShip
+
+            'Ship is not destroyed'
             alienShip.isDestroyed() >> false
 
-            when:
+            when: 'Ship is not destroyed and is not null'
                 controller.removeAlienShip()
 
             then:
@@ -205,18 +180,18 @@ class AlienShipControllerTests extends Specification{
 
     def "hitByProjectile and ship is destroyed"() {
         given:
-            def controller = Spy(AlienShipController.class)
-            def arena = Mock(Arena.class)
-            def alienShip = Mock(AlienShip)
             def projectile = Mock(Projectile)
             def element = Mock(AttackingElement)
+
+
             projectile.getElement() >> element
-            arena.getAlienShip() >> alienShip
-            controller.getModel() >> arena
+
+            'alienShip is destroyed'
             alienShip.isDestroyed() >> true
 
-        when:
+        when: 'alienShip is hit by a projectile and is destroyed'
             controller.hitByProjectile(alienShip, projectile)
+
         then:
             1 * alienShip.decreaseHealth(_)
             1 * arena.increaseScore(_)
@@ -225,17 +200,18 @@ class AlienShipControllerTests extends Specification{
 
     def "hitByProjectile and ship is not destroyed"() {
         given:
-            def controller = Spy(AlienShipController.class)
-            def arena = Mock(Arena.class)
-            def alienShip = Mock(AlienShip)
             def projectile = Mock(Projectile)
             def element = Mock(AttackingElement)
+
+
             projectile.getElement() >> element
-            arena.getAlienShip() >> alienShip
-            controller.getModel() >> arena
+
+            'alienShip is destroyed'
             alienShip.isDestroyed() >> false
-        when:
+
+        when: 'alienShip is hit by a projectile and is not destroyed'
             controller.hitByProjectile(alienShip, projectile)
+
         then:
             1 * alienShip.decreaseHealth(_)
             0 * arena.increaseScore(_)
@@ -244,9 +220,9 @@ class AlienShipControllerTests extends Specification{
 
     def "Alien Ship Step generate"() {
         given:
-            def arena = Mock(Arena.class)
             def controller = new AlienShipController(arena)
             def controllerSpy = Mockito.spy(controller)
+
 
         try (MockedStatic<SoundManager> utilities = Mockito.mockStatic(SoundManager.class)) {
             utilities.when(SoundManager::getInstance).thenReturn(soundManager)
@@ -265,10 +241,15 @@ class AlienShipControllerTests extends Specification{
             def arena = Mockito.mock(Arena.class)
             def controller = new AlienShipController(arena)
             def controllerSpy = Mockito.spy(controller)
+
+
             Mockito.when(controllerSpy.getModel()).thenReturn(arena)
             Mockito.when(arena.getAlienShip()).thenReturn(new AlienShip(Mock(Position), 0, 0, 1))
+
+
             controllerSpy.setLastMovementTime(0)
             controllerSpy.setLastAppearance(50002)
+
 
         try (MockedStatic<SoundManager> utilities = Mockito.mockStatic(SoundManager.class)) {
             utilities.when(SoundManager::getInstance).thenReturn(soundManager)
@@ -286,10 +267,15 @@ class AlienShipControllerTests extends Specification{
             def arena = Mockito.mock(Arena.class)
             def controller = new AlienShipController(arena)
             def controllerSpy = Mockito.spy(controller)
+
+
             Mockito.when(controllerSpy.getModel()).thenReturn(arena)
             Mockito.when(arena.getAlienShip()).thenReturn(new AlienShip(Mock(Position), 0, 0, 1))
+
+
             controllerSpy.setLastAppearance(50001)
             controllerSpy.setLastMovementTime(50002)
+
 
         try (MockedStatic<SoundManager> utilities = Mockito.mockStatic(SoundManager.class)) {
             utilities.when(SoundManager::getInstance).thenReturn(soundManager)
@@ -307,9 +293,14 @@ class AlienShipControllerTests extends Specification{
             def arena = Mockito.mock(Arena.class)
             def controller = new AlienShipController(arena)
             def controllerSpy = Mockito.spy(controller)
+
+
             Mockito.when(controllerSpy.getModel()).thenReturn(arena)
             Mockito.when(arena.getAlienShip()).thenReturn(new AlienShip(Mock(Position), 0, 0, 1))
+
+
             controllerSpy.setLastAppearance(50001)
+
 
         try (MockedStatic<SoundManager> utilities = Mockito.mockStatic(SoundManager.class)) {
             utilities.when(SoundManager::getInstance).thenReturn(soundManager)
@@ -325,8 +316,10 @@ class AlienShipControllerTests extends Specification{
         def arena = Mockito.mock(Arena.class)
         def controller = new AlienShipController(arena)
         def controllerSpy = Mockito.spy(controller)
+
         Mockito.when(controllerSpy.getModel()).thenReturn(arena)
         Mockito.when(arena.getAlienShip()).thenReturn(new AlienShip(Mock(Position), 0, 0, 1))
+
         controllerSpy.setLastAppearance(50001)
         controllerSpy.setLastMovementTime(50002)
 
@@ -345,8 +338,10 @@ class AlienShipControllerTests extends Specification{
         def arena = Mockito.mock(Arena.class)
         def controller = new AlienShipController(arena)
         def controllerSpy = Mockito.spy(controller)
+
         Mockito.when(controllerSpy.getModel()).thenReturn(arena)
         Mockito.when(arena.getAlienShip()).thenReturn(new AlienShip(Mock(Position), 0, 0, 1))
+
         controllerSpy.setLastAppearance(50001)
 
         try (MockedStatic<SoundManager> utilities = Mockito.mockStatic(SoundManager.class)) {
@@ -359,8 +354,6 @@ class AlienShipControllerTests extends Specification{
     }
 
     def "Get lastMovement"(){
-        given:
-            def controller = new AlienShipController(Mock(Arena))
         when:
             controller.setLastMovementTime(10)
         then:
@@ -368,12 +361,10 @@ class AlienShipControllerTests extends Specification{
     }
 
     def "Get lastAppearance"(){
-        given:
-        def controller = new AlienShipController(Mock(Arena))
         when:
-        controller.setLastAppearance(10)
+            controller.setLastAppearance(10)
         then:
-        controller.getLastAppearance() == 10
+            controller.getLastAppearance() == 10
     }
 }
 
