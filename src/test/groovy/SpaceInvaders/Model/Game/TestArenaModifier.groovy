@@ -30,12 +30,24 @@ class TestArenaModifier extends Specification{
         arena.getAliens().size() == 3
         arena.getAliens().get(2).getAlienState() == AlienState.ATTACKING
         arena.getAliens().get(1).getAlienState() == AlienState.PASSIVE
+        arena.getAliens().get(0).getAlienState() == AlienState.PASSIVE
         when:
         arenaModifier.removeAlien(aliens.get(2))
         then:
         arena.getAliens().size() == 2
         arena.getAliens().get(1).getAlienState() == AlienState.ATTACKING
+        arena.getAliens().get(0).getAlienState() == AlienState.PASSIVE
+        when:
+        arenaModifier.removeAlien(aliens.get(1))
+        then:
+        arena.getAliens().size() == 1
+        arena.getAliens().get(0).getAlienState() == AlienState.ATTACKING
+        when:
+        arenaModifier.removeAlien(aliens.get(0))
+        then:
+        arena.getAliens().empty
     }
+
 
     def "RemoveCoverWall"(){
         given:
@@ -140,6 +152,9 @@ class TestArenaModifier extends Specification{
 
         then:
             arena.getAlienShip().getMovementDirection() == -1
+            arena.getAlienShip().getPosition().equals(new Position(71,6))
+            arena.getAlienShip().getHealth() == 50
+            arena.getAlienShip().getScore() == 1000
     }
 
     def "CreateAlienShip movement 0"() {
@@ -155,6 +170,9 @@ class TestArenaModifier extends Specification{
 
         then:
             arena.getAlienShip().getMovementDirection() == 1
+            arena.getAlienShip().getPosition().equals(new Position(4,6))
+            arena.getAlienShip().getHealth() == 50
+            arena.getAlienShip().getScore() == 1000
     }
 
     def "RemoveAlienShip"() {
