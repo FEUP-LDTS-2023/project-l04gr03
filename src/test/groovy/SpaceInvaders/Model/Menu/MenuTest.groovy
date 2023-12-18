@@ -8,49 +8,59 @@ class MenuTest extends Specification {
 
     def "Next Option"(){
         given:
-            def m = new StartMenu()
+            def menu = new StartMenu()
+
         when:
-            m.nextOption()
+            menu.nextOption()
+
         then:
-            m.isSelected(1)
+            menu.isSelected(1)
     }
 
     def "Previous Option selected < 0"(){
         given:
-            def m = new StartMenu()
+            def menu = new StartMenu()
+
         when:
-            m.previousOption()
+            menu.previousOption()
+
         then:
-            m.isSelected(3)
+            menu.isSelected(3)
 
     }
 
     def "Next Option selected >= options.size()"(){
         given:
-            def m = new StartMenu()
-            m.selected = 3
+            def menu = new StartMenu()
+            menu.selected = 3
+
         when:
-            m.nextOption()
+            menu.nextOption()
+
         then:
-            m.isSelected(0)
+            menu.isSelected(0)
 
     }
 
     def "Previous Option" (){
         given:
-            def m = new StartMenu()
-            m.selected = 1
+            def menu = new StartMenu()
+            menu.selected = 1
+
         when:
-            m.previousOption()
+            menu.previousOption()
+
         then:
-            m.isSelected(0)
+            menu.isSelected(0)
     }
 
     def "Number of options"(){
         given:
-            def m = new PauseMenu()
+            def menu = new PauseMenu()
+
         when:
-            int i = m.getNumberOptions()
+            int i = menu.getNumberOptions()
+
         then:
             i == 4
     }

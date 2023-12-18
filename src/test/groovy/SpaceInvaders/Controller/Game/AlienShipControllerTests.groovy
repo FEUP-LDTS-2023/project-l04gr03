@@ -114,6 +114,16 @@ class AlienShipControllerTests extends Specification{
             !controller.canMoveAlienShip()
     }
 
+
+    def "Can move alien ship wrong position x+2 > arena.width() kill mutation "(){
+        given:
+        alienShip.getPosition() >> new Position(72, 10)
+        arena.getWidth() >> 74
+
+        expect:
+        !controller.canMoveAlienShip()
+    }
+
     def "remove alien ship - ship not null and is destroyed"(){
         given:
 

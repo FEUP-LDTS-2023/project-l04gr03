@@ -1,0 +1,1781 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <link rel="stylesheet" type="text/css" href="../style.css">
+</head>
+<body>
+
+
+<h1>AlienShipController.java</h1>
+
+<table class="src">
+
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@66227940_1'/>
+1
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@66227940_1'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>package SpaceInvaders.Controller.Game;</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@66227940_2'/>
+2
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@66227940_2'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''></span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@66227940_3'/>
+3
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@66227940_3'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>import SpaceInvaders.Controller.Sound.SoundManager;</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@66227940_4'/>
+4
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@66227940_4'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>import SpaceInvaders.Game;</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@66227940_5'/>
+5
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@66227940_5'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>import SpaceInvaders.Model.Game.Arena;</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@66227940_6'/>
+6
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@66227940_6'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>import SpaceInvaders.Model.Game.RegularGameElements.AlienShip;</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@66227940_7'/>
+7
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@66227940_7'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>import SpaceInvaders.Model.Game.RegularGameElements.Projectile;</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@66227940_8'/>
+8
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@66227940_8'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>import SpaceInvaders.Model.Position;</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@66227940_9'/>
+9
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@66227940_9'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>import SpaceInvaders.Model.Sound.Sound_Options;</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@66227940_10'/>
+10
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@66227940_10'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>import com.googlecode.lanterna.input.KeyStroke;</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@66227940_11'/>
+11
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@66227940_11'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''></span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@66227940_12'/>
+12
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@66227940_12'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>import java.io.IOException;</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@66227940_13'/>
+13
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@66227940_13'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''></span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@66227940_14'/>
+14
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@66227940_14'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''></span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@66227940_15'/>
+15
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@66227940_15'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''></span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@66227940_16'/>
+16
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@66227940_16'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>public class AlienShipController extends GameController{</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@66227940_17'/>
+17
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@66227940_17'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>    long lastAppearance;</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@66227940_18'/>
+18
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@66227940_18'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>    long lastMovementTime;</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@66227940_19'/>
+19
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@66227940_19'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>    public AlienShipController(Arena arena){</span></pre></td></tr>
+
+
+<tr>
+<td class='covered'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@66227940_20'/>
+20
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@66227940_20'></a>
+<span>
+</span>
+</span>
+</td>
+<td class='covered'><pre><span  class=''>        super(arena);</span></pre></td></tr>
+
+
+<tr>
+<td class='covered'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@66227940_21'/>
+21
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@66227940_21'></a>
+<span>
+</span>
+</span>
+</td>
+<td class='covered'><pre><span  class=''>        this.lastAppearance = 0;</span></pre></td></tr>
+
+
+<tr>
+<td class='covered'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@66227940_22'/>
+22
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@66227940_22'></a>
+<span>
+</span>
+</span>
+</td>
+<td class='covered'><pre><span  class=''>        this.lastMovementTime = 0;</span></pre></td></tr>
+
+
+<tr>
+<td class='covered'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@66227940_23'/>
+23
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@66227940_23'></a>
+<span>
+</span>
+</span>
+</td>
+<td class='covered'><pre><span  class=''>    }</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@66227940_24'/>
+24
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@66227940_24'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''></span></pre></td></tr>
+
+
+<tr>
+<td class='covered'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@66227940_25'/>
+25
+</td>
+<td class='killed'>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@66227940_25'>1</a>
+<span>
+
+1. getLastMovementTime : replaced long return with 0 for SpaceInvaders/Controller/Game/AlienShipController::getLastMovementTime &rarr; KILLED<br/>
+
+</span>
+</span>
+</td>
+<td class='covered'><pre><span  class='killed'>    public long getLastMovementTime() {return lastMovementTime;}</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@66227940_26'/>
+26
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@66227940_26'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''></span></pre></td></tr>
+
+
+<tr>
+<td class='covered'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@66227940_27'/>
+27
+</td>
+<td class='killed'>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@66227940_27'>1</a>
+<span>
+
+1. getLastAppearance : replaced long return with 0 for SpaceInvaders/Controller/Game/AlienShipController::getLastAppearance &rarr; KILLED<br/>
+
+</span>
+</span>
+</td>
+<td class='covered'><pre><span  class='killed'>    public long getLastAppearance() {return lastAppearance;}</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@66227940_28'/>
+28
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@66227940_28'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''></span></pre></td></tr>
+
+
+<tr>
+<td class='covered'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@66227940_29'/>
+29
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@66227940_29'></a>
+<span>
+</span>
+</span>
+</td>
+<td class='covered'><pre><span  class=''>    public void setLastMovementTime(long lastMovementTime) {this.lastMovementTime = lastMovementTime;}</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@66227940_30'/>
+30
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@66227940_30'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''></span></pre></td></tr>
+
+
+<tr>
+<td class='covered'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@66227940_31'/>
+31
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@66227940_31'></a>
+<span>
+</span>
+</span>
+</td>
+<td class='covered'><pre><span  class=''>    public void setLastAppearance(long lastAppearance) {this.lastAppearance = lastAppearance;}</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@66227940_32'/>
+32
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@66227940_32'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''></span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@66227940_33'/>
+33
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@66227940_33'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''></span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@66227940_34'/>
+34
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@66227940_34'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>    public void generateAlienShip(){</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@66227940_35'/>
+35
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@66227940_35'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''></span></pre></td></tr>
+
+
+<tr>
+<td class='covered'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@66227940_36'/>
+36
+</td>
+<td class='killed'>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@66227940_36'>1</a>
+<span>
+
+1. generateAlienShip : removed call to SpaceInvaders/Model/Game/ArenaModifier::createAlienShip &rarr; KILLED<br/>
+
+</span>
+</span>
+</td>
+<td class='covered'><pre><span  class='killed'>        getArenaModifier().createAlienShip();</span></pre></td></tr>
+
+
+<tr>
+<td class='covered'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@66227940_37'/>
+37
+</td>
+<td class='killed'>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@66227940_37'>1</a>
+<span>
+
+1. generateAlienShip : removed call to SpaceInvaders/Controller/Sound/SoundManager::playSound &rarr; KILLED<br/>
+
+</span>
+</span>
+</td>
+<td class='covered'><pre><span  class='killed'>        SoundManager.getInstance().playSound(Sound_Options.ALIEN_SHIP_HIGH);</span></pre></td></tr>
+
+
+<tr>
+<td class='covered'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@66227940_38'/>
+38
+</td>
+<td class='killed'>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@66227940_38'>1</a>
+<span>
+
+1. generateAlienShip : removed call to SpaceInvaders/Controller/Sound/SoundManager::playSound &rarr; KILLED<br/>
+
+</span>
+</span>
+</td>
+<td class='covered'><pre><span  class='killed'>        SoundManager.getInstance().playSound(Sound_Options.ALIEN_SHIP_LOW);</span></pre></td></tr>
+
+
+<tr>
+<td class='covered'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@66227940_39'/>
+39
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@66227940_39'></a>
+<span>
+</span>
+</span>
+</td>
+<td class='covered'><pre><span  class=''>    }</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@66227940_40'/>
+40
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@66227940_40'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''></span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@66227940_41'/>
+41
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@66227940_41'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>    public void moveAlienShip(){</span></pre></td></tr>
+
+
+<tr>
+<td class='covered'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@66227940_42'/>
+42
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@66227940_42'></a>
+<span>
+</span>
+</span>
+</td>
+<td class='covered'><pre><span  class=''>        AlienShip alienShip = getModel().getAlienShip();</span></pre></td></tr>
+
+
+<tr>
+<td class='covered'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@66227940_43'/>
+43
+</td>
+<td class='killed'>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@66227940_43'>1</a>
+<span>
+
+1. moveAlienShip : negated conditional &rarr; KILLED<br/>
+
+</span>
+</span>
+</td>
+<td class='covered'><pre><span  class='killed'>        if(canMoveAlienShip()) {</span></pre></td></tr>
+
+
+<tr>
+<td class='covered'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@66227940_44'/>
+44
+</td>
+<td class='killed'>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@66227940_44'>2</a>
+<span>
+
+1. moveAlienShip : Replaced integer addition with subtraction &rarr; KILLED<br/>
+
+2. moveAlienShip : removed call to SpaceInvaders/Model/Game/RegularGameElements/AlienShip::setPosition &rarr; KILLED<br/>
+
+</span>
+</span>
+</td>
+<td class='covered'><pre><span  class='killed'>            alienShip.setPosition(new Position(alienShip.getPosition().getX() + alienShip.getMovementDirection(), alienShip.getPosition().getY()));</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@66227940_45'/>
+45
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@66227940_45'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>        }</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@66227940_46'/>
+46
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@66227940_46'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>        else{</span></pre></td></tr>
+
+
+<tr>
+<td class='covered'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@66227940_47'/>
+47
+</td>
+<td class='killed'>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@66227940_47'>1</a>
+<span>
+
+1. moveAlienShip : removed call to SpaceInvaders/Model/Game/ArenaModifier::removeAlienShip &rarr; KILLED<br/>
+
+</span>
+</span>
+</td>
+<td class='covered'><pre><span  class='killed'>            getArenaModifier().removeAlienShip();</span></pre></td></tr>
+
+
+<tr>
+<td class='covered'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@66227940_48'/>
+48
+</td>
+<td class='killed'>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@66227940_48'>1</a>
+<span>
+
+1. moveAlienShip : removed call to SpaceInvaders/Controller/Sound/SoundManager::stopSound &rarr; KILLED<br/>
+
+</span>
+</span>
+</td>
+<td class='covered'><pre><span  class='killed'>            SoundManager.getInstance().stopSound(Sound_Options.ALIEN_SHIP_HIGH);</span></pre></td></tr>
+
+
+<tr>
+<td class='covered'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@66227940_49'/>
+49
+</td>
+<td class='killed'>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@66227940_49'>1</a>
+<span>
+
+1. moveAlienShip : removed call to SpaceInvaders/Controller/Sound/SoundManager::stopSound &rarr; KILLED<br/>
+
+</span>
+</span>
+</td>
+<td class='covered'><pre><span  class='killed'>            SoundManager.getInstance().stopSound(Sound_Options.ALIEN_SHIP_LOW);</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@66227940_50'/>
+50
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@66227940_50'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>        }</span></pre></td></tr>
+
+
+<tr>
+<td class='covered'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@66227940_51'/>
+51
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@66227940_51'></a>
+<span>
+</span>
+</span>
+</td>
+<td class='covered'><pre><span  class=''>    }</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@66227940_52'/>
+52
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@66227940_52'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''></span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@66227940_53'/>
+53
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@66227940_53'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>    public boolean canMoveAlienShip(){</span></pre></td></tr>
+
+
+<tr>
+<td class='covered'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@66227940_54'/>
+54
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@66227940_54'></a>
+<span>
+</span>
+</span>
+</td>
+<td class='covered'><pre><span  class=''>        AlienShip alienShip = getModel().getAlienShip();</span></pre></td></tr>
+
+
+<tr>
+<td class='covered'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@66227940_55'/>
+55
+</td>
+<td class='killed'>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@66227940_55'>7</a>
+<span>
+
+1. canMoveAlienShip : changed conditional boundary &rarr; KILLED<br/>
+
+2. canMoveAlienShip : changed conditional boundary &rarr; KILLED<br/>
+
+3. canMoveAlienShip : Replaced integer subtraction with addition &rarr; KILLED<br/>
+
+4. canMoveAlienShip : Replaced integer addition with subtraction &rarr; KILLED<br/>
+
+5. canMoveAlienShip : negated conditional &rarr; KILLED<br/>
+
+6. canMoveAlienShip : negated conditional &rarr; KILLED<br/>
+
+7. canMoveAlienShip : replaced boolean return with true for SpaceInvaders/Controller/Game/AlienShipController::canMoveAlienShip &rarr; KILLED<br/>
+
+</span>
+</span>
+</td>
+<td class='covered'><pre><span  class='killed'>        return (alienShip.getPosition().getX() - 1 &#62; 0) &#38;&#38; (alienShip.getPosition().getX() + 2 &#60; getModel().getWidth());</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@66227940_56'/>
+56
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@66227940_56'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>    }</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@66227940_57'/>
+57
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@66227940_57'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''></span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@66227940_58'/>
+58
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@66227940_58'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>    public void removeAlienShip(){</span></pre></td></tr>
+
+
+<tr>
+<td class='covered'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@66227940_59'/>
+59
+</td>
+<td class='killed'>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@66227940_59'>1</a>
+<span>
+
+1. removeAlienShip : negated conditional &rarr; KILLED<br/>
+
+</span>
+</span>
+</td>
+<td class='covered'><pre><span  class='killed'>        if(getModel().getAlienShip() != null) {</span></pre></td></tr>
+
+
+<tr>
+<td class='covered'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@66227940_60'/>
+60
+</td>
+<td class='killed'>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@66227940_60'>1</a>
+<span>
+
+1. removeAlienShip : negated conditional &rarr; KILLED<br/>
+
+</span>
+</span>
+</td>
+<td class='covered'><pre><span  class='killed'>            if (getModel().getAlienShip().isDestroyed()) {</span></pre></td></tr>
+
+
+<tr>
+<td class='covered'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@66227940_61'/>
+61
+</td>
+<td class='killed'>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@66227940_61'>1</a>
+<span>
+
+1. removeAlienShip : removed call to SpaceInvaders/Model/Game/ArenaModifier::removeAlienShip &rarr; KILLED<br/>
+
+</span>
+</span>
+</td>
+<td class='covered'><pre><span  class='killed'>                getArenaModifier().removeAlienShip();</span></pre></td></tr>
+
+
+<tr>
+<td class='covered'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@66227940_62'/>
+62
+</td>
+<td class='killed'>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@66227940_62'>1</a>
+<span>
+
+1. removeAlienShip : removed call to SpaceInvaders/Controller/Sound/SoundManager::playSound &rarr; KILLED<br/>
+
+</span>
+</span>
+</td>
+<td class='covered'><pre><span  class='killed'>                SoundManager.getInstance().playSound(Sound_Options.DESTRUCTION);</span></pre></td></tr>
+
+
+<tr>
+<td class='covered'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@66227940_63'/>
+63
+</td>
+<td class='killed'>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@66227940_63'>1</a>
+<span>
+
+1. removeAlienShip : removed call to SpaceInvaders/Controller/Sound/SoundManager::stopSound &rarr; KILLED<br/>
+
+</span>
+</span>
+</td>
+<td class='covered'><pre><span  class='killed'>                SoundManager.getInstance().stopSound(Sound_Options.ALIEN_SHIP_HIGH);</span></pre></td></tr>
+
+
+<tr>
+<td class='covered'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@66227940_64'/>
+64
+</td>
+<td class='killed'>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@66227940_64'>1</a>
+<span>
+
+1. removeAlienShip : removed call to SpaceInvaders/Controller/Sound/SoundManager::stopSound &rarr; KILLED<br/>
+
+</span>
+</span>
+</td>
+<td class='covered'><pre><span  class='killed'>                SoundManager.getInstance().stopSound(Sound_Options.ALIEN_SHIP_LOW);</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@66227940_65'/>
+65
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@66227940_65'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>            }</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@66227940_66'/>
+66
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@66227940_66'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>        }</span></pre></td></tr>
+
+
+<tr>
+<td class='covered'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@66227940_67'/>
+67
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@66227940_67'></a>
+<span>
+</span>
+</span>
+</td>
+<td class='covered'><pre><span  class=''>    }</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@66227940_68'/>
+68
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@66227940_68'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''></span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@66227940_69'/>
+69
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@66227940_69'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>    public void hitByProjectile(AlienShip alienShip, Projectile projectile){</span></pre></td></tr>
+
+
+<tr>
+<td class='covered'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@66227940_70'/>
+70
+</td>
+<td class='killed'>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@66227940_70'>1</a>
+<span>
+
+1. hitByProjectile : removed call to SpaceInvaders/Model/Game/RegularGameElements/AlienShip::decreaseHealth &rarr; KILLED<br/>
+
+</span>
+</span>
+</td>
+<td class='covered'><pre><span  class='killed'>        alienShip.decreaseHealth(projectile.getElement().getDamagePerShot());</span></pre></td></tr>
+
+
+<tr>
+<td class='covered'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@66227940_71'/>
+71
+</td>
+<td class='killed'>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@66227940_71'>1</a>
+<span>
+
+1. hitByProjectile : negated conditional &rarr; KILLED<br/>
+
+</span>
+</span>
+</td>
+<td class='covered'><pre><span  class='killed'>        if(getModel().getAlienShip().isDestroyed()) {</span></pre></td></tr>
+
+
+<tr>
+<td class='covered'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@66227940_72'/>
+72
+</td>
+<td class='killed'>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@66227940_72'>1</a>
+<span>
+
+1. hitByProjectile : removed call to SpaceInvaders/Model/Game/Arena::increaseScore &rarr; KILLED<br/>
+
+</span>
+</span>
+</td>
+<td class='covered'><pre><span  class='killed'>            getModel().increaseScore(alienShip.getScore());</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@66227940_73'/>
+73
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@66227940_73'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>        }</span></pre></td></tr>
+
+
+<tr>
+<td class='covered'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@66227940_74'/>
+74
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@66227940_74'></a>
+<span>
+</span>
+</span>
+</td>
+<td class='covered'><pre><span  class=''>    }</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@66227940_75'/>
+75
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@66227940_75'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>    @Override</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@66227940_76'/>
+76
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@66227940_76'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>    public void step(Game game, KeyStroke key, long time) throws IOException {</span></pre></td></tr>
+
+
+<tr>
+<td class='covered'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@66227940_77'/>
+77
+</td>
+<td class='killed'>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@66227940_77'>3</a>
+<span>
+
+1. step : changed conditional boundary &rarr; KILLED<br/>
+
+2. step : Replaced long subtraction with addition &rarr; KILLED<br/>
+
+3. step : negated conditional &rarr; KILLED<br/>
+
+</span>
+</span>
+</td>
+<td class='covered'><pre><span  class='killed'>        if(time - lastAppearance &#62; 50000){</span></pre></td></tr>
+
+
+<tr>
+<td class='covered'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@66227940_78'/>
+78
+</td>
+<td class='killed'>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@66227940_78'>1</a>
+<span>
+
+1. step : removed call to SpaceInvaders/Controller/Game/AlienShipController::generateAlienShip &rarr; KILLED<br/>
+
+</span>
+</span>
+</td>
+<td class='covered'><pre><span  class='killed'>            generateAlienShip();</span></pre></td></tr>
+
+
+<tr>
+<td class='covered'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@66227940_79'/>
+79
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@66227940_79'></a>
+<span>
+</span>
+</span>
+</td>
+<td class='covered'><pre><span  class=''>            lastAppearance = time;</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@66227940_80'/>
+80
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@66227940_80'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>        }</span></pre></td></tr>
+
+
+<tr>
+<td class='covered'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@66227940_81'/>
+81
+</td>
+<td class='killed'>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@66227940_81'>1</a>
+<span>
+
+1. step : negated conditional &rarr; KILLED<br/>
+
+</span>
+</span>
+</td>
+<td class='covered'><pre><span  class='killed'>        else if(getModel().getAlienShip() != null){</span></pre></td></tr>
+
+
+<tr>
+<td class='covered'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@66227940_82'/>
+82
+</td>
+<td class='killed'>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@66227940_82'>3</a>
+<span>
+
+1. step : changed conditional boundary &rarr; KILLED<br/>
+
+2. step : Replaced long subtraction with addition &rarr; KILLED<br/>
+
+3. step : negated conditional &rarr; KILLED<br/>
+
+</span>
+</span>
+</td>
+<td class='covered'><pre><span  class='killed'>            if(time - lastMovementTime &#62; 100) {</span></pre></td></tr>
+
+
+<tr>
+<td class='covered'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@66227940_83'/>
+83
+</td>
+<td class='killed'>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@66227940_83'>1</a>
+<span>
+
+1. step : removed call to SpaceInvaders/Controller/Game/AlienShipController::moveAlienShip &rarr; KILLED<br/>
+
+</span>
+</span>
+</td>
+<td class='covered'><pre><span  class='killed'>                moveAlienShip();</span></pre></td></tr>
+
+
+<tr>
+<td class='covered'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@66227940_84'/>
+84
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@66227940_84'></a>
+<span>
+</span>
+</span>
+</td>
+<td class='covered'><pre><span  class=''>                lastMovementTime = time;</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@66227940_85'/>
+85
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@66227940_85'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>            }</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@66227940_86'/>
+86
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@66227940_86'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>        }</span></pre></td></tr>
+
+
+<tr>
+<td class='covered'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@66227940_87'/>
+87
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@66227940_87'></a>
+<span>
+</span>
+</span>
+</td>
+<td class='covered'><pre><span  class=''>    }</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@66227940_88'/>
+88
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@66227940_88'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''></span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@66227940_89'/>
+89
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@66227940_89'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''></span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@66227940_90'/>
+90
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@66227940_90'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>}</span></pre></td></tr>
+
+
+
+<tr><td></td><td></td><td><h2>Mutations</h2></td></tr>
+
+
+<tr>
+<td><a href='#org.pitest.mutationtest.report.html.SourceFile@66227940_25'>25</a></td> 
+<td></td>
+<td>
+
+<a name='grouporg.pitest.mutationtest.report.html.SourceFile@66227940_25'/> 
+
+<p class='KILLED'><span class='pop'>1.<span><b>1</b><br/><b>Location : </b>getLastMovementTime<br/><b>Killed by : </b>SpaceInvaders.Controller.Game.AlienShipControllerTests.[engine:spock]/[spec:SpaceInvaders.Controller.Game.AlienShipControllerTests]/[feature:$spock_feature_0_18]</span></span> replaced long return with 0 for SpaceInvaders/Controller/Game/AlienShipController::getLastMovementTime &rarr; KILLED</p> 
+</td>
+</tr>
+
+<tr>
+<td><a href='#org.pitest.mutationtest.report.html.SourceFile@66227940_27'>27</a></td> 
+<td></td>
+<td>
+
+<a name='grouporg.pitest.mutationtest.report.html.SourceFile@66227940_27'/> 
+
+<p class='KILLED'><span class='pop'>1.<span><b>1</b><br/><b>Location : </b>getLastAppearance<br/><b>Killed by : </b>SpaceInvaders.Controller.Game.AlienShipControllerTests.[engine:spock]/[spec:SpaceInvaders.Controller.Game.AlienShipControllerTests]/[feature:$spock_feature_0_19]</span></span> replaced long return with 0 for SpaceInvaders/Controller/Game/AlienShipController::getLastAppearance &rarr; KILLED</p> 
+</td>
+</tr>
+
+<tr>
+<td><a href='#org.pitest.mutationtest.report.html.SourceFile@66227940_36'>36</a></td> 
+<td></td>
+<td>
+
+<a name='grouporg.pitest.mutationtest.report.html.SourceFile@66227940_36'/> 
+
+<p class='KILLED'><span class='pop'>1.<span><b>1</b><br/><b>Location : </b>generateAlienShip<br/><b>Killed by : </b>SpaceInvaders.Controller.Game.AlienShipControllerTests.[engine:spock]/[spec:SpaceInvaders.Controller.Game.AlienShipControllerTests]/[feature:$spock_feature_0_0]</span></span> removed call to SpaceInvaders/Model/Game/ArenaModifier::createAlienShip &rarr; KILLED</p> 
+</td>
+</tr>
+
+<tr>
+<td><a href='#org.pitest.mutationtest.report.html.SourceFile@66227940_37'>37</a></td> 
+<td></td>
+<td>
+
+<a name='grouporg.pitest.mutationtest.report.html.SourceFile@66227940_37'/> 
+
+<p class='KILLED'><span class='pop'>1.<span><b>1</b><br/><b>Location : </b>generateAlienShip<br/><b>Killed by : </b>SpaceInvaders.Controller.Game.AlienShipControllerTests.[engine:spock]/[spec:SpaceInvaders.Controller.Game.AlienShipControllerTests]/[feature:$spock_feature_0_0]</span></span> removed call to SpaceInvaders/Controller/Sound/SoundManager::playSound &rarr; KILLED</p> 
+</td>
+</tr>
+
+<tr>
+<td><a href='#org.pitest.mutationtest.report.html.SourceFile@66227940_38'>38</a></td> 
+<td></td>
+<td>
+
+<a name='grouporg.pitest.mutationtest.report.html.SourceFile@66227940_38'/> 
+
+<p class='KILLED'><span class='pop'>1.<span><b>1</b><br/><b>Location : </b>generateAlienShip<br/><b>Killed by : </b>SpaceInvaders.Controller.Game.AlienShipControllerTests.[engine:spock]/[spec:SpaceInvaders.Controller.Game.AlienShipControllerTests]/[feature:$spock_feature_0_0]</span></span> removed call to SpaceInvaders/Controller/Sound/SoundManager::playSound &rarr; KILLED</p> 
+</td>
+</tr>
+
+<tr>
+<td><a href='#org.pitest.mutationtest.report.html.SourceFile@66227940_43'>43</a></td> 
+<td></td>
+<td>
+
+<a name='grouporg.pitest.mutationtest.report.html.SourceFile@66227940_43'/> 
+
+<p class='KILLED'><span class='pop'>1.<span><b>1</b><br/><b>Location : </b>moveAlienShip<br/><b>Killed by : </b>SpaceInvaders.Controller.Game.AlienShipControllerTests.[engine:spock]/[spec:SpaceInvaders.Controller.Game.AlienShipControllerTests]/[feature:$spock_feature_0_2]</span></span> negated conditional &rarr; KILLED</p> 
+</td>
+</tr>
+
+<tr>
+<td><a href='#org.pitest.mutationtest.report.html.SourceFile@66227940_44'>44</a></td> 
+<td></td>
+<td>
+
+<a name='grouporg.pitest.mutationtest.report.html.SourceFile@66227940_44'/> 
+
+<p class='KILLED'><span class='pop'>1.<span><b>1</b><br/><b>Location : </b>moveAlienShip<br/><b>Killed by : </b>SpaceInvaders.Controller.Game.AlienShipControllerTests.[engine:spock]/[spec:SpaceInvaders.Controller.Game.AlienShipControllerTests]/[feature:$spock_feature_0_1]</span></span> Replaced integer addition with subtraction &rarr; KILLED</p> <p class='KILLED'><span class='pop'>2.<span><b>2</b><br/><b>Location : </b>moveAlienShip<br/><b>Killed by : </b>SpaceInvaders.Controller.Game.AlienShipControllerTests.[engine:spock]/[spec:SpaceInvaders.Controller.Game.AlienShipControllerTests]/[feature:$spock_feature_0_1]</span></span> removed call to SpaceInvaders/Model/Game/RegularGameElements/AlienShip::setPosition &rarr; KILLED</p> 
+</td>
+</tr>
+
+<tr>
+<td><a href='#org.pitest.mutationtest.report.html.SourceFile@66227940_47'>47</a></td> 
+<td></td>
+<td>
+
+<a name='grouporg.pitest.mutationtest.report.html.SourceFile@66227940_47'/> 
+
+<p class='KILLED'><span class='pop'>1.<span><b>1</b><br/><b>Location : </b>moveAlienShip<br/><b>Killed by : </b>SpaceInvaders.Controller.Game.AlienShipControllerTests.[engine:spock]/[spec:SpaceInvaders.Controller.Game.AlienShipControllerTests]/[feature:$spock_feature_0_2]</span></span> removed call to SpaceInvaders/Model/Game/ArenaModifier::removeAlienShip &rarr; KILLED</p> 
+</td>
+</tr>
+
+<tr>
+<td><a href='#org.pitest.mutationtest.report.html.SourceFile@66227940_48'>48</a></td> 
+<td></td>
+<td>
+
+<a name='grouporg.pitest.mutationtest.report.html.SourceFile@66227940_48'/> 
+
+<p class='KILLED'><span class='pop'>1.<span><b>1</b><br/><b>Location : </b>moveAlienShip<br/><b>Killed by : </b>SpaceInvaders.Controller.Game.AlienShipControllerTests.[engine:spock]/[spec:SpaceInvaders.Controller.Game.AlienShipControllerTests]/[feature:$spock_feature_0_2]</span></span> removed call to SpaceInvaders/Controller/Sound/SoundManager::stopSound &rarr; KILLED</p> 
+</td>
+</tr>
+
+<tr>
+<td><a href='#org.pitest.mutationtest.report.html.SourceFile@66227940_49'>49</a></td> 
+<td></td>
+<td>
+
+<a name='grouporg.pitest.mutationtest.report.html.SourceFile@66227940_49'/> 
+
+<p class='KILLED'><span class='pop'>1.<span><b>1</b><br/><b>Location : </b>moveAlienShip<br/><b>Killed by : </b>SpaceInvaders.Controller.Game.AlienShipControllerTests.[engine:spock]/[spec:SpaceInvaders.Controller.Game.AlienShipControllerTests]/[feature:$spock_feature_0_2]</span></span> removed call to SpaceInvaders/Controller/Sound/SoundManager::stopSound &rarr; KILLED</p> 
+</td>
+</tr>
+
+<tr>
+<td><a href='#org.pitest.mutationtest.report.html.SourceFile@66227940_55'>55</a></td> 
+<td></td>
+<td>
+
+<a name='grouporg.pitest.mutationtest.report.html.SourceFile@66227940_55'/> 
+
+<p class='KILLED'><span class='pop'>1.<span><b>1</b><br/><b>Location : </b>canMoveAlienShip<br/><b>Killed by : </b>SpaceInvaders.Controller.Game.AlienShipControllerTests.[engine:spock]/[spec:SpaceInvaders.Controller.Game.AlienShipControllerTests]/[feature:$spock_feature_0_4]</span></span> changed conditional boundary &rarr; KILLED</p> <p class='KILLED'><span class='pop'>2.<span><b>2</b><br/><b>Location : </b>canMoveAlienShip<br/><b>Killed by : </b>SpaceInvaders.Controller.Game.AlienShipControllerTests.[engine:spock]/[spec:SpaceInvaders.Controller.Game.AlienShipControllerTests]/[feature:$spock_feature_0_6]</span></span> changed conditional boundary &rarr; KILLED</p> <p class='KILLED'><span class='pop'>3.<span><b>3</b><br/><b>Location : </b>canMoveAlienShip<br/><b>Killed by : </b>SpaceInvaders.Controller.Game.AlienShipControllerTests.[engine:spock]/[spec:SpaceInvaders.Controller.Game.AlienShipControllerTests]/[feature:$spock_feature_0_4]</span></span> Replaced integer subtraction with addition &rarr; KILLED</p> <p class='KILLED'><span class='pop'>4.<span><b>4</b><br/><b>Location : </b>canMoveAlienShip<br/><b>Killed by : </b>SpaceInvaders.Controller.Game.AlienShipControllerTests.[engine:spock]/[spec:SpaceInvaders.Controller.Game.AlienShipControllerTests]/[feature:$spock_feature_0_5]</span></span> Replaced integer addition with subtraction &rarr; KILLED</p> <p class='KILLED'><span class='pop'>5.<span><b>5</b><br/><b>Location : </b>canMoveAlienShip<br/><b>Killed by : </b>SpaceInvaders.Controller.Game.AlienShipControllerTests.[engine:spock]/[spec:SpaceInvaders.Controller.Game.AlienShipControllerTests]/[feature:$spock_feature_0_3]</span></span> negated conditional &rarr; KILLED</p> <p class='KILLED'><span class='pop'>6.<span><b>6</b><br/><b>Location : </b>canMoveAlienShip<br/><b>Killed by : </b>SpaceInvaders.Controller.Game.AlienShipControllerTests.[engine:spock]/[spec:SpaceInvaders.Controller.Game.AlienShipControllerTests]/[feature:$spock_feature_0_5]</span></span> negated conditional &rarr; KILLED</p> <p class='KILLED'><span class='pop'>7.<span><b>7</b><br/><b>Location : </b>canMoveAlienShip<br/><b>Killed by : </b>SpaceInvaders.Controller.Game.AlienShipControllerTests.[engine:spock]/[spec:SpaceInvaders.Controller.Game.AlienShipControllerTests]/[feature:$spock_feature_0_5]</span></span> replaced boolean return with true for SpaceInvaders/Controller/Game/AlienShipController::canMoveAlienShip &rarr; KILLED</p> 
+</td>
+</tr>
+
+<tr>
+<td><a href='#org.pitest.mutationtest.report.html.SourceFile@66227940_59'>59</a></td> 
+<td></td>
+<td>
+
+<a name='grouporg.pitest.mutationtest.report.html.SourceFile@66227940_59'/> 
+
+<p class='KILLED'><span class='pop'>1.<span><b>1</b><br/><b>Location : </b>removeAlienShip<br/><b>Killed by : </b>SpaceInvaders.Controller.Game.AlienShipControllerTests.[engine:spock]/[spec:SpaceInvaders.Controller.Game.AlienShipControllerTests]/[feature:$spock_feature_0_8]</span></span> negated conditional &rarr; KILLED</p> 
+</td>
+</tr>
+
+<tr>
+<td><a href='#org.pitest.mutationtest.report.html.SourceFile@66227940_60'>60</a></td> 
+<td></td>
+<td>
+
+<a name='grouporg.pitest.mutationtest.report.html.SourceFile@66227940_60'/> 
+
+<p class='KILLED'><span class='pop'>1.<span><b>1</b><br/><b>Location : </b>removeAlienShip<br/><b>Killed by : </b>SpaceInvaders.Controller.Game.AlienShipControllerTests.[engine:spock]/[spec:SpaceInvaders.Controller.Game.AlienShipControllerTests]/[feature:$spock_feature_0_9]</span></span> negated conditional &rarr; KILLED</p> 
+</td>
+</tr>
+
+<tr>
+<td><a href='#org.pitest.mutationtest.report.html.SourceFile@66227940_61'>61</a></td> 
+<td></td>
+<td>
+
+<a name='grouporg.pitest.mutationtest.report.html.SourceFile@66227940_61'/> 
+
+<p class='KILLED'><span class='pop'>1.<span><b>1</b><br/><b>Location : </b>removeAlienShip<br/><b>Killed by : </b>SpaceInvaders.Controller.Game.AlienShipControllerTests.[engine:spock]/[spec:SpaceInvaders.Controller.Game.AlienShipControllerTests]/[feature:$spock_feature_0_7]</span></span> removed call to SpaceInvaders/Model/Game/ArenaModifier::removeAlienShip &rarr; KILLED</p> 
+</td>
+</tr>
+
+<tr>
+<td><a href='#org.pitest.mutationtest.report.html.SourceFile@66227940_62'>62</a></td> 
+<td></td>
+<td>
+
+<a name='grouporg.pitest.mutationtest.report.html.SourceFile@66227940_62'/> 
+
+<p class='KILLED'><span class='pop'>1.<span><b>1</b><br/><b>Location : </b>removeAlienShip<br/><b>Killed by : </b>SpaceInvaders.Controller.Game.AlienShipControllerTests.[engine:spock]/[spec:SpaceInvaders.Controller.Game.AlienShipControllerTests]/[feature:$spock_feature_0_7]</span></span> removed call to SpaceInvaders/Controller/Sound/SoundManager::playSound &rarr; KILLED</p> 
+</td>
+</tr>
+
+<tr>
+<td><a href='#org.pitest.mutationtest.report.html.SourceFile@66227940_63'>63</a></td> 
+<td></td>
+<td>
+
+<a name='grouporg.pitest.mutationtest.report.html.SourceFile@66227940_63'/> 
+
+<p class='KILLED'><span class='pop'>1.<span><b>1</b><br/><b>Location : </b>removeAlienShip<br/><b>Killed by : </b>SpaceInvaders.Controller.Game.AlienShipControllerTests.[engine:spock]/[spec:SpaceInvaders.Controller.Game.AlienShipControllerTests]/[feature:$spock_feature_0_7]</span></span> removed call to SpaceInvaders/Controller/Sound/SoundManager::stopSound &rarr; KILLED</p> 
+</td>
+</tr>
+
+<tr>
+<td><a href='#org.pitest.mutationtest.report.html.SourceFile@66227940_64'>64</a></td> 
+<td></td>
+<td>
+
+<a name='grouporg.pitest.mutationtest.report.html.SourceFile@66227940_64'/> 
+
+<p class='KILLED'><span class='pop'>1.<span><b>1</b><br/><b>Location : </b>removeAlienShip<br/><b>Killed by : </b>SpaceInvaders.Controller.Game.AlienShipControllerTests.[engine:spock]/[spec:SpaceInvaders.Controller.Game.AlienShipControllerTests]/[feature:$spock_feature_0_7]</span></span> removed call to SpaceInvaders/Controller/Sound/SoundManager::stopSound &rarr; KILLED</p> 
+</td>
+</tr>
+
+<tr>
+<td><a href='#org.pitest.mutationtest.report.html.SourceFile@66227940_70'>70</a></td> 
+<td></td>
+<td>
+
+<a name='grouporg.pitest.mutationtest.report.html.SourceFile@66227940_70'/> 
+
+<p class='KILLED'><span class='pop'>1.<span><b>1</b><br/><b>Location : </b>hitByProjectile<br/><b>Killed by : </b>SpaceInvaders.Controller.Game.AlienShipControllerTests.[engine:spock]/[spec:SpaceInvaders.Controller.Game.AlienShipControllerTests]/[feature:$spock_feature_0_11]</span></span> removed call to SpaceInvaders/Model/Game/RegularGameElements/AlienShip::decreaseHealth &rarr; KILLED</p> 
+</td>
+</tr>
+
+<tr>
+<td><a href='#org.pitest.mutationtest.report.html.SourceFile@66227940_71'>71</a></td> 
+<td></td>
+<td>
+
+<a name='grouporg.pitest.mutationtest.report.html.SourceFile@66227940_71'/> 
+
+<p class='KILLED'><span class='pop'>1.<span><b>1</b><br/><b>Location : </b>hitByProjectile<br/><b>Killed by : </b>SpaceInvaders.Controller.Game.AlienShipControllerTests.[engine:spock]/[spec:SpaceInvaders.Controller.Game.AlienShipControllerTests]/[feature:$spock_feature_0_11]</span></span> negated conditional &rarr; KILLED</p> 
+</td>
+</tr>
+
+<tr>
+<td><a href='#org.pitest.mutationtest.report.html.SourceFile@66227940_72'>72</a></td> 
+<td></td>
+<td>
+
+<a name='grouporg.pitest.mutationtest.report.html.SourceFile@66227940_72'/> 
+
+<p class='KILLED'><span class='pop'>1.<span><b>1</b><br/><b>Location : </b>hitByProjectile<br/><b>Killed by : </b>SpaceInvaders.Controller.Game.AlienShipControllerTests.[engine:spock]/[spec:SpaceInvaders.Controller.Game.AlienShipControllerTests]/[feature:$spock_feature_0_10]</span></span> removed call to SpaceInvaders/Model/Game/Arena::increaseScore &rarr; KILLED</p> 
+</td>
+</tr>
+
+<tr>
+<td><a href='#org.pitest.mutationtest.report.html.SourceFile@66227940_77'>77</a></td> 
+<td></td>
+<td>
+
+<a name='grouporg.pitest.mutationtest.report.html.SourceFile@66227940_77'/> 
+
+<p class='KILLED'><span class='pop'>1.<span><b>1</b><br/><b>Location : </b>step<br/><b>Killed by : </b>SpaceInvaders.Controller.Game.AlienShipControllerTests.[engine:spock]/[spec:SpaceInvaders.Controller.Game.AlienShipControllerTests]/[feature:$spock_feature_0_17]</span></span> changed conditional boundary &rarr; KILLED</p> <p class='KILLED'><span class='pop'>2.<span><b>2</b><br/><b>Location : </b>step<br/><b>Killed by : </b>SpaceInvaders.Controller.Game.AlienShipControllerTests.[engine:spock]/[spec:SpaceInvaders.Controller.Game.AlienShipControllerTests]/[feature:$spock_feature_0_17]</span></span> Replaced long subtraction with addition &rarr; KILLED</p> <p class='KILLED'><span class='pop'>3.<span><b>3</b><br/><b>Location : </b>step<br/><b>Killed by : </b>SpaceInvaders.Controller.Game.AlienShipControllerTests.[engine:spock]/[spec:SpaceInvaders.Controller.Game.AlienShipControllerTests]/[feature:$spock_feature_0_12]</span></span> negated conditional &rarr; KILLED</p> 
+</td>
+</tr>
+
+<tr>
+<td><a href='#org.pitest.mutationtest.report.html.SourceFile@66227940_78'>78</a></td> 
+<td></td>
+<td>
+
+<a name='grouporg.pitest.mutationtest.report.html.SourceFile@66227940_78'/> 
+
+<p class='KILLED'><span class='pop'>1.<span><b>1</b><br/><b>Location : </b>step<br/><b>Killed by : </b>SpaceInvaders.Controller.Game.AlienShipControllerTests.[engine:spock]/[spec:SpaceInvaders.Controller.Game.AlienShipControllerTests]/[feature:$spock_feature_0_12]</span></span> removed call to SpaceInvaders/Controller/Game/AlienShipController::generateAlienShip &rarr; KILLED</p> 
+</td>
+</tr>
+
+<tr>
+<td><a href='#org.pitest.mutationtest.report.html.SourceFile@66227940_81'>81</a></td> 
+<td></td>
+<td>
+
+<a name='grouporg.pitest.mutationtest.report.html.SourceFile@66227940_81'/> 
+
+<p class='KILLED'><span class='pop'>1.<span><b>1</b><br/><b>Location : </b>step<br/><b>Killed by : </b>SpaceInvaders.Controller.Game.AlienShipControllerTests.[engine:spock]/[spec:SpaceInvaders.Controller.Game.AlienShipControllerTests]/[feature:$spock_feature_0_13]</span></span> negated conditional &rarr; KILLED</p> 
+</td>
+</tr>
+
+<tr>
+<td><a href='#org.pitest.mutationtest.report.html.SourceFile@66227940_82'>82</a></td> 
+<td></td>
+<td>
+
+<a name='grouporg.pitest.mutationtest.report.html.SourceFile@66227940_82'/> 
+
+<p class='KILLED'><span class='pop'>1.<span><b>1</b><br/><b>Location : </b>step<br/><b>Killed by : </b>SpaceInvaders.Controller.Game.AlienShipControllerTests.[engine:spock]/[spec:SpaceInvaders.Controller.Game.AlienShipControllerTests]/[feature:$spock_feature_0_16]</span></span> changed conditional boundary &rarr; KILLED</p> <p class='KILLED'><span class='pop'>2.<span><b>2</b><br/><b>Location : </b>step<br/><b>Killed by : </b>SpaceInvaders.Controller.Game.AlienShipControllerTests.[engine:spock]/[spec:SpaceInvaders.Controller.Game.AlienShipControllerTests]/[feature:$spock_feature_0_14]</span></span> Replaced long subtraction with addition &rarr; KILLED</p> <p class='KILLED'><span class='pop'>3.<span><b>3</b><br/><b>Location : </b>step<br/><b>Killed by : </b>SpaceInvaders.Controller.Game.AlienShipControllerTests.[engine:spock]/[spec:SpaceInvaders.Controller.Game.AlienShipControllerTests]/[feature:$spock_feature_0_14]</span></span> negated conditional &rarr; KILLED</p> 
+</td>
+</tr>
+
+<tr>
+<td><a href='#org.pitest.mutationtest.report.html.SourceFile@66227940_83'>83</a></td> 
+<td></td>
+<td>
+
+<a name='grouporg.pitest.mutationtest.report.html.SourceFile@66227940_83'/> 
+
+<p class='KILLED'><span class='pop'>1.<span><b>1</b><br/><b>Location : </b>step<br/><b>Killed by : </b>SpaceInvaders.Controller.Game.AlienShipControllerTests.[engine:spock]/[spec:SpaceInvaders.Controller.Game.AlienShipControllerTests]/[feature:$spock_feature_0_13]</span></span> removed call to SpaceInvaders/Controller/Game/AlienShipController::moveAlienShip &rarr; KILLED</p> 
+</td>
+</tr>
+
+</table>
+
+
+<h2>Active mutators</h2>
+<ul>
+
+<li class='mutator'>CONDITIONALS_BOUNDARY</li>
+
+<li class='mutator'>EMPTY_RETURNS</li>
+
+<li class='mutator'>FALSE_RETURNS</li>
+
+<li class='mutator'>INCREMENTS</li>
+
+<li class='mutator'>INVERT_NEGS</li>
+
+<li class='mutator'>MATH</li>
+
+<li class='mutator'>NEGATE_CONDITIONALS</li>
+
+<li class='mutator'>NULL_RETURNS</li>
+
+<li class='mutator'>PRIMITIVE_RETURNS</li>
+
+<li class='mutator'>TRUE_RETURNS</li>
+
+<li class='mutator'>VOID_METHOD_CALLS</li>
+
+</ul>
+
+<h2>Tests examined</h2>
+<ul>
+<li>SpaceInvaders.Controller.Game.AlienShipControllerTests.[engine:spock]/[spec:SpaceInvaders.Controller.Game.AlienShipControllerTests]/[feature:$spock_feature_0_6] (7 ms)</li><li>SpaceInvaders.Controller.Game.AlienShipControllerTests.[engine:spock]/[spec:SpaceInvaders.Controller.Game.AlienShipControllerTests]/[feature:$spock_feature_0_5] (4 ms)</li><li>SpaceInvaders.Controller.Game.AlienShipControllerTests.[engine:spock]/[spec:SpaceInvaders.Controller.Game.AlienShipControllerTests]/[feature:$spock_feature_0_4] (9 ms)</li><li>SpaceInvaders.Controller.Game.AlienShipControllerTests.[engine:spock]/[spec:SpaceInvaders.Controller.Game.AlienShipControllerTests]/[feature:$spock_feature_0_3] (6 ms)</li><li>SpaceInvaders.Controller.Game.AlienShipControllerTests.[engine:spock]/[spec:SpaceInvaders.Controller.Game.AlienShipControllerTests]/[feature:$spock_feature_0_1] (11 ms)</li><li>SpaceInvaders.Controller.Game.AlienShipControllerTests.[engine:spock]/[spec:SpaceInvaders.Controller.Game.AlienShipControllerTests]/[feature:$spock_feature_0_2] (10 ms)</li><li>SpaceInvaders.Controller.Game.ArenaControllerTests.[engine:spock]/[spec:SpaceInvaders.Controller.Game.ArenaControllerTests]/[feature:$spock_feature_0_20] (7 ms)</li><li>SpaceInvaders.Controller.Game.AlienShipControllerTests.[engine:spock]/[spec:SpaceInvaders.Controller.Game.AlienShipControllerTests]/[feature:$spock_feature_0_0] (14 ms)</li><li>SpaceInvaders.Controller.Game.ArenaControllerTests.[engine:spock]/[spec:SpaceInvaders.Controller.Game.ArenaControllerTests]/[feature:$spock_feature_0_24] (6 ms)</li><li>SpaceInvaders.Controller.Game.ArenaControllerTests.[engine:spock]/[spec:SpaceInvaders.Controller.Game.ArenaControllerTests]/[feature:$spock_feature_0_25] (6 ms)</li><li>SpaceInvaders.Controller.Game.ArenaControllerTests.[engine:spock]/[spec:SpaceInvaders.Controller.Game.ArenaControllerTests]/[feature:$spock_feature_0_26] (6 ms)</li><li>SpaceInvaders.Controller.Game.ArenaControllerTests.[engine:spock]/[spec:SpaceInvaders.Controller.Game.ArenaControllerTests]/[feature:$spock_feature_0_27] (8 ms)</li><li>SpaceInvaders.Controller.Game.ArenaControllerTests.[engine:spock]/[spec:SpaceInvaders.Controller.Game.ArenaControllerTests]/[feature:$spock_feature_0_28] (7 ms)</li><li>SpaceInvaders.Controller.Game.ArenaControllerTests.[engine:spock]/[spec:SpaceInvaders.Controller.Game.ArenaControllerTests]/[feature:$spock_feature_0_29] (8 ms)</li><li>SpaceInvaders.Controller.Game.AlienControllerTests.[engine:spock]/[spec:SpaceInvaders.Controller.Game.AlienControllerTests]/[feature:$spock_feature_0_0] (14 ms)</li><li>SpaceInvaders.Controller.Game.ArenaControllerTests.[engine:spock]/[spec:SpaceInvaders.Controller.Game.ArenaControllerTests]/[feature:$spock_feature_0_30] (9 ms)</li><li>SpaceInvaders.Controller.Game.AlienShipControllerTests.[engine:spock]/[spec:SpaceInvaders.Controller.Game.AlienShipControllerTests]/[feature:$spock_feature_0_11] (6 ms)</li><li>SpaceInvaders.Controller.Game.AlienShipControllerTests.[engine:spock]/[spec:SpaceInvaders.Controller.Game.AlienShipControllerTests]/[feature:$spock_feature_0_10] (7 ms)</li><li>SpaceInvaders.Controller.Game.AlienShipControllerTests.[engine:spock]/[spec:SpaceInvaders.Controller.Game.AlienShipControllerTests]/[feature:$spock_feature_0_15] (9 ms)</li><li>SpaceInvaders.Controller.Game.AlienShipControllerTests.[engine:spock]/[spec:SpaceInvaders.Controller.Game.AlienShipControllerTests]/[feature:$spock_feature_0_14] (9 ms)</li><li>SpaceInvaders.Controller.Game.AlienShipControllerTests.[engine:spock]/[spec:SpaceInvaders.Controller.Game.AlienShipControllerTests]/[feature:$spock_feature_0_13] (20 ms)</li><li>SpaceInvaders.Controller.Game.AlienShipControllerTests.[engine:spock]/[spec:SpaceInvaders.Controller.Game.AlienShipControllerTests]/[feature:$spock_feature_0_12] (14 ms)</li><li>SpaceInvaders.Controller.Game.AlienShipControllerTests.[engine:spock]/[spec:SpaceInvaders.Controller.Game.AlienShipControllerTests]/[feature:$spock_feature_0_19] (7 ms)</li><li>SpaceInvaders.Controller.Game.AlienShipControllerTests.[engine:spock]/[spec:SpaceInvaders.Controller.Game.AlienShipControllerTests]/[feature:$spock_feature_0_18] (5 ms)</li><li>SpaceInvaders.Controller.Game.AlienShipControllerTests.[engine:spock]/[spec:SpaceInvaders.Controller.Game.AlienShipControllerTests]/[feature:$spock_feature_0_17] (16 ms)</li><li>SpaceInvaders.Controller.Game.AlienShipControllerTests.[engine:spock]/[spec:SpaceInvaders.Controller.Game.AlienShipControllerTests]/[feature:$spock_feature_0_16] (11 ms)</li><li>SpaceInvaders.Controller.Game.AlienShipControllerTests.[engine:spock]/[spec:SpaceInvaders.Controller.Game.AlienShipControllerTests]/[feature:$spock_feature_0_9] (5 ms)</li><li>SpaceInvaders.Controller.Game.AlienShipControllerTests.[engine:spock]/[spec:SpaceInvaders.Controller.Game.AlienShipControllerTests]/[feature:$spock_feature_0_8] (8 ms)</li><li>SpaceInvaders.Controller.Game.AlienShipControllerTests.[engine:spock]/[spec:SpaceInvaders.Controller.Game.AlienShipControllerTests]/[feature:$spock_feature_0_7] (12 ms)</li>
+</ul>
+
+<br/>
+
+Report generated by <a href='http://pitest.org'>PIT</a> 1.7.0
+
+</body>
+</html>

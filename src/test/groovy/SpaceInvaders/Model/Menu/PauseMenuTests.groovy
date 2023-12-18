@@ -5,91 +5,109 @@ import spock.lang.Specification
 class PauseMenuTests extends Specification{
     def "Get Option PauseMenu"(){
         given:
-        def m = new PauseMenu()
+            def menu = new PauseMenu()
+
         expect:
-        expected == m.getOption(i)
+            expected == menu.getOption(i)
+
         where:
-        i | expected
-        0 | "Continue"
-        1 | "Instructions"
-        2 | "Restart"
-        3 | "Exit"
+            i | expected
+            0 | "Continue"
+            1 | "Instructions"
+            2 | "Restart"
+            3 | "Exit"
     }
 
     def "isSelectedContinue is True"(){
         given:
-        def menu = Spy(PauseMenu)
+            def menu = Spy(PauseMenu)
+
         when:
-        menu.isSelected(0) >> true
+            menu.isSelected(0) >> true
+
         then:
-        menu.isSelectedContinue() == true
+            menu.isSelectedContinue()
 
     }
 
     def "isSelectedContinue is false"(){
         given:
-        def menu = Spy(PauseMenu)
+            def menu = Spy(PauseMenu)
+
         when:
-        menu.isSelected(0) >> false
+            menu.isSelected(0) >> false
+
         then:
-        menu.isSelectedContinue() == false
+            !menu.isSelectedContinue()
 
     }
 
     def "isSelectedInstructions is true"(){
         given:
-        def menu = Spy(PauseMenu)
+            def menu = Spy(PauseMenu)
+
         when:
-        menu.isSelected(1) >> true
+            menu.isSelected(1) >> true
+
         then:
-        menu.isSelectedInstructions() == true
+            menu.isSelectedInstructions()
 
     }
 
     def "isSelectedInstructions is false"(){
         given:
-        def menu = Spy(PauseMenu)
+            def menu = Spy(PauseMenu)
+
         when:
-        menu.isSelected(1) >> false
+            menu.isSelected(1) >> false
+
         then:
-        menu.isSelectedInstructions() == false
+            !menu.isSelectedInstructions()
 
     }
 
     def "isSelectedRestart is true"(){
         given:
-        def menu = Spy(PauseMenu)
+            def menu = Spy(PauseMenu)
+
         when:
-        menu.isSelected(2) >> true
+            menu.isSelected(2) >> true
+
         then:
-        menu.isSelectedRestart() == true
+            menu.isSelectedRestart()
     }
 
     def "isSelectedRestart is false"(){
         given:
-        def menu = Spy(PauseMenu)
+            def menu = Spy(PauseMenu)
+
         when:
-        menu.isSelected(2) >> false
+            menu.isSelected(2) >> false
+
         then:
-        menu.isSelectedRestart() == false
+            !menu.isSelectedRestart()
     }
 
     def "isSelectedExit is true"(){
         given:
-        def menu = Spy(PauseMenu)
+            def menu = Spy(PauseMenu)
+
         when:
-        menu.isSelected(3) >> true
+            menu.isSelected(3) >> true
+
         then:
-        menu.isSelectedExit() == true
+            menu.isSelectedExit()
     }
 
     def "isSelectedExit is false"(){
         given:
-        def menu = Spy(PauseMenu)
+            def menu = Spy(PauseMenu)
+
         when:
-        menu.isSelected(3) >> false
+            menu.isSelected(3) >> false
+
         then:
-        menu.isSelectedExit() == false
+            !menu.isSelectedExit()
     }
 }
 

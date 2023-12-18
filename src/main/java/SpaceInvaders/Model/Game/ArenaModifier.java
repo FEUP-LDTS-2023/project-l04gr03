@@ -3,7 +3,6 @@ package SpaceInvaders.Model.Game;
 import SpaceInvaders.Model.Game.Collectables.CollectableFactory;
 import SpaceInvaders.Model.Game.Collectables.CollectableType;
 import SpaceInvaders.Model.Game.RegularGameElements.*;
-import SpaceInvaders.Model.Game.RegularGameElements.*;
 import SpaceInvaders.Model.Position;
 
 import java.util.ArrayList;

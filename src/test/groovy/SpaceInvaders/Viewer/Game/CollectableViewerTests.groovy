@@ -23,19 +23,24 @@ class CollectableViewerTests extends Specification{
             def CollectableViewer = new GodModeCollectableViewer()
             def gui = Mock(GUI)
             def collectable = new GodModeCollectable(Mock(Position),Mock(Ship))
+
         when:
             CollectableViewer.draw(gui,collectable)
+
         then:
            1 * gui.drawElement(collectable.getPosition(), '\u00c7', "#FFFF00");
 
     }
+
     def "Health collectable draw"(){
         given:
             def CollectableViewer = new HealthCollectableViewer()
             def gui = Mock(GUI)
             def collectable = new HealthCollectable(Mock(Position),Mock(Ship))
+
         when:
             CollectableViewer.draw(gui, collectable)
+
         then:
             1 *  gui.drawElement(collectable.getPosition(), '\u00c1', "#ff0000")
     }
@@ -45,8 +50,10 @@ class CollectableViewerTests extends Specification{
             def CollectableViewer = new MachineGunCollectableViewer()
             def gui = Mock(GUI)
             def collectable = new MachineGunModeCollectable(Mock(Position), Mock(Ship))
+
         when:
             CollectableViewer.draw(gui, collectable)
+
         then:
             1 * gui.drawElement(collectable.getPosition(), '\u00c9', "#B0E0E6");
 
@@ -57,8 +64,10 @@ class CollectableViewerTests extends Specification{
             def CollectableViewer = new ScoreCollectableViewer()
             def gui = Mock(GUI)
             def collectable = new ScoreCollectable(Mock(Position),Mock(List<Alien>),0)
+
         when:
             CollectableViewer.draw(gui,collectable)
+
         then:
             1 * gui.drawElement(collectable.getPosition(), '\u0024', "#009000");
     }
@@ -68,8 +77,10 @@ class CollectableViewerTests extends Specification{
             def CollectableViewer = new DamageCollectableViewer()
             def gui = Mock(GUI)
             def collectable = new DamageCollectable(Mock(Position),Mock(Ship),0)
+
         when:
             CollectableViewer.draw(gui, collectable)
+
         then:
             1 * gui.drawElement(collectable.getPosition(), '\u00C8', "#FF4500");
     }

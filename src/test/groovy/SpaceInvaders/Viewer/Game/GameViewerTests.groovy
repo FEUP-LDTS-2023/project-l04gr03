@@ -30,6 +30,7 @@ class GameViewerTests extends Specification{
             def gameViewerSpy = Spy(GameViewer)
             def gui = Mock(GUI)
             def arena = Mock(Arena)
+
             gameViewerSpy.getModel() >> arena
             arena.getShip() >> Mock(Ship)
             arena.getWalls() >> Arrays.asList(Mock(Wall))
@@ -49,6 +50,7 @@ class GameViewerTests extends Specification{
         when: "No Char change (boundary limit)"
             gameViewerSpy.draw(gui, 300)
             gameViewerSpy.draw(gui,600)
+
         then:
             2 * gui.drawElement(_, '\u00ca', _)
             10 * gui.drawElement(_,_,_)
@@ -57,6 +59,7 @@ class GameViewerTests extends Specification{
         when: "Char change"
             gameViewerSpy.draw(gui,1000 )
             gameViewerSpy.draw(gui,1001)
+
         then:
             1 * gui.drawElement(_, '\u00cb', _)
             11 * gui.drawElement(_,_,_)
@@ -66,116 +69,121 @@ class GameViewerTests extends Specification{
     def "Draw Elements Health collectable"() {
         given:
 
-        def gameViewerSpy = Spy(GameViewer)
-        def gui = Mock(GUI)
-        def arena = Mock(Arena)
-        gameViewerSpy.getModel() >> arena
-        arena.getShip() >> Mock(Ship)
-        arena.getWalls() >> Arrays.asList(Mock(Wall))
-        arena.getProjectiles() >> Arrays.asList(Mock(Projectile))
-        arena.getCoverWalls() >> Arrays.asList(Mock(CoverWall))
-        arena.getAliens() >> Arrays.asList((Mock(Alien)))
-        arena.getActiveCollectable() >> new HealthCollectable(Mock(Position), Mock(Ship))
-        arena.getAlienShip() >> Mock(AlienShip)
+            def gameViewerSpy = Spy(GameViewer)
+            def gui = Mock(GUI)
+            def arena = Mock(Arena)
+
+            gameViewerSpy.getModel() >> arena
+            arena.getShip() >> Mock(Ship)
+            arena.getWalls() >> Arrays.asList(Mock(Wall))
+            arena.getProjectiles() >> Arrays.asList(Mock(Projectile))
+            arena.getCoverWalls() >> Arrays.asList(Mock(CoverWall))
+            arena.getAliens() >> Arrays.asList((Mock(Alien)))
+            arena.getActiveCollectable() >> new HealthCollectable(Mock(Position), Mock(Ship))
+            arena.getAlienShip() >> Mock(AlienShip)
 
         when:
-        gameViewerSpy.drawElements(gui, 0)
+            gameViewerSpy.drawElements(gui, 0)
 
         then:
-        7 * gui.drawElement(_, _, _)
-        8 * gui.drawText(_, _, _)
+            7 * gui.drawElement(_, _, _)
+            8 * gui.drawText(_, _, _)
     }
 
     def "Draw Elements God Mode collectable"() {
         given:
 
-        def gameViewerSpy = Spy(GameViewer)
-        def gui = Mock(GUI)
-        def arena = Mock(Arena)
-        gameViewerSpy.getModel() >> arena
-        arena.getShip() >> Mock(Ship)
-        arena.getWalls() >> Arrays.asList(Mock(Wall))
-        arena.getProjectiles() >> Arrays.asList(Mock(Projectile))
-        arena.getCoverWalls() >> Arrays.asList(Mock(CoverWall))
-        arena.getAliens() >> Arrays.asList((Mock(Alien)))
-        arena.getActiveCollectable() >> new GodModeCollectable(Mock(Position), Mock(Ship))
-        arena.getAlienShip() >> Mock(AlienShip)
+            def gameViewerSpy = Spy(GameViewer)
+            def gui = Mock(GUI)
+            def arena = Mock(Arena)
+
+            gameViewerSpy.getModel() >> arena
+            arena.getShip() >> Mock(Ship)
+            arena.getWalls() >> Arrays.asList(Mock(Wall))
+            arena.getProjectiles() >> Arrays.asList(Mock(Projectile))
+            arena.getCoverWalls() >> Arrays.asList(Mock(CoverWall))
+            arena.getAliens() >> Arrays.asList((Mock(Alien)))
+            arena.getActiveCollectable() >> new GodModeCollectable(Mock(Position), Mock(Ship))
+            arena.getAlienShip() >> Mock(AlienShip)
 
         when:
-        gameViewerSpy.drawElements(gui, 0)
+            gameViewerSpy.drawElements(gui, 0)
 
         then:
-        7 * gui.drawElement(_, _, _)
-        8 * gui.drawText(_, _, _)
+            7 * gui.drawElement(_, _, _)
+            8 * gui.drawText(_, _, _)
     }
 
     def "Draw Elements MachineGun collectable"() {
         given:
 
-        def gameViewerSpy = Spy(GameViewer)
-        def gui = Mock(GUI)
-        def arena = Mock(Arena)
-        gameViewerSpy.getModel() >> arena
-        arena.getShip() >> Mock(Ship)
-        arena.getWalls() >> Arrays.asList(Mock(Wall))
-        arena.getProjectiles() >> Arrays.asList(Mock(Projectile))
-        arena.getCoverWalls() >> Arrays.asList(Mock(CoverWall))
-        arena.getAliens() >> Arrays.asList((Mock(Alien)))
-        arena.getActiveCollectable() >> new MachineGunModeCollectable(Mock(Position), Mock(Ship))
-        arena.getAlienShip() >> Mock(AlienShip)
+            def gameViewerSpy = Spy(GameViewer)
+            def gui = Mock(GUI)
+            def arena = Mock(Arena)
+
+            gameViewerSpy.getModel() >> arena
+            arena.getShip() >> Mock(Ship)
+            arena.getWalls() >> Arrays.asList(Mock(Wall))
+            arena.getProjectiles() >> Arrays.asList(Mock(Projectile))
+            arena.getCoverWalls() >> Arrays.asList(Mock(CoverWall))
+            arena.getAliens() >> Arrays.asList((Mock(Alien)))
+            arena.getActiveCollectable() >> new MachineGunModeCollectable(Mock(Position), Mock(Ship))
+            arena.getAlienShip() >> Mock(AlienShip)
 
         when:
-        gameViewerSpy.drawElements(gui, 0)
+            gameViewerSpy.drawElements(gui, 0)
 
         then:
-        7 * gui.drawElement(_, _, _)
-        8 * gui.drawText(_, _, _)
+            7 * gui.drawElement(_, _, _)
+            8 * gui.drawText(_, _, _)
     }
 
     def "Draw Elements Score collectable"() {
         given:
 
-        def gameViewerSpy = Spy(GameViewer)
-        def gui = Mock(GUI)
-        def arena = Mock(Arena)
-        gameViewerSpy.getModel() >> arena
-        arena.getShip() >> Mock(Ship)
-        arena.getWalls() >> Arrays.asList(Mock(Wall))
-        arena.getProjectiles() >> Arrays.asList(Mock(Projectile))
-        arena.getCoverWalls() >> Arrays.asList(Mock(CoverWall))
-        arena.getAliens() >> Arrays.asList((Mock(Alien)))
-        arena.getActiveCollectable() >> new ScoreCollectable(Mock(Position), Mock(List<Alien>), 1)
-        arena.getAlienShip() >> Mock(AlienShip)
+            def gameViewerSpy = Spy(GameViewer)
+            def gui = Mock(GUI)
+            def arena = Mock(Arena)
+
+            gameViewerSpy.getModel() >> arena
+            arena.getShip() >> Mock(Ship)
+            arena.getWalls() >> Arrays.asList(Mock(Wall))
+            arena.getProjectiles() >> Arrays.asList(Mock(Projectile))
+            arena.getCoverWalls() >> Arrays.asList(Mock(CoverWall))
+            arena.getAliens() >> Arrays.asList((Mock(Alien)))
+            arena.getActiveCollectable() >> new ScoreCollectable(Mock(Position), Mock(List<Alien>), 1)
+            arena.getAlienShip() >> Mock(AlienShip)
 
         when:
-        gameViewerSpy.drawElements(gui, 0)
+            gameViewerSpy.drawElements(gui, 0)
 
         then:
-        7 * gui.drawElement(_, _, _)
-        8 * gui.drawText(_, _, _)
+            7 * gui.drawElement(_, _, _)
+            8 * gui.drawText(_, _, _)
     }
 
     def "Draw Elements Damage collectable"() {
         given:
 
-        def gameViewerSpy = Spy(GameViewer)
-        def gui = Mock(GUI)
-        def arena = Mock(Arena)
-        gameViewerSpy.getModel() >> arena
-        arena.getShip() >> Mock(Ship)
-        arena.getWalls() >> Arrays.asList(Mock(Wall))
-        arena.getProjectiles() >> Arrays.asList(Mock(Projectile))
-        arena.getCoverWalls() >> Arrays.asList(Mock(CoverWall))
-        arena.getAliens() >> Arrays.asList((Mock(Alien)))
-        arena.getActiveCollectable() >> new DamageCollectable(Mock(Position), Mock(Ship), 1)
-        arena.getAlienShip() >> Mock(AlienShip)
+            def gameViewerSpy = Spy(GameViewer)
+            def gui = Mock(GUI)
+            def arena = Mock(Arena)
+
+            gameViewerSpy.getModel() >> arena
+            arena.getShip() >> Mock(Ship)
+            arena.getWalls() >> Arrays.asList(Mock(Wall))
+            arena.getProjectiles() >> Arrays.asList(Mock(Projectile))
+            arena.getCoverWalls() >> Arrays.asList(Mock(CoverWall))
+            arena.getAliens() >> Arrays.asList((Mock(Alien)))
+            arena.getActiveCollectable() >> new DamageCollectable(Mock(Position), Mock(Ship), 1)
+            arena.getAlienShip() >> Mock(AlienShip)
 
         when:
-        gameViewerSpy.drawElements(gui, 0)
+            gameViewerSpy.drawElements(gui, 0)
 
         then:
-        7 * gui.drawElement(_, _, _)
-        8 * gui.drawText(_, _, _)
+            7 * gui.drawElement(_, _, _)
+            8 * gui.drawText(_, _, _)
     }
     def "Draw Elements test char choice when time equals zero"(){
         given:
@@ -186,6 +194,7 @@ class GameViewerTests extends Specification{
 
         when:
             gameViewer.drawElements(gui, 0)
+
         then:
             gameViewer.getAlienCharChoice() == 0
             gameViewer.getLastCharChange() == 0
@@ -200,6 +209,7 @@ class GameViewerTests extends Specification{
 
         when: 'change char to 1'
             gameViewer.drawElements(gui, 301)
+
         then:
             gameViewer.getAlienCharChoice() == 1
             gameViewer.getLastCharChange() == 301
@@ -220,12 +230,14 @@ class GameViewerTests extends Specification{
 
         when: 'change char to 1'
             gameViewer.drawElements(gui, 301)
+
         then:
             gameViewer.getAlienCharChoice() == 1
             gameViewer.getLastCharChange() == 301
 
         when: 'change char to 2'
             gameViewer.drawElements(gui, 602)
+
         then:
 
             gameViewer.getAlienCharChoice() == 0

@@ -2,3 +2,7 @@ Pedro 3000
 Maria 1000
 Lucas 10000
 lucas 26220
+R 0
+R 0
+R 0
+R 0

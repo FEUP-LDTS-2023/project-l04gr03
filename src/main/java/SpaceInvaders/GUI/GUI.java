@@ -7,13 +7,13 @@ import java.io.IOException;
 
 public interface GUI {
 
-   public void drawElement(Position position, char character, String Color);
-    public void drawText(Position position, String text, String color);
+   void drawElement(Position position, char character, String Color);
+   void drawText(Position position, String text, String color);
 
-    public KeyStroke getNextAction() throws IOException;
-    public void clear();
-    public void refresh() throws IOException;
-    public void close() throws IOException;
+   KeyStroke getNextAction() throws IOException;
+   void clear();
+   void refresh() throws IOException;
+   void close() throws IOException;
 
 
 }
