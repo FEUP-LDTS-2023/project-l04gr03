@@ -7,8 +7,10 @@ class GameTests extends Specification{
     def "getState"(){
         given:
             def game = Mock(Game)
+
         when:
             game.getState()
+
         then:
             1 * game.getState()
     }
@@ -16,8 +18,10 @@ class GameTests extends Specification{
     def "setState"(){
         given:
             def game = Mock(Game)
+
         when:
             game.setState(GameStates.RESUME_GAME)
+
         then:
             1 * game.setState(_)
     }
@@ -25,8 +29,10 @@ class GameTests extends Specification{
     def "setPrevState"(){
         given:
             def game = Mock(Game)
+
         when:
             game.setPrevState()
+
         then:
             1 * game.setPrevState()
     }

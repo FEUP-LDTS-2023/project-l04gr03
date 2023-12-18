@@ -7,18 +7,24 @@ import spock.lang.Specification
 class TestAlienShip extends Specification{
 
     def "GetScore"(){
-        AlienShip alienShip = new AlienShip(Mock(Position),50,500,0)
+        given:
+            def alienShip = new AlienShip(Mock(Position),50,500,0)
+
         when:
-        int score = alienShip.getScore()
+            int score = alienShip.getScore()
+
         then:
-        score == 500
+            score == 500
     }
 
     def "GetMovementDirection"(){
-        AlienShip alienShip = new AlienShip(Mock(Position),50,500,1)
+        given:
+            def alienShip = new AlienShip(Mock(Position),50,500,1)
+
         when:
-        int movementDirection = alienShip.getMovementDirection()
+            int movementDirection = alienShip.getMovementDirection()
+
         then:
-        movementDirection == 1
+            movementDirection == 1
     }
 }

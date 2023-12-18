@@ -11,9 +11,11 @@ class SoundTests extends Specification{
     def "Play"(){
         given:
             def sound = new Sound("src/main/resources/sounds/shoot.wav")
+
         when:
             sound.setSound(clip)
             sound.play()
+
         then:
             1 * clip.setFramePosition(0)
             1 * clip.start()
@@ -22,10 +24,12 @@ class SoundTests extends Specification{
     def "Play and is already playing"(){
         given:
             def sound = new Sound("src/main/resources/sounds/shoot.wav")
+
         when:
             sound.setSound(clip)
             clip.isRunning() >> true
             sound.play()
+
         then:
             1 * clip.setFramePosition(0)
             1 * clip.start()
@@ -35,21 +39,26 @@ class SoundTests extends Specification{
     def "Play Continuously"(){
         given:
             def sound = new Sound("src/main/resources/sounds/shoot.wav")
+
         when:
             sound.setSound(clip)
             sound.playContinuously()
+
         then:
             1 * clip.loop(Clip.LOOP_CONTINUOUSLY)
             1 * clip.setFramePosition(0)
             1 * clip.start()
+
     }
 
     def "Stop" (){
         given:
             def sound = new Sound("src/main/resources/sounds/shoot.wav")
+
         when:
             sound.setSound(clip)
             sound.stop()
+
         then:
             1 * clip.stop()
     }
@@ -58,8 +67,10 @@ class SoundTests extends Specification{
         given:
             def sound = new Sound("src/main/resources/sounds/shoot.wav")
             clip.isRunning() >> true
+
         when:
             sound.setSound(clip)
+
         then:
             sound.isPlaying()
     }
@@ -68,8 +79,10 @@ class SoundTests extends Specification{
         given:
             def sound = new Sound("src/main/resources/sounds/shoot.wav")
             clip.isRunning() >> false
+
         when:
             sound.setSound(clip)
+
         then:
             !sound.isPlaying()
     }
@@ -77,9 +90,11 @@ class SoundTests extends Specification{
     def "resumePlaying"(){
         given:
             def sound = new Sound("src/main/resources/sounds/shoot.wav")
+
         when:
             sound.setSound(clip)
             sound.resumePlaying()
+
         then:
             1 * clip.start()
             1 * clip.loop(_)
@@ -88,8 +103,10 @@ class SoundTests extends Specification{
     def "getSound"(){
         given:
             def sound = new Sound("src/main/resources/sounds/shoot.wav")
+
         when:
             sound.setSound(clip)
+
         then:
             sound.getSound() == clip
     }
@@ -97,8 +114,10 @@ class SoundTests extends Specification{
     def "SetSound"(){
         given:
             def sound = new Sound("src/main/resources/sounds/shoot.wav")
+
         when:
             sound.setSound(clip)
+
         then:
             sound.getSound() == clip
     }
@@ -106,6 +125,7 @@ class SoundTests extends Specification{
     def "Sound not valid"(){
         when:
             def sound = new Sound("src/main/resources/text/Leaderboard.txt")
+
         then:
             thrown RuntimeException
     }

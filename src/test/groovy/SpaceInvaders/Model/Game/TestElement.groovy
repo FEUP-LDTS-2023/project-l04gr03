@@ -10,6 +10,7 @@ class TestElement extends Specification{
         given:
             def element = new Wall(Mock(Position))
             def other = new Leaderboard()
+
         expect:
             !element.equals(other)
     }
@@ -18,6 +19,7 @@ class TestElement extends Specification{
         given:
             def element = new Wall(new Position(1,1))
             def element2 = new Wall(new Position(1,1))
+
         expect:
             element.equals(element2)
     }
@@ -26,6 +28,7 @@ class TestElement extends Specification{
         given:
             def position = new Position(10,1)
             def element = new Wall(position)
+
         expect:
             element.hashCode() == position.hashCode()
     }

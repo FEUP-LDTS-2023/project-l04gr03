@@ -13,6 +13,7 @@ class TestArena extends Specification{
     def "width"(){
         given:
             def arena = new Arena(10,10)
+
         expect:
             arena.getWidth() == 10
     }
@@ -20,6 +21,7 @@ class TestArena extends Specification{
     def "height"(){
         given:
             def arena = new Arena(10,10)
+
         expect:
             arena.getHeight() == 10
     }
@@ -27,6 +29,7 @@ class TestArena extends Specification{
     def "Round"(){
         given:
             def arena = new Arena(10,10)
+
         when:
             arena.setRound(2)
         then:
@@ -36,6 +39,7 @@ class TestArena extends Specification{
     def "Score"(){
         given:
             def arena = new Arena(10,10)
+
         when:
             arena.increaseScore(10)
         then:
@@ -47,11 +51,14 @@ class TestArena extends Specification{
             def arena = new Arena(10,10)
             def wall = Mock(Wall)
             def walls = Arrays.asList(wall)
+
         when:
             arena.setWalls(walls)
+
         then:
             arena.getWalls() == walls
     }
+
     def "get attackingAliens"(){
         given:
             def arena = new Arena(10,10)
@@ -59,8 +66,9 @@ class TestArena extends Specification{
             def alien2 = new Alien(new Position(1,2), 1,1,1, AlienState.ATTACKING,1)
             def alien3 = new Alien(new Position(1,5), 1,1,1, AlienState.ATTACKING,1)
             def aliens = Arrays.asList(alien1,alien2, alien3)
-            arena.setAliens(aliens)
             def attackingAliens = Arrays.asList(alien2, alien3)
+
+            arena.setAliens(aliens)
 
         expect:
             arena.getAttackingAliens() == attackingAliens
@@ -71,7 +79,9 @@ class TestArena extends Specification{
             def arena = new Arena(10,10)
             def alien1 = new Alien(new Position(1,1), 1,1,1, AlienState.PASSIVE,1)
             def aliens = Arrays.asList(alien1)
+
             arena.setAliens(aliens)
+
         expect:
             !arena.freeArenaPosition(new Position(1,1))
     }
@@ -81,10 +91,12 @@ class TestArena extends Specification{
             def arena = new Arena(10,10)
             def alien1 = new Alien(new Position(1,1), 1,1,1, AlienState.PASSIVE,1)
             def aliens = Arrays.asList(alien1)
-            arena.setAliens(aliens)
             def coverWall = new CoverWall(new Position(2,2),1)
             def coverWalls = Arrays.asList(coverWall)
+
+            arena.setAliens(aliens)
             arena.setCoverWalls(coverWalls)
+
         expect:
             !arena.freeArenaPosition(new Position(2,2))
     }
@@ -94,12 +106,14 @@ class TestArena extends Specification{
             def arena = new Arena(10,10)
             def alien1 = new Alien(new Position(1,1), 1,1,1, AlienState.PASSIVE,1)
             def aliens = Arrays.asList(alien1)
-            arena.setAliens(aliens)
             def coverWall = new CoverWall(new Position(2,2),1)
             def coverWalls = Arrays.asList(coverWall)
-            arena.setCoverWalls(coverWalls)
             def alienShip = new AlienShip(new Position(4,4), 10,10,1)
+
             arena.setAlienShip(alienShip)
+            arena.setAliens(aliens)
+            arena.setCoverWalls(coverWalls)
+
         expect:
             !arena.freeArenaPosition(new Position(4,4))
     }
@@ -109,28 +123,32 @@ class TestArena extends Specification{
             def arena = new Arena(10,10)
             def alien1 = new Alien(new Position(1,1), 1,1,1, AlienState.PASSIVE,1)
             def aliens = Arrays.asList(alien1)
-            arena.setAliens(aliens)
             def coverWall = new CoverWall(new Position(2,2),1)
             def coverWalls = Arrays.asList(coverWall)
-            arena.setCoverWalls(coverWalls)
             def alienShip = new AlienShip(new Position(4,4), 10,10,1)
+
             arena.setAlienShip(alienShip)
+            arena.setAliens(aliens)
+            arena.setCoverWalls(coverWalls)
+
         expect:
             arena.freeArenaPosition(new Position(3,4))
     }
 
     def "free arena position alien ship null"(){
         given:
-        def arena = new Arena(10,10)
-        def alien1 = new Alien(new Position(1,1), 1,1,1, AlienState.PASSIVE,1)
-        def aliens = Arrays.asList(alien1)
-        arena.setAliens(aliens)
-        def coverWall = new CoverWall(new Position(2,2),1)
-        def coverWalls = Arrays.asList(coverWall)
-        arena.setCoverWalls(coverWalls)
-        arena.setAlienShip(null)
+            def arena = new Arena(10,10)
+            def alien1 = new Alien(new Position(1,1), 1,1,1, AlienState.PASSIVE,1)
+            def aliens = Arrays.asList(alien1)
+            def coverWall = new CoverWall(new Position(2,2),1)
+            def coverWalls = Arrays.asList(coverWall)
+
+            arena.setCoverWalls(coverWalls)
+            arena.setAlienShip(null)
+            arena.setAliens(aliens)
+
         expect:
-        arena.freeArenaPosition(new Position(3,4))
+            arena.freeArenaPosition(new Position(3,4))
     }
 
     def "Free columns"(){
@@ -138,12 +156,13 @@ class TestArena extends Specification{
             def arena = new Arena(5,5)
             def alien1 = new Alien(new Position(1,1), 1,1,1, AlienState.PASSIVE,1)
             def aliens = Arrays.asList(alien1)
-            arena.setAliens(aliens)
             def coverWall = new CoverWall(new Position(2,2),1)
             def coverWalls = Arrays.asList(coverWall)
-            arena.setCoverWalls(coverWalls)
             def alienShip = new AlienShip(new Position(4,4), 10,10,1)
+
             arena.setAlienShip(alienShip)
+            arena.setAliens(aliens)
+            arena.setCoverWalls(coverWalls)
 
         expect:
             arena.getFreeArenaColumns() == Arrays.asList(0,3)
@@ -155,12 +174,14 @@ class TestArena extends Specification{
         def arenaSpy = Spy(arena)
         def alien1 = new Alien(new Position(1,1), 1,1,1, AlienState.PASSIVE,1)
         def aliens = Arrays.asList(alien1)
-        arenaSpy.setAliens(aliens)
         def coverWall = new CoverWall(new Position(2,2),1)
         def coverWalls = Arrays.asList(coverWall)
-        arenaSpy.setCoverWalls(coverWalls)
         def alienShip = new AlienShip(new Position(4,4), 10,10,1)
+
         arenaSpy.setAlienShip(alienShip)
+        arenaSpy.setAliens(aliens)
+        arenaSpy.setCoverWalls(coverWalls)
+
         when:
             arenaSpy.getFreeArenaColumns()
         then:

@@ -171,7 +171,7 @@ class SoundManagerTests extends Specification {
     def "Should stop laser"(){
         when:
             soundManagerSpy.stopSound(Sound_Options.LASER)
-        
+
         then:
             1 * laserSound.stop()
     }

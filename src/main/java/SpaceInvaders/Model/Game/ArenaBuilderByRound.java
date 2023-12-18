@@ -1,11 +1,9 @@
 package SpaceInvaders.Model.Game;
 
 import SpaceInvaders.Model.Game.RegularGameElements.*;
-import SpaceInvaders.Model.Menu.OnlyTextMenu;
 import SpaceInvaders.Model.Position;
 
 import java.io.*;
-import java.net.URL;
 import java.nio.charset.Charset;
 import java.nio.file.Files;
 import java.nio.file.Path;

@@ -9,7 +9,6 @@ import SpaceInvaders.Model.Game.Element;
 import SpaceInvaders.Model.Game.RegularGameElements.*;
 import SpaceInvaders.Model.Sound.Sound_Options;
 import SpaceInvaders.State.GameStates;
-import SpaceInvaders.State.State;
 import com.googlecode.lanterna.input.KeyStroke;
 import com.googlecode.lanterna.input.KeyType;
 

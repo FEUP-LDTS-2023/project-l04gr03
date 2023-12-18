@@ -1,0 +1,373 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <link rel="stylesheet" type="text/css" href="../style.css">
+</head>
+<body>
+
+
+<h1>Controller.java</h1>
+
+<table class="src">
+
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@2539ab41_1'/>
+1
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@2539ab41_1'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>package SpaceInvaders.Controller;</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@2539ab41_2'/>
+2
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@2539ab41_2'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''></span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@2539ab41_3'/>
+3
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@2539ab41_3'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>import SpaceInvaders.Game;</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@2539ab41_4'/>
+4
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@2539ab41_4'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>import com.googlecode.lanterna.input.KeyStroke;</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@2539ab41_5'/>
+5
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@2539ab41_5'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''></span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@2539ab41_6'/>
+6
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@2539ab41_6'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>import java.io.IOException;</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@2539ab41_7'/>
+7
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@2539ab41_7'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''></span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@2539ab41_8'/>
+8
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@2539ab41_8'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>public abstract class Controller&#60;T&#62; {</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@2539ab41_9'/>
+9
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@2539ab41_9'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>    private final T model;</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@2539ab41_10'/>
+10
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@2539ab41_10'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''></span></pre></td></tr>
+
+
+<tr>
+<td class='covered'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@2539ab41_11'/>
+11
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@2539ab41_11'></a>
+<span>
+</span>
+</span>
+</td>
+<td class='covered'><pre><span  class=''>    public Controller(T model) {</span></pre></td></tr>
+
+
+<tr>
+<td class='covered'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@2539ab41_12'/>
+12
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@2539ab41_12'></a>
+<span>
+</span>
+</span>
+</td>
+<td class='covered'><pre><span  class=''>        this.model = model;</span></pre></td></tr>
+
+
+<tr>
+<td class='covered'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@2539ab41_13'/>
+13
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@2539ab41_13'></a>
+<span>
+</span>
+</span>
+</td>
+<td class='covered'><pre><span  class=''>    }</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@2539ab41_14'/>
+14
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@2539ab41_14'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''></span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@2539ab41_15'/>
+15
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@2539ab41_15'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>    public T getModel() {</span></pre></td></tr>
+
+
+<tr>
+<td class='covered'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@2539ab41_16'/>
+16
+</td>
+<td class='killed'>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@2539ab41_16'>1</a>
+<span>
+
+1. getModel : replaced return value with null for SpaceInvaders/Controller/Controller::getModel &rarr; KILLED<br/>
+
+</span>
+</span>
+</td>
+<td class='covered'><pre><span  class='killed'>        return model;</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@2539ab41_17'/>
+17
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@2539ab41_17'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>    }</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@2539ab41_18'/>
+18
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@2539ab41_18'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''></span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@2539ab41_19'/>
+19
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@2539ab41_19'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>    public abstract void step(Game game, KeyStroke key, long time) throws IOException;</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@2539ab41_20'/>
+20
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@2539ab41_20'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>}</span></pre></td></tr>
+
+
+
+<tr><td></td><td></td><td><h2>Mutations</h2></td></tr>
+
+
+<tr>
+<td><a href='#org.pitest.mutationtest.report.html.SourceFile@2539ab41_16'>16</a></td> 
+<td></td>
+<td>
+
+<a name='grouporg.pitest.mutationtest.report.html.SourceFile@2539ab41_16'/> 
+
+<p class='KILLED'><span class='pop'>1.<span><b>1</b><br/><b>Location : </b>getModel<br/><b>Killed by : </b>SpaceInvaders.Controller.Menu.PauseMenuControllerTests.[engine:spock]/[spec:SpaceInvaders.Controller.Menu.PauseMenuControllerTests]/[feature:$spock_feature_0_1]</span></span> replaced return value with null for SpaceInvaders/Controller/Controller::getModel &rarr; KILLED</p> 
+</td>
+</tr>
+
+</table>
+
+
+<h2>Active mutators</h2>
+<ul>
+
+<li class='mutator'>CONDITIONALS_BOUNDARY</li>
+
+<li class='mutator'>EMPTY_RETURNS</li>
+
+<li class='mutator'>FALSE_RETURNS</li>
+
+<li class='mutator'>INCREMENTS</li>
+
+<li class='mutator'>INVERT_NEGS</li>
+
+<li class='mutator'>MATH</li>
+
+<li class='mutator'>NEGATE_CONDITIONALS</li>
+
+<li class='mutator'>NULL_RETURNS</li>
+
+<li class='mutator'>PRIMITIVE_RETURNS</li>
+
+<li class='mutator'>TRUE_RETURNS</li>
+
+<li class='mutator'>VOID_METHOD_CALLS</li>
+
+</ul>
+
+<h2>Tests examined</h2>
+<ul>
+<li>SpaceInvaders.Controller.Game.ArenaControllerTests.[engine:spock]/[spec:SpaceInvaders.Controller.Game.ArenaControllerTests]/[feature:$spock_feature_0_21] (21 ms)</li><li>SpaceInvaders.Controller.Game.ArenaControllerTests.[engine:spock]/[spec:SpaceInvaders.Controller.Game.ArenaControllerTests]/[feature:$spock_feature_0_24] (6 ms)</li><li>SpaceInvaders.Controller.Game.ArenaControllerTests.[engine:spock]/[spec:SpaceInvaders.Controller.Game.ArenaControllerTests]/[feature:$spock_feature_0_25] (6 ms)</li><li>SpaceInvaders.Controller.Game.AlienControllerTests.[engine:spock]/[spec:SpaceInvaders.Controller.Game.AlienControllerTests]/[feature:$spock_feature_0_20] (24 ms)</li><li>SpaceInvaders.Controller.Game.ArenaControllerTests.[engine:spock]/[spec:SpaceInvaders.Controller.Game.ArenaControllerTests]/[feature:$spock_feature_0_26] (6 ms)</li><li>SpaceInvaders.Controller.Game.ArenaControllerTests.[engine:spock]/[spec:SpaceInvaders.Controller.Game.ArenaControllerTests]/[feature:$spock_feature_0_27] (8 ms)</li><li>SpaceInvaders.Controller.Game.ArenaControllerTests.[engine:spock]/[spec:SpaceInvaders.Controller.Game.ArenaControllerTests]/[feature:$spock_feature_0_28] (7 ms)</li><li>SpaceInvaders.Controller.Game.ArenaControllerTests.[engine:spock]/[spec:SpaceInvaders.Controller.Game.ArenaControllerTests]/[feature:$spock_feature_0_29] (8 ms)</li><li>SpaceInvaders.Controller.Game.AlienControllerTests.[engine:spock]/[spec:SpaceInvaders.Controller.Game.AlienControllerTests]/[feature:$spock_feature_0_0] (14 ms)</li><li>SpaceInvaders.Controller.Menu.GameOverMenuControllerTests.[engine:spock]/[spec:SpaceInvaders.Controller.Menu.GameOverMenuControllerTests]/[feature:$spock_feature_0_1] (16 ms)</li><li>SpaceInvaders.Controller.Menu.GameOverMenuControllerTests.[engine:spock]/[spec:SpaceInvaders.Controller.Menu.GameOverMenuControllerTests]/[feature:$spock_feature_0_0] (11 ms)</li><li>SpaceInvaders.Controller.Game.CollectableControllerTests.[engine:spock]/[spec:SpaceInvaders.Controller.Game.CollectableControllerTests]/[feature:$spock_feature_0_9] (14 ms)</li><li>SpaceInvaders.Controller.Game.CollectableControllerTests.[engine:spock]/[spec:SpaceInvaders.Controller.Game.CollectableControllerTests]/[feature:$spock_feature_0_6] (18 ms)</li><li>SpaceInvaders.Controller.Game.CollectableControllerTests.[engine:spock]/[spec:SpaceInvaders.Controller.Game.CollectableControllerTests]/[feature:$spock_feature_0_7] (24 ms)</li><li>SpaceInvaders.Controller.Game.CollectableControllerTests.[engine:spock]/[spec:SpaceInvaders.Controller.Game.CollectableControllerTests]/[feature:$spock_feature_0_12] (17 ms)</li><li>SpaceInvaders.Controller.Game.CollectableControllerTests.[engine:spock]/[spec:SpaceInvaders.Controller.Game.CollectableControllerTests]/[feature:$spock_feature_0_11] (19 ms)</li><li>SpaceInvaders.Controller.Menu.PauseMenuControllerTests.[engine:spock]/[spec:SpaceInvaders.Controller.Menu.PauseMenuControllerTests]/[feature:$spock_feature_0_1] (8 ms)</li><li>SpaceInvaders.Controller.Menu.PauseMenuControllerTests.[engine:spock]/[spec:SpaceInvaders.Controller.Menu.PauseMenuControllerTests]/[feature:$spock_feature_0_0] (12 ms)</li><li>SpaceInvaders.Controller.Game.ShipControllerTests.[engine:spock]/[spec:SpaceInvaders.Controller.Game.ShipControllerTests]/[feature:$spock_feature_0_22] (24 ms)</li><li>SpaceInvaders.Controller.Game.CollectableControllerTests.[engine:spock]/[spec:SpaceInvaders.Controller.Game.CollectableControllerTests]/[feature:$spock_feature_0_10] (25 ms)</li><li>SpaceInvaders.Controller.Game.AlienControllerTests.[engine:spock]/[spec:SpaceInvaders.Controller.Game.AlienControllerTests]/[feature:$spock_feature_0_19] (24 ms)</li><li>SpaceInvaders.Controller.Game.AlienControllerTests.[engine:spock]/[spec:SpaceInvaders.Controller.Game.AlienControllerTests]/[feature:$spock_feature_0_18] (29 ms)</li><li>SpaceInvaders.Controller.Game.ShipControllerTests.[engine:spock]/[spec:SpaceInvaders.Controller.Game.ShipControllerTests]/[feature:$spock_feature_0_20] (18 ms)</li><li>SpaceInvaders.Controller.Game.CollectableControllerTests.[engine:spock]/[spec:SpaceInvaders.Controller.Game.CollectableControllerTests]/[feature:$spock_feature_0_4] (30 ms)</li><li>SpaceInvaders.Controller.Game.ArenaControllerTests.[engine:spock]/[spec:SpaceInvaders.Controller.Game.ArenaControllerTests]/[feature:$spock_feature_0_30] (9 ms)</li><li>SpaceInvaders.Controller.Game.ShipControllerTests.[engine:spock]/[spec:SpaceInvaders.Controller.Game.ShipControllerTests]/[feature:$spock_feature_0_21] (17 ms)</li><li>SpaceInvaders.Controller.Game.CollectableControllerTests.[engine:spock]/[spec:SpaceInvaders.Controller.Game.CollectableControllerTests]/[feature:$spock_feature_0_5] (31 ms)</li><li>SpaceInvaders.Controller.Game.AlienShipControllerTests.[engine:spock]/[spec:SpaceInvaders.Controller.Game.AlienShipControllerTests]/[feature:$spock_feature_0_15] (9 ms)</li><li>SpaceInvaders.Controller.Game.AlienShipControllerTests.[engine:spock]/[spec:SpaceInvaders.Controller.Game.AlienShipControllerTests]/[feature:$spock_feature_0_14] (9 ms)</li><li>SpaceInvaders.Controller.Game.AlienShipControllerTests.[engine:spock]/[spec:SpaceInvaders.Controller.Game.AlienShipControllerTests]/[feature:$spock_feature_0_13] (20 ms)</li><li>SpaceInvaders.Controller.Game.ShipControllerTests.[engine:spock]/[spec:SpaceInvaders.Controller.Game.ShipControllerTests]/[feature:$spock_feature_0_19] (11 ms)</li><li>SpaceInvaders.Controller.Game.AlienShipControllerTests.[engine:spock]/[spec:SpaceInvaders.Controller.Game.AlienShipControllerTests]/[feature:$spock_feature_0_17] (16 ms)</li><li>SpaceInvaders.Controller.Game.AlienShipControllerTests.[engine:spock]/[spec:SpaceInvaders.Controller.Game.AlienShipControllerTests]/[feature:$spock_feature_0_16] (11 ms)</li><li>SpaceInvaders.Controller.Menu.StartMenuControllerTests.[engine:spock]/[spec:SpaceInvaders.Controller.Menu.StartMenuControllerTests]/[feature:$spock_feature_0_1] (11 ms)</li><li>SpaceInvaders.Controller.Game.ShipControllerTests.[engine:spock]/[spec:SpaceInvaders.Controller.Game.ShipControllerTests]/[feature:$spock_feature_0_17] (13 ms)</li><li>SpaceInvaders.Controller.Menu.StartMenuControllerTests.[engine:spock]/[spec:SpaceInvaders.Controller.Menu.StartMenuControllerTests]/[feature:$spock_feature_0_0] (15 ms)</li><li>SpaceInvaders.Controller.Game.ShipControllerTests.[engine:spock]/[spec:SpaceInvaders.Controller.Game.ShipControllerTests]/[feature:$spock_feature_0_18] (14 ms)</li><li>SpaceInvaders.Controller.Game.ShipControllerTests.[engine:spock]/[spec:SpaceInvaders.Controller.Game.ShipControllerTests]/[feature:$spock_feature_0_15] (11 ms)</li><li>SpaceInvaders.Controller.Game.ShipControllerTests.[engine:spock]/[spec:SpaceInvaders.Controller.Game.ShipControllerTests]/[feature:$spock_feature_0_16] (14 ms)</li>
+</ul>
+
+<br/>
+
+Report generated by <a href='http://pitest.org'>PIT</a> 1.7.0
+
+</body>
+</html>

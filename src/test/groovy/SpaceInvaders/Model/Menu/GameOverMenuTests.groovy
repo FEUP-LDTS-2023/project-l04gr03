@@ -6,119 +6,139 @@ class GameOverMenuTests extends Specification{
 
     def "Add char username GameOver"(){
         given:
-        def m = new GameOverMenu(0)
-        Character c = 'A'
+            def menu = new GameOverMenu(0)
+            Character c = 'A'
+
         when:
-        m.addLetter(c)
+            menu.addLetter(c)
+
         then:
-        m.username == "A"
+            menu.username == "A"
 
         when: 'username length == 6'
-        Character c1 = 'a', c2 = 'b', c3 = 'c', c4 = 'd', c5 = 'e', c6 = 'l'
-        m.addLetter(c1);
-        m.addLetter(c2)
-        m.addLetter(c3)
-        m.addLetter(c4)
-        m.addLetter(c5)
-        m.addLetter(c6)
+            Character c1 = 'a', c2 = 'b', c3 = 'c', c4 = 'd', c5 = 'e', c6 = 'l'
+            menu.addLetter(c1);
+            menu.addLetter(c2)
+            menu.addLetter(c3)
+            menu.addLetter(c4)
+            menu.addLetter(c5)
+            menu.addLetter(c6)
+
         then:
-        m.username.length() == 6
-        m.username == "Aabcde"
+            menu.username.length() == 6
+            menu.username == "Aabcde"
     }
 
     def "Add char username GameOver when username isn´t empty"(){
         given:
-        def m = new GameOverMenu(0)
-        Character c = 'C'
-        StringBuilder s = new StringBuilder()
-        s.append("AB")
-        m.setUsername(s)
+            def menu = new GameOverMenu(0)
+            Character c = 'C'
+            def stringBuilder = new StringBuilder()
+            stringBuilder.append("AB")
+            menu.setUsername(stringBuilder)
+
         when:
-        m.addLetter(c)
+            menu.addLetter(c)
+
         then:
-        m.username == "ABC"
+            menu.username == "ABC"
     }
 
     def "Remove char username GameOver"(){
         given:
-        def m = new GameOverMenu(0)
-        StringBuilder s = new StringBuilder()
-        s.append("ABC")
-        m.setUsername(s)
+            def menu = new GameOverMenu(0)
+            def stringBuilder = new StringBuilder()
+            stringBuilder.append("ABC")
+            menu.setUsername(stringBuilder)
+
         when:
-        m.removeLetter()
+            menu.removeLetter()
+
         then:
-        m.username == "AB"
+            menu.username == "AB"
     }
 
     def "remove Char username GameOver when username is empty" (){
         given:
-        def m = new GameOverMenu(0)
+            def menu = new GameOverMenu(0)
+
         when:
-        m.removeLetter()
+            menu.removeLetter()
+
         then:
-        m.username == ""
+            menu.username == ""
     }
 
     def "isSelectedRestart is True"(){
         given:
-        def menu = new GameOverMenu(0)
+            def menu = new GameOverMenu(0)
+
         expect:
-            menu.isSelectedRestart() == true
+            menu.isSelectedRestart()
 
     }
 
     def "isSelectedRestart is false"(){
         given:
             def menu = new GameOverMenu(0)
+
         when:
             menu.nextOption()
+
         then:
-            menu.isSelectedRestart() == false
+            !menu.isSelectedRestart()
 
     }
 
     def "isSelectedLeaderboard is true"(){
         given:
             def menu = new GameOverMenu(0)
+
         when:
             menu.nextOption()
+
         then:
-            menu.isSelectedLeaderboard() == true
+            menu.isSelectedLeaderboard()
 
     }
 
     def "isSelectedLeaderboard is false"(){
         given:
             def menu = new GameOverMenu(0)
+
         when:
             menu.nextOption()
             menu.nextOption()
+
         then:
-            menu.isSelectedLeaderboard() == false
+            !menu.isSelectedLeaderboard()
 
     }
 
     def "isSelectedExit is true"(){
         given:
             def menu = new GameOverMenu(0)
+
         when:
             menu.nextOption()
             menu.nextOption()
+
         then:
-            menu.isSelectedExit() == true
+            menu.isSelectedExit()
     }
 
     def "isSelectedExit is false"(){
         given:
             def menu = new GameOverMenu(0)
+
         expect:
-            menu.isSelectedExit() == false
+            !menu.isSelectedExit()
     }
 
     def"Get Score"() {
         given:
             def menu = new GameOverMenu(10)
+
         expect:
             menu.getScore() == 10
     }

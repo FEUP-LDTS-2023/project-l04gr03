@@ -2,7 +2,6 @@ package SpaceInvaders.Model.Game;
 
 import SpaceInvaders.Model.Game.Collectables.Collectable;
 import SpaceInvaders.Model.Game.RegularGameElements.*;
-import SpaceInvaders.Model.Game.RegularGameElements.*;
 import SpaceInvaders.Model.Position;
 
 

@@ -23,8 +23,10 @@ class RegularElementsTests extends Specification{
             def viewer = new AlienViewer(0);
             def gui = Mock(GUI)
             def alien = Mock(Alien)
+
         when:
             viewer.draw(gui,alien)
+
         then:
             1 * gui.drawElement(_,_,_)
     }
@@ -35,13 +37,17 @@ class RegularElementsTests extends Specification{
             def gui = Mock(GUI)
             def alien = Mock(Alien)
             alien.getType() >> 0;
-        when:
+
+        when: 'Choice 0'
             viewer.draw(gui,alien)
+
         then:
             1 * gui.drawElement(_,'\u00ca',"#DB55DD")
-        when:
+
+        when: 'Choice 1'
             viewer = new AlienViewer(1)
             viewer.draw(gui,alien)
+
         then:
             1 * gui.drawElement(_, '\u00cb', "#DB55DD")
     }
@@ -52,6 +58,7 @@ class RegularElementsTests extends Specification{
             def viewer = new CoverWallViewer()
             def gui = Mock(GUI)
             def coverWall = Mock(CoverWall)
+
         when:
             viewer.draw(gui,coverWall)
         then:
@@ -63,10 +70,13 @@ class RegularElementsTests extends Specification{
             def viewer = new CoverWallViewer()
             def gui = Mock(GUI)
             def coverWall = new CoverWall(Mock(Position), health)
+
         when:
             viewer.draw(gui, coverWall)
+
         then:
             1 * gui.drawElement(_,Char,_)
+
         where:
             Char | health
         '\u00d2' | 100
@@ -85,8 +95,10 @@ class RegularElementsTests extends Specification{
             def viewer = new ProjectileViewer()
             def gui = Mock(GUI)
             def projectile = Mock(Projectile)
+
         when:
             viewer.draw(gui,projectile)
+
         then:
             1 * gui.drawElement(_,_,_)
     }
@@ -96,8 +108,10 @@ class RegularElementsTests extends Specification{
             def viewer = new ShipViewer()
             def gui = Mock(GUI)
             def ship = Mock(Ship)
+
         when:
             viewer.draw(gui,ship)
+
         then:
             1 * gui.drawElement(_,_,_)
     }
@@ -107,8 +121,10 @@ class RegularElementsTests extends Specification{
             def viewer = new WallViewer()
             def gui = Mock(GUI)
             def wall = Mock(Wall)
+
         when:
             viewer.draw(gui,wall)
+
         then:
             1 * gui.drawElement(_,_,_)
     }
@@ -118,8 +134,10 @@ class RegularElementsTests extends Specification{
             def viewer = new AlienShipViewer();
             def gui = Mock(GUI)
             def alienShip = Mock(AlienShip)
+
         when:
             viewer.draw(gui,alienShip)
+
         then:
             1 * gui.drawElement(_,_,_)
     }

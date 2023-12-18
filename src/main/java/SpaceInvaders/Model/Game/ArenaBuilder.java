@@ -1,7 +1,6 @@
 package SpaceInvaders.Model.Game;
 
 import SpaceInvaders.Model.Game.RegularGameElements.*;
-import SpaceInvaders.Model.Game.RegularGameElements.*;
 
 import java.util.ArrayList;
 import java.util.List;

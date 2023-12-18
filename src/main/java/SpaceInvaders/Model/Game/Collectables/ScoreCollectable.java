@@ -2,8 +2,6 @@ package SpaceInvaders.Model.Game.Collectables;
 
 import SpaceInvaders.Model.Game.RegularGameElements.Alien;
 import SpaceInvaders.Model.Game.RegularGameElements.AlienMode;
-import SpaceInvaders.Model.Game.RegularGameElements.AttackingElement;
-import SpaceInvaders.Model.Game.RegularGameElements.ShipMode;
 import SpaceInvaders.Model.Position;
 
 

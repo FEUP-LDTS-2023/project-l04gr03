@@ -26,6 +26,7 @@ class GUITests extends Specification{
     def "Draw element"(){
         when:
             gui.drawElement(new Position(1,1), 'a' as char, "#001000")
+
         then:
             1 * tg.putString(1,2,'a')
             1 * tg.setForegroundColor(_)
@@ -36,6 +37,7 @@ class GUITests extends Specification{
     def "Draw text"(){
         when:
             gui.drawText(new Position(1,1), "lefjop", "#010101")
+
         then:
             1 * tg.putString(1,1,"lefjop")
             1 * tg.setForegroundColor(_)
@@ -45,6 +47,7 @@ class GUITests extends Specification{
         given:
             def key = new KeyStroke(KeyType.Enter)
             screen.pollInput() >> key
+
         expect:
             gui.getNextAction() == key
     }
@@ -52,6 +55,7 @@ class GUITests extends Specification{
     def "Refresh"(){
         when:
             gui.refresh()
+
         then:
             1 * screen.refresh()
     }
@@ -59,6 +63,7 @@ class GUITests extends Specification{
     def "Close"(){
         when:
             gui.close()
+
         then:
             1 * screen.close()
     }
@@ -66,6 +71,7 @@ class GUITests extends Specification{
     def "clear"(){
         when:
             gui.clear()
+
         then:
             1 * screen.clear()
     }

@@ -5,24 +5,27 @@ import SpaceInvaders.Model.Game.RegularGameElements.ShipMode
 import SpaceInvaders.Model.Position
 import spock.lang.Specification;
 
-public class TestShip extends Specification {
+class TestShip extends Specification {
 
     def "GetShipDamagePerShot"(){
         given:
-        Ship ship = new Ship(Mock(Position),100,20)
+            def ship = new Ship(Mock(Position),100,20)
+
         when:
-        ship.setShipMode(shipMode)
+            ship.setShipMode(shipMode)
+
         then:
-        ship.getDamagePerShot() == expectedDamage
+            ship.getDamagePerShot() == expectedDamage
+
         where:
-        shipMode                 || expectedDamage
-        ShipMode.NORMAL_MODE     || 20
-        ShipMode.DAMAGE_2X       || 40
-        ShipMode.DAMAGE_3X       || 60
-        ShipMode.DAMAGE_4X       || 80
-        ShipMode.DAMAGE_5X       || 100
-        ShipMode.DAMAGE_10X      || 200
-        ShipMode.GOD_MODE        || 20
+            shipMode                 || expectedDamage
+            ShipMode.NORMAL_MODE     || 20
+            ShipMode.DAMAGE_2X       || 40
+            ShipMode.DAMAGE_3X       || 60
+            ShipMode.DAMAGE_4X       || 80
+            ShipMode.DAMAGE_5X       || 100
+            ShipMode.DAMAGE_10X      || 200
+            ShipMode.GOD_MODE        || 20
     }
 
     def "RestoreHealth"(){

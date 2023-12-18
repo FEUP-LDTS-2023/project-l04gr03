@@ -16,15 +16,18 @@ class ViewerTests extends Specification{
         given:
             def viewer = Spy(GameViewer.class)
             def arena = Mock(Arena)
+            def gui = Mock(GUI)
+
             viewer.getModel() >> arena
             arena.getAliens() >> Arrays.asList(Mock(Alien))
             arena.getCoverWalls() >> Arrays.asList(Mock(CoverWall))
             arena.getProjectiles() >> Arrays.asList(Mock(Projectile))
             arena.getWalls() >> Arrays.asList(Mock(Wall))
             arena.getShip() >> new Ship(Mock(Position), 10,10)
-            def gui = Mock(GUI)
+
         when:
             viewer.draw(gui, 0)
+
         then:
             1 * gui.clear()
             1 * gui.refresh()

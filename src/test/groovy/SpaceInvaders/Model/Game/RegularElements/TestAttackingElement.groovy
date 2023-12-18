@@ -10,6 +10,7 @@ class TestAttackingElement extends Specification{
         given:
             def element = new AttackingElement(Mock(Position), 0, 0)
             def other = new AlienShip(Mock(Position),0,0,0)
+
         expect:
             !element.equals(other)
     }
@@ -18,6 +19,7 @@ class TestAttackingElement extends Specification{
         given:
             def element = new AttackingElement(new Position(1,1), 0, 0)
             def element2 = new AttackingElement(new Position(1,1), 0, 0)
+
         expect:
             element.equals(element2)
     }
@@ -25,6 +27,7 @@ class TestAttackingElement extends Specification{
     def"Hash code"(){
         given:
             def element = new AttackingElement(Mock(Position), 10, 20)
+
         expect:
             element.hashCode() == ((31 + 20) * 31 + 10) * 31 + element.getPosition().hashCode()
     }

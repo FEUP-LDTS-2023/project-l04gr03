@@ -337,9 +337,18 @@ To fix that we added -1 to the method's limit parameter. This change can be foun
 
 ### TESTING
 
-- **Coverage Testing** (Intermediate delivery):
+- **Mutation Testing**:
 
-![Test](Testing/Test_coverage.png)
+**Image:**
+
+
+![Test](Testing/Pitest.png)
+
+
+**Link to the file:**
+
+[MutationCoverage](../docs/Pitest_Report)
+
 
 ### SELF-EVALUATION
 

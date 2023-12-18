@@ -11,11 +11,13 @@ class TestProjectile extends Specification {
 
     def "GetElement"(){
         given:
-        AttackingElement element = Mock(AttackingElement)
-        Projectile projectile = new Projectile(Mock(Position),element)
+            def element = Mock(AttackingElement)
+            def projectile = new Projectile(Mock(Position),element)
+
         when:
-        AttackingElement attackingElement = projectile.getElement()
+            def attackingElement = projectile.getElement()
+
         then:
-        attackingElement == element
+            attackingElement == element
     }
 }

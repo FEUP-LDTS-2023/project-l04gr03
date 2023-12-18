@@ -16,34 +16,43 @@ class TestArenaModifier extends Specification{
 
     def "RemoveAlien"(){
         given:
-            Arena arena = new Arena(75,30)
-            List<Alien> aliens = new ArrayList<>();
+            def arena = new Arena(75,30)
+            def arenaModifier = new ArenaModifier(arena)
+
+            List<Alien> aliens = new ArrayList<>()
             aliens.add(new Alien(new Position(13,11),30,20,20,AlienState.PASSIVE,0))
             aliens.add(new Alien(new Position(13,13),30,20,20,AlienState.PASSIVE,1))
             aliens.add(new Alien(new Position(13,15),30,20,20,AlienState.ATTACKING,2))
             aliens.add(new Alien(new Position(16,11),30,20,20,AlienState.ATTACKING,0))
             arena.setAliens(aliens);
-            ArenaModifier arenaModifier = new ArenaModifier(arena)
+
         when: "removed 1 alien"
             arenaModifier.removeAlien(aliens.get(3))
+
         then:
             arena.getAliens().size() == 3
             arena.getAliens().get(2).getAlienState() == AlienState.ATTACKING
             arena.getAliens().get(1).getAlienState() == AlienState.PASSIVE
             arena.getAliens().get(0).getAlienState() == AlienState.PASSIVE
+
         when: "removed 2 aliens"
             arenaModifier.removeAlien(aliens.get(2))
+
         then:
             arena.getAliens().size() == 2
             arena.getAliens().get(1).getAlienState() == AlienState.ATTACKING
             arena.getAliens().get(0).getAlienState() == AlienState.PASSIVE
+
         when: "Removed 3 aliens"
             arenaModifier.removeAlien(aliens.get(1))
+
         then:
             arena.getAliens().size() == 1
             arena.getAliens().get(0).getAlienState() == AlienState.ATTACKING
+
         when: "Removed 4 aliens"
             arenaModifier.removeAlien(aliens.get(0))
+
         then:
             arena.getAliens().empty
     }
@@ -51,17 +60,21 @@ class TestArenaModifier extends Specification{
 
     def "RemoveAlien - alien not in alien list"(){
         given:
-            Arena arena = new Arena(75,30)
-            List<Alien> aliens = new ArrayList<>();
+            def arena = new Arena(75,30)
+            def alien = new Alien(Mock(Position), 10,10,10, AlienState.PASSIVE,1)
+            def arenaModifier = new ArenaModifier(arena)
+
+            List<Alien> aliens = new ArrayList<>()
             aliens.add(new Alien(new Position(13,11),30,20,20,AlienState.PASSIVE,0))
             aliens.add(new Alien(new Position(13,13),30,20,20,AlienState.PASSIVE,1))
             aliens.add(new Alien(new Position(13,15),30,20,20,AlienState.ATTACKING,2))
             aliens.add(new Alien(new Position(16,11),30,20,20,AlienState.ATTACKING,0))
+
             arena.setAliens(aliens);
-            def alien = new Alien(Mock(Position), 10,10,10, AlienState.PASSIVE,1)
-            def arenaModifier = new ArenaModifier(arena)
+
         when:
             arenaModifier.removeAlien(alien)
+
         then:
             aliens.size() == 4
             0 * aliens.remove(_)
@@ -70,98 +83,112 @@ class TestArenaModifier extends Specification{
 
     def "RemoveCoverWall"(){
         given:
-        Arena arena = new Arena(75,30)
-        List<CoverWall> coverWalls = new ArrayList<>()
-        coverWalls.add(new CoverWall(new Position(15,24),100))
-        coverWalls.add(new CoverWall(new Position(45,24),100))
-        arena.setCoverWalls(coverWalls)
-        ArenaModifier arenaModifier = new ArenaModifier((arena))
+            def arena = new Arena(75,30)
+            def arenaModifier = new ArenaModifier((arena))
+
+            List<CoverWall> coverWalls = new ArrayList<>()
+            coverWalls.add(new CoverWall(new Position(15,24),100))
+            coverWalls.add(new CoverWall(new Position(45,24),100))
+
+            arena.setCoverWalls(coverWalls)
         when:
-        arenaModifier.removeCoverWall(coverWalls.get(0))
+            arenaModifier.removeCoverWall(coverWalls.get(0))
+
         then:
-        arena.getCoverWalls().size() == 1
-        arena.getCoverWalls().get(0).getPosition().equals(new Position(45,24))
+            arena.getCoverWalls().size() == 1
+            arena.getCoverWalls().get(0).getPosition().equals(new Position(45,24))
     }
 
     def "AddProjectile"(){
         given:
-        Arena arena = new Arena(75,30)
-        List<Projectile> projectiles = new ArrayList<>()
-        arena.setProjectiles(projectiles)
-        Alien alien = Mock(Alien)
-        Projectile projectile1 = new Projectile(new Position(13,15),alien)
-        Projectile projectile2 = new Projectile(new Position(19,15),alien)
-        ArenaModifier arenaModifier = new ArenaModifier(arena)
+            def arena = new Arena(75,30)
+            def alien = Mock(Alien)
+            def projectile1 = new Projectile(new Position(13,15),alien)
+            def projectile2 = new Projectile(new Position(19,15),alien)
+            def arenaModifier = new ArenaModifier(arena)
+
+            List<Projectile> projectiles = new ArrayList<>()
+            arena.setProjectiles(projectiles)
+
         when:
-        arenaModifier.addProjectile(projectile1)
-        arenaModifier.addProjectile(projectile2)
+            arenaModifier.addProjectile(projectile1)
+            arenaModifier.addProjectile(projectile2)
+
         then:
-        arena.getProjectiles().size() == 2
+            arena.getProjectiles().size() == 2
     }
 
     def "RemoveProjectile"(){
         given:
-        Arena arena = new Arena(75,30)
-        List<Projectile> projectiles = new ArrayList<>()
-        Alien alien = Mock(Alien)
-        Ship ship = Mock(Ship)
-        projectiles.add(new Projectile(new Position(13,15),alien))
-        projectiles.add(new Projectile(new Position(35,26),ship))
-        projectiles.add(new Projectile(new Position(10,10),ship))
-        arena.setProjectiles(projectiles)
-        ArenaModifier arenaModifier = new ArenaModifier((arena))
+            def arena = new Arena(75,30)
+            List<Projectile> projectiles = new ArrayList<>()
+            def alien = Mock(Alien)
+            def ship = Mock(Ship)
+            def arenaModifier = new ArenaModifier((arena))
+            projectiles.add(new Projectile(new Position(13,15),alien))
+            projectiles.add(new Projectile(new Position(35,26),ship))
+            projectiles.add(new Projectile(new Position(10,10),ship))
+            arena.setProjectiles(projectiles)
+
         when:
-        arenaModifier.removeProjectile(projectiles.get(2))
-        arenaModifier.removeProjectile(projectiles.get(0))
+            arenaModifier.removeProjectile(projectiles.get(2))
+            arenaModifier.removeProjectile(projectiles.get(0))
+
         then:
-        arena.getProjectiles().size() == 1
-        arena.getProjectiles().get(0).getPosition().equals(new Position(35,26))
+            arena.getProjectiles().size() == 1
+            arena.getProjectiles().get(0).getPosition().equals(new Position(35,26))
     }
 
     def "RemoveActiveCollectable"(){
         given:
-        Arena arena = Mock(Arena)
-        ArenaModifier arenaModifier = new ArenaModifier(arena)
+            def arena = Mock(Arena)
+            def arenaModifier = new ArenaModifier(arena)
+
         when:
-        arenaModifier.removeActiveCollectable()
+            arenaModifier.removeActiveCollectable()
+
         then:
-        1 * arena.setActiveCollectable(null)
+            1 * arena.setActiveCollectable(null)
     }
 
     def "ResetShipMode"(){
         given:
-        Arena arena = new Arena(75,30)
-        ArenaModifier arenaModifier = new ArenaModifier(arena)
-        Ship ship = Mock(Ship)
-        arena.setShip(ship)
+            def arena = new Arena(75,30)
+            def arenaModifier = new ArenaModifier(arena)
+            def ship = Mock(Ship)
+            arena.setShip(ship)
+
         when:
-        arenaModifier.resetShipMode()
+            arenaModifier.resetShipMode()
+
         then:
-        1 * ship.setShipMode(ShipMode.NORMAL_MODE)
+            1 * ship.setShipMode(ShipMode.NORMAL_MODE)
     }
 
     def "ResetAliensMode"() {
         given:
-        Arena arena = new Arena(75, 30)
-        ArenaModifier arenaModifier = new ArenaModifier(arena)
-        Alien alien = Mock(Alien)
-        List<Alien> aliens = new ArrayList<>()
-        arena.setAliens(aliens)
+            def arena = new Arena(75, 30)
+            def arenaModifier = new ArenaModifier(arena)
+            def alien = Mock(Alien)
+            List<Alien> aliens = new ArrayList<>()
+            arena.setAliens(aliens)
+
         when:
-        aliens.add(alien)
-        aliens.add(alien)
-        aliens.add(alien)
-        aliens.add(alien)
-        aliens.add(alien)
-        arenaModifier.resetAliensMode()
+            aliens.add(alien)
+            aliens.add(alien)
+            aliens.add(alien)
+            aliens.add(alien)
+            aliens.add(alien)
+            arenaModifier.resetAliensMode()
+
         then:
-        5 * alien.setAlienMode(AlienMode.NORMAL_MODE)
+            5 * alien.setAlienMode(AlienMode.NORMAL_MODE)
     }
 
     def "CreateAlienShip movement -1"() {
         given:
-            Arena arena = new Arena(75, 30)
-            ArenaModifier arenaModifier = new ArenaModifier((arena))
+            def arena = new Arena(75, 30)
+            def arenaModifier = new ArenaModifier((arena))
             def randomMock = Mock(Random)
             arenaModifier.setRandom(randomMock)
             randomMock.nextInt(2) >> 0
@@ -178,8 +205,8 @@ class TestArenaModifier extends Specification{
 
     def "CreateAlienShip movement 0"() {
         given:
-            Arena arena = new Arena(75, 30)
-            ArenaModifier arenaModifier = new ArenaModifier((arena))
+            def arena = new Arena(75, 30)
+            def arenaModifier = new ArenaModifier((arena))
             def randomMock = Mock(Random)
             arenaModifier.setRandom(randomMock)
             randomMock.nextInt(2) >> 1
@@ -196,12 +223,14 @@ class TestArenaModifier extends Specification{
 
     def "RemoveAlienShip"() {
         given:
-        def arena = Mock(Arena)
-        def arenaModifier = new ArenaModifier(arena)
+            def arena = Mock(Arena)
+            def arenaModifier = new ArenaModifier(arena)
+
         when:
-        arenaModifier.removeAlienShip()
+            arenaModifier.removeAlienShip()
+
         then:
-        1 * arena.setAlienShip(null)
+            1 * arena.setAlienShip(null)
     }
 
     def "create collectable random element 0"(){
@@ -210,9 +239,10 @@ class TestArenaModifier extends Specification{
             def arenaModifier = new ArenaModifier(arena)
             def randomMock = Mock(Random)
             def position = new Position(3,1)
-            arenaModifier.setRandom(randomMock)
             def arenaModifierSpy = Spy(arenaModifier)
-            List<Integer> freeColumns = java.util.Arrays.asList(3,1)
+
+            arenaModifierSpy.setRandom(randomMock)
+            List<Integer> freeColumns = Arrays.asList(3,1)
             arena.getFreeArenaColumns() >> freeColumns
             randomMock.nextInt(2) >> 0
 
@@ -229,9 +259,10 @@ class TestArenaModifier extends Specification{
             def arenaModifier = new ArenaModifier(arena)
             def randomMock = Mock(Random)
             def position = new Position(4,1)
-            arenaModifier.setRandom(randomMock)
             def arenaModifierSpy = Spy(arenaModifier)
-            List<Integer> freeColumns = java.util.Arrays.asList(3,4)
+
+            arenaModifierSpy.setRandom(randomMock)
+            List<Integer> freeColumns = Arrays.asList(3,4)
             arena.getFreeArenaColumns() >> freeColumns
             randomMock.nextInt(2) >> 1
 
@@ -246,8 +277,9 @@ class TestArenaModifier extends Specification{
             def arena = new Arena(74,37)
             def arenaModifier = new ArenaModifier(arena)
             def randomMock = Mock(Random)
-            arenaModifier.setRandom(randomMock)
             def position = new Position(10,10)
+
+            arenaModifier.setRandom(randomMock)
             randomMock.nextInt(4) >> 1
             randomMock.nextInt(5) >> 2
 
@@ -265,8 +297,9 @@ class TestArenaModifier extends Specification{
             def arena = new Arena(74,37)
             def arenaModifier = new ArenaModifier(arena)
             def randomMock = Mock(Random)
-            arenaModifier.setRandom(randomMock)
             def position = new Position(10,10)
+
+            arenaModifier.setRandom(randomMock)
             randomMock.nextInt(5) >> 2
 
         when:
@@ -284,9 +317,10 @@ class TestArenaModifier extends Specification{
             def alien = new Alien(new Position(2,1),10,10,10,AlienState.PASSIVE,1)
             def excludedAlien = new Alien(new Position(3,2),10,10,10,AlienState.PASSIVE,1)
             def otherAlien = new Alien(new Position(2,2),10,10,10,AlienState.PASSIVE,1)
-            List<Alien> aliens = java.util.Arrays.asList(alien, otherAlien, excludedAlien)
-            arena.setAliens(aliens)
             def arenaModifier = new ArenaModifier(arena)
+
+            List<Alien> aliens = Arrays.asList(alien, otherAlien, excludedAlien)
+            arena.setAliens(aliens)
 
         expect:
             arenaModifier.hasAlienInFront(alien, excludedAlien)
@@ -299,9 +333,10 @@ class TestArenaModifier extends Specification{
             def alien = new Alien(new Position(2,1),10,10,10,AlienState.PASSIVE,1)
             def excludedAlien = new Alien(new Position(3,2),10,10,10,AlienState.PASSIVE,1)
             def otherAlien = new Alien(new Position(4,2),10,10,10,AlienState.PASSIVE,1)
-            List<Alien> aliens = java.util.Arrays.asList(alien,otherAlien,  excludedAlien)
-            arena.setAliens(aliens)
             def arenaModifier = new ArenaModifier(arena)
+
+            List<Alien> aliens = Arrays.asList(alien,otherAlien,  excludedAlien)
+            arena.setAliens(aliens)
 
         expect:
             !arenaModifier.hasAlienInFront(alien, excludedAlien)

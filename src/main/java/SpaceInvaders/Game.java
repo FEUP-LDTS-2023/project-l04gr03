@@ -29,6 +29,10 @@ public class Game {
 
     public void setState(GameStates gameStates) throws IOException {state.UpdateState(gameStates);}
 
+    public void setPrevState() throws IOException {
+        state.UpdateToPrevious();
+    }
+
 
     private void startGame() throws IOException, InterruptedException {
         int FPS = 30;
@@ -52,8 +56,4 @@ public class Game {
         game.startGame();
     }
 
-
-    public void setPrevState() throws IOException {
-        state.UpdateToPrevious();
-    }
 }
