@@ -189,6 +189,10 @@ This leads us to the necessity of having a simple and organized way to handle th
 
 ![pattern](Images_UML/State_Pattern.png)
 
+**State Diagram**:
+
+![pattern](Images_UML/State_Diagram.png)
+
 - **Consequences.** The functionality of the game is influenced by the state that it is currently in. Because of that, many features and functionalities are trapped inside a single state.
 
 ### Part-Whole Hierarchies
