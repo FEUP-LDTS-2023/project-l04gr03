@@ -51,10 +51,13 @@ public class ArenaModifier {
     public void createCollectableAffectingShip(Position position){
         List<CollectableType> collectableTypes = new ArrayList<>(Arrays.asList(CollectableType.HEALTH, CollectableType.DAMAGE, CollectableType.MACHINE_GUN_MODE, CollectableType.GOD_MODE));
         int randomCollectableTypeIndex = random.nextInt(collectableTypes.size());
+
         List<Integer> collectableMultiplier = new ArrayList<>(Arrays.asList(2,3,4,5,10));
         int randomCollectableMultiplierIndex = random.nextInt(collectableMultiplier.size());
+
         CollectableType collectableType = collectableTypes.get(randomCollectableTypeIndex);
         int multiplier = collectableMultiplier.get(randomCollectableMultiplierIndex);
+
         CollectableFactory<Ship> collectableFactory = new CollectableFactory<>(position,collectableType,multiplier,arena.getShip());
         arena.setActiveCollectable(collectableFactory.createCollectable());
     }
@@ -64,8 +67,23 @@ public class ArenaModifier {
         List<Integer> collectableMultiplier = new ArrayList<>(Arrays.asList(2,3,4,5,10));
         int randomCollectableMultiplierIndex = random.nextInt(collectableMultiplier.size());
         int multiplier = collectableMultiplier.get(randomCollectableMultiplierIndex);
+
         CollectableFactory<List<Alien>> collectableFactory = new CollectableFactory<>(position,CollectableType.SCORE,multiplier,arena.getAliens());
         arena.setActiveCollectable(collectableFactory.createCollectable());
+    }
+
+    public void createAlienShip() {
+        List<Integer> movementOptions = new ArrayList<>(Arrays.asList(-1,1));
+        int movementChoiceIndex = random.nextInt(movementOptions.size());
+        int movement = movementOptions.get(movementChoiceIndex);
+        if(movement == -1){
+            AlienShip alienShip = new AlienShip(new Position(arena.getWidth() - 4, 6),50 , 1000, movement);
+            arena.setAlienShip(alienShip);
+        }
+        else {
+            AlienShip alienShip = new AlienShip(new Position(4, 6),50 , 1000, movement);
+            arena.setAlienShip(alienShip);
+        }
     }
 
     public boolean hasAlienInFront(Alien alien, Alien excludedAlien){
@@ -107,20 +125,5 @@ public class ArenaModifier {
     public void removeProjectile(Projectile projectile) {getArena().getProjectiles().remove(projectile);}
 
     public void removeAlienShip(){getArena().setAlienShip(null);}
-
-
-    public void createAlienShip() {
-        List<Integer> movementOptions = new ArrayList<>(Arrays.asList(-1,1));
-        int movementChoiceIndex = random.nextInt(movementOptions.size());
-        int movement = movementOptions.get(movementChoiceIndex);
-        if(movement == -1){
-            AlienShip alienShip = new AlienShip(new Position(arena.getWidth() - 4, 6),50 , 1000, movement);
-            arena.setAlienShip(alienShip);
-        }
-        else {
-            AlienShip alienShip = new AlienShip(new Position(4, 6),50 , 1000, movement);
-            arena.setAlienShip(alienShip);
-        }
-    }
 
 }
