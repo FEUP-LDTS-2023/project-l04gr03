@@ -2,7 +2,6 @@ Pedro 3000
 Maria 1000
 Lucas 10000
 lucas 26220
-R 0
-R 0
-R 0
-R 0
+Frank 28980
+noob 1000
+Franc 18620
