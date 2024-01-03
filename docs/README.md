@@ -371,6 +371,12 @@ the Game class executes the main function and runs the game loop. Mutation testi
 ![GradleCoverage](Testing/Gradle_Coverage.png)
 
 
+### Sources
+
+This project was primarily based on the HERO example presented in the classes. However, some parts were inspired on:
+https://github.com/thePeras/LDTS_Flappy_Tiger
+
+
 ### SELF-EVALUATION
 
 - **Lucas Faria**: 45%
