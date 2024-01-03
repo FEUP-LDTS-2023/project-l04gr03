@@ -344,6 +344,11 @@ To fix that we added -1 to the method's limit parameter. This change can be foun
 [Leaderboard](../src/main/java/SpaceInvaders/Model/Menu/Leaderboard.java)
 
 
+- **Unchecked or unsafe operarions in CollectableFactory class** - This problem arises in the createCollectable method of the CollectableFactory class due to two different reasons:
+Firstly, in this method, when creating a scoreCollectable we cast the AttackingElement object associated with the collectable to a list of aliens. This cast is considered unsafe as the class of the object List<Aliens> does not extend the AttackingElements class. However, we were not able this issue, since the attackingElement associated with the score collectable really had to be a list of aliens.
+Secondly,this method is set to return an object of the collectable template class but does not specify the type associated with its template object. We were also not able to solve this problem, since this function is set to create several types of collectables, thus making it impossible to specify the type of the template object associated with its return value. 
+You can check the function that causes these issues in:
+[CollectableFactory](../src/main/java/SpaceInvaders/Model/Game/Collectables/CollectableFactory.java)
 
 ### TESTING
 
